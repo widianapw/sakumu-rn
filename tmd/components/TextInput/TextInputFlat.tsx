@@ -134,7 +134,7 @@ const TextInputFlat = ({
         }
         <Pressable
           onPress={() => {
-            if (rest.pickerType && rest.pickerType != "select") {
+            if (rest.pickerType && rest.pickerType != "phone") {
               if (!disabled) {
                 // @ts-ignore
                 rest.onOpenPicker();

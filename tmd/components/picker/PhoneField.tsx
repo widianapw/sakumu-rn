@@ -2,25 +2,36 @@
  * Created by Widiana Putra on 30/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "../TextInput/TextField";
 import _countries from "../../data/_countries";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../../model/PickerItem";
 
 interface Props {
-  selectedPhoneCode?: string;
+  initialPhoneCode?: string;
+  onPhoneCodeChange?: (code: string) => void;
 }
 
 const PhoneField = ({
                       search,
+                      onPhoneCodeChange,
                       ...props
                     }: Props & React.ComponentProps<typeof TextField> & React.ComponentProps<typeof PickerBottomSheet>) => {
-  const [selected, setSelected] = useState(props.selectedPhoneCode ?? "62");
+  const [selected, setSelected] = useState(props.initialPhoneCode ?? "62");
   const [isOpenPicker, setIsOpenPicker] = useState(false);
   const handleOpenPicker = () => {
     setIsOpenPicker(true);
   };
+
+  useEffect(() => {
+    if (onPhoneCodeChange) {
+      onPhoneCodeChange(selected);
+    }
+    return () =>{};
+  }, [selected]);
+
+
 
   return <>
     <TextField

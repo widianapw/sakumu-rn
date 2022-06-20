@@ -19,10 +19,13 @@ export default function PickerScreen() {
   const [selected, setSelected] = useState("62");
   const [date, setDate] = useState(new Date());
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
-  return <ScrollView style={{
-    flex: 1,
-    backgroundColor: "white",
-  }}>
+  const [initialMap, setInitialMap] = useState({});
+  return <ScrollView
+    keyboardShouldPersistTaps="always"
+    style={{
+      flex: 1,
+      backgroundColor: "white",
+    }}>
     <VStack
       spacing={16}
       style={{
@@ -30,6 +33,10 @@ export default function PickerScreen() {
       }}>
 
       <MapPicker
+        onSelected={(data) => {
+          setInitialMap(data);
+        }}
+        initial={initialMap}
         label={"Map Picker"}
         placeholder={"Map Picker"}
       />
@@ -46,14 +53,17 @@ export default function PickerScreen() {
 
       <PhoneField
         search={true}
-        selectedPhoneCode={"62"}
+        initialPhoneCode={"62"}
         placeholder={"Phone"}
+        onPhoneCodeChange={(code) => {
+          console.log(code);
+        }}
         label={"Phone"}
         mode={"contained"} />
 
       <PhoneField
         search={true}
-        selectedPhoneCode={"62"}
+        initialPhoneCode={"62"}
         placeholder={"Phone"}
         label={"Phone"}
         mode={"filled"} />
@@ -62,7 +72,7 @@ export default function PickerScreen() {
         error
         errorText={"Must filled"}
         search={true}
-        selectedPhoneCode={"62"}
+        initialPhoneCode={"62"}
         placeholder={"Phone"}
         label={"Phone"}
         mode={"flat"} />
@@ -113,7 +123,6 @@ export default function PickerScreen() {
           })
         }
       />
-
 
     </VStack>
 

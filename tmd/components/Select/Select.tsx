@@ -4,7 +4,7 @@
  */
 import TextField, { TextInputProps } from "../TextInput/TextField";
 import Icon from "../Icon";
-import React, { ComponentProps, useMemo, useState } from "react";
+import React, { ComponentProps, useEffect, useMemo, useState } from "react";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../../model/PickerItem";
 import { useTheme } from "../../core/theming";
@@ -12,16 +12,18 @@ import { useTheme } from "../../core/theming";
 interface Props {
   initial?: string | number;
   options: PickerItem[];
+  onSelectedValueChange?: (value: string | number) => void;
 }
 
 const Select = ({
                   initial,
                   options,
                   search,
+                  onSelectedValueChange,
                   ...rest
                 }: Props & TextInputProps & ComponentProps<typeof PickerBottomSheet>) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(initial);
+  const [selected, setSelected] = useState<string | number>(initial);
   const theme = useTheme();
 
   const selectedObj = useMemo(() => {
@@ -36,11 +38,19 @@ const Select = ({
 
   };
 
+  useEffect(() => {
+    if (onSelectedValueChange) {
+      onSelectedValueChange(selected);
+    }
+  }, [selected]);
+
+
   return <>
     <TextField
       label={rest.label}
       placeholder={rest.placeholder}
       onOpenPicker={() => {
+        console.log("OPEN THIS")
         setIsOpen(true);
       }}
       value={selectedObj?.name}

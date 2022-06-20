@@ -5,7 +5,6 @@ import color from "color";
 import ActivityIndicator from "../ActivityIndicator";
 import { IconSource } from "../MaterialIcon";
 import Surface from "../Surface";
-import Text from "../Typography/Text";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
 import { black, white } from "../../styles/colors";
 import { useTheme } from "../../core/theming";
@@ -245,8 +244,7 @@ const Button = ({
   const { color: customLabelColor, fontSize: customLabelSize } =
   StyleSheet.flatten(labelStyle) || {};
 
-  const font = theme.fonts.medium;
-  const textStyle = { color: textColor, ...font };
+  const textStyle = { color: textColor };
   const isIconButton = !children && icon;
   const iconStyle = isIconButton
     ? { ...styles.iconButton, margin: marginSize }
@@ -318,6 +316,7 @@ const Button = ({
             {
               !isIconButton &&
               <Typography
+                type={"button1"}
                 selectable={false}
                 numberOfLines={1}
                 style={[
@@ -326,11 +325,11 @@ const Button = ({
                   compact && styles.compactLabel,
                   uppercase && styles.uppercaseLabel,
                   textStyle,
-                  font,
                   labelStyle,
                   {
                     marginVertical: marginSize,
                   },
+
                   variant == "tertiary" ? { marginHorizontal: 0 } : {},
                 ]}
               >

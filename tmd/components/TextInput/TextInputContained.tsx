@@ -25,7 +25,6 @@ import IconButton from "../IconButton";
 import MaterialIcon from "../MaterialIcon";
 import Icon from "../Icon";
 import _countries from "../../data/_countries";
-import { SvgUri } from "react-native-svg";
 
 const INPUT_PADDING_HORIZONTAL = 8;
 const MIN_HEIGHT = 40;
@@ -141,7 +140,7 @@ const TextInputContained = ({
 
         <Pressable
           onPress={() => {
-            if (rest.pickerType && rest.pickerType != "select") {
+            if (rest.pickerType && rest.pickerType != "phone") {
               if (!disabled) {
                 // @ts-ignore
                 rest.onOpenPicker();

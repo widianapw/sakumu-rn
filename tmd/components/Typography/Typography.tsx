@@ -32,6 +32,7 @@ const Typography = ({ style, type = "body2", ...rest }: Props & React.ComponentP
   let fontSize = 14;
   let lineHeight = 20;
   let spacing = 0;
+  let fontTheme = theme.fonts.medium;
   switch (type) {
     case "h1": {
       fontSize = 32;
@@ -78,22 +79,26 @@ const Typography = ({ style, type = "body2", ...rest }: Props & React.ComponentP
     case "body1": {
       fontSize = 16;
       lineHeight = 24;
+      fontTheme = theme.fonts.regular;
       break;
     }
     case "body2": {
       fontSize = 14;
       lineHeight = 20;
+      fontTheme = theme.fonts.regular;
       break;
     }
     case "body3": {
       fontSize = 12;
       lineHeight = 16;
       spacing = 0.1;
+      fontTheme = theme.fonts.regular;
       break;
     }
     case "body4": {
       fontSize = 10;
       lineHeight = 14;
+      fontTheme = theme.fonts.regular;
       break;
     }
     case "button1": {
@@ -114,12 +119,11 @@ const Typography = ({ style, type = "body2", ...rest }: Props & React.ComponentP
       {...rest}
       style={[
         {
-          ...theme.fonts.medium,
           color: theme.colors.neutral.neutral_90,
           letterSpacing: spacing,
           lineHeight: lineHeight,
           fontSize: fontSize,
-
+          ...fontTheme,
         },
         styles.text,
         style,

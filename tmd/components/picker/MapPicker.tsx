@@ -3,39 +3,142 @@
  * Copyright (c) 2022 - Made with love
  */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TextField from "../TextInput/TextField";
 import Icon from "../Icon";
-import { Modal, View } from "react-native";
-import { Modalize } from "react-native-modalize";
+import { Image, Modal, View } from "react-native";
 import Typography from "../Typography/Typography";
-import { Button } from "../../index";
+import { Button, useTheme } from "../../index";
 import IconButton from "../IconButton";
 import MapView from "react-native-maps";
 import { HStack, VStack } from "react-native-flex-layout";
+import Geocoder, { GeocodingObject } from "@timwangdev/react-native-geocoder";
+import RNGooglePlaces from "react-native-google-places";
+import { PERMISSIONS, requestMultiple } from "react-native-permissions";
+import Geolocation from "react-native-geolocation-service";
 
-export default function MapPicker({ ...rest }: React.ComponentProps<typeof TextField>) {
-  const modalizeRef = useRef<Modalize>(null);
+interface SelectedMap {
+  fullAddress?: string;
+  location?: {
+    latitude: number;
+    longitude: number;
+  };
+  nameAddress?: string;
+}
+
+interface Props {
+  onSelected?: (selected: SelectedMap) => void;
+  initial?: SelectedMap;
+}
+
+export default function MapPicker({ onSelected, initial, ...rest }: React.ComponentProps<typeof TextField> & Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalSearchOpen, setIsModalSearchOpen] = useState(false);
+  const [addressObj, setAddressObj] = useState<GeocodingObject | null>(null);
+  const [savedMap, setSavedMap] = useState<SelectedMap | null>(null);
+  const [mapRegion, setMapRegion] = useState({});
+  const mapRef = useRef<MapView>(null);
+  const theme = useTheme();
   const handleOpen = () => {
     setIsModalOpen(true);
-
     // modalizeRef?.current?.open();
+  };
+
+  const handleAddressChange = (lat: number, lng: number) => {
+    Geocoder.geocodePositionGoogle({
+      lat: lat,
+      lng: lng,
+    }, {
+      apiKey: "AIzaSyBdxwn9ARvmzweQfs6NkT7bqkTXsNfCekg",
+    }).then((res) => {
+      const a = res[0];
+      a.position = {
+        lat: lat,
+        lng: lng,
+      };
+      setAddressObj(a);
+    });
+  };
+
+  const openSearchModal = () => {
+    RNGooglePlaces.openAutocompleteModal({
+      useOverlay: true,
+    })
+      .then((place) => {
+        handleCameraChanges(
+          place.location?.latitude,
+          place.location?.longitude,
+        );
+      })
+      .catch(error => console.log(error.message));  // error is a Javascript Error object
+  };
+
+  const handleCameraChanges = (lat: number, lng: number) => {
+    mapRef?.current?.animateCamera({
+      center: { latitude: lat, longitude: lng },
+      pitch: 2,
+      heading: 20,
+      altitude: 200,
+      zoom: 20,
+    }, { duration: 500 });
+  };
+
+  useEffect(() => {
+    requestMultiple([PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION, PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION, PERMISSIONS.IOS.LOCATION_ALWAYS])
+      .then((statuses) => {
+        if (statuses["android.permission.ACCESS_COARSE_LOCATION"] == "granted" && statuses["android.permission.ACCESS_FINE_LOCATION"] == "granted" && statuses["ios.permission.LOCATION_ALWAYS"] == "granted") {
+          console.log("ALL GRANTED");
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(initial);
+    if (initial?.location) {
+      setAddressObj({
+        formattedAddress: initial?.fullAddress,
+        feature: initial?.nameAddress,
+        position: initial?.location,
+      });
+      handleCameraChanges(initial?.location?.latitude, initial?.location?.longitude);
+    } else {
+      getUserCurrentLocation();
+    }
+  }, [isModalOpen]);
+
+
+  const getUserCurrentLocation = () => {
+    Geolocation.getCurrentPosition((position) => {
+      setMapRegion({
+        latitude: position.coords.latitude,
+        longitude: position.coords.latitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+      handleCameraChanges(position.coords.latitude, position.coords.longitude);
+      handleAddressChange(position.coords.latitude, position.coords.longitude);
+    });
   };
 
   return (
     <>
       <TextField
+        selection={{ start: 0 }}
         pickerType={"map"}
         editable={false}
         onOpenPicker={handleOpen}
+        value={savedMap?.fullAddress}
         suffixIcon={
           <Icon icon={"map"} size={18} />
         }
         {...rest}
       />
 
+      {/* pick location modal*/}
       <Modal
+        onRequestClose={() => {
+          setIsModalOpen(false);
+        }}
         animationType="slide"
         transparent={false}
         visible={isModalOpen}
@@ -45,23 +148,51 @@ export default function MapPicker({ ...rest }: React.ComponentProps<typeof TextF
           flexGrow: 1,
         }}>
 
-          <MapView
+
+          <View
             style={{
               position: "absolute",
               flex: 1,
               top: 0,
-              bottom: 0,
+              bottom: 120,
               left: 0,
               right: 0,
             }}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          />
+          >
 
+            <View style={{
+              position: "relative",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+              <View style={{
+                zIndex: 200,
+                marginBottom: 52,
+              }}>
+                <Image
+                  source={require("../../../src/assets/icons/location-marker.png")} />
+              </View>
+
+              <MapView
+                showsCompass={false}
+                style={{
+                  position: "absolute",
+                  top: 0, bottom: 0, left: 0, right: 0,
+                }}
+                ref={mapRef}
+                showsUserLocation={true}
+                showsMyLocationButton={false}
+                onRegionChangeComplete={(r, d) => {
+                  // console.log(r)
+                  handleAddressChange(r.latitude, r.longitude);
+                }}
+              >
+
+              </MapView>
+            </View>
+
+          </View>
 
           <View style={{
             position: "absolute",
@@ -78,11 +209,50 @@ export default function MapPicker({ ...rest }: React.ComponentProps<typeof TextF
 
               <HStack justify={"between"} items={"center"}>
                 <Typography type={"title1"}>Select Location</Typography>
-                <Button variant={"secondary"} size={"sm"} shape={"rounded"}>Search</Button>
+                <Button
+                  variant={"secondary"}
+                  size={"sm"}
+                  shape={"rounded"}
+                  onPress={() => {
+                    openSearchModal();
+                  }}
+                >Search</Button>
               </HStack>
 
-              <Button fullWidth size={'md'}>Save</Button>
+              <VStack style={{
+                marginTop: 16,
+              }}>
+                <HStack items={"center"}>
+                  <Icon icon={"location-sharp"} size={16} color={theme.colors.primary.main} />
+                  <Typography
+                    style={{ fontWeight: "600" }}
+                    type={"title3"}>{addressObj?.feature ?? addressObj?.streetName ?? "-"}</Typography>
+                </HStack>
+                <Typography
+                  type={"body2"}
+                  style={{ marginTop: 4 }}
+                >{addressObj?.formattedAddress}</Typography>
+              </VStack>
 
+              <Button
+                onPress={() => {
+                  const dataToSend: SelectedMap = {
+                    fullAddress: addressObj?.formattedAddress,
+                    location: {
+                      latitude: addressObj?.position?.lat,
+                      longitude: addressObj?.position?.lng,
+                    },
+                    nameAddress: addressObj?.feature ?? addressObj?.streetName ?? "",
+                  };
+                  if (onSelected) {
+                    setSavedMap(dataToSend);
+                    onSelected(dataToSend);
+                    // console.log(dataToSend);
+                    setIsModalOpen(false);
+                  }
+                }}
+                style={{ marginTop: 16 }}
+                fullWidth size={"md"}>Save</Button>
             </VStack>
 
           </View>
@@ -111,7 +281,7 @@ export default function MapPicker({ ...rest }: React.ComponentProps<typeof TextF
                   margin: 16,
                 }}
                 onPress={() => {
-
+                  getUserCurrentLocation();
                 }}
                 icon={"locate"}
               />

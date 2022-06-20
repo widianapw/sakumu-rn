@@ -7,7 +7,8 @@ import { useState } from "react";
 import {
   ColorValue,
   I18nManager,
-  Platform, Pressable,
+  Platform,
+  Pressable,
   StyleSheet,
   TextInput as NativeTextInput,
   TextStyle,
@@ -118,7 +119,7 @@ const TextInputFilled = ({
 
         <Pressable
           onPress={() => {
-            if (rest.pickerType && rest.pickerType != "select") {
+            if (rest.pickerType && rest.pickerType != "phone") {
               if (!disabled) {
                 // @ts-ignore
                 rest.onOpenPicker();

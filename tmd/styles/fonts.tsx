@@ -1,29 +1,29 @@
-import type {Fonts} from '../types';
+import type { Fonts } from "../types";
 
 const fonts: Fonts = {
     thin: {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '100',
+        fontFamily: "Inter-Thin",
+        fontWeight: "100",
     },
     light: {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '300',
+        fontFamily: "Inter-Light",
+        fontWeight: "300",
     },
     regular: {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '400'
+        fontFamily: "Inter-Regular",
+        fontWeight: "400",
     },
     medium: {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '500',
+        fontFamily: "Inter-Medium",
+        fontWeight: "500",
     },
     semiBold: {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '600',
+        fontFamily: "Inter-SemiBold",
+        fontWeight: "600",
     },
     bold: {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '700'
+        fontFamily: "Inter-Bold",
+        fontWeight: "700",
     }
 }
 
