@@ -10,13 +10,13 @@ import TypographyScreen from "./screens/components/TypographyScreen";
 import MainScreen from "./screens/MainScreen";
 import TextFieldScreen from "./screens/components/TextFieldScreen";
 import PickerScreen from "./screens/components/PickerScreen";
-import { Host, Portal } from "react-native-portalize";
+import BottomSheetScreen from "./screens/components/BottomSheetScreen";
+import LanguageScreen from "./screens/components/LanguageScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Host>
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
@@ -27,8 +27,9 @@ const AppNavigation = () => {
           <Stack.Screen name={"TypographyScreen"} component={TypographyScreen} />
           <Stack.Screen name={"TextFieldScreen"} component={TextFieldScreen} />
           <Stack.Screen name={"PickerScreen"} component={PickerScreen} />
+          <Stack.Screen name={"BottomSheetScreen"} component={BottomSheetScreen} />
+          <Stack.Screen name={"LanguageScreen"} component={LanguageScreen} />
         </Stack.Navigator>
-      </Host>
     </NavigationContainer>
   );
 };

@@ -42,12 +42,12 @@ export type Theme = {
 
 interface TextInputTheme {
   shape: "rect" | "rounded";
-  mode: "outlined" | "contained" | "flat";
+  mode: "filled" | "contained" | "flat";
 }
 
 interface ButtonTheme {
   variant: "primary" | "secondary" | "tertiary";
-  shape: "react" | "rounded";
+  shape: "rect" | "rounded";
 }
 
 interface BaseColorProps {

@@ -2,9 +2,8 @@
  * Created by Widiana Putra on 14/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useState } from "react";
+import React, { ComponentProps, useState } from "react";
 import TextField from "../TextInput/TextField";
-import { ComponentProps } from "react";
 import Icon from "../Icon";
 import { default as DatePickerDialog } from "react-native-date-picker";
 import moment from "moment";
@@ -26,6 +25,7 @@ export function DatePicker({ ...rest }: ComponentProps<typeof TextField>) {
         }
         pickerType={"date"}
         editable={false}
+        mode={theme?.textInput?.mode}
         onOpenPicker={handleOpen}
         {...rest}
         suffixIcon={

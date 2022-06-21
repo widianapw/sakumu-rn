@@ -22,7 +22,6 @@ import LabelInput from "./Label/LabelInput";
 import { HelperText } from "../../index";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
-import MaterialIcon from "../MaterialIcon";
 import Icon from "../Icon";
 import _countries from "../../data/_countries";
 
@@ -165,7 +164,7 @@ const TextInputContained = ({
               alignItems: "center",
               display: "flex",
             }}>
-              <MaterialIcon source={"magnify"} size={20} color={colors.neutral.neutral_70} />
+              <Icon icon={"search"} size={20} color={colors.neutral.neutral_70} />
             </View>
           }
 
@@ -226,6 +225,9 @@ const TextInputContained = ({
                     rest?.onInvokeTextChanged(val);
                   }
                 }
+                if (onChangeText) {
+                  onChangeText(val);
+                }
               },
               value: value,
               maxLength: maxLength,
@@ -273,8 +275,12 @@ const TextInputContained = ({
                   colors.neutral.neutral_70
                 }
                 onPress={() => {
-                  rest?.onClear();
-                  rest?.onInvokeTextChanged("");
+                  if(rest.onClear){
+                    rest?.onClear();
+                  }
+                  if(rest.onInvokeTextChanged){
+                    rest?.onInvokeTextChanged("");
+                  }
                   setIsShowSearch(false);
                 }}
                 icon={"close-circle"}
@@ -388,6 +394,7 @@ type PhonePickerProps = {
 const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
   const country = _countries.find((it) => it.phone_code == initial);
   const theme = useTheme();
+  console.log(initial);
   return <View
     style={{
       display: "flex",

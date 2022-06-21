@@ -86,6 +86,7 @@ interface Props {
    */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   /**
    * Style for the button text.
    */
@@ -125,7 +126,7 @@ const Button = ({
   let marginSize = 8;
   switch (size) {
     case "sm":
-      marginSize = 6;
+      marginSize = 2;
       break;
     case "md":
       marginSize = 8;
@@ -253,7 +254,15 @@ const Button = ({
       : styles.icon;
 
   return (
-    <View style={{ display: "flex", flexDirection: fullWidth ? "column" : "row" }}>
+    <View style={
+      [
+        { display: "flex", flexDirection: fullWidth ? "column" : "row" },
+        fullWidth ? {
+          flex: 1,
+        } : {},
+        rest.containerStyle,
+      ]
+    }>
       <Surface
         {...rest}
         style={[

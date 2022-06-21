@@ -11,7 +11,7 @@ import { Button, Divider, useTheme } from "../../index";
 import TextField from "../TextInput/TextField";
 import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
 import { PickerItem } from "../../model/PickerItem";
-import { RadioButton } from "../RadioButton/RadioButton";
+import RadioButton from "../RadioButton/RadioButton";
 
 interface Props {
   open?: boolean;
@@ -61,12 +61,19 @@ export default function PickerBottomSheet(props: Props) {
 
           </View>
         }
-        <Typography type={"body2"} style={{
-          flexGrow: 1,
-          flex: 1,
-          color: colors.neutral.neutral_90,
-        }}>{item?.name}</Typography>
-        <RadioButton value={item?.id} />
+
+        <RadioButton
+          containerStyle={{
+            flexDirection: "row-reverse",
+          }}
+          text={item?.name}
+          textStyle={{
+            flexGrow: 1,
+            flex: 1,
+            color: colors.neutral.neutral_90,
+          }}
+          value={item?.id}
+        />
       </View>
       <Divider />
     </Pressable>;
@@ -75,8 +82,15 @@ export default function PickerBottomSheet(props: Props) {
     <Modalize
       onClose={() => {
         setList(props.data);
-        props.onClose();
+        if(props.onClose){
+          props.onClose();
+        }
       }}
+      modalStyle={{
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
+      }}
+      handlePosition={"inside"}
       customRenderer={
         <Animated.View style={{
           flex: 1,
@@ -156,9 +170,13 @@ export default function PickerBottomSheet(props: Props) {
           <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
             <Button
               onPress={() => {
-                props.onSave(selected);
+                if (props.onSave) {
+                  props.onSave(selected);
+                }
               }}
-              fullWidth
+              style={{
+                width: "100%",
+              }}
               shape={"rounded"}
             >Save</Button>
           </View>

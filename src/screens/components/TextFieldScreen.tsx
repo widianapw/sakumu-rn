@@ -24,13 +24,12 @@ const TextFieldScreen = () => {
         }}>
 
         <TextInput
-          error
-          errorText={"Not Valid"}
           mode={"flat"}
-          keyboardType={"email-address"}
-          label="Email"
-          placeholder={"Email"}
+          label="Search"
+          placeholder={"Search"}
+          search
         />
+
         <TextInput
           mode={"flat"}
           password

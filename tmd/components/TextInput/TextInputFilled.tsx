@@ -144,7 +144,7 @@ const TextInputFilled = ({
               alignItems: "center",
               display: "flex",
             }}>
-              <Icon source={"magnify"} size={20} color={colors.neutral.neutral_70} />
+              <Icon icon={"search"} size={20} color={colors.neutral.neutral_70} />
             </View>
           }
 
@@ -201,6 +201,9 @@ const TextInputFilled = ({
                   console.log(val.length > 0);
                   setIsShowSearch(val.length > 0);
                 }
+                if (onChangeText) {
+                  onChangeText(val);
+                }
               },
               value: value,
               maxLength: maxLength,
@@ -248,7 +251,12 @@ const TextInputFilled = ({
                   colors.neutral.neutral_70
                 }
                 onPress={() => {
-                  rest?.onClear();
+                  if(rest.onClear){
+                    rest?.onClear();
+                  }
+                  if(rest.onInvokeTextChanged){
+                    rest?.onInvokeTextChanged("");
+                  }
                   setIsShowSearch(false);
                 }}
                 icon={"close-circle"}

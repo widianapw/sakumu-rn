@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Platform, View } from "react-native";
+import { Platform, Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import RadioButtonAndroid from "./RadioButtonAndroid";
 import RadioButtonIOS from "./RadioButtonIOS";
-import { useTheme, withTheme } from "../../core/theming";
+import { useTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
 
 export type Props = {
@@ -30,12 +30,11 @@ export type Props = {
    * Custom color for radio.
    */
   color?: string;
+  text?: string;
+  textStyle?: StyleProp<TextStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
-   */
-  theme: ReactNativePaper.Theme;
-  /**
-   * testID to be used on tests.
    */
   testID?: string;
 };
@@ -90,21 +89,56 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const RadioButton = (props: Props) => {
-  const theme = useTheme()
+const RadioButton = ({ onPress, ...props }: Props) => {
+  const theme = useTheme();
   const Button = Platform.select({
     default: RadioButtonAndroid,
     ios: RadioButtonIOS,
   });
 
-  return <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-    <Button color={props.color ??theme.colors.primary.main } {...props} />
-  </View>;
+  const parentComponentStyle: StyleProp<ViewStyle> = [{
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  }, props.containerStyle];
+
+  const childrenComponent = () => {
+    return <>
+      <Button color={props.color ?? theme.colors.primary.main} {...props} >
+      </Button>
+      {
+        props.text &&
+        <Typography
+          type={"body2"}
+          style={[{
+            color: theme.colors.neutral.neutral_90,
+          },
+            props.textStyle,
+          ]}>
+          {
+            props.text
+          }
+        </Typography>
+      }
+    </>;
+  };
+
+  const ParentComponent = () => {
+    return <>
+      {onPress ?
+        <Pressable
+          onPress={onPress}
+          style={parentComponentStyle}
+        >{childrenComponent()}</Pressable>
+        : <View style={parentComponentStyle}>{childrenComponent()}</View>
+      }
+    </>;
+  };
+
+  return <>
+    <ParentComponent />
+  </>;
 };
 
-export default withTheme(RadioButton);
+export default RadioButton;
 
-// @component-docs ignore-next-line
-const RadioButtonWithTheme = withTheme(RadioButton);
-// @component-docs ignore-next-line
-export { RadioButtonWithTheme as RadioButton };

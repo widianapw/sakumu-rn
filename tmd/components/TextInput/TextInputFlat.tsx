@@ -3,7 +3,8 @@ import { useState } from "react";
 import {
   Animated,
   I18nManager,
-  Platform, Pressable,
+  Platform,
+  Pressable,
   StyleSheet,
   TextInput as NativeTextInput,
   TextStyle,
@@ -67,6 +68,7 @@ const TextInputFlat = ({
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
   const [isShowPassword, setIsShowPassword] = useState(!password);
+  const [isShowSearch, setIsShowSearch] = useState(false);
 
   const {
     fontSize: fontSizeStyle,
@@ -177,7 +179,7 @@ const TextInputFlat = ({
                 }]}
             >
               {
-                (prefixText || prefixIcon) &&
+                (prefixText || prefixIcon || rest.search) &&
                 <View style={{
                   flexShrink: 1,
                   marginBottom: 1,
@@ -187,6 +189,11 @@ const TextInputFlat = ({
                   alignItems: "center",
                   display: "flex",
                 }}>
+                  {
+                    rest.search &&
+                    <Icon icon={"search"} size={20} color={colors.neutral.neutral_70} />
+                  }
+
                   {
                     prefixIcon &&
                     prefixIcon
@@ -246,7 +253,17 @@ const TextInputFlat = ({
                     value: value,
                     ...rest,
                     ref: innerRef,
-                    onChangeText,
+                    // onChangeText,
+                    onChangeText: (val) => {
+                      if (rest.search) {
+                        console.log(val.length > 0);
+                        setIsShowSearch(val.length > 0);
+                      }
+                      if (onChangeText) {
+                        onChangeText(val);
+                      }
+
+                    },
                     placeholder: rest.placeholder,
                     placeholderTextColor: placeholderTextColor ?? placeholderColor,
                     editable: !disabled && editable,
@@ -278,6 +295,37 @@ const TextInputFlat = ({
                 </View>
 
               </View>
+              {
+                isShowSearch &&
+                <View style={{
+                  flexShrink: 1,
+                  display: "flex",
+                  marginBottom: 1,
+                  paddingLeft: 0,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                >
+                  <IconButton
+                    color={
+                      colors.neutral.neutral_70
+                    }
+                    onPress={() => {
+                      if(rest.onClear){
+                        rest?.onClear();
+                      }
+                      if(rest.onInvokeTextChanged){
+                        rest?.onInvokeTextChanged("");
+                      }
+                      setIsShowSearch(false);
+                    }}
+                    icon={"close-circle"}
+                    size={ICON_BUTTON} />
+                </View>
+
+              }
+
               {
                 password && <View style={{
                   flexShrink: 1,

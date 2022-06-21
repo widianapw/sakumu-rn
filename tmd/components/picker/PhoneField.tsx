@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 30/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import TextField from "../TextInput/TextField";
 import _countries from "../../data/_countries";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
@@ -10,28 +10,38 @@ import { PickerItem } from "../../model/PickerItem";
 
 interface Props {
   initialPhoneCode?: string;
-  onPhoneCodeChange?: (code: string) => void;
+  onPhoneCodeChange?: (value: string) => void;
 }
 
 const PhoneField = ({
                       search,
+                      initialPhoneCode,
                       onPhoneCodeChange,
                       ...props
                     }: Props & React.ComponentProps<typeof TextField> & React.ComponentProps<typeof PickerBottomSheet>) => {
-  const [selected, setSelected] = useState(props.initialPhoneCode ?? "62");
+  const [selected, setSelected] = useState<string | number>("");
   const [isOpenPicker, setIsOpenPicker] = useState(false);
-  const handleOpenPicker = () => {
+
+
+  const handleSelected = useCallback(
+    (value: string) => {
+      setSelected(value);
+      if (onPhoneCodeChange) {
+        onPhoneCodeChange(value);
+      }
+    },
+    [selected],
+  );
+
+  const handleOpenPicker = () =>
     setIsOpenPicker(true);
-  };
+
 
   useEffect(() => {
-    if (onPhoneCodeChange) {
-      onPhoneCodeChange(selected);
+    if (initialPhoneCode) {
+      setSelected(initialPhoneCode);
     }
-    return () =>{};
-  }, [selected]);
-
-
+  }, []);
 
   return <>
     <TextField
@@ -43,7 +53,6 @@ const PhoneField = ({
       keyboardType={"numeric"}
       {...props}
     />
-
 
     <PickerBottomSheet
       initial={selected}
@@ -63,7 +72,7 @@ const PhoneField = ({
         })
       }
       onSave={(value) => {
-        setSelected(value);
+        handleSelected(value);
         setIsOpenPicker(false);
       }}
       title={"Phone Code Picker"}

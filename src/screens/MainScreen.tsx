@@ -2,18 +2,11 @@
  * Created by Widiana Putra on 27/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useRef, useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, View } from "react-native";
 import { Button } from "../../tmd";
-import Icon from "../../tmd/components/Icon";
-import { Modalize } from "react-native-modalize";
 import Typography from "../../tmd/components/Typography/Typography";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from "@react-native-google-signin/google-signin";
+import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
 import { VStack } from "react-native-flex-layout";
 
 const MainScreen = ({ navigation }) => {
@@ -107,6 +100,20 @@ const MainScreen = ({ navigation }) => {
         Picker
       </Button>
 
+      <Button
+        onPress={() => {
+          navigation.navigate("BottomSheetScreen");
+        }}
+      >
+        Bottom Sheet
+      </Button>
+
+      <Button
+        onPress={() => {
+          navigation.navigate("LanguageScreen");
+        }}>
+        Language Screen
+      </Button>
 
     </VStack>
 

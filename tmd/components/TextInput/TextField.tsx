@@ -452,6 +452,9 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
     if (usedMode === "outlined") {
       return (
         <TextInputOutlined
+          onClear={() => {
+            root.current?.clear();
+          }}
           disabled={disabled}
           password={password}
           counter={counter}
@@ -485,9 +488,6 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
-          onClear={() => {
-            root.current?.clear();
-          }}
         />
 
       );
@@ -570,6 +570,9 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
         onLeftAffixLayoutChange={onLeftAffixLayoutChange}
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
+        onClear={() => {
+          root.current?.clear();
+        }}
       />
     );
   },

@@ -55,27 +55,27 @@ export default function PickerScreen() {
         search={true}
         initialPhoneCode={"62"}
         placeholder={"Phone"}
-        onPhoneCodeChange={(code) => {
-          console.log(code);
-        }}
         label={"Phone"}
+        onPhoneCodeChange={(value) => {
+          console.log(value);
+        }}
         mode={"contained"} />
 
-      <PhoneField
-        search={true}
-        initialPhoneCode={"62"}
-        placeholder={"Phone"}
-        label={"Phone"}
-        mode={"filled"} />
+      {/*<PhoneField*/}
+      {/*  search={true}*/}
+      {/*  initialPhoneCode={"62"}*/}
+      {/*  placeholder={"Phone"}*/}
+      {/*  label={"Phone"}*/}
+      {/*  mode={"filled"} />*/}
 
-      <PhoneField
-        error
-        errorText={"Must filled"}
-        search={true}
-        initialPhoneCode={"62"}
-        placeholder={"Phone"}
-        label={"Phone"}
-        mode={"flat"} />
+      {/*<PhoneField*/}
+      {/*  error*/}
+      {/*  errorText={"Must filled"}*/}
+      {/*  search={true}*/}
+      {/*  initialPhoneCode={"62"}*/}
+      {/*  placeholder={"Phone"}*/}
+      {/*  label={"Phone"}*/}
+      {/*  mode={"flat"} />*/}
 
       <Select
         label={"Country"}
