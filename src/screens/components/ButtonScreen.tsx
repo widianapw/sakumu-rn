@@ -6,11 +6,26 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button } from "../../../tmd";
 import { VStack } from "react-native-flex-layout";
+import TextButton from "../../../tmd/components/Button/TextButton";
 
 export default function ButtonScreen() {
   return <ScrollView>
     <View style={{ padding: 16, flexDirection: "column" }}>
       <VStack spacing={8}>
+        <TextButton
+          onPress={() => {
+          }}
+        >
+          TextButton
+        </TextButton>
+        <TextButton
+          underline
+          onPress={() => {
+          }}
+        >
+          TextButton
+        </TextButton>
+
         <Button
           variant={"primary"}
           onPress={() => {
@@ -18,7 +33,9 @@ export default function ButtonScreen() {
           Primary
         </Button>
         <Button
-          icon={"camera"}
+          icon={{
+            icon: "camera",
+          }}
           variant={"primary"}
           onPress={() => {
           }}>
@@ -49,7 +66,9 @@ export default function ButtonScreen() {
         </Button>
 
         <Button
-          icon={"camera"}
+          icon={{
+            icon: "camera",
+          }}
           onPress={() => {
           }}
           variant={"secondary"}
@@ -64,7 +83,9 @@ export default function ButtonScreen() {
           Tertiary
         </Button>
         <Button
-          icon={"camera"}
+          icon={{
+            icon: "camera",
+          }}
           onPress={() => {
           }}
           variant={"tertiary"}
@@ -100,7 +121,6 @@ export default function ButtonScreen() {
           size={"lg"}>
           Button Large
         </Button>
-
 
       </VStack>
     </View>

@@ -198,8 +198,10 @@ const TextInputFilled = ({
               ref: innerRef,
               onChangeText: (val) => {
                 if (rest.search) {
-                  console.log(val.length > 0);
                   setIsShowSearch(val.length > 0);
+                  if (rest?.onInvokeTextChanged) {
+                    rest?.onInvokeTextChanged(val);
+                  }
                 }
                 if (onChangeText) {
                   onChangeText(val);

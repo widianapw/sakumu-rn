@@ -3,21 +3,22 @@
  * Copyright (c) 2022 - Made with love
  */
 
-export const _dateFilters =[
+const parentNode = "date_filters";
+export const _dateFilters = [
   {
     id: 1,
-    name: "1 Bulan Terakhir"
+    name: `${parentNode}.one_month_ago`,
   },
   {
     id: 2,
-    name: "2 Bulan Terakhir"
+    name: `${parentNode}.two_months_ago`,
   },
   {
     id: 3,
-    name: "3 Bulan Terakhir"
+    name: `${parentNode}.three_months_ago`,
   },
   {
     id: 4,
-    name: "Atur Tanggal"
-  }
+    name: `${parentNode}.set_date`,
+  },
 ]

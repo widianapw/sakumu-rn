@@ -394,7 +394,6 @@ type PhonePickerProps = {
 const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
   const country = _countries.find((it) => it.phone_code == initial);
   const theme = useTheme();
-  console.log(initial);
   return <View
     style={{
       display: "flex",

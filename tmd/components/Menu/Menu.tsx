@@ -22,7 +22,7 @@ import type { $Omit } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { APPROX_STATUSBAR_HEIGHT } from '../../constantsHelper';
 import { addEventListener } from '../../utils/addEventListener';
 
 type Props = {

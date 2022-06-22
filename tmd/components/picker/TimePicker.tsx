@@ -11,6 +11,7 @@ import moment from "moment";
 
 interface Props {
   initial?: string;
+  onChangeTime?: (time: string) => void;
 }
 
 export default function TimePicker({ initial, ...rest }: React.ComponentProps<typeof TextField> & Props) {

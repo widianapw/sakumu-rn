@@ -10,6 +10,7 @@ import Typography from "../Typography/Typography";
 import { useTheme } from "../../core/theming";
 import { Button } from "../../index";
 import { HStack, VStack } from "react-native-flex-layout";
+import { useTranslation } from "react-i18next";
 
 export interface BSProps {
   open: boolean;
@@ -27,6 +28,7 @@ export interface BSProps {
 
 export default function AlertBottomSheet(props: BSProps) {
   const modalizeRef = useRef<Modalize>(null);
+  const { t } = useTranslation();
   useEffect(() => {
     if (props.open) {
       modalizeRef?.current?.open();
@@ -63,7 +65,11 @@ export default function AlertBottomSheet(props: BSProps) {
           <VStack justify={"center"} items={"center"}>
             {
               props.imageNode &&
-              props.imageNode
+              <View style={{ paddingBottom: 16 }}>
+                {
+                  props.imageNode
+                }
+              </View>
             }
             {
               props.title &&
@@ -71,12 +77,14 @@ export default function AlertBottomSheet(props: BSProps) {
             }
             {
               props.description &&
-              <Typography type={"body1"} style={{
+              <Typography type={"body2"} style={{
                 color: theme.colors.neutral.neutral_80, textAlign: "center",
+                marginTop: 8,
+
               }}>{props.description}</Typography>
             }
           </VStack>
-          <HStack spacing={8} mt={18}>
+          <HStack spacing={16} mt={18}>
             {
               props.buttonSecondary &&
               <Button
@@ -88,7 +96,7 @@ export default function AlertBottomSheet(props: BSProps) {
                     handleClose();
                   }
                 }}
-              >{props.buttonSecondaryTitle ?? "Cancel"}</Button>
+              >{props.buttonSecondaryTitle ?? t("cancel")}</Button>
             }
             <Button
               fullWidth
@@ -99,7 +107,7 @@ export default function AlertBottomSheet(props: BSProps) {
                   handleClose();
                 }
               }}
-            >{props.buttonPrimaryTitle ?? "Kembali"}</Button>
+            >{props.buttonPrimaryTitle ?? t("back")}</Button>
 
           </HStack>
 

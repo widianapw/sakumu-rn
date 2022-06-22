@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 30/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "../TextInput/TextField";
 import _countries from "../../data/_countries";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
@@ -10,7 +10,7 @@ import { PickerItem } from "../../model/PickerItem";
 
 interface Props {
   initialPhoneCode?: string;
-  onPhoneCodeChange?: (value: string) => void;
+  onPhoneCodeChange?: (value: string | number) => void;
 }
 
 const PhoneField = ({
@@ -23,15 +23,16 @@ const PhoneField = ({
   const [isOpenPicker, setIsOpenPicker] = useState(false);
 
 
-  const handleSelected = useCallback(
-    (value: string) => {
-      setSelected(value);
-      if (onPhoneCodeChange) {
-        onPhoneCodeChange(value);
-      }
-    },
-    [selected],
-  );
+  const handleSelected = (value: string | number) => {
+    setSelected(value);
+  };
+
+  useEffect(() => {
+    if (onPhoneCodeChange) {
+      onPhoneCodeChange(selected);
+    }
+  }, [selected]);
+
 
   const handleOpenPicker = () =>
     setIsOpenPicker(true);

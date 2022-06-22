@@ -3,13 +3,13 @@ import { Animated, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "rea
 import color from "color";
 
 import ActivityIndicator from "../ActivityIndicator";
-import { IconSource } from "../MaterialIcon";
 import Surface from "../Surface";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
 import { black, white } from "../../styles/colors";
 import { useTheme } from "../../core/theming";
-import Icon from "../Icon";
-import Typography from "../Typography/Typography";
+import Icon, { IconProps } from "../Icon";
+import Typography, { TypographyType } from "../Typography/Typography";
+import { VStack } from "react-native-flex-layout";
 
 type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonShape = "rect" | "rounded"
@@ -51,7 +51,7 @@ interface Props {
   /**
    * Icon to display for the `Button`.
    */
-  icon?: IconSource;
+  icon?: IconProps;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -91,6 +91,9 @@ interface Props {
    * Style for the button text.
    */
   labelStyle?: StyleProp<TextStyle>;
+
+  underline?: boolean;
+  underlineStyle?: StyleProp<ViewStyle>;
   /**
    * testID to be used on tests.
    */
@@ -126,19 +129,16 @@ const Button = ({
   let marginSize = 8;
   switch (size) {
     case "sm":
-      marginSize = 2;
+      marginSize = 8;
       break;
     case "md":
-      marginSize = 8;
+      marginSize = 10;
       break;
     case "lg":
       marginSize = 12;
       break;
   }
 
-  if (variant == "tertiary") {
-    marginSize = 0;
-  }
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(disabled || variant !== "primary" ? 0 : 2),
@@ -252,8 +252,23 @@ const Button = ({
     : StyleSheet.flatten(contentStyle)?.flexDirection === "row-reverse"
       ? styles.iconReverse
       : styles.icon;
-
+  let buttonType: TypographyType;
+  switch (size) {
+    case "sm" : {
+      buttonType = "button3";
+      break;
+    }
+    case "md": {
+      buttonType = "button2";
+      break;
+    }
+    case "lg": {
+      buttonType = "button1";
+      break;
+    }
+  }
   return (
+
     <View style={
       [
         { display: "flex", flexDirection: fullWidth ? "column" : "row" },
@@ -293,59 +308,76 @@ const Button = ({
           style={touchableStyle}
           testID={testID}
         >
-          <View style={[styles.content, contentStyle]}>
-            {icon && loading !== true ? (
-              <View style={[
-                variant == "tertiary" ? {} : iconStyle,
-              ]}>
-                <Icon
-                  icon={icon}
+          <VStack>
+
+            <View style={[
+              { marginVertical: marginSize },
+              styles.content,
+              contentStyle,
+            ]}>
+              {icon && loading !== true ? (
+                <View style={[
+                  iconStyle,
+                ]}>
+                  <Icon
+                    icon={icon.icon}
+                    source={icon.source}
+                    size={icon.size ?? customLabelSize ?? 20}
+                    color={
+                      icon.color ??
+                      typeof customLabelColor === "string"
+                        ? customLabelColor
+                        : textColor
+                    }
+                  />
+                </View>
+              ) : null}
+              {loading ? (
+                <ActivityIndicator
                   size={customLabelSize ?? 16}
                   color={
                     typeof customLabelColor === "string"
                       ? customLabelColor
                       : textColor
                   }
+                  style={[
+                    iconStyle,
+                  ]}
                 />
-              </View>
-            ) : null}
-            {loading ? (
-              <ActivityIndicator
-                size={customLabelSize ?? 16}
-                color={
-                  typeof customLabelColor === "string"
-                    ? customLabelColor
-                    : textColor
+              ) : null}
+              {
+                !isIconButton &&
+                <Typography
+                  type={buttonType}
+                  selectable={false}
+                  numberOfLines={1}
+                  style={[
+                    styles.label,
+                    uppercase && styles.uppercaseLabel,
+                    textStyle,
+                    labelStyle,
+                    {},
+                  ]}
+                >
+                  {children}
+                </Typography>
+              }
+            </View>
+
+            {rest?.underline &&
+              <View
+                style={[{
+                  height: 1,
+                  marginBottom: 2,
+                  marginHorizontal: 2,
+                  backgroundColor: textColor ?? colors.primary.main,
+                },
+                  rest.underlineStyle,
+                ]
                 }
-                style={[
-                  variant == "tertiary" ? {} : iconStyle,
-                ]}
               />
-            ) : null}
-            {
-              !isIconButton &&
-              <Typography
-                type={"button1"}
-                selectable={false}
-                numberOfLines={1}
-                style={[
-                  styles.label,
-
-                  compact && styles.compactLabel,
-                  uppercase && styles.uppercaseLabel,
-                  textStyle,
-                  labelStyle,
-                  {
-                    marginVertical: marginSize,
-                  },
-
-                  variant == "tertiary" ? { marginHorizontal: 0 } : {},
-                ]}
-              >
-                {children}
-              </Typography>
             }
-          </View>
+          </VStack>
         </TouchableRipple>
       </Surface>
     </View>
@@ -363,14 +395,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    marginHorizontal: 16,
   },
   icon: {
-    marginLeft: 12,
-    marginRight: -10,
+    marginRight: 4,
+    // marginLeft: 12,
+    // marginRight: -10,
   },
   iconReverse: {
-    marginRight: 12,
-    marginLeft: -10,
+    // marginRight: 12,
+    // marginLeft: -10,
+    marginLeft: 4,
   },
   iconButton: {
     margin: 8,
@@ -378,8 +413,6 @@ const styles = StyleSheet.create({
   label: {
     textAlign: "center",
     letterSpacing: 1,
-    marginVertical: 8,
-    marginHorizontal: 16,
   },
   compactLabel: {
     marginHorizontal: 8,

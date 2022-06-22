@@ -57,7 +57,7 @@ export default function PickerScreen() {
         placeholder={"Phone"}
         label={"Phone"}
         onPhoneCodeChange={(value) => {
-          console.log(value);
+          //get value from this shit
         }}
         mode={"contained"} />
 

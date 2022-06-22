@@ -8,10 +8,21 @@ import Icon from "../Icon";
 import { default as DatePickerDialog } from "react-native-date-picker";
 import moment from "moment";
 import { useTheme } from "../../core/theming";
+import  TmdConstants from "../../utils/TmdConstants";
+interface Props {
+  date?: string;
+  onDateChanges?: (date: Date) => void;
+  onDateChangesFormatted?: (date: string) => void;
+}
 
-export function DatePicker({ ...rest }: ComponentProps<typeof TextField>) {
+export function DatePicker({
+                             date,
+                             onDateChanges,
+                             onDateChangesFormatted,
+                             ...rest
+                           }: ComponentProps<typeof TextField> & Props) {
   const [isOpenPicker, setIsOpenPicker] = useState(false);
-  const [selected, setSelected] = useState(new Date());
+  const [selected, setSelected] = useState(date ? moment(date).toDate() : new Date());
   const handleOpen = () => {
     setIsOpenPicker(true);
   };
@@ -29,7 +40,7 @@ export function DatePicker({ ...rest }: ComponentProps<typeof TextField>) {
         onOpenPicker={handleOpen}
         {...rest}
         suffixIcon={
-          <Icon icon={"calendar"} size={18} />
+          <Icon source={'ionicons'} icon={"ios-calendar"} size={18} />
         }
       />
 
@@ -42,6 +53,13 @@ export function DatePicker({ ...rest }: ComponentProps<typeof TextField>) {
         onConfirm={(date) => {
           setIsOpenPicker(false);
           setSelected(date);
+          if (onDateChanges) {
+            onDateChanges(date);
+          }
+          if (onDateChangesFormatted) {
+            const formatted = moment(date).format(TmdConstants.DATE_FORMAT_SEND_API);
+            onDateChangesFormatted(formatted);
+          }
         }}
         onCancel={() => {
           setIsOpenPicker(false);

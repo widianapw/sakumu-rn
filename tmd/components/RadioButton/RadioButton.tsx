@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Platform, Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native";
+import { Platform, StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import RadioButtonAndroid from "./RadioButtonAndroid";
 import RadioButtonIOS from "./RadioButtonIOS";
 import { useTheme } from "../../core/theming";
@@ -102,41 +102,31 @@ const RadioButton = ({ onPress, ...props }: Props) => {
     alignItems: "center",
   }, props.containerStyle];
 
-  const childrenComponent = () => {
+  const ChildrenComponent = () => {
     return <>
-      <Button color={props.color ?? theme.colors.primary.main} {...props} >
-      </Button>
-      {
-        props.text &&
-        <Typography
-          type={"body2"}
-          style={[{
-            color: theme.colors.neutral.neutral_90,
-          },
-            props.textStyle,
-          ]}>
-          {
-            props.text
-          }
-        </Typography>
-      }
-    </>;
-  };
-
-  const ParentComponent = () => {
-    return <>
-      {onPress ?
-        <Pressable
-          onPress={onPress}
-          style={parentComponentStyle}
-        >{childrenComponent()}</Pressable>
-        : <View style={parentComponentStyle}>{childrenComponent()}</View>
-      }
     </>;
   };
 
   return <>
-    <ParentComponent />
+    {
+      <View style={parentComponentStyle}>
+        <Button color={props.color ?? theme.colors.primary.main} {...props} />
+        {
+          props.text &&
+          <Typography
+            type={"body2"}
+            style={[{
+              color: theme.colors.neutral.neutral_90,
+            },
+              props.textStyle,
+            ]}>
+            {
+              props.text
+            }
+          </Typography>
+        }
+      </View>
+    }
   </>;
 };
 

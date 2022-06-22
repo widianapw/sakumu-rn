@@ -10,7 +10,7 @@ import overlay from '../../styles/overlay';
 import { DEFAULT_APPBAR_HEIGHT, Appbar } from './Appbar';
 import shadow from '../../styles/shadow';
 import { withTheme } from '../../core/theming';
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { APPROX_STATUSBAR_HEIGHT } from '../../constantsHelper';
 
 type Props = React.ComponentProps<typeof Appbar> & {
   /**

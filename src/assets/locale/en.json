@@ -1,6 +1,36 @@
 {
   "translation": {
     "welcome_to_rnstarterkit": "Welcome to React Native Starter Kit",
-    "back": "Back"
+    "back": "Back",
+    "sure": "Sure",
+    "errors": {
+      "no_connection_title": "You seem to be offline",
+      "no_connection_description": "Please check your Wi-Fi connection or cellular data and try again.",
+      "server_error_title": "Could not connect to server...",
+      "server_error_description": "Please come back later while we fix this."
+    },
+    "permissions": {
+      "location_title": "Allow app to access your location",
+      "location_description": "By giving us access, it will help us detect your location accurately.",
+      "storage_title": "Allow app to access your phone storage?",
+      "storage_description": "You will be able to share files from your device to our app.",
+      "camera_title": "Allow app to access your camera?",
+      "camera_description": "By giving us access, you'll be able to take pictures and share it in the app.",
+      "bluetooth_title": "Your Bluetooth seems to be off",
+      "bluetooth_description": "Please turn on bluetooth to use this feature."
+    },
+    "allow": "Allow",
+    "save": "Save",
+    "reset": "Reset",
+    "apply_filter": "Apply Filter",
+    "choose_date": "Choose Date",
+    "date_filters": {
+      "one_month_ago": "One Month Ago",
+      "two_months_ago": "Two Months Ago",
+      "three_months_ago": "Three Months Ago",
+      "set_date": "Set Date"
+    },
+    "start_date": "Start Date",
+    "end_date": "End Date"
   }
 }

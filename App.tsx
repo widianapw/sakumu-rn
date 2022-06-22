@@ -22,6 +22,7 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "./src/utils/i18n";
 import BottomSheetProvider from "./tmd/providers/BottomSheetProvider";
 import { Host } from "react-native-portalize";
+import PermissionProvider from "./tmd/providers/PermissionProvider";
 
 GoogleSignin.configure({
   webClientId: "992506026123-uqeer92bafkp826i1s3c3786qcs8cpk3.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -35,7 +36,9 @@ const App = () => {
         <I18nextProvider i18n={i18n}>
           <Host>
             <BottomSheetProvider>
-              <AppNavigation />
+              <PermissionProvider>
+                <AppNavigation />
+              </PermissionProvider>
             </BottomSheetProvider>
           </Host>
         </I18nextProvider>

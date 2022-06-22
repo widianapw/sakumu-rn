@@ -9,22 +9,28 @@ import Typography from "../Typography/Typography";
 import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
 import { HStack, VStack } from "react-native-flex-layout";
 import { DatePicker } from "../picker/DatePicker";
-
+import moment from "moment";
+import TmdConstants from "../../utils/TmdConstants";
+import { useTranslation } from "react-i18next";
 
 /**
  * Created by Widiana Putra on 21/06/2022
  * Copyright (c) 2022 - Made with love
  */
 
-type DateFilterPayload = {
-  id: number;
+type DateRange = {
   start_date?: string;
   end_date?: string;
 }
 
+export type DateFilterPayload = {
+  id: number;
+  date_range?: DateRange;
+}
+
 interface Props {
   open: boolean;
-  initial?: DateFilterPayload;
+  initial?: DateFilterPayload | undefined;
   onClose: () => void;
   onSave?: (data: DateFilterPayload) => void;
   onReset?: () => void;
@@ -34,7 +40,12 @@ interface Props {
 export default function DateFilterBottomSheet({ open, initial, onClose, ...props }: Props) {
   const modalizeRef = useRef<Modalize>(null);
   const [selectedItem, setSelectedItem] = useState<DateFilterPayload>();
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedId, setSelectedId] = useState<number | null | undefined>(null);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+    start_date: moment().format(TmdConstants.DATE_FORMAT_SEND_API),
+    end_date: moment().format(TmdConstants.DATE_FORMAT_SEND_API),
+  });
+  const { t } = useTranslation();
   const list = _dateFilters;
   useEffect(() => {
     if (open) {
@@ -43,6 +54,13 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
       modalizeRef?.current?.close();
     }
   }, [open]);
+
+  useEffect(() => {
+    console.log(initial);
+    setSelectedId(initial?.id);
+    setDateRange(initial?.date_range);
+  }, [initial]);
+
 
   const handleClose = () => {
     onClose();
@@ -60,7 +78,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
           containerStyle={{
             flexDirection: "row-reverse",
           }}
-          text={item?.name}
+          text={t(item?.name)}
           textStyle={{
             flexGrow: 1,
             flex: 1,
@@ -72,6 +90,59 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
     </Pressable>;
   };
 
+  const getValue = (): DateFilterPayload => {
+    let returnedValue: DateFilterPayload;
+    switch (selectedId) {
+      case 1 : {
+        const currDate = moment();
+        const start = currDate.format(TmdConstants.DATE_FORMAT_SEND_API);
+        const end = currDate.subtract(1, "months").format(TmdConstants.DATE_FORMAT_SEND_API);
+        returnedValue = {
+          id: selectedId,
+          date_range: {
+            start_date: start,
+            end_date: end,
+          },
+        };
+        break;
+      }
+      case 2: {
+        const currDate = moment();
+        const start = currDate.format(TmdConstants.DATE_FORMAT_SEND_API);
+        const end = currDate.subtract(2, "months").format(TmdConstants.DATE_FORMAT_SEND_API);
+        returnedValue = {
+          id: selectedId,
+          date_range: {
+            start_date: start,
+            end_date: end,
+          },
+        };
+        break;
+      }
+      case 3: {
+        const currDate = moment();
+        const start = currDate.format(TmdConstants.DATE_FORMAT_SEND_API);
+        const end = currDate.subtract(3, "months").format(TmdConstants.DATE_FORMAT_SEND_API);
+        returnedValue = {
+          id: selectedId,
+          date_range: {
+            start_date: start,
+            end_date: end,
+          },
+        };
+        break;
+      }
+      default: {
+        console.log(dateRange);
+        returnedValue = {
+          id: selectedId ?? 4,
+          date_range: dateRange,
+        };
+        break;
+      }
+    }
+    return returnedValue;
+  };
 
   return (
     <>
@@ -97,7 +168,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
               justifyContent: "space-between",
               alignItems: "center",
             }}>
-              <Typography type={"title2"}>{props.title ?? "Filter Data"}</Typography>
+              <Typography type={"title2"}>{props.title ?? t("choose_date")}</Typography>
               {
                 props.onReset &&
                 <Button
@@ -105,7 +176,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                   shape={"rounded"}
                   variant={"secondary"}
                   onPress={props?.onReset}
-                >Reset</Button>
+                >{t("reset")}</Button>
               }
             </View>
             <RadioButtonGroup
@@ -122,33 +193,43 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
               }
             </RadioButtonGroup>
 
-            {
-              selectedId == 4 &&
               <HStack spacing={8} mt={16}>
                 <View style={{ flex: 1 }}>
                   <DatePicker
-                    label={"Start Date"}
+                    date={dateRange?.start_date}
+                    onDateChangesFormatted={(date) => {
+                      setDateRange({ ...dateRange, start_date: date });
+                    }}
+                    disabled={selectedId != 4}
+                    label={t("start_date")}
                   />
                 </View>
                 <View style={{ flex: 1 }}>
                   <DatePicker
-                    label={"End Date"}
+                    date={dateRange?.end_date}
+                    onDateChangesFormatted={(date) => {
+                      console.log(date);
+                      setDateRange({ ...dateRange, end_date: date });
+                    }}
+                    disabled={selectedId != 4}
+                    label={t("end_date")}
                   />
                 </View>
               </HStack>
-            }
 
             <VStack mt={24}>
               <Button
                 onPress={() => {
                   if (props.onSave) {
-                    props.onSave(selectedItem);
+                    const value = getValue();
+                    setSelectedItem(value);
+                    props.onSave(value);
                   }
                 }}
                 style={{
                   width: "100%",
                 }}
-              >Apply Filter</Button>
+              >{t("apply_filter")}</Button>
             </VStack>
           </View>
         </Modalize>

@@ -3,7 +3,6 @@ import { GestureResponderEvent, StyleProp, StyleSheet, TouchableWithoutFeedback,
 import color from "color";
 
 import TouchableRipple from "./TouchableRipple/TouchableRipple";
-import { IconSource } from "./MaterialIcon";
 import { useTheme } from "../core/theming";
 
 import type { $RemoveChildren } from "../types";

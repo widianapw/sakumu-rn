@@ -1,17 +1,11 @@
-import * as React from 'react';
-import {
-  AccessibilityInfo,
-  Appearance,
-  ColorSchemeName,
-  NativeEventSubscription,
-} from 'react-native';
-import { ThemeProvider } from './theming';
-import { Provider as SettingsProvider, Settings } from './settings';
-import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
-import PortalHost from '../components/Portal/PortalHost';
-import DefaultTheme from '../styles/DefaultTheme';
-import DarkTheme from '../styles/DarkTheme';
-import { addEventListener } from '../utils/addEventListener';
+import * as React from "react";
+import { AccessibilityInfo, Appearance, ColorSchemeName, NativeEventSubscription } from "react-native";
+import { ThemeProvider } from "./theming";
+import { Provider as SettingsProvider, Settings } from "./settings";
+import MaterialCommunityIcon from "../components/MaterialCommunityIcon";
+import PortalHost from "../components/Portal/PortalHost";
+import DefaultTheme from "../styles/DefaultTheme";
+import { addEventListener } from "../utils/addEventListener";
 import { Theme } from "../types";
 
 type Props = {
@@ -78,7 +72,7 @@ const Provider = ({ ...props }: Props) => {
       return providedTheme;
     } else {
       const theme = (
-        colorScheme === 'dark' ? DarkTheme : DefaultTheme
+        DefaultTheme
       ) as ReactNativePaper.Theme;
 
       return {

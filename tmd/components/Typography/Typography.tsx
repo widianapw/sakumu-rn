@@ -5,8 +5,9 @@
 import { StyleProp, StyleSheet, Text as NativeText, TextStyle } from "react-native";
 import * as React from "react";
 import { useTheme } from "../../index";
+import { exp } from "@gorhom/bottom-sheet/lib/typescript/utilities/easingExp";
 
-type TypographyType =
+export type TypographyType =
   "h1"
   | "h2"
   | "h3"
@@ -21,6 +22,7 @@ type TypographyType =
   | "body4"
   | "button1"
   | "button2"
+  | "button3"
 
 interface Props {
   style?: StyleProp<TextStyle>;
@@ -107,10 +109,16 @@ const Typography = ({ style, type = "body2", ...rest }: Props & React.ComponentP
       break;
     }
     case "button2": {
+      fontSize = 14;
+      lineHeight = 20;
+      break;
+    }
+    case "button3": {
       fontSize = 12;
       lineHeight = 16;
       break;
     }
+
   }
 
 

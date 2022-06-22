@@ -5,13 +5,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Portal } from "react-native-portalize";
 import { Modalize } from "react-native-modalize";
-import { Animated, FlatList, Image, Pressable, View } from "react-native";
+import { Animated, FlatList, Image, TouchableOpacity, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { Button, Divider, useTheme } from "../../index";
 import TextField from "../TextInput/TextField";
 import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
 import { PickerItem } from "../../model/PickerItem";
 import RadioButton from "../RadioButton/RadioButton";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open?: boolean;
@@ -30,6 +31,7 @@ export default function PickerBottomSheet(props: Props) {
   const [list, setList] = useState(props.data);
   const theme = useTheme();
   const { colors } = theme;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (props.open) {
@@ -42,15 +44,17 @@ export default function PickerBottomSheet(props: Props) {
 
 
   const renderItem = ({ item }) => {
-    return <Pressable
+    return <TouchableOpacity
       onPress={() => {
         setSelected(item?.id);
       }}
     >
-      <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", paddingVertical: 8 }}>
+      <View
+        style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", paddingVertical: 8, flex: 1 }}>
         {
           item?.image &&
           <View style={{ marginRight: 8 }}>
+            {/*<Typography>{item?.image}</Typography>*/}
             <Image
               source={{ uri: item?.image }}
               resizeMode={"center"}
@@ -65,18 +69,18 @@ export default function PickerBottomSheet(props: Props) {
         <RadioButton
           containerStyle={{
             flexDirection: "row-reverse",
+            flex: 1,
           }}
           text={item?.name}
           textStyle={{
             flexGrow: 1,
-            flex: 1,
             color: colors.neutral.neutral_90,
           }}
           value={item?.id}
         />
       </View>
       <Divider />
-    </Pressable>;
+    </TouchableOpacity>;
   };
   return <Portal>
     <Modalize
@@ -89,6 +93,7 @@ export default function PickerBottomSheet(props: Props) {
       modalStyle={{
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
+        flex: 1,
       }}
       handlePosition={"inside"}
       customRenderer={
@@ -115,20 +120,22 @@ export default function PickerBottomSheet(props: Props) {
                     shape={"rounded"}
                     variant={"secondary"}
                     onPress={props?.onReset}
-                  >Reset</Button>
+                  >
+                    {t("reset")}
+                  </Button>
                 }
               </View>
               {props.search &&
                 <View style={{ marginTop: 8 }}>
                   <TextField
+                    shape={"rounded"}
                     onInvokeTextChanged={(text) => {
                       if (text.length > 0) {
-                        setList(props.data.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
+                        setList(props?.data?.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
                       } else {
                         setList(props.data);
                       }
                     }}
-                    mode={"contained"}
                     search
                     placeholder={"Search"}
                   />
@@ -148,6 +155,7 @@ export default function PickerBottomSheet(props: Props) {
           <View style={{ flexGrow: 1, flex: 1 }}>
             <RadioButtonGroup
               onValueChange={(value) => {
+                console.warn(value);
                 setSelected(value);
               }}
               value={selected}>
@@ -169,6 +177,7 @@ export default function PickerBottomSheet(props: Props) {
 
           <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
             <Button
+              size={"lg"}
               onPress={() => {
                 if (props.onSave) {
                   props.onSave(selected);
@@ -178,7 +187,7 @@ export default function PickerBottomSheet(props: Props) {
                 width: "100%",
               }}
               shape={"rounded"}
-            >Save</Button>
+            >{t("save")}</Button>
           </View>
         </Animated.View>
       }

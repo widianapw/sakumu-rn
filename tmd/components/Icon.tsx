@@ -10,7 +10,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 //look icons here https://github.com/oblador/react-native-vector-icons#bundled-icon-sets
-interface IconProps {
+export interface IconProps {
   source?: "ionicons" | "material-community" | "fa-5";
   icon: string;
   size?: number;

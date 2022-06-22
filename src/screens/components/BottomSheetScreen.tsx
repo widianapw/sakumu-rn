@@ -3,15 +3,27 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { Alert, ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../tmd";
 import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
-import DateFilterBottomSheet from "../../../tmd/components/BottomSheet/DateFilterBottomSheet";
+import DateFilterBottomSheet, { DateFilterPayload } from "../../../tmd/components/BottomSheet/DateFilterBottomSheet";
+import Typography from "../../../tmd/components/Typography/Typography";
+import { getBankListAPI } from "../../services/bank/bankService";
+import { usePermission } from "../../../tmd/providers/PermissionProvider";
+import { CAMERA_PERMISSIONS, LOCATION_PERMISSIONS, STORAGE_PERMISSIONS } from "../../../tmd/data/_permissionTypes";
 
 export default function BottomSheetScreen() {
-  const { showConfirmationBS, hideConfirmationBS, showAlertBS, hideAlertBS } = useBottomSheet();
+  const {
+    showConfirmationBS,
+    hideConfirmationBS,
+    showAlertBS,
+    hideAlertBS,
+    showErrorBS,
+    hideErrorBS,
+  } = useBottomSheet();
+  const { requestPermissions } = usePermission();
   const handleShowConfirmation = () => {
     showConfirmationBS({
       title: "Takin ingin Tanda Tangan Kontrak?",
@@ -31,11 +43,45 @@ export default function BottomSheetScreen() {
     });
   };
 
-  const [isShowDateFilter, setIsShowDateFilter] = useState(false);
+  const handleGetData = async () => {
+    try {
+      const data = await getBankListAPI();
+      console.log(data);
+    } catch (e) {
+      console.log("ERROR VIEW");
+      showErrorBS(e, {
+        buttonPrimaryAction: () => {
+          Alert.alert("Sarangheyo");
+          hideErrorBS();
+        },
+      });
+    }
+  };
 
+  const requestPermission = () => {
+    requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS, LOCATION_PERMISSIONS],
+      () => {
+        Alert.alert("GRANTED ");
+      });
+  };
+
+  const [isShowDateFilter, setIsShowDateFilter] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<DateFilterPayload | null>(null);
   return (
     <>
-      <DateFilterBottomSheet open={isShowDateFilter} onClose={() => setIsShowDateFilter(false)} onReset={() => {}}/>
+      <DateFilterBottomSheet
+        open={isShowDateFilter}
+        initial={selectedDate}
+        onClose={() => setIsShowDateFilter(false)}
+        onReset={() => {
+          setSelectedDate(null);
+          setIsShowDateFilter(false);
+        }}
+
+        onSave={(data) => {
+          setSelectedDate(data);
+          setIsShowDateFilter(false);
+        }} />
       <ScrollView>
         <VStack spacing={16} style={{
           padding: 16,
@@ -53,6 +99,24 @@ export default function BottomSheetScreen() {
             }}
           >
             Date Filter BottomSheet</Button>
+          {
+            selectedDate &&
+            <Typography>
+              Date Start = {selectedDate?.date_range?.start_date}, Date End = {selectedDate?.date_range?.end_date}
+            </Typography>
+          }
+
+          <Button
+            onPress={handleGetData}
+          >
+            GET DATA WITH ERROR
+          </Button>
+
+          <Button
+            onPress={requestPermission}
+          >
+            PERMISSIONS (REJECT)
+          </Button>
         </VStack>
       </ScrollView>
     </>

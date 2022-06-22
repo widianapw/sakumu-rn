@@ -4,6 +4,7 @@
  */
 import React from "react";
 import AlertBottomSheet from "./AlertBottomSheet";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   open: boolean;
@@ -19,12 +20,13 @@ interface Props {
 }
 
 export default function ConfirmationBottomSheet({ open, buttonPrimaryTitle, buttonSecondaryTitle, ...rest }: Props) {
+  const { t } = useTranslation();
   return (
     <>
       <AlertBottomSheet
         open={open}
-        buttonSecondaryTitle={buttonSecondaryTitle ?? "Back"}
-        buttonPrimaryTitle={buttonPrimaryTitle ?? "Sure"}
+        buttonSecondaryTitle={buttonSecondaryTitle ?? t("back")}
+        buttonPrimaryTitle={buttonPrimaryTitle ?? t("sure")}
         buttonSecondary={true}
         {...rest}
       />
