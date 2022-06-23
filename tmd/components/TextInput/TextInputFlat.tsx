@@ -24,7 +24,7 @@ const INPUT_PADDING_HORIZONTAL = 8;
 const MIN_HEIGHT = 32;
 const SHAPE_RADIUS = 10;
 const ROUNDED_RADIUS = 32;
-const ICON_BUTTON = MIN_HEIGHT - 20;
+const ICON_BUTTON = MIN_HEIGHT - 14;
 
 const TextInputFlat = ({
                          disabled = false,
@@ -308,6 +308,7 @@ const TextInputFlat = ({
                 }}
                 >
                   <IconButton
+                    fitIcon
                     color={
                       colors.neutral.neutral_70
                     }
@@ -338,6 +339,7 @@ const TextInputFlat = ({
                 }}
                 >
                   <IconButton
+                    fitIcon
                     color={
                       isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_90
                     }

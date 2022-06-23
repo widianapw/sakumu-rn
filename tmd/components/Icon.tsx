@@ -5,7 +5,7 @@
 import React from "react";
 import { useTheme } from "../core/theming";
 import { default as Ionicons } from "react-native-vector-icons/Ionicons";
-import { View } from "react-native";
+import { StyleProp, TextStyle, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
@@ -15,27 +15,28 @@ export interface IconProps {
   icon: string;
   size?: number;
   color?: string;
+  style?: StyleProp<TextStyle>;
 }
 
 const Icon = ({
-                source = "ionicons", icon, size = 22, color,
+                source = "ionicons", icon, size = 22, color, style,
               }: IconProps) => {
   const theme = useTheme();
   const defaultColor = theme.colors.neutral.neutral_80;
   return <View>
     {
       source == "material-community" &&
-      <MaterialCommunityIcons name={icon} size={size} color={color ?? defaultColor} />
+      <MaterialCommunityIcons style={style} name={icon} size={size} color={color ?? defaultColor} />
     }
 
     {
       source == "fa-5" &&
-      <FontAwesome5 name={icon} size={size} color={color ?? defaultColor} />
+      <FontAwesome5 style={style} name={icon} size={size} color={color ?? defaultColor} />
     }
 
     {
       source == "ionicons" &&
-      <Ionicons name={icon} size={size} color={color ?? defaultColor} />
+      <Ionicons style={style} name={icon} size={size} color={color ?? defaultColor} />
     }
   </View>;
 };

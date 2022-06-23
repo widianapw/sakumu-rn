@@ -24,6 +24,7 @@ const TextFieldScreen = () => {
         }}>
 
         <TextInput
+          required
           mode={"flat"}
           label="Search"
           placeholder={"Search"}
@@ -31,6 +32,7 @@ const TextFieldScreen = () => {
         />
 
         <TextInput
+          required
           mode={"flat"}
           password
           label="Password"

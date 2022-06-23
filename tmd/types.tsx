@@ -1,4 +1,8 @@
 import type * as React from "react";
+import { TagShape, TagSize, TagVariant } from "./components/Tag/Tag";
+import { ButtonShape, ButtonSize, ButtonVariant } from "./components/Button/Button";
+import { TextInputMode, TextInputShape } from "./components/TextInput/TextField";
+import { AlertType, AlertVariant } from "./components/Alert/Alert";
 
 export type Font = {
   fontFamily: string;
@@ -34,20 +38,32 @@ export type Theme = {
   colors: ThemeColors;
   textInput?: TextInputTheme;
   button: ButtonTheme;
+  tag: TagTheme;
   fonts: Fonts;
+  alert: AlertTheme;
   animation: {
     scale: number;
   };
 };
+interface AlertTheme {
+  variant: AlertVariant;
+  type: AlertType;
+}
+interface TagTheme {
+  shape: TagShape;
+  variant: TagVariant;
+  size: TagSize;
+}
 
 interface TextInputTheme {
-  shape: "rect" | "rounded";
-  mode: "filled" | "contained" | "flat";
+  shape: TextInputShape;
+  mode: TextInputMode;
 }
 
 interface ButtonTheme {
-  variant: "primary" | "secondary" | "tertiary";
-  shape: "rect" | "rounded";
+  variant: ButtonVariant;
+  shape: ButtonShape;
+  size: ButtonSize;
 }
 
 interface BaseColorProps {

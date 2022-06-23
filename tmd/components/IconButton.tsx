@@ -23,6 +23,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<TouchableWithoutFeedback>;
+  fitIcon?: boolean;
   /**
    * @optional
    */
@@ -77,7 +78,7 @@ const IconButton = ({
     typeof customColor !== "undefined" ? customColor : theme.colors.neutral.neutral_80;
   const rippleColor = color(iconColor).alpha(0.32).rgb().string();
   const IconComponent = Icon;
-  const buttonSize = size * 1.8;
+  const buttonSize = rest.fitIcon ? size : size * 1.8;
   return (
     <TouchableRipple
       borderless

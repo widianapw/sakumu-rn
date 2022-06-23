@@ -7,29 +7,24 @@ import Typography from "../../../tmd/components/Typography/Typography";
 import { ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../tmd";
-import { useTranslation } from "react-i18next";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import StorageKey from "../../utils/StorageKey";
+import { useLocale } from "../../providers/LocaleProvider";
 
 export default function LanguageScreen() {
-  const { t, i18n } = useTranslation();
-  const handleChangeLang = (lang: string) => {
-    AsyncStorage.setItem(StorageKey.LOCALE, lang);
-    i18n.changeLanguage(lang);
-  };
+  const { changeLanguage, t, currentLanguage } = useLocale();
   return (
     <ScrollView>
       <VStack spacing={16} p={16} items={"center"} justify={"center"}>
         <Typography>{t("welcome_to_rnstarterkit")}</Typography>
+        <Typography>current lang: {currentLanguage}</Typography>
         <VStack spacing={8}>
           <Button
             onPress={() => {
-              handleChangeLang("en")
+              changeLanguage("en");
             }}
           >Change to English</Button>
           <Button
             onPress={() => {
-              handleChangeLang("id")
+              changeLanguage("id");
             }}
           >Change to Indonesia</Button>
         </VStack>

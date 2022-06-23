@@ -12,6 +12,8 @@ import TextInputOutlined from "./TextInputOutlined";
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
+export type TextInputMode = "filled" | "contained" | "flat";
+export type TextInputShape = "rect" | "rounded";
 export type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   /**
    * Mode of the TextInput.
@@ -21,7 +23,7 @@ export type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput>
    * In `outlined` mode, the background color of the label is derived from `colors.background` in theme or the `backgroundColor` style.
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
-  mode?: "flat" | "filled" | "contained" | "outlined";
+  mode?: TextInputMode;
   left?: React.ReactNode;
   right?: React.ReactNode;
   /**
@@ -130,7 +132,7 @@ export type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput>
   counter?: boolean;
   search?: boolean;
   onClear?: Function;
-  shape?: "rect" | "rounded"
+  shape?: TextInputShape;
   pickerType?: "phone" | "select" | "date" | "map"
 
   //phone

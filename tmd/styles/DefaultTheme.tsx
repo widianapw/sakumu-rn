@@ -13,6 +13,16 @@ const DefaultTheme: Theme = {
   button: {
     variant: "primary",
     shape: "rounded",
+    size: "md",
+  },
+  tag: {
+    variant: "primary",
+    size: "md",
+    shape: "rounded",
+  },
+  alert:{
+    variant: "info",
+    type: "basic"
   },
   fonts: configureFonts(),
   animation: {

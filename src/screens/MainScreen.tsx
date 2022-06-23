@@ -9,8 +9,7 @@ import Typography from "../../tmd/components/Typography/Typography";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
 import { VStack } from "react-native-flex-layout";
 
-const MainScreen = ({ navigation }) => {
-
+const MainScreen = ({ navigation }: any) => {
   const [userInfo, setUserInfo] = useState({});
   const signIn = async () => {
     try {
@@ -106,6 +105,28 @@ const MainScreen = ({ navigation }) => {
         }}
       >
         Bottom Sheet
+      </Button>
+
+      <Button onPress={() => {
+        navigation.navigate("TagScreen");
+      }}>
+        Tag
+      </Button>
+
+      <Button
+        onPress={() => {
+          navigation.navigate("AlertScreen");
+        }}
+      >
+        Alert
+      </Button>
+
+      <Button
+        onPress={() => {
+          navigation.navigate("SelectorScreen");
+        }}
+      >
+        Selector
       </Button>
 
       <Button

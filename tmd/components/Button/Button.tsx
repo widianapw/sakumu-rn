@@ -11,9 +11,9 @@ import Icon, { IconProps } from "../Icon";
 import Typography, { TypographyType } from "../Typography/Typography";
 import { VStack } from "react-native-flex-layout";
 
-type ButtonVariant = "primary" | "secondary" | "tertiary";
-type ButtonShape = "rect" | "rounded"
-type ButtonSize = "sm" | "md" | "lg"
+export type ButtonVariant = "primary" | "secondary" | "tertiary";
+export type ButtonShape = "rect" | "rounded"
+export type ButtonSize = "sm" | "md" | "lg"
 
 interface Props {
   /**
@@ -101,7 +101,7 @@ interface Props {
 }
 
 const Button = ({
-                  size = "md",
+                  size,
                   shape,
                   fullWidth = false,
                   disabled,
@@ -127,7 +127,9 @@ const Button = ({
   const theme = useTheme();
   const usedShape = shape ?? theme.button.shape;
   let marginSize = 8;
-  switch (size) {
+
+  const usedSize = size ?? theme.button.size;
+  switch (usedSize) {
     case "sm":
       marginSize = 8;
       break;

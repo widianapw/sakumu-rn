@@ -5,7 +5,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Portal } from "react-native-portalize";
 import { Modalize } from "react-native-modalize";
-import { Animated, FlatList, Image, TouchableOpacity, View } from "react-native";
+import { Animated, FlatList, Image, Pressable, TouchableOpacity, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { Button, Divider, useTheme } from "../../index";
 import TextField from "../TextInput/TextField";
@@ -44,7 +44,7 @@ export default function PickerBottomSheet(props: Props) {
 
 
   const renderItem = ({ item }) => {
-    return <TouchableOpacity
+    return <Pressable
       onPress={() => {
         setSelected(item?.id);
       }}
@@ -80,7 +80,7 @@ export default function PickerBottomSheet(props: Props) {
         />
       </View>
       <Divider />
-    </TouchableOpacity>;
+    </Pressable>;
   };
   return <Portal>
     <Modalize
@@ -155,7 +155,6 @@ export default function PickerBottomSheet(props: Props) {
           <View style={{ flexGrow: 1, flex: 1 }}>
             <RadioButtonGroup
               onValueChange={(value) => {
-                console.warn(value);
                 setSelected(value);
               }}
               value={selected}>

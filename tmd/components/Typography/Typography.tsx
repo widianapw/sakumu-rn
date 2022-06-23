@@ -5,7 +5,6 @@
 import { StyleProp, StyleSheet, Text as NativeText, TextStyle } from "react-native";
 import * as React from "react";
 import { useTheme } from "../../index";
-import { exp } from "@gorhom/bottom-sheet/lib/typescript/utilities/easingExp";
 
 export type TypographyType =
   "h1"
@@ -16,6 +15,7 @@ export type TypographyType =
   | "title3"
   | "label1"
   | "label2"
+  | "label3"
   | "body1"
   | "body2"
   | "body3"
@@ -29,13 +29,15 @@ interface Props {
   type?: TypographyType;
 }
 
-const Typography = ({ style, type = "body2", ...rest }: Props & React.ComponentProps<typeof NativeText>) => {
+const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeof NativeText>) => {
   const theme = useTheme();
+
   let fontSize = 14;
   let lineHeight = 20;
   let spacing = 0;
   let fontTheme = theme.fonts.medium;
-  switch (type) {
+  const usedType = type ?? "body2";
+  switch (usedType) {
     case "h1": {
       fontSize = 32;
       lineHeight = 40;
@@ -78,6 +80,13 @@ const Typography = ({ style, type = "body2", ...rest }: Props & React.ComponentP
       spacing = 0.1;
       break;
     }
+    case "label3": {
+      fontSize = 10;
+      lineHeight = 14;
+      spacing = 0.1;
+      break;
+    }
+
     case "body1": {
       fontSize = 16;
       lineHeight = 24;
@@ -129,10 +138,12 @@ const Typography = ({ style, type = "body2", ...rest }: Props & React.ComponentP
         {
           color: theme.colors.neutral.neutral_90,
           letterSpacing: spacing,
-          lineHeight: lineHeight,
           fontSize: fontSize,
           ...fontTheme,
         },
+        type ? {
+          lineHeight: lineHeight,
+        } : {},
         styles.text,
         style,
 

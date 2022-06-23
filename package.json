@@ -48,6 +48,7 @@
     "react-native-shadow-2": "^6.0.5",
     "react-native-svg": "^12.3.0",
     "react-native-vector-icons": "^9.1.0",
+    "react-query": "^3.39.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

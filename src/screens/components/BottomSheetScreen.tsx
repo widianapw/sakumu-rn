@@ -46,9 +46,7 @@ export default function BottomSheetScreen() {
   const handleGetData = async () => {
     try {
       const data = await getBankListAPI();
-      console.log(data);
     } catch (e) {
-      console.log("ERROR VIEW");
       showErrorBS(e, {
         buttonPrimaryAction: () => {
           Alert.alert("Sarangheyo");

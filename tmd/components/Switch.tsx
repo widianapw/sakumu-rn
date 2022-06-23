@@ -1,14 +1,8 @@
-import * as React from 'react';
-import { grey400, grey800, grey50, white, black } from '../styles/colors';
-import {
-  NativeModules,
-  Platform,
-  StyleProp,
-  Switch as NativeSwitch,
-  ViewStyle,
-} from 'react-native';
-import setColor from 'color';
-import { withTheme } from '../core/theming';
+import * as React from "react";
+import { black, grey400, grey50, grey800, white } from "../styles/colors";
+import { NativeModules, Platform, StyleProp, Switch as NativeSwitch, ViewStyle } from "react-native";
+import setColor from "color";
+import { withTheme } from "../core/theming";
 
 const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion

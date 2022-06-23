@@ -16,6 +16,7 @@ import Geocoder, { GeocodingObject } from "@timwangdev/react-native-geocoder";
 import RNGooglePlaces from "react-native-google-places";
 import { PERMISSIONS, requestMultiple } from "react-native-permissions";
 import Geolocation from "react-native-geolocation-service";
+import env from "../../../src/env";
 
 interface SelectedMap {
   fullAddress?: string;
@@ -49,7 +50,7 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
       lat: lat,
       lng: lng,
     }, {
-      apiKey: "AIzaSyBdxwn9ARvmzweQfs6NkT7bqkTXsNfCekg",
+      apiKey: env.GOOGLE_MAPS_API_KEY,
     }).then((res) => {
       const a = res[0];
       a.position = {
