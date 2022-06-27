@@ -73,7 +73,7 @@ const PhoneField = ({
         })
       }
       onSave={(value) => {
-        handleSelected(value);
+        handleSelected(value?.id);
         setIsOpenPicker(false);
       }}
       title={"Phone Code Picker"}

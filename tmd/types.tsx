@@ -3,6 +3,7 @@ import { TagShape, TagSize, TagVariant } from "./components/Tag/Tag";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./components/Button/Button";
 import { TextInputMode, TextInputShape } from "./components/TextInput/TextField";
 import { AlertType, AlertVariant } from "./components/Alert/Alert";
+import { ChipShape, ChipVariant } from "./components/Chip";
 
 export type Font = {
   fontFamily: string;
@@ -41,14 +42,22 @@ export type Theme = {
   tag: TagTheme;
   fonts: Fonts;
   alert: AlertTheme;
+  chip: ChipTheme;
   animation: {
     scale: number;
   };
 };
+
+interface ChipTheme {
+  variant: ChipVariant;
+  shape: ChipShape;
+}
+
 interface AlertTheme {
   variant: AlertVariant;
   type: AlertType;
 }
+
 interface TagTheme {
   shape: TagShape;
   variant: TagVariant;

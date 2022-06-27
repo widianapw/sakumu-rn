@@ -22,26 +22,30 @@ import BottomSheetProvider from "./tmd/providers/BottomSheetProvider";
 import { Host } from "react-native-portalize";
 import PermissionProvider from "./tmd/providers/PermissionProvider";
 import LocaleProvider from "./src/providers/LocaleProvider";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 GoogleSignin.configure({
   webClientId: "992506026123-uqeer92bafkp826i1s3c3786qcs8cpk3.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access)
   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
 });
-
+// Create a client
+const queryClient = new QueryClient();
 const App = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>{/* content */}
-      <ThemeProvider theme={DefaultTheme}>
-        <LocaleProvider>
-          <Host>
-            <BottomSheetProvider>
-              <PermissionProvider>
-                <AppNavigation />
-              </PermissionProvider>
-            </BottomSheetProvider>
-          </Host>
-        </LocaleProvider>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={DefaultTheme}>
+          <LocaleProvider>
+            <Host>
+              <BottomSheetProvider>
+                <PermissionProvider>
+                  <AppNavigation />
+                </PermissionProvider>
+              </BottomSheetProvider>
+            </Host>
+          </LocaleProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   );
 };

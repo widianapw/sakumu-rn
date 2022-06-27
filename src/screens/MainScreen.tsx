@@ -131,6 +131,22 @@ const MainScreen = ({ navigation }: any) => {
 
       <Button
         onPress={() => {
+          navigation.navigate("APIScreen");
+        }}
+      >
+        API Screen
+      </Button>
+
+
+      <Button onPress={() => {
+        navigation.navigate("ChipScreen");
+      }}>
+        Chip Screen
+      </Button>
+
+
+      <Button
+        onPress={() => {
           navigation.navigate("LanguageScreen");
         }}>
         Language Screen

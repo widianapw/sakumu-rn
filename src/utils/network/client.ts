@@ -51,7 +51,7 @@ client.interceptors.response.use(
       null,
       2,
     )}`;
-    console.log(printable);
+    // console.log(printable);
     return response.data;
   },
   (error) => {

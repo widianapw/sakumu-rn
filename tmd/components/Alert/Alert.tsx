@@ -71,6 +71,7 @@ export default function Alert({ title, description, dismissible, type, variant, 
             backgroundColor: backgroundColor,
             padding: 8,
             borderRadius: roundness,
+
           },
           usedType == "outlined" ? {
             borderWidth: 1,
@@ -80,7 +81,9 @@ export default function Alert({ title, description, dismissible, type, variant, 
         ]}>
           <View
             style={{
+              alignItems: title ? "flex-start" : "center",
               flexDirection: "row",
+
             }}>
             <View style={{ marginRight: 6 }}>
               <Icon
@@ -120,6 +123,7 @@ export default function Alert({ title, description, dismissible, type, variant, 
               {
                 (dismissible) &&
                 <IconButton
+                  variant={"secondary"}
                   fitIcon
                   onPress={() => {
                     setIsShown(false);

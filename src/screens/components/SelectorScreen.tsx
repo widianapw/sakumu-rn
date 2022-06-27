@@ -4,11 +4,13 @@
  */
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
-import { VStack } from "react-native-flex-layout";
-import { Checkbox } from "../../../tmd";
+import { Box, VStack } from "react-native-flex-layout";
+import { Checkbox, RadioButton } from "../../../tmd";
+import RadioButtonGroup from "../../../tmd/components/RadioButton/RadioButtonGroup";
 
 export default function SelectorScreen() {
   const [isChecked, setIsChecked] = useState(true);
+  const [rbVal, setRbVal] = useState("1");
   return (
     <ScrollView style={{
       flex: 1,
@@ -31,6 +33,13 @@ export default function SelectorScreen() {
             marginTop: 8,
           }}
           indeterminate={true} text={"Indeterminate CB"} />
+        <Box mt={16} />
+        <RadioButtonGroup
+          onValueChange={(value => setRbVal(value))}
+          value={rbVal}>
+          <RadioButton value={"1"} text={"1"} />
+          <RadioButton value={"2"} text={"2"} />
+        </RadioButtonGroup>
       </VStack>
     </ScrollView>
   );

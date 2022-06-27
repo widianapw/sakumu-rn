@@ -4,7 +4,7 @@ import { colors } from "./colors";
 
 const DefaultTheme: Theme = {
   dark: false,
-  roundness: 6,
+  roundness: 8,
   colors: colors,
   textInput: {
     mode: "filled",
@@ -20,9 +20,13 @@ const DefaultTheme: Theme = {
     size: "md",
     shape: "rounded",
   },
-  alert:{
+  alert: {
     variant: "info",
-    type: "basic"
+    type: "basic",
+  },
+  chip: {
+    variant: "filled",
+    shape: "rounded",
   },
   fonts: configureFonts(),
   animation: {

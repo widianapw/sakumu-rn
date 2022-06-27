@@ -5,7 +5,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Portal } from "react-native-portalize";
 import { Modalize } from "react-native-modalize";
-import { Animated, FlatList, Image, Pressable, TouchableOpacity, View } from "react-native";
+import { Animated, FlatList, Image, Pressable, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { Button, Divider, useTheme } from "../../index";
 import TextField from "../TextInput/TextField";
@@ -20,7 +20,7 @@ interface Props {
   initial?: string;
   data?: PickerItem[];
   onReset?: () => void;
-  onSave?: (id: string | number) => void;
+  onSave?: (item?: PickerItem) => void;
   title?: string;
   search?: boolean;
 }
@@ -179,7 +179,8 @@ export default function PickerBottomSheet(props: Props) {
               size={"lg"}
               onPress={() => {
                 if (props.onSave) {
-                  props.onSave(selected);
+                  const obj = props.data?.find(it => it.id == selected);
+                  props.onSave(obj);
                 }
               }}
               style={{

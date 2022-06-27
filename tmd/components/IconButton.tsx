@@ -7,6 +7,8 @@ import { useTheme } from "../core/theming";
 
 import type { $RemoveChildren } from "../types";
 import Icon from "./Icon";
+import { ButtonShape, ButtonVariant } from "./Button/Button";
+import { black, white } from "../styles/colors";
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -24,6 +26,9 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<TouchableWithoutFeedback>;
   fitIcon?: boolean;
+  variant?: ButtonVariant;
+  shape?: ButtonShape;
+  color?: string;
   /**
    * @optional
    */
@@ -65,18 +70,58 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  */
 const IconButton = ({
                       icon,
-                      color: customColor,
+                      color: iconColor,
                       size = 24,
                       accessibilityLabel,
                       disabled,
                       onPress,
                       style,
+                      variant,
+                      shape,
                       ...rest
                     }: Props & React.ComponentProps<typeof Icon>) => {
   const theme = useTheme();
-  const iconColor =
-    typeof customColor !== "undefined" ? customColor : theme.colors.neutral.neutral_80;
-  const rippleColor = color(iconColor).alpha(0.32).rgb().string();
+  const { colors, roundness, button } = theme;
+
+  const usedVariant = variant ?? button.variant;
+  const usedShape = shape ?? button.shape;
+  let backgroundColor: string,
+    borderColor: string,
+    textColor: string,
+    borderWidth: number;
+
+  if (usedVariant === "primary") {
+    if (disabled) {
+      backgroundColor = color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
+    } else {
+      backgroundColor = colors.primary?.main;
+    }
+  } else {
+    backgroundColor = "transparent";
+  }
+
+  if (usedVariant === "secondary") {
+    borderColor = colors.primary?.main;
+    borderWidth = 1;
+  } else {
+    borderColor = "transparent";
+    borderWidth = 0;
+  }
+
+  if (disabled) {
+    textColor = color(colors.neutral.neutral_10)
+      .alpha(0.32)
+      .rgb()
+      .string();
+  } else if (usedVariant === "primary") {
+    textColor = colors.neutral.neutral_10;
+  } else {
+    textColor = colors.primary.main;
+  }
+  const rippleColor = color(textColor).alpha(0.32).rgb().string();
   const IconComponent = Icon;
   const buttonSize = rest.fitIcon ? size : size * 1.8;
   return (
@@ -87,7 +132,10 @@ const IconButton = ({
       rippleColor={rippleColor}
       style={[
         styles.container,
-        { width: buttonSize, height: buttonSize, borderRadius: buttonSize / 2 },
+        { width: buttonSize, height: buttonSize, borderRadius: shape == "rect" ? roundness : buttonSize / 2 },
+        {
+          backgroundColor: backgroundColor,
+        },
         disabled && styles.disabled,
         style,
       ]}
@@ -106,7 +154,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <IconComponent color={iconColor} icon={icon} size={size} />
+        <IconComponent color={iconColor ? iconColor : textColor} icon={icon} size={size} source={rest.source} />
       </View>
     </TouchableRipple>
   );

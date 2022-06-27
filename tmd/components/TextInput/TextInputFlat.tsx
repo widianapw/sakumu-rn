@@ -308,6 +308,7 @@ const TextInputFlat = ({
                 }}
                 >
                   <IconButton
+                    variant={'secondary'}
                     fitIcon
                     color={
                       colors.neutral.neutral_70
@@ -340,6 +341,7 @@ const TextInputFlat = ({
                 >
                   <IconButton
                     fitIcon
+                    variant={'secondary'}
                     color={
                       isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_90
                     }

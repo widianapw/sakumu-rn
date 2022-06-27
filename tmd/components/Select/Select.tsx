@@ -72,7 +72,7 @@ const Select = ({
       onClose={handleClose}
       data={options}
       onSave={(value) => {
-        setSelected(value);
+        setSelected(value?.id);
         handleClose();
       }}
       title={rest.title ?? rest.label} />

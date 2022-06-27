@@ -10,11 +10,12 @@ import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg"
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
 import DateFilterBottomSheet, { DateFilterPayload } from "../../../tmd/components/BottomSheet/DateFilterBottomSheet";
 import Typography from "../../../tmd/components/Typography/Typography";
-import { getBankListAPI } from "../../services/bank/bankService";
 import { usePermission } from "../../../tmd/providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, LOCATION_PERMISSIONS, STORAGE_PERMISSIONS } from "../../../tmd/data/_permissionTypes";
+import useBankService from "../../services/bank/useBankService";
 
 export default function BottomSheetScreen() {
+  const { getBank } = useBankService();
   const {
     showConfirmationBS,
     hideConfirmationBS,
@@ -43,18 +44,6 @@ export default function BottomSheetScreen() {
     });
   };
 
-  const handleGetData = async () => {
-    try {
-      const data = await getBankListAPI();
-    } catch (e) {
-      showErrorBS(e, {
-        buttonPrimaryAction: () => {
-          Alert.alert("Sarangheyo");
-          hideErrorBS();
-        },
-      });
-    }
-  };
 
   const requestPermission = () => {
     requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS, LOCATION_PERMISSIONS],
@@ -105,7 +94,9 @@ export default function BottomSheetScreen() {
           }
 
           <Button
-            onPress={handleGetData}
+            onPress={() => {
+              getBank()
+            }}
           >
             GET DATA WITH ERROR
           </Button>

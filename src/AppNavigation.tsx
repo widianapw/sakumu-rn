@@ -15,6 +15,10 @@ import LanguageScreen from "./screens/components/LanguageScreen";
 import TagScreen from "./screens/components/TagScreen";
 import AlertScreen from "./screens/components/AlertScreen";
 import SelectorScreen from "./screens/components/SelectorScreen";
+import APIScreen from "./screens/components/API/APIScreen";
+import FetchDataScreen from "./screens/components/API/FetchDataScreen";
+import PaginationScreen from "./screens/components/API/PaginationScreen";
+import ChipScreen from "./screens/components/ChipScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -45,6 +49,10 @@ const AppNavigation = () => {
         <Stack.Screen name={"AlertScreen"} component={AlertScreen} />
         <Stack.Screen name={"SelectorScreen"} component={SelectorScreen} />
         <Stack.Screen name={"LanguageScreen"} component={LanguageScreen} />
+        <Stack.Screen name={"APIScreen"} component={APIScreen} />
+        <Stack.Screen name={"FetchDataScreen"} component={FetchDataScreen} />
+        <Stack.Screen name={"PaginationScreen"} component={PaginationScreen} />
+        <Stack.Screen name={"ChipScreen"} component={ChipScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

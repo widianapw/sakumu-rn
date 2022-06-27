@@ -4,6 +4,7 @@ import RadioButtonAndroid from "./RadioButtonAndroid";
 import RadioButtonIOS from "./RadioButtonIOS";
 import { useTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
+import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
 
 export type Props = {
   /**
@@ -89,7 +90,7 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const RadioButton = ({ onPress, ...props }: Props) => {
+const RadioButton = ({ onPress, value, ...props }: Props) => {
   const theme = useTheme();
   const Button = Platform.select({
     default: RadioButtonAndroid,
@@ -98,35 +99,34 @@ const RadioButton = ({ onPress, ...props }: Props) => {
 
   const parentComponentStyle: StyleProp<ViewStyle> = [{
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
   }, props.containerStyle];
 
-  const ChildrenComponent = () => {
-    return <>
-    </>;
-  };
-
   return <>
-    {
-      <View style={parentComponentStyle}>
-        <Button color={props.color ?? theme.colors.primary.main} {...props} />
-        {
-          props.text &&
-          <Typography
-            type={"body2"}
-            style={[{
-              color: theme.colors.neutral.neutral_90,
-            },
-              props.textStyle,
-            ]}>
+    <RadioButtonContext.Consumer>
+      {(context?: RadioButtonContextType) => {
+        return (
+          <View style={parentComponentStyle}>
+            <Button color={props.color ?? theme.colors.primary.main} {...props} value={value} />
             {
-              props.text
+              props.text &&
+              <Typography
+                type={"body2"}
+                style={[{
+                  color: theme.colors.neutral.neutral_90,
+                },
+                  props.textStyle,
+                ]}>
+                {
+                  props.text
+                }
+              </Typography>
             }
-          </Typography>
-        }
-      </View>
-    }
+          </View>
+        );
+      }}
+    </RadioButtonContext.Consumer>
+
   </>;
 };
 
