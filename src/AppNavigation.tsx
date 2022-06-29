@@ -19,6 +19,8 @@ import APIScreen from "./screens/components/API/APIScreen";
 import FetchDataScreen from "./screens/components/API/FetchDataScreen";
 import PaginationScreen from "./screens/components/API/PaginationScreen";
 import ChipScreen from "./screens/components/ChipScreen";
+import OTPScreen from "./screens/components/OTPScreen";
+import FormScreen from "./screens/components/FormScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -53,6 +55,8 @@ const AppNavigation = () => {
         <Stack.Screen name={"FetchDataScreen"} component={FetchDataScreen} />
         <Stack.Screen name={"PaginationScreen"} component={PaginationScreen} />
         <Stack.Screen name={"ChipScreen"} component={ChipScreen} />
+        <Stack.Screen name={"OTPScreen"} component={OTPScreen} />
+        <Stack.Screen name={"FormScreen"} component={FormScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

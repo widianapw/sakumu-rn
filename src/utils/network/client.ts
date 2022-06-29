@@ -3,9 +3,9 @@
  * Copyright (c) 2022 - Made with love
  */
 import axios from "axios";
-import env from "../../env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import StorageKey from "../StorageKey";
+import Config from "react-native-config";
 
 const getLocale = async () => {
   try {
@@ -16,12 +16,11 @@ const getLocale = async () => {
   }
 };
 const client = axios.create({
-  baseURL: env.BASE_URL,
+  baseURL: Config.BASE_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
     "X-App-Locale": "en",
-
   },
 });
 

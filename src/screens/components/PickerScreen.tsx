@@ -10,7 +10,7 @@ import _countries from "../../../tmd/data/_countries";
 import { VStack } from "react-native-flex-layout";
 import Select from "../../../tmd/components/Select/Select";
 import { PickerItem } from "../../../tmd/model/PickerItem";
-import { DatePicker } from "../../../tmd/components/picker/DatePicker";
+import  DatePicker  from "../../../tmd/components/picker/DatePicker";
 import TimePicker from "../../../tmd/components/picker/TimePicker";
 import MapPicker from "../../../tmd/components/picker/MapPicker";
 

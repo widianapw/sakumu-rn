@@ -1,12 +1,11 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import Typography from "./Typography/Typography";
 import Icon, { IconProps } from "./Icon";
 import { useTheme } from "../core/theming";
 import { TouchableRipple } from "../index";
 import PickerBottomSheet from "./BottomSheet/PickerBottomSheet";
-import _countries from "../data/_countries";
 import { PickerItem } from "../model/PickerItem";
 
 export type ChipShape = "rect" | "rounded"
@@ -24,23 +23,52 @@ export type ChipProps = {
   onPress?: () => void;
   type?: "filter" | "picker";
   onPickerChanges?: (item?: PickerItem) => void;
+  initial?: string;
+  pickerList?: PickerItem[];
+  pickerTitle?: string;
+  onResetPicker?: () => void;
 }
 const ROUNDED_BORDER_RADIUS = 32;
 
-export default function Chip({ shape, variant, text, selected, type = "filter", ...rest }: ChipProps) {
+export default function Chip({
+                               shape,
+                               variant,
+                               text,
+                               selected,
+                               type = "filter",
+                               ...rest
+                             }: ChipProps) {
   const { colors, chip, roundness } = useTheme();
   let bgColor, txtColor, borderColor;
   const usedVariant = variant ?? chip.variant;
   const [isOpenPicker, setIsOpenPicker] = useState(false);
   const usedShape = shape ?? chip.shape;
-  const isSelectedFilled = usedVariant == "filled" && selected;
+  const isSelectedFilled = usedVariant == "filled" && isSelected;
   const isUseBorder = usedVariant == "outlined" || isSelectedFilled;
   const [selectedObj, setSelectedObj] = useState({});
+
+  const [isSelected, setIsSelected] = useState(false);
+  const [pickerInitial, setPickerInitial] = useState("");
+
+  useEffect(() => {
+    setIsSelected(selected ?? false);
+  }, [selected]);
+
+  useEffect(() => {
+    const obj = rest?.pickerList?.find((item) => item.id == rest.initial);
+    if (obj) {
+      setIsSelected(true);
+      setSelectedObj(obj);
+    }
+    setPickerInitial(rest?.initial)
+  }, [rest.initial, rest.pickerList]);
+
+
   switch (usedVariant) {
     case "filled": {
       bgColor = colors.neutral.neutral_20;
       txtColor = colors.neutral.neutral_90;
-      if (selected) {
+      if (isSelected) {
         bgColor = colors.primary.main;
         txtColor = colors.neutral.neutral_10;
         borderColor = colors.primary.border;
@@ -51,7 +79,7 @@ export default function Chip({ shape, variant, text, selected, type = "filter", 
       bgColor = colors.neutral.neutral_10;
       borderColor = colors.neutral.neutral_50;
       txtColor = colors.neutral.neutral_90;
-      if (selected) {
+      if (isSelected) {
         bgColor = colors.primary.surface;
         borderColor = colors.primary.main;
         txtColor = colors.primary.main;
@@ -67,6 +95,10 @@ export default function Chip({ shape, variant, text, selected, type = "filter", 
   const handleOnPress = () => {
     if (type == "picker") {
       setIsOpenPicker(true);
+    } else {
+      if (rest.onPress) {
+        rest.onPress();
+      }
     }
   };
 
@@ -129,26 +161,36 @@ export default function Chip({ shape, variant, text, selected, type = "filter", 
         </>
       </TouchableRipple>
     </View>
-    <PickerBottomSheet
-      open={isOpenPicker}
-      onClose={() => {
-        setIsOpenPicker(false);
-      }}
-      onSave={(item) => {
-        if (rest.onPickerChanges) {
-          rest.onPickerChanges(item);
-        }
-        setSelectedObj(item);
-        setIsOpenPicker(false);
-      }}
-      initial={"62"}
-      data={_countries.map(it => {
-        const i: PickerItem = {
-          name: it.name,
-          id: it.code,
-        };
-        return i;
-      })}
-    />
+    {
+      type == "picker" &&
+      <PickerBottomSheet
+        open={isOpenPicker}
+        title={rest.pickerTitle}
+        onReset={rest.onResetPicker ? () => {
+          if (rest.onResetPicker) {
+            rest.onResetPicker();
+            setPickerInitial("")
+            setSelectedObj({});
+            setIsSelected(false);
+            setIsOpenPicker(false);
+          }
+        } : undefined}
+        onClose={() => {
+          setIsOpenPicker(false);
+        }}
+        onSave={(item) => {
+          if (item) {
+            if (rest.onPickerChanges) {
+              rest.onPickerChanges(item);
+            }
+            setSelectedObj(item);
+            setIsSelected(true);
+            setIsOpenPicker(false);
+          }
+        }}
+        initial={pickerInitial}
+        data={rest.pickerList}
+      />
+    }
   </>;
 }

@@ -8,21 +8,25 @@ import Icon from "../Icon";
 import { default as DatePickerDialog } from "react-native-date-picker";
 import moment from "moment";
 import { useTheme } from "../../core/theming";
-import  TmdConstants from "../../utils/TmdConstants";
+import TmdConstants from "../../utils/TmdConstants";
+import { useLocale } from "../../../src/providers/LocaleProvider";
+
 interface Props {
   date?: string;
   onDateChanges?: (date: Date) => void;
   onDateChangesFormatted?: (date: string) => void;
+  title?: string;
 }
 
-export function DatePicker({
-                             date,
-                             onDateChanges,
-                             onDateChangesFormatted,
-                             ...rest
-                           }: ComponentProps<typeof TextField> & Props) {
+export default function DatePicker({
+                                     date,
+                                     onDateChanges,
+                                     onDateChangesFormatted,
+                                     ...rest
+                                   }: ComponentProps<typeof TextField> & Props) {
+  const { t } = useLocale();
   const [isOpenPicker, setIsOpenPicker] = useState(false);
-  const [selected, setSelected] = useState(date ? moment(date).toDate() : new Date());
+  const [selected, setSelected] = useState(date ? moment(date).toDate() : null);
   const handleOpen = () => {
     setIsOpenPicker(true);
   };
@@ -32,7 +36,7 @@ export function DatePicker({
     <>
       <TextField
         value={
-          moment(selected).format("D MMMM YYYY")
+          selected ? moment(selected).format("D MMMM YYYY") : undefined
         }
         pickerType={"date"}
         editable={false}
@@ -45,10 +49,13 @@ export function DatePicker({
       />
 
       <DatePickerDialog
+        title={rest.title}
         modal={true}
         mode={"date"}
         open={isOpenPicker}
-        date={selected}
+        date={selected ?? new Date()}
+        confirmText={t("confirm")}
+        cancelText={t("cancel")}
         androidVariant={"iosClone"}
         onConfirm={(date) => {
           setIsOpenPicker(false);

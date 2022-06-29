@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 06/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useEffect, useRef, useState } from "react";
+import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import { Portal } from "react-native-portalize";
 import { Modalize } from "react-native-modalize";
 import { Animated, FlatList, Image, Pressable, View } from "react-native";
@@ -25,18 +25,23 @@ interface Props {
   search?: boolean;
 }
 
-export default function PickerBottomSheet(props: Props) {
+export default function PickerBottomSheet(props: Props & ComponentProps<typeof Modalize>) {
   const modalizeRef = useRef<Modalize>(null);
-  const [selected, setSelected] = useState(props.initial);
+  const [selected, setSelected] = useState();
   const [list, setList] = useState(props.data);
   const theme = useTheme();
   const { colors } = theme;
   const { t } = useTranslation();
 
   useEffect(() => {
+    // if (props?.initial) {
+    setSelected(props?.initial);
+    // }
+  }, [props.initial]);
+
+  useEffect(() => {
     if (props.open) {
       modalizeRef?.current?.open();
-      setSelected(props.initial);
     } else {
       modalizeRef?.current?.close();
     }
@@ -96,9 +101,10 @@ export default function PickerBottomSheet(props: Props) {
         flex: 1,
       }}
       handlePosition={"inside"}
+      {...props}
       customRenderer={
         <Animated.View style={{
-          flex: 1,
+          flexGrow: 1,
           flexDirection: "column",
         }}>
           <View
@@ -142,14 +148,14 @@ export default function PickerBottomSheet(props: Props) {
                 </View>
               }
             </View>
-            {(props.search || props.onReset) &&
-              <Divider
-                variant={"dotted"}
-                style={{
-                  marginTop: 8,
-                  marginBottom: 0,
-                }} />
-            }
+            {/*{(props.search || props.onReset) &&*/}
+            {/*  <Divider*/}
+            {/*    variant={"dotted"}*/}
+            {/*    style={{*/}
+            {/*      marginTop: 8,*/}
+            {/*      marginBottom: 0,*/}
+            {/*    }} />*/}
+            {/*}*/}
           </View>
 
           <View style={{ flexGrow: 1, flex: 1 }}>
@@ -168,11 +174,11 @@ export default function PickerBottomSheet(props: Props) {
               />
             </RadioButtonGroup>
           </View>
-          <Divider
-            style={{
-              marginTop: 0,
-            }}
-            variant={"dotted"} />
+          {/*<Divider*/}
+          {/*  style={{*/}
+          {/*    marginTop: 0,*/}
+          {/*  }}*/}
+          {/*  variant={"dotted"} />*/}
 
           <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
             <Button

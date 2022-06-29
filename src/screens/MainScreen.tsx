@@ -46,12 +46,8 @@ const MainScreen = ({ navigation }: any) => {
   return <ScrollView>
     <VStack
       spacing={16}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      p={16}
+      center
     >
       <View>
         <GoogleSigninButton
@@ -142,6 +138,18 @@ const MainScreen = ({ navigation }: any) => {
         navigation.navigate("ChipScreen");
       }}>
         Chip Screen
+      </Button>
+
+      <Button onPress={() => {
+        navigation.navigate("OTPScreen");
+      }}>
+        OTP INPUT
+      </Button>
+
+      <Button onPress={() => {
+        navigation.navigate("FormScreen");
+      }}>
+        Form Input
       </Button>
 
 

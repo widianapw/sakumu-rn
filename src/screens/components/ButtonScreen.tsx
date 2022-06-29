@@ -13,16 +13,35 @@ export default function ButtonScreen() {
     <View style={{ padding: 16, flexDirection: "column" }}>
       <VStack spacing={8}>
         <IconButton
-          variant={'secondary'}
-          shape={"rect"}
+          shape={"rounded"}
           icon={"camera"}
           onPress={() => {
           }}
-
         />
         <IconButton
           variant={"secondary"}
           icon={"camera"} onPress={() => {
+        }}
+        />
+        <IconButton
+          variant={"tertiary"}
+          icon={"camera"} onPress={() => {
+        }}
+        />
+        <IconButton
+          icon={"arrow-back"}
+          themeSize={"lg"}
+          onPress={() => {
+          }}
+        />
+        <IconButton
+          themeSize={"md"}
+          icon={"arrow-back"} onPress={() => {
+        }}
+        />
+        <IconButton
+          themeSize={"sm"}
+          icon={"arrow-back"} onPress={() => {
         }}
         />
         <TextButton
@@ -32,6 +51,9 @@ export default function ButtonScreen() {
           TextButton
         </TextButton>
         <TextButton
+          icon={{
+            icon: "camera",
+          }}
           underline
           onPress={() => {
           }}

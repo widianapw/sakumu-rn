@@ -27,7 +27,6 @@ const fonts: Fonts = {
     }
 }
 
-
 export default function configureFonts(): Fonts {
     return fonts;
 }

@@ -3,23 +3,35 @@
  * Copyright (c) 2022 - Made with love
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "../TextInput/TextField";
 import Icon from "../Icon";
 import DatePicker from "react-native-date-picker";
 import moment from "moment";
+import { useLocale } from "../../../src/providers/LocaleProvider";
 
 interface Props {
   initial?: string;
   onChangeTime?: (time: string) => void;
+  title?: string;
 }
 
 export default function TimePicker({ initial, ...rest }: React.ComponentProps<typeof TextField> & Props) {
+  const { t } = useLocale();
   const [isOpenPicker, setIsOpenPicker] = useState(false);
   const [selected, setSelected] = useState(initial ? new Date() : null);
   const handleOpen = () => {
     setIsOpenPicker(true);
   };
+
+  useEffect(() => {
+    if (rest.onChangeTime) {
+      const data = selected ?
+        moment(selected).format("HH:mm") : "";
+      rest.onChangeTime(data);
+    }
+  }, [selected]);
+
 
   return (
     <>
@@ -37,10 +49,13 @@ export default function TimePicker({ initial, ...rest }: React.ComponentProps<ty
         {...rest}
       />
       <DatePicker
+        title={rest.title}
         modal={true}
         open={isOpenPicker}
         date={selected ?? new Date()}
         mode={"time"}
+        confirmText={t("confirm")}
+        cancelText={t("cancel")}
         androidVariant={"iosClone"}
         onConfirm={(date) => {
           setIsOpenPicker(false);

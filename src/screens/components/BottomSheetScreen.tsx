@@ -20,9 +20,6 @@ export default function BottomSheetScreen() {
     showConfirmationBS,
     hideConfirmationBS,
     showAlertBS,
-    hideAlertBS,
-    showErrorBS,
-    hideErrorBS,
   } = useBottomSheet();
   const { requestPermissions } = usePermission();
   const handleShowConfirmation = () => {

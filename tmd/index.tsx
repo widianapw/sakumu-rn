@@ -28,3 +28,8 @@ export { default as Switch } from "./components/Switch";
 export { default as TouchableRipple } from "./components/TouchableRipple/TouchableRipple";
 export { default as TextInput } from "./components/TextInput/TextField";
 export { default as Icon } from "./components/Icon";
+export { default as RHFTextField } from "./components/RHF/RHFTextField";
+export { default as RHFSelect } from "./components/RHF/RHFSelect";
+export { default as RHFPhoneField } from "./components/RHF/RHFPhoneField";
+export { default as RHFTimePicker } from "./components/RHF/RHFTimePicker";
+export { default as RHFDatePicker } from "./components/RHF/RHFDatePicker";

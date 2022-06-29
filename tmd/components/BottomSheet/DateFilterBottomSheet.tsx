@@ -8,7 +8,7 @@ import { Button, Divider } from "../../index";
 import Typography from "../Typography/Typography";
 import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
 import { HStack, VStack } from "react-native-flex-layout";
-import { DatePicker } from "../picker/DatePicker";
+import DatePicker from "../picker/DatePicker";
 import moment from "moment";
 import TmdConstants from "../../utils/TmdConstants";
 import { useTranslation } from "react-i18next";
@@ -133,10 +133,15 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
         break;
       }
       default: {
-        console.log(dateRange);
+        const curr = moment().format(TmdConstants.DATE_FORMAT_SEND_API);
+        const returned: DateRange = {
+          start_date: dateRange?.start_date ?? curr,
+          end_date: dateRange?.end_date ?? curr,
+        };
+        setDateRange(returned);
         returnedValue = {
           id: selectedId ?? 4,
-          date_range: dateRange,
+          date_range: returned,
         };
         break;
       }
@@ -196,6 +201,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
               <HStack spacing={8} mt={16}>
                 <View style={{ flex: 1 }}>
                   <DatePicker
+                    placeholder={t('start_date')}
                     date={dateRange?.start_date}
                     onDateChangesFormatted={(date) => {
                       setDateRange({ ...dateRange, start_date: date });
@@ -206,6 +212,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                 </View>
                 <View style={{ flex: 1 }}>
                   <DatePicker
+                    placeholder={t('end_date')}
                     date={dateRange?.end_date}
                     onDateChangesFormatted={(date) => {
                       console.log(date);

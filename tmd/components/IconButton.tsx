@@ -7,8 +7,7 @@ import { useTheme } from "../core/theming";
 
 import type { $RemoveChildren } from "../types";
 import Icon from "./Icon";
-import { ButtonShape, ButtonVariant } from "./Button/Button";
-import { black, white } from "../styles/colors";
+import { ButtonShape, ButtonSize, ButtonVariant } from "./Button/Button";
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -29,6 +28,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   variant?: ButtonVariant;
   shape?: ButtonShape;
   color?: string;
+  themeSize?: ButtonSize;
   /**
    * @optional
    */
@@ -71,13 +71,14 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 const IconButton = ({
                       icon,
                       color: iconColor,
-                      size = 24,
+                      size: iconSize,
                       accessibilityLabel,
                       disabled,
                       onPress,
                       style,
                       variant,
                       shape,
+                      themeSize,
                       ...rest
                     }: Props & React.ComponentProps<typeof Icon>) => {
   const theme = useTheme();
@@ -85,45 +86,72 @@ const IconButton = ({
 
   const usedVariant = variant ?? button.variant;
   const usedShape = shape ?? button.shape;
+  const usedSize = themeSize ?? button.size;
+
+
   let backgroundColor: string,
     borderColor: string,
     textColor: string,
-    borderWidth: number;
+    borderWidth: number,
+    usedIconSize: number,
+    calculateButtonSize: number;
 
-  if (usedVariant === "primary") {
-    if (disabled) {
-      backgroundColor = color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
-    } else {
-      backgroundColor = colors.primary?.main;
+  switch (usedSize) {
+    case "sm" : {
+      usedIconSize = 12;
+      calculateButtonSize = 2;
+      break;
     }
-  } else {
-    backgroundColor = "transparent";
+    case "md": {
+      usedIconSize = 20;
+      calculateButtonSize = 1.7;
+
+      break;
+    }
+    case "lg": {
+      usedIconSize = 28;
+      calculateButtonSize = 1.7;
+      break;
+    }
+  }
+  usedIconSize = iconSize ?? usedIconSize;
+
+  switch (usedVariant) {
+    case "primary": {
+      if (disabled) {
+        backgroundColor = colors.neutral.neutral_60;
+        textColor = colors.neutral.neutral_10;
+      } else {
+        backgroundColor = colors.primary?.main;
+        textColor = colors.neutral.neutral_10;
+      }
+      break;
+    }
+    case "secondary": {
+      if (disabled) {
+        backgroundColor = colors.neutral.neutral_10;
+        textColor = colors.neutral.neutral_50;
+      } else {
+        backgroundColor = colors.neutral.neutral_10;
+        textColor = colors.primary.main;
+      }
+      break;
+    }
+    case "tertiary": {
+      if (disabled) {
+        backgroundColor = colors.neutral.neutral_10;
+        textColor = colors.neutral.neutral_50;
+      } else {
+        backgroundColor = colors.neutral.neutral_10;
+        textColor = colors.primary.main;
+      }
+      break;
+    }
   }
 
-  if (usedVariant === "secondary") {
-    borderColor = colors.primary?.main;
-    borderWidth = 1;
-  } else {
-    borderColor = "transparent";
-    borderWidth = 0;
-  }
-
-  if (disabled) {
-    textColor = color(colors.neutral.neutral_10)
-      .alpha(0.32)
-      .rgb()
-      .string();
-  } else if (usedVariant === "primary") {
-    textColor = colors.neutral.neutral_10;
-  } else {
-    textColor = colors.primary.main;
-  }
-  const rippleColor = color(textColor).alpha(0.32).rgb().string();
+  const rippleColor = color(iconColor ? iconColor : colors.primary.pressed).alpha(0.32).rgb().string();
   const IconComponent = Icon;
-  const buttonSize = rest.fitIcon ? size : size * 1.8;
+  const buttonSize = rest.fitIcon ? usedIconSize : usedIconSize * calculateButtonSize;
   return (
     <TouchableRipple
       borderless
@@ -132,11 +160,14 @@ const IconButton = ({
       rippleColor={rippleColor}
       style={[
         styles.container,
-        { width: buttonSize, height: buttonSize, borderRadius: shape == "rect" ? roundness : buttonSize / 2 },
+        { width: buttonSize, height: buttonSize, borderRadius: usedShape == "rect" ? roundness : buttonSize / 2 },
         {
           backgroundColor: backgroundColor,
         },
-        disabled && styles.disabled,
+        usedVariant == "secondary" ? {
+          borderWidth: 1,
+          borderColor: iconColor ? iconColor : textColor,
+        } : {},
         style,
       ]}
       accessibilityLabel={accessibilityLabel}
@@ -154,7 +185,7 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <IconComponent color={iconColor ? iconColor : textColor} icon={icon} size={size} source={rest.source} />
+        <IconComponent color={iconColor ? iconColor : textColor} icon={icon} size={usedIconSize} source={rest.source} />
       </View>
     </TouchableRipple>
   );
@@ -165,9 +196,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
-  },
-  disabled: {
-    opacity: 0.32,
   },
 });
 

@@ -110,7 +110,7 @@ export default function Alert({ title, description, dismissible, type, variant, 
               }
 
               <Typography
-                type={"body2"}
+                type={"body3"}
                 style={{
                   color: textColor,
                 }}
@@ -123,7 +123,10 @@ export default function Alert({ title, description, dismissible, type, variant, 
               {
                 (dismissible) &&
                 <IconButton
-                  variant={"secondary"}
+                  variant={"tertiary"}
+                  style={{
+                    backgroundColor: "transparent",
+                  }}
                   fitIcon
                   onPress={() => {
                     setIsShown(false);

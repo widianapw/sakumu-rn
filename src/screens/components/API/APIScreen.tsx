@@ -10,6 +10,7 @@ import useCredentialService from "../../../services/credential/useCredentialServ
 
 export default function APIScreen({ navigation }: any) {
   const { checkCredential, isLoadingCheckCredential } = useCredentialService();
+
   const handlePost = () => {
     checkCredential("082146456432", "widianaputraa@gmail.com");
   };

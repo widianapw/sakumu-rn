@@ -44,14 +44,12 @@ const PermissionProvider = ({ children }: any) => {
 
   const requestPermissions = (permissions: PermissionOS[], onGranted?: () => void) => {
     const isAndroid = Platform.OS == "android";
-    console.log("DINISI");
     let osPermissions: Permission[];
     if (isAndroid) {
       osPermissions = permissions.map(it => it.android).flat();
     } else {
       osPermissions = permissions.map(it => it.ios).flat();
     }
-    console.log(osPermissions);
     requestMultiple(osPermissions)
       .then((statuses) => {
         const results = osPermissions.map(it => statuses[it] == "granted");

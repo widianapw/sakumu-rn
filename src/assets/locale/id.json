@@ -7,7 +7,37 @@
       "no_connection_title": "Internet Anda sepertinya mati...",
       "no_connection_description": "Cek koneksi Wi-Fi atau kuota internet Anda dan coba lagi ya.",
       "server_error_title": "Sever kami sedang bermasalah...",
-      "server_error_description": "Tolong kembali beberapa saat lagi sementara kami memperbaikinya."
+      "server_error_description": "Tolong kembali beberapa saat lagi sementara kami memperbaikinya.",
+      "invalid": "{{path}} tidak valid",
+      "required": "{{path}} adalah bidang wajib",
+      "defined": "{{path}} harus didefinisikan",
+      "notNull": "{{path}} tidak boleh null",
+      "oneOf": "{{path}} harus merupakan salah satu dari nilai berikut: {{values}}",
+      "length_string": "{{path}} harus tepat {{length}} karakter",
+      "min_string": "{{path}} minimal harus {{min}} karakter",
+      "max_string": "{{path}} harus terdiri dari maksimal {{max}} karakter",
+      "matches": "{{path}} harus sesuai dengan yang berikut: {{regex}}",
+      "email": "{{path}} harus email yang valid",
+      "url": "{{path}} harus berupa URL yang valid",
+      "uuid": "{{path}}harus berupa UUID yang valid",
+      "trim": "{{path}} harus berupa string yang dipangkas",
+      "lowercase": "{{path}} harus berupa string huruf kecil",
+      "uppercase": "{{path}} harus berupa string huruf besar",
+      "min_number": "{{path}} harus lebih besar dari atau sama dengan {{min}}",
+      "max_number": "{{path}} harus kurang dari atau sama dengan {{max}}",
+      "lessThan": "{{path}} harus kurang dari {{less}}",
+      "moreThan": "{{path}} harus lebih besar dari {{more}}",
+      "positive": "{{path}} harus bilangan positif",
+      "negative": "{{path}} harus bilangan negatif",
+      "integer": "{{path}} harus bilangan bulat",
+      "min_date": "{{path}} bidang harus lebih akhir dari {{min}}",
+      "max_date": "{{path}} bidang harus lebih awal dari {{max}}",
+      "isValue": "{{path}} bidang harus {{value}}",
+      "noUnknown": "{{path}} bidang memiliki kunci yang tidak ditentukan: {{unknown}}",
+      "min_array": "{{path}} bidang harus memiliki setidaknya {{min}} item",
+      "max_array": "{{path}} bidang harus memiliki kurang dari atau sama dengan {{max}} item",
+      "length_array": "{{path}} harus memiliki {{length}} item",
+      "greater": "{{value}} harus lebih besar dari {{min_value}}"
     },
     "permissions": {
       "location_title": "Izinkan kami mengakses lokasi Anda",
@@ -31,6 +61,8 @@
       "set_date": "Atur tanggal"
     },
     "start_date": "Tanggal Mulai",
-    "end_date": "Tanggal Selesai"
+    "end_date": "Tanggal Selesai",
+    "confirm": "Konfirmasi",
+    "cancel": "Batal"
   }
 }

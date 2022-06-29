@@ -37,7 +37,7 @@ export type Theme = {
   mode?: Mode;
   roundness: number;
   colors: ThemeColors;
-  textInput?: TextInputTheme;
+  textInput: TextInputTheme;
   button: ButtonTheme;
   tag: TagTheme;
   fonts: Fonts;

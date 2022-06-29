@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { Animated, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import color from "color";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
@@ -37,6 +38,8 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
 
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  onCheckedChange?: (checked: boolean) => void;
+
 };
 
 // From https://material.io/design/motion/speed.html#duration
@@ -99,6 +102,13 @@ const Checkbox = ({
       }),
     ]).start();
   }, [checked, scaleAnim, scale]);
+
+  useEffect(() => {
+    if (rest.onCheckedChange) {
+      rest.onCheckedChange(checked ?? false);
+    }
+  }, [checked]);
+
 
   const unchecked = !checked && !indeterminate;
   const checkedColor = rest.color || colors.neutral.neutral_10;

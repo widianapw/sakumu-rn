@@ -146,7 +146,6 @@ const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeo
         } : {},
         styles.text,
         style,
-
       ]}
     />
   );

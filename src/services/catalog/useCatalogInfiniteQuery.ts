@@ -1,7 +1,9 @@
 import useCatalogService from "./useCatalogService";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
-import { useInfiniteQuery } from "react-query";
+import { isError, useInfiniteQuery } from "react-query";
 import { CatalogListResponse } from "../../models/catalog/Catalog";
+import { useEffect } from "react";
+import { err } from "react-native-svg/lib/typescript/xml";
 
 /**
  * Created by Widiana Putra on 27/06/2022
@@ -16,6 +18,7 @@ export default function useCatalogInfiniteQuery() {
     fetchNextPage,
     hasNextPage,
     error,
+    isError,
     ...rest
   } = useInfiniteQuery<CatalogListResponse>("catalogs", (par) => {
     return getCatalogs(par.pageParam);
@@ -25,9 +28,11 @@ export default function useCatalogInfiniteQuery() {
 
   const mappedData = data?.pages?.map(it => it.data).flat();
 
-  if (error) {
-    showErrorBS(error);
-  }
+  useEffect(() => {
+    if (error) {
+      showErrorBS(error);
+    }
+  }, [isError]);
 
   const fetchNext = () => {
     if (hasNextPage) {
