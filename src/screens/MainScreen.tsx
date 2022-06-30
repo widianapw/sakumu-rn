@@ -168,6 +168,7 @@ const MainScreen = ({ navigation }: any) => {
       </Button>
 
       <Button
+        color={"red"}
         loading={isLoadingLogout}
         onPress={logout}
       >

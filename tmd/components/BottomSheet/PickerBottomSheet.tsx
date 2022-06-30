@@ -33,6 +33,8 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
   const { colors } = theme;
   const { t } = useTranslation();
 
+  const isFullHeight = props.data?.length >= 6;
+
   useEffect(() => {
     // if (props?.initial) {
     setSelected(props?.initial);
@@ -89,17 +91,20 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
   };
   return <Portal>
     <Modalize
+      adjustToContentHeight={!isFullHeight}
       onClose={() => {
         setList(props.data);
-        if(props.onClose){
+        if (props.onClose) {
           props.onClose();
         }
       }}
-      modalStyle={{
-        borderTopLeftRadius: 16,
-        borderTopRightRadius: 16,
-        flex: 1,
-      }}
+      modalStyle={
+        [{
+          borderTopLeftRadius: 16,
+          borderTopRightRadius: 16,
+        },
+          isFullHeight ? { flex: 1 } : {},
+        ]}
       handlePosition={"inside"}
       {...props}
       customRenderer={
@@ -158,7 +163,13 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
             {/*}*/}
           </View>
 
-          <View style={{ flexGrow: 1, flex: 1 }}>
+          <View
+            style={
+              isFullHeight
+                ? { flexGrow: 1, flex: 1 }
+                : {}
+            }
+          >
             <RadioButtonGroup
               onValueChange={(value) => {
                 setSelected(value);

@@ -1,8 +1,9 @@
 import * as React from "react";
-import { black, grey400, grey50, grey800, white } from "../styles/colors";
-import { NativeModules, Platform, StyleProp, Switch as NativeSwitch, ViewStyle } from "react-native";
+import { black, grey400, grey50, grey800 } from "../styles/colors";
+import { NativeModules, Platform, StyleProp, Switch as NativeSwitch, TextStyle, View, ViewStyle } from "react-native";
 import setColor from "color";
-import { withTheme } from "../core/theming";
+import { useTheme } from "../core/theming";
+import Typography from "./Typography/Typography";
 
 const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
@@ -26,10 +27,12 @@ type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
    */
   onValueChange?: Function;
   style?: StyleProp<ViewStyle>;
+  switchStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  text?: string;
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -71,26 +74,28 @@ type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
  * ```
  */
 const Switch = ({
-  value,
-  disabled,
-  onValueChange,
-  color,
-  theme,
-  ...rest
-}: Props) => {
-  const checkedColor = color || theme.colors.accent;
+                  value,
+                  disabled,
+                  onValueChange,
+                  color,
+                  switchStyle,
+                  textStyle,
+                  style,
+                  text,
+                  ...rest
+                }: Props) => {
+  const theme = useTheme();
+  const checkedColor = color || theme.colors.primary.main;
 
   const onTintColor =
-    Platform.OS === 'ios'
+    Platform.OS === "ios"
       ? checkedColor
       : disabled
-      ? theme.dark
-        ? setColor(white).alpha(0.1).rgb().string()
-        : setColor(black).alpha(0.12).rgb().string()
-      : setColor(checkedColor).alpha(0.5).rgb().string();
+        ? setColor(black).alpha(0.12).rgb().string()
+        : setColor(checkedColor).alpha(0.5).rgb().string();
 
   const thumbTintColor =
-    Platform.OS === 'ios'
+    Platform.OS === "ios"
       ? undefined
       : disabled
       ? theme.dark
@@ -123,14 +128,36 @@ const Switch = ({
         };
 
   return (
-    <NativeSwitch
-      value={value}
-      disabled={disabled}
-      onValueChange={disabled ? undefined : onValueChange}
-      {...props}
-      {...rest}
-    />
+    <View style={
+      [
+        {
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "row",
+          justifyContent: "flex-start",
+        },
+        style,
+      ]
+    }>
+      <View>
+        <NativeSwitch
+          value={value}
+          disabled={disabled}
+          onValueChange={disabled ? undefined : onValueChange}
+          style={switchStyle}
+          {...props}
+          {...rest}
+        />
+      </View>
+      {text &&
+        <Typography
+          style={textStyle}
+          type={"body2"}>
+          {text}
+        </Typography>
+      }
+    </View>
   );
 };
 
-export default withTheme(Switch);
+export default Switch;

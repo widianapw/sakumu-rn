@@ -58,6 +58,7 @@ const AuthProvider = ({ children }: any) => {
       dispatch({
         type: "LOGOUT",
       });
+      setIsLoadingLogout(false);
     } catch (e) {
       setIsLoadingLogout(false);
     }

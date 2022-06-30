@@ -27,6 +27,7 @@ import AuthProvider from "./src/providers/AuthProvider";
 import { Provider } from "react-redux";
 import { persistor, store } from "./src/redux/stores/store";
 import { PersistGate } from "redux-persist/integration/react";
+import Typography from "./tmd/components/Typography/Typography";
 
 GoogleSignin.configure({
   webClientId: "992506026123-uqeer92bafkp826i1s3c3786qcs8cpk3.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -37,7 +38,11 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate persistor={persistor} loading={
+        <Typography>
+          Loading Redux Persistor...
+        </Typography>
+      }>
         <GestureHandlerRootView style={{ flex: 1 }}>{/* content */}
           <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={DefaultTheme}>

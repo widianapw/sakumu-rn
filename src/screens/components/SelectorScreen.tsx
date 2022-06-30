@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import { Box, VStack } from "react-native-flex-layout";
-import { Checkbox, RadioButton } from "../../../tmd";
+import { Checkbox, RadioButton, Switch } from "../../../tmd";
 import RadioButtonGroup from "../../../tmd/components/RadioButton/RadioButtonGroup";
 
 export default function SelectorScreen() {
@@ -40,6 +40,12 @@ export default function SelectorScreen() {
           <RadioButton value={"1"} text={"1"} />
           <RadioButton value={"2"} text={"2"} />
         </RadioButtonGroup>
+
+        <Box mt={16} />
+        <Switch onChange={() => {
+          setIsChecked(!isChecked);
+        }} value={isChecked} text={"Damn"} />
+        <Switch value={true} disabled text={"Damn"} />
       </VStack>
     </ScrollView>
   );

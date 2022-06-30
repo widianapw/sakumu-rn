@@ -10,15 +10,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Button, RHFPhoneField, RHFTextField } from "../../../tmd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../providers/AuthProvider";
-import { useSelector } from "react-redux";
 
 export default function LoginScreen() {
-  const { login, isLoadingLogin, isAuthenticated } = useAuth();
-  const isssss = useSelector(state => state.isAuthenticated);
+  const { login, isLoadingLogin } = useAuth();
   const schema = yup.object({
     phone_code: yup.string().required(),
-    phone: yup.string().required(),
-    password: yup.string().required(),
+    phone: yup.string().required().min(6).max(13),
+    password: yup.string().required().min(8),
   }).required();
 
   const method = useForm({
@@ -43,7 +41,6 @@ export default function LoginScreen() {
           flex: 1,
         }}>
           <View>
-
             <RHFPhoneField
               mode={"filled"}
               name={"phone"}
