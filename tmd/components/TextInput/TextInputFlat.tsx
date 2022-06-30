@@ -308,6 +308,9 @@ const TextInputFlat = ({
                 }}
                 >
                   <IconButton
+                    style={{
+                      backgroundColor: "transparent",
+                    }}
                     variant={'tertiary'}
                     fitIcon
                     color={
@@ -340,6 +343,9 @@ const TextInputFlat = ({
                 }}
                 >
                   <IconButton
+                    style={{
+                      backgroundColor: "transparent",
+                    }}
                     fitIcon
                     variant={'tertiary'}
                     color={

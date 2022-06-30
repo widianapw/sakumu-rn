@@ -271,6 +271,9 @@ const TextInputContained = ({
             }}
             >
               <IconButton
+                style={{
+                  backgroundColor: "transparent",
+                }}
                 variant={'tertiary'}
                 color={
                   colors.neutral.neutral_70
@@ -300,6 +303,9 @@ const TextInputContained = ({
             }}
             >
               <IconButton
+                style={{
+                  backgroundColor: "transparent",
+                }}
                 variant={'tertiary'}
                 color={
                   isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_90

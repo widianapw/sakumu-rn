@@ -8,9 +8,12 @@ import { Button } from "../../tmd";
 import Typography from "../../tmd/components/Typography/Typography";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
 import { VStack } from "react-native-flex-layout";
+import { useAuth } from "../providers/AuthProvider";
 
 const MainScreen = ({ navigation }: any) => {
+  const { user, logout, isLoadingLogout } = useAuth();
   const [userInfo, setUserInfo] = useState({});
+
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
@@ -49,6 +52,7 @@ const MainScreen = ({ navigation }: any) => {
       p={16}
       center
     >
+      <Typography>Welcome, {user?.name}</Typography>
       <View>
         <GoogleSigninButton
           style={{}}
@@ -160,6 +164,12 @@ const MainScreen = ({ navigation }: any) => {
         Language Screen
       </Button>
 
+      <Button
+        loading={isLoadingLogout}
+        onPress={logout}
+      >
+        Logout
+      </Button>
     </VStack>
 
   </ScrollView>;

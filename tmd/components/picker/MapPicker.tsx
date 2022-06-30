@@ -172,7 +172,7 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
                 marginBottom: 52,
               }}>
                 <Image
-                  source={require("../../../src/assets/icons/location-marker.png")} />
+                  source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
               </View>
 
               <MapView
@@ -264,6 +264,7 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
                 flexDirection: "row",
               }}>
               <IconButton
+                themeSize={"lg"}
                 variant={"tertiary"}
                 color={theme.colors.neutral.neutral_80}
                 style={{
@@ -277,6 +278,7 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
               />
               <View style={{ flexGrow: 1 }} />
               <IconButton
+                themeSize={"lg"}
                 color={theme.colors.neutral.neutral_80}
                 variant={"tertiary"}
                 style={{

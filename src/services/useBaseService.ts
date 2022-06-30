@@ -1,33 +1,29 @@
 import client from "../utils/network/client";
 import { AxiosRequestConfig } from "axios";
-import { useBottomSheet } from "../../tmd/providers/BottomSheetProvider";
 
 /**
  * Created by Widiana Putra on 27/06/2022
  * Copyright (c) 2022 - Made with love
  */
 export default function useBaseService() {
-  const postAPI = async (route: string, body: any, onError?: (e: unknown) => void) => {
+  const postAPI = async <E>(route: string, body?: any) => {
     try {
-      const res = await client.post(route, body);
-      return res.data;
+      return await client.post(route, body) as E;
     } catch (e) {
       throw e;
     }
   };
-  const patchAPI = async (route: string, body?: any) => {
+  const patchAPI = async <E>(route: string, body?: any) => {
     try {
-      const res = await client.patch(route, body);
-      return res.data;
+      return await client.patch(route, body) as E;
     } catch (e) {
       throw e;
     }
   };
 
-  const deleteAPI = async (route: string, body?: any) => {
+  const deleteAPI = async <E>(route: string, body?: any) => {
     try {
-      const res = await client.delete(route, body);
-      return res.data;
+      return await client.delete(route, body) as E;
     } catch (e) {
       throw e;
     }

@@ -249,15 +249,18 @@ const TextInputFilled = ({
             }}
             >
               <IconButton
-                variant={'tertiary'}
+                style={{
+                  backgroundColor: "transparent",
+                }}
+                variant={"tertiary"}
                 color={
                   colors.neutral.neutral_70
                 }
                 onPress={() => {
-                  if(rest.onClear){
+                  if (rest.onClear) {
                     rest?.onClear();
                   }
-                  if(rest.onInvokeTextChanged){
+                  if (rest.onInvokeTextChanged) {
                     rest?.onInvokeTextChanged("");
                   }
                   setIsShowSearch(false);
@@ -278,6 +281,9 @@ const TextInputFilled = ({
             }}
             >
               <IconButton
+                style={{
+                  backgroundColor: "transparent",
+                }}
                 variant={'tertiary'}
                 color={
                   isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_90
@@ -378,11 +384,8 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
       paddingLeft: INPUT_PADDING_HORIZONTAL,
       paddingRight: INPUT_PADDING_HORIZONTAL / 2,
       height: MIN_HEIGHT,
-      backgroundColor: theme.colors.neutral.neutral_20,
       borderRightWidth: 1,
       borderRightColor: theme.colors.neutral.neutral_40,
-      borderTopStartRadius: 10,
-      borderBottomStartRadius: 10,
       justifyContent: "center",
       alignItems: "center",
     }}

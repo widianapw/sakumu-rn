@@ -15,6 +15,17 @@ const getLocale = async () => {
     return "en";
   }
 };
+
+const getAccessToken = async () => {
+  try {
+    const token = await AsyncStorage.getItem(StorageKey.ACCESS_TOKEN);
+    return token ?? "";
+  } catch (e) {
+    return "";
+  }
+
+};
+
 const client = axios.create({
   baseURL: Config.BASE_URL,
   headers: {
@@ -26,13 +37,19 @@ const client = axios.create({
 
 client.interceptors.request.use(
   async (config) => {
-    // config.baseURL = await getBaseUrl();
-    // config?.headers?.common = { ...config?.headers?.common, "X-App-Locale": await getLocale() };
-    config.headers.common = { ...config.headers.common, 'X-App-Locale': await getLocale() };
-    // config.headers["X-App-Locale"] = await getLocale();
+    // config.headers.common = { ...config.headers.common, "X-App-Locale": await getLocale() };
+    const token = await getAccessToken();
+    const locale = await getLocale();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    if (locale) {
+      config.headers["X-App-Locale"] = locale;
+    }
+
     const printable = `--Request--\nMethod: ${config?.method?.toUpperCase()} \nURL: ${
       config.baseURL
-    }${config.url}\nHeaders:${JSON.stringify(config?.headers?.common)} \nParams: ${JSON.stringify(
+    }${config.url}\nHeaders:${JSON.stringify(config?.headers, null, 2)} \nParams: ${JSON.stringify(
       config.params,
       null,
       2,

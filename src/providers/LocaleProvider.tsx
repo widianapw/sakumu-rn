@@ -99,7 +99,6 @@ const LocaleChildProvider = ({ children }: any) => {
 };
 
 const LocaleProvider = ({ children }: any) => {
-
   return (
     <I18nextProvider i18n={i18n}>
       <LocaleChildProvider>

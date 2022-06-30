@@ -7,8 +7,9 @@ import { ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../../tmd";
 import useCredentialService from "../../../services/credential/useCredentialService";
+import { navigate } from "../../../navigations/RootNavigation";
 
-export default function APIScreen({ navigation }: any) {
+export default function APIScreen() {
   const { checkCredential, isLoadingCheckCredential } = useCredentialService();
 
   const handlePost = () => {
@@ -19,13 +20,13 @@ export default function APIScreen({ navigation }: any) {
     <VStack p={16} spacing={16}>
       <Button
         onPress={() => {
-          navigation.navigate("FetchDataScreen");
+          navigate("FetchDataScreen");
         }}
       >
         Fetch data</Button>
       <Button
         onPress={() => {
-          navigation.navigate("PaginationScreen");
+          navigate("PaginationScreen");
         }}
       >
         Fetch Pagination</Button>
