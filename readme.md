@@ -75,7 +75,7 @@ DEBUG: `yarn ios:debug` or `yarn android:debug`
 
 STAGING: `yarn ios:staging` or `yarn android:staging`
 
-PRODUCTION: `yarn ios` o `yarn android`
+PRODUCTION: `yarn ios` or `yarn android`
 
 Also, you can use npm following the same rule as before: `npm run ios:staging`
 

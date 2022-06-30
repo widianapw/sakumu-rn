@@ -8,11 +8,14 @@ import StorageKey from "../utils/StorageKey";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../utils/i18n";
 import * as Yup from "yup";
+import "moment/locale/id";
+import moment from "moment";
 
 type LocaleProviderType = {
   changeLanguage: (lang: string) => void;
   currentLanguage: string;
   t: TFunction<"translation", undefined>;
+  momentLocale: moment.Moment;
 }
 const initialState: LocaleProviderType = {
   changeLanguage: (lang: string) => {
@@ -20,6 +23,7 @@ const initialState: LocaleProviderType = {
   currentLanguage: "en",
   t: () => {
   },
+  momentLocale: moment(),
 };
 
 export const LocaleContext = createContext(initialState);
@@ -28,6 +32,7 @@ export const useLocale = () => useContext(LocaleContext);
 const LocaleChildProvider = ({ children }: any) => {
   const { i18n, t } = useTranslationi18n();
   const [currentLanguage, setCurrentLanguage] = useState("en");
+  const momentLocale = moment().locale(currentLanguage);
   const changeLanguage = (lang: string) => {
     AsyncStorage.setItem(StorageKey.LOCALE, lang);
     setCurrentLanguage(lang);
@@ -92,7 +97,7 @@ const LocaleChildProvider = ({ children }: any) => {
   });
 
   return (
-    <LocaleContext.Provider value={{ changeLanguage, currentLanguage, t }}>
+    <LocaleContext.Provider value={{ changeLanguage, currentLanguage, t, momentLocale }}>
       {children}
     </LocaleContext.Provider>
   );

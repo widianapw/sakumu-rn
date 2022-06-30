@@ -9,10 +9,12 @@ import Typography from "../../tmd/components/Typography/Typography";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
 import { VStack } from "react-native-flex-layout";
 import { useAuth } from "../providers/AuthProvider";
+import { useLocale } from "../providers/LocaleProvider";
 
 const MainScreen = ({ navigation }: any) => {
   const { user, logout, isLoadingLogout } = useAuth();
   const [userInfo, setUserInfo] = useState({});
+  const { momentLocale } = useLocale();
 
   const signIn = async () => {
     try {
@@ -53,6 +55,7 @@ const MainScreen = ({ navigation }: any) => {
       center
     >
       <Typography>Welcome, {user?.name}</Typography>
+      <Typography>{momentLocale.format("DD MMMM YYYY")}</Typography>
       <View>
         <GoogleSigninButton
           style={{}}
