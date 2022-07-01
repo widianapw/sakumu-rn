@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
@@ -33,40 +33,43 @@ export default function LoginScreen() {
   };
 
   return (
-    <ScrollView style={{
-      flex: 1,
-    }}>
-      <FormProvider {...method}>
-        <VStack p={16} spacing={16} style={{
-          flex: 1,
-        }}>
-          <View>
-            <RHFPhoneField
-              mode={"filled"}
-              name={"phone"}
-              phoneCodeName={"phone_code"}
-              label={"Phone"}
-            />
-          </View>
+    <SafeAreaView>
 
-          <View>
-            <RHFTextField
-              name={"password"}
-              label={"Password"}
-              password
-            />
-          </View>
+      <ScrollView style={{
+        flex: 1,
+      }}>
+        <FormProvider {...method}>
+          <VStack p={16} spacing={16} style={{
+            flex: 1,
+          }}>
+            <View>
+              <RHFPhoneField
+                mode={"filled"}
+                name={"phone"}
+                phoneCodeName={"phone_code"}
+                label={"Phone"}
+              />
+            </View>
 
-          <Button
-            loading={isLoadingLogin}
-            onPress={method.handleSubmit(onSubmit)}
-            containerStyle={{
-              marginTop: 24,
-            }}
-            fullWidth
-          >Login</Button>
-        </VStack>
-      </FormProvider>
-    </ScrollView>
+            <View>
+              <RHFTextField
+                name={"password"}
+                label={"Password"}
+                password
+              />
+            </View>
+
+            <Button
+              loading={isLoadingLogin}
+              onPress={method.handleSubmit(onSubmit)}
+              containerStyle={{
+                marginTop: 24,
+              }}
+              fullWidth
+            >Login</Button>
+          </VStack>
+        </FormProvider>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

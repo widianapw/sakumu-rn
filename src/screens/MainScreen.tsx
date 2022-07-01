@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import { Button } from "../../tmd";
 import Typography from "../../tmd/components/Typography/Typography";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
@@ -48,61 +48,64 @@ const MainScreen = ({ navigation }: any) => {
     }
   };
 
-  return <ScrollView>
-    <VStack
-      spacing={16}
-      p={16}
-      center
-    >
-      <Typography>Welcome, {user?.name}</Typography>
-      <Typography>{momentLocale.format("DD MMMM YYYY")}</Typography>
-      <View>
-        <GoogleSigninButton
-          style={{}}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={() => {
-            signIn();
-          }}
-        />
-        <Typography style={{ color: "black" }}>{userInfo?.user?.name}</Typography>
+  return (
+    <SafeAreaView>
 
-        <Button color={"red"} onPress={signOut}>Logout Google</Button>
-      </View>
+      <ScrollView>
+        <VStack
+          spacing={16}
+          p={16}
+          center
+        >
+          <Typography>Welcome, {user?.name}</Typography>
+          <Typography>{momentLocale.format("DD MMMM YYYY")}</Typography>
+          <View>
+            <GoogleSigninButton
+              style={{}}
+              size={GoogleSigninButton.Size.Wide}
+              color={GoogleSigninButton.Color.Dark}
+              onPress={() => {
+                signIn();
+              }}
+            />
+            <Typography style={{ color: "black" }}>{userInfo?.user?.name}</Typography>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("ButtonScreen");
-        }}
-      >
-        Button
-      </Button>
+            <Button color={"red"} onPress={signOut}>Logout Google</Button>
+          </View>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("TypographyScreen");
-        }}
-      >
-        Typography
-      </Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("ButtonScreen");
+            }}
+          >
+            Button
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("TextFieldScreen");
-        }}
-      >
-        TextField
-      </Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("TypographyScreen");
+            }}
+          >
+            Typography
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("PickerScreen");
-        }}
-      >
-        Picker
-      </Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("TextFieldScreen");
+            }}
+          >
+            TextField
+          </Button>
 
-      <Button
+          <Button
+            onPress={() => {
+              navigation.navigate("PickerScreen");
+            }}
+          >
+            Picker
+          </Button>
+
+          <Button
         onPress={() => {
           navigation.navigate("BottomSheetScreen");
         }}
@@ -132,51 +135,53 @@ const MainScreen = ({ navigation }: any) => {
         Selector
       </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("APIScreen");
-        }}
-      >
-        API Screen
-      </Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("APIScreen");
+            }}
+          >
+            API Screen
+          </Button>
 
 
-      <Button onPress={() => {
-        navigation.navigate("ChipScreen");
-      }}>
-        Chip Screen
-      </Button>
+          <Button onPress={() => {
+            navigation.navigate("ChipScreen");
+          }}>
+            Chip Screen
+          </Button>
 
-      <Button onPress={() => {
-        navigation.navigate("OTPScreen");
-      }}>
-        OTP INPUT
-      </Button>
+          <Button onPress={() => {
+            navigation.navigate("OTPScreen");
+          }}>
+            OTP INPUT
+          </Button>
 
-      <Button onPress={() => {
-        navigation.navigate("FormScreen");
-      }}>
-        Form Input
-      </Button>
+          <Button onPress={() => {
+            navigation.navigate("FormScreen");
+          }}>
+            Form Input
+          </Button>
 
 
-      <Button
-        onPress={() => {
-          navigation.navigate("LanguageScreen");
-        }}>
-        Language Screen
-      </Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("LanguageScreen");
+            }}>
+            Language Screen
+          </Button>
 
-      <Button
-        color={"red"}
-        loading={isLoadingLogout}
-        onPress={logout}
-      >
-        Logout
-      </Button>
-    </VStack>
+          <Button
+            color={"red"}
+            loading={isLoadingLogout}
+            onPress={logout}
+          >
+            Logout
+          </Button>
+        </VStack>
 
-  </ScrollView>;
+      </ScrollView>
+    </SafeAreaView>
+  )
 };
 
 export default MainScreen;

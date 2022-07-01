@@ -35,8 +35,10 @@ type BSContextType = {
   hideErrorBS: () => void;
   showPermissionBS: (type: PermissionType, props?: ConfirmationBSContext) => void;
   hidePermissionBS: () => void;
-
+  showImagePickerBS: () => void;
+  hideImagePickerBS: () => void;
 }
+
 const initialState: BSContextType = {
   showConfirmationBS: () => {
   },
@@ -53,6 +55,11 @@ const initialState: BSContextType = {
   showPermissionBS: () => {
   },
   hidePermissionBS: () => {
+  },
+  showImagePickerBS: () => {
+  },
+  hideImagePickerBS: () => {
+
   },
 };
 
