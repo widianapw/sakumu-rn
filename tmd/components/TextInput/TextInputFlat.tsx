@@ -212,6 +212,9 @@ const TextInputFlat = ({
                 </View>
               }
               <View
+                pointerEvents={
+                  editable ? "auto" : "none"
+                }
                 style={{
                   flexGrow: 1,
                   flex: 1,
@@ -224,7 +227,6 @@ const TextInputFlat = ({
                     {},
                   ]}
                 >
-
 
                   {!isAndroid && multiline && label && (
                     // Workaround for: https://github.com/callstack/react-native-paper/issues/2799

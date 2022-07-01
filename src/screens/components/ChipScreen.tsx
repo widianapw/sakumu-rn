@@ -4,24 +4,26 @@
  */
 
 import React from "react";
-import { ScrollView } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import { HStack, VStack } from "react-native-flex-layout";
 import Chip from "../../../tmd/components/Chip";
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 
 export default function ChipScreen() {
-  return <ScrollView>
-    <VStack p={16} spacing={8}>
-      <HStack spacing={8}>
-        <Chip
-          text={"Widiana"}
-          selected
-        />
-        <Chip text={"Widiana"} />
-        <Chip text={"Widiana"} />
-      </HStack>
-      <HStack spacing={8}>
+  return (
+    <SafeAreaView>
+      <ScrollView>
+        <VStack p={16} spacing={8}>
+          <HStack spacing={8}>
+            <Chip
+              text={"Widiana"}
+              selected
+            />
+            <Chip text={"Widiana"} />
+            <Chip text={"Widiana"} />
+          </HStack>
+          <HStack spacing={8}>
         <Chip text={"Widiana"} selected variant={"outlined"} />
         <Chip text={"Widiana"} variant={"outlined"} />
         <Chip text={"Widiana"} variant={"outlined"} />
@@ -53,11 +55,13 @@ export default function ChipScreen() {
             };
             return i;
           })}
-          type={'picker'}
+          type={"picker"}
           text={"Widiana"} />
         <Chip text={"Widiana"} />
       </HStack>
 
-    </VStack>
-  </ScrollView>;
+        </VStack>
+      </ScrollView>
+    </SafeAreaView>
+  )
 }

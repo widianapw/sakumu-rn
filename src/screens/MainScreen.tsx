@@ -49,7 +49,6 @@ const MainScreen = ({ navigation }: any) => {
   };
 
   return <SafeAreaView>
-
   <ScrollView>
     <VStack
       spacing={16}

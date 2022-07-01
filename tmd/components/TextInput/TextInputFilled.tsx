@@ -188,10 +188,13 @@ const TextInputFilled = ({
           }
 
           <View
+            pointerEvents={
+              editable ? "auto" : "none"
+            }
             style={{
               flexGrow: 1,
               flex: 1,
-          
+
             }}
           >
             {render?.({

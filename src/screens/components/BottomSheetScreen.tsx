@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { Alert, ScrollView } from "react-native";
+import { Alert, SafeAreaView, ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../tmd";
 import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg";
@@ -53,58 +53,61 @@ export default function BottomSheetScreen() {
   const [selectedDate, setSelectedDate] = useState<DateFilterPayload | null>(null);
   return (
     <>
-      <DateFilterBottomSheet
-        open={isShowDateFilter}
-        initial={selectedDate}
-        onClose={() => setIsShowDateFilter(false)}
-        onReset={() => {
-          setSelectedDate(null);
-          setIsShowDateFilter(false);
-        }}
+      <SafeAreaView>
 
-        onSave={(data) => {
-          setSelectedDate(data);
-          setIsShowDateFilter(false);
-        }} />
-      <ScrollView>
-        <VStack spacing={16} style={{
-          padding: 16,
-        }}>
-          <Button onPress={() => {
-            handleShowAlert();
-          }}>Alert / Error BottomSheet</Button>
-          <Button onPress={() => {
-            handleShowConfirmation();
+        <DateFilterBottomSheet
+          open={isShowDateFilter}
+          initial={selectedDate}
+          onClose={() => setIsShowDateFilter(false)}
+          onReset={() => {
+            setSelectedDate(null);
+            setIsShowDateFilter(false);
           }}
-          >Confirmation BottomSheet</Button>
-          <Button
-            onPress={() => {
-              setIsShowDateFilter(true);
-            }}
-          >
-            Date Filter BottomSheet</Button>
-          {
-            selectedDate &&
-            <Typography>
-              Date Start = {selectedDate?.date_range?.start_date}, Date End = {selectedDate?.date_range?.end_date}
-            </Typography>
-          }
 
-          <Button
-            onPress={() => {
-              getBank()
+          onSave={(data) => {
+            setSelectedDate(data);
+            setIsShowDateFilter(false);
+          }} />
+        <ScrollView>
+          <VStack spacing={16} style={{
+            padding: 16,
+          }}>
+            <Button onPress={() => {
+              handleShowAlert();
+            }}>Alert / Error BottomSheet</Button>
+            <Button onPress={() => {
+              handleShowConfirmation();
             }}
-          >
-            GET DATA WITH ERROR
-          </Button>
+            >Confirmation BottomSheet</Button>
+            <Button
+              onPress={() => {
+                setIsShowDateFilter(true);
+              }}
+            >
+              Date Filter BottomSheet</Button>
+            {
+              selectedDate &&
+              <Typography>
+                Date Start = {selectedDate?.date_range?.start_date}, Date End = {selectedDate?.date_range?.end_date}
+              </Typography>
+            }
 
-          <Button
-            onPress={requestPermission}
-          >
-            PERMISSIONS (REJECT)
-          </Button>
-        </VStack>
-      </ScrollView>
+            <Button
+              onPress={() => {
+                getBank()
+              }}
+            >
+              GET DATA WITH ERROR
+            </Button>
+
+            <Button
+              onPress={requestPermission}
+            >
+              PERMISSIONS (REJECT)
+            </Button>
+          </VStack>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 }

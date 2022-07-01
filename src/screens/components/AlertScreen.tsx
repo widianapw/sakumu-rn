@@ -3,12 +3,14 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { ScrollView } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Alert } from "../../../tmd";
 
 export default function AlertScreen() {
   return (
+    <SafeAreaView>
+
     <ScrollView style={{ flex: 1 }}>
       <VStack p={16} style={{ flex: 1 }} spacing={16}>
         <Alert
@@ -46,5 +48,6 @@ export default function AlertScreen() {
 
       </VStack>
     </ScrollView>
+    </SafeAreaView>
   );
 }

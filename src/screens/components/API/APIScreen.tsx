@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { ScrollView } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../../tmd";
 import useCredentialService from "../../../services/credential/useCredentialService";
@@ -16,25 +16,30 @@ export default function APIScreen() {
     checkCredential("082146456432", "widianaputraa@gmail.com");
   };
 
-  return <ScrollView>
-    <VStack p={16} spacing={16}>
-      <Button
-        onPress={() => {
-          navigate("FetchDataScreen");
-        }}
-      >
-        Fetch data</Button>
-      <Button
-        onPress={() => {
-          navigate("PaginationScreen");
-        }}
-      >
-        Fetch Pagination</Button>
-      <Button
-        loading={isLoadingCheckCredential}
-        onPress={handlePost}>
-        POST / PATCH API
-      </Button>
-    </VStack>
-  </ScrollView>;
+  return (
+    <SafeAreaView>
+
+      <ScrollView>
+        <VStack p={16} spacing={16}>
+          <Button
+            onPress={() => {
+              navigate("FetchDataScreen");
+            }}
+          >
+            Fetch data</Button>
+          <Button
+            onPress={() => {
+              navigate("PaginationScreen");
+            }}
+          >
+            Fetch Pagination</Button>
+          <Button
+            loading={isLoadingCheckCredential}
+            onPress={handlePost}>
+            POST / PATCH API
+          </Button>
+        </VStack>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }

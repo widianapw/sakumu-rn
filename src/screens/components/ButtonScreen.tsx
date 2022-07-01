@@ -3,33 +3,35 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import { Button, IconButton } from "../../../tmd";
 import { VStack } from "react-native-flex-layout";
 import TextButton from "../../../tmd/components/Button/TextButton";
 
 export default function ButtonScreen() {
-  return <ScrollView>
-    <View style={{ padding: 16, flexDirection: "column" }}>
-      <VStack spacing={8}>
-        <IconButton
-          shape={"rounded"}
-          icon={"camera"}
-          onPress={() => {
-          }}
-        />
-        <IconButton
-          variant={"secondary"}
-          icon={"camera"} onPress={() => {
-        }}
-        />
-        <IconButton
-          variant={"tertiary"}
-          icon={"camera"} onPress={() => {
-        }}
-        />
-        <IconButton
-          icon={"arrow-back"}
+  return (
+    <SafeAreaView>
+      <ScrollView>
+        <View style={{ padding: 16, flexDirection: "column" }}>
+          <VStack spacing={8}>
+            <IconButton
+              shape={"rounded"}
+              icon={"camera"}
+              onPress={() => {
+              }}
+            />
+            <IconButton
+              variant={"secondary"}
+              icon={"camera"} onPress={() => {
+            }}
+            />
+            <IconButton
+              variant={"tertiary"}
+              icon={"camera"} onPress={() => {
+            }}
+            />
+            <IconButton
+              icon={"arrow-back"}
           themeSize={"lg"}
           onPress={() => {
           }}
@@ -143,21 +145,23 @@ export default function ButtonScreen() {
           Button Small
         </Button>
 
-        <Button
-          onPress={() => {
-          }}
-          size={"md"}>
-          Button Medium
-        </Button>
+            <Button
+              onPress={() => {
+              }}
+              size={"md"}>
+              Button Medium
+            </Button>
 
-        <Button
-          onPress={() => {
-          }}
-          size={"lg"}>
-          Button Large
-        </Button>
+            <Button
+              onPress={() => {
+              }}
+              size={"lg"}>
+              Button Large
+            </Button>
 
-      </VStack>
-    </View>
-  </ScrollView>;
+          </VStack>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  )
 }

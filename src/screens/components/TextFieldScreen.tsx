@@ -3,24 +3,27 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { KeyboardAvoidingView, ScrollView } from "react-native";
+import { KeyboardAvoidingView, SafeAreaView, ScrollView } from "react-native";
 import { TextInput, useTheme } from "../../../tmd";
 import TextField from "../../../tmd/components/TextInput/TextField";
 import { VStack } from "react-native-flex-layout";
 
 const TextFieldScreen = () => {
   const theme = useTheme();
-  return <KeyboardAvoidingView>
-    <ScrollView
-      style={{
-        backgroundColor: theme.colors.neutral.neutral_10,
-      }}
-    >
-      <VStack
-        spacing={16}
-        style={{
-          padding: 16,
-          flexDirection: "column",
+  return (
+    <SafeAreaView>
+
+      <KeyboardAvoidingView>
+        <ScrollView
+          style={{
+            backgroundColor: theme.colors.neutral.neutral_10,
+          }}
+        >
+          <VStack
+            spacing={16}
+            style={{
+              padding: 16,
+              flexDirection: "column",
         }}>
 
         <TextInput
@@ -107,9 +110,11 @@ const TextFieldScreen = () => {
           placeholder={"Filled"}
         />
 
-      </VStack>
-    </ScrollView>
-  </KeyboardAvoidingView>;
+          </VStack>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  )
 };
 
 export default TextFieldScreen;

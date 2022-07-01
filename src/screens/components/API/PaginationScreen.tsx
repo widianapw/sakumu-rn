@@ -5,7 +5,7 @@
 import React from "react";
 import Typography from "../../../../tmd/components/Typography/Typography";
 import { CatalogItem } from "../../../models/catalog/Catalog";
-import { FlatList, View } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
 import useCatalogInfiniteQuery from "../../../services/catalog/useCatalogInfiniteQuery";
 
 export default function PaginationScreen() {
@@ -18,33 +18,38 @@ export default function PaginationScreen() {
       <Typography>{item?.name}</Typography>
     </View>;
   };
-  return <View style={{
-    flex: 1,
-  }}>
-    {
-      isLoadingCatalog &&
-      <Typography>Loading...</Typography>
-    }
-    {
-      catalogs &&
-      <View style={{ flexDirection: "column", flex: 1 }}>
-        <FlatList
-          style={{
-            flexGrow: 1,
-            padding: 16,
-          }}
-          onEndReached={fetchNext}
-          data={catalogs}
-          renderItem={({ item }) => renderItem(item)}
-          keyExtractor={(item, number) => item?.id}
-        />
+  return (
+    <SafeAreaView>
+
+      <View style={{
+        flex: 1,
+      }}>
         {
-          isFetchingNextPage &&
-          <Typography style={{
-            padding: 16,
-          }}>Fetching next page...</Typography>
+          isLoadingCatalog &&
+          <Typography>Loading...</Typography>
+        }
+        {
+          catalogs &&
+          <View style={{ flexDirection: "column", flex: 1 }}>
+            <FlatList
+              style={{
+                flexGrow: 1,
+                padding: 16,
+              }}
+              onEndReached={fetchNext}
+              data={catalogs}
+              renderItem={({ item }) => renderItem(item)}
+              keyExtractor={(item, number) => item?.id}
+            />
+            {
+              isFetchingNextPage &&
+              <Typography style={{
+                padding: 16,
+              }}>Fetching next page...</Typography>
+            }
+          </View>
         }
       </View>
-    }
-  </View>;
+    </SafeAreaView>
+  );
 }

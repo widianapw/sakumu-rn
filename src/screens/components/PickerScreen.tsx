@@ -3,14 +3,14 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import { useTheme } from "../../../tmd";
 import PhoneField from "../../../tmd/components/picker/PhoneField";
 import _countries from "../../../tmd/data/_countries";
 import { VStack } from "react-native-flex-layout";
 import Select from "../../../tmd/components/Select/Select";
 import { PickerItem } from "../../../tmd/model/PickerItem";
-import  DatePicker  from "../../../tmd/components/picker/DatePicker";
+import DatePicker from "../../../tmd/components/picker/DatePicker";
 import TimePicker from "../../../tmd/components/picker/TimePicker";
 import MapPicker from "../../../tmd/components/picker/MapPicker";
 
@@ -20,17 +20,20 @@ export default function PickerScreen() {
   const [date, setDate] = useState(new Date());
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
   const [initialMap, setInitialMap] = useState({});
-  return <ScrollView
-    keyboardShouldPersistTaps="always"
-    style={{
-      flex: 1,
-      backgroundColor: "white",
-    }}>
-    <VStack
-      spacing={16}
-      style={{
-        padding: 16,
-      }}>
+  return (
+    <SafeAreaView>
+
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        style={{
+          flex: 1,
+          backgroundColor: "white",
+        }}>
+        <VStack
+          spacing={16}
+          style={{
+            padding: 16,
+          }}>
 
       <MapPicker
         onSelected={(data) => {
@@ -124,7 +127,9 @@ export default function PickerScreen() {
         }
       />
 
-    </VStack>
+        </VStack>
 
-  </ScrollView>;
+      </ScrollView>
+    </SafeAreaView>
+  )
 }
