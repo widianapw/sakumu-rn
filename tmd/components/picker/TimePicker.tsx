@@ -40,6 +40,7 @@ export default function TimePicker({ initial, ...rest }: React.ComponentProps<ty
           selected ?
             moment(selected).format("HH:mm") : ""
         }
+        pointerEvents="none"
         editable={false}
         pickerType={"date"}
         onOpenPicker={handleOpen}

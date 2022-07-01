@@ -134,7 +134,8 @@ const TextInputFilled = ({
               flexDirection: "row",
               alignItems: "center",
               display: "flex",
-            }]}>
+            }]}
+            >
           {
             rest.search &&
             <View style={{
@@ -190,6 +191,7 @@ const TextInputFilled = ({
             style={{
               flexGrow: 1,
               flex: 1,
+          
             }}
           >
             {render?.({

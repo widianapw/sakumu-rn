@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import { Button } from "../../tmd";
 import Typography from "../../tmd/components/Typography/Typography";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
@@ -48,7 +48,9 @@ const MainScreen = ({ navigation }: any) => {
     }
   };
 
-  return <ScrollView>
+  return <SafeAreaView>
+
+  <ScrollView>
     <VStack
       spacing={16}
       p={16}
@@ -176,7 +178,8 @@ const MainScreen = ({ navigation }: any) => {
       </Button>
     </VStack>
 
-  </ScrollView>;
+  </ScrollView>
+  </SafeAreaView>
 };
 
 export default MainScreen;
