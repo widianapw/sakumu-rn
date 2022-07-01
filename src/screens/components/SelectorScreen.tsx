@@ -3,16 +3,17 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { Box, VStack } from "react-native-flex-layout";
 import { Checkbox, RadioButton, Switch } from "../../../tmd";
 import RadioButtonGroup from "../../../tmd/components/RadioButton/RadioButtonGroup";
+import Page from "../../../tmd/components/Page";
 
 export default function SelectorScreen() {
   const [isChecked, setIsChecked] = useState(true);
   const [rbVal, setRbVal] = useState("1");
   return (
-    <SafeAreaView>
+    <Page>
 
       <ScrollView style={{
         flex: 1,
@@ -50,6 +51,6 @@ export default function SelectorScreen() {
           <Switch value={true} disabled text={"Damn"} />
         </VStack>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

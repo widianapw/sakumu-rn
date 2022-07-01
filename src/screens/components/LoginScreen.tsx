@@ -3,13 +3,14 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button, RHFPhoneField, RHFTextField } from "../../../tmd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../providers/AuthProvider";
+import Page from "../../../tmd/components/Page";
 
 export default function LoginScreen() {
   const { login, isLoadingLogin } = useAuth();
@@ -33,8 +34,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView>
-
+    <Page>
       <ScrollView style={{
         flex: 1,
       }}>
@@ -70,6 +70,6 @@ export default function LoginScreen() {
           </VStack>
         </FormProvider>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

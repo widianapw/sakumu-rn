@@ -3,16 +3,16 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { KeyboardAvoidingView, SafeAreaView, ScrollView } from "react-native";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { TextInput, useTheme } from "../../../tmd";
 import TextField from "../../../tmd/components/TextInput/TextField";
 import { VStack } from "react-native-flex-layout";
+import Page from "../../../tmd/components/Page";
 
 const TextFieldScreen = () => {
   const theme = useTheme();
   return (
-    <SafeAreaView>
-
+    <Page>
       <KeyboardAvoidingView>
         <ScrollView
           style={{
@@ -113,7 +113,7 @@ const TextFieldScreen = () => {
           </VStack>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </Page>
   )
 };
 

@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { Alert, SafeAreaView, ScrollView } from "react-native";
+import { Alert, ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../tmd";
 import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg";
@@ -13,6 +13,7 @@ import Typography from "../../../tmd/components/Typography/Typography";
 import { usePermission } from "../../../tmd/providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, LOCATION_PERMISSIONS, STORAGE_PERMISSIONS } from "../../../tmd/data/_permissionTypes";
 import useBankService from "../../services/bank/useBankService";
+import Page from "../../../tmd/components/Page";
 
 export default function BottomSheetScreen() {
   const { getBank } = useBankService();
@@ -53,7 +54,7 @@ export default function BottomSheetScreen() {
   const [selectedDate, setSelectedDate] = useState<DateFilterPayload | null>(null);
   return (
     <>
-      <SafeAreaView>
+      <Page>
 
         <DateFilterBottomSheet
           open={isShowDateFilter}
@@ -107,7 +108,7 @@ export default function BottomSheetScreen() {
             </Button>
           </VStack>
         </ScrollView>
-      </SafeAreaView>
+      </Page>
     </>
   );
 }

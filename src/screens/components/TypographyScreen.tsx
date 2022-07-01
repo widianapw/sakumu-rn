@@ -3,12 +3,13 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Typography from "../../../tmd/components/Typography/Typography";
+import Page from "../../../tmd/components/Page";
 
 export default function TypographyScreen() {
   return (
-    <SafeAreaView>
+    <Page>
       <ScrollView>
         <View
           style={{ padding: 16, flexDirection: "column" }}
@@ -29,6 +30,6 @@ export default function TypographyScreen() {
           <Typography type={"button2"}>Button 2</Typography>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

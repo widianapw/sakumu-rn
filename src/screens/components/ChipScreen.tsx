@@ -4,15 +4,16 @@
  */
 
 import React from "react";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { HStack, VStack } from "react-native-flex-layout";
 import Chip from "../../../tmd/components/Chip";
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
+import Page from "../../../tmd/components/Page";
 
 export default function ChipScreen() {
   return (
-    <SafeAreaView>
+    <Page>
       <ScrollView>
         <VStack p={16} spacing={8}>
           <HStack spacing={8}>
@@ -62,6 +63,6 @@ export default function ChipScreen() {
 
         </VStack>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   )
 }

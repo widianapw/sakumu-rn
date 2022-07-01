@@ -3,14 +3,15 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button, IconButton } from "../../../tmd";
 import { VStack } from "react-native-flex-layout";
 import TextButton from "../../../tmd/components/Button/TextButton";
+import Page from "../../../tmd/components/Page";
 
 export default function ButtonScreen() {
   return (
-    <SafeAreaView>
+    <Page>
       <ScrollView>
         <View style={{ padding: 16, flexDirection: "column" }}>
           <VStack spacing={8}>
@@ -162,6 +163,6 @@ export default function ButtonScreen() {
           </VStack>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   )
 }

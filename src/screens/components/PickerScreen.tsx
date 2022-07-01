@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { useTheme } from "../../../tmd";
 import PhoneField from "../../../tmd/components/picker/PhoneField";
 import _countries from "../../../tmd/data/_countries";
@@ -13,6 +13,7 @@ import { PickerItem } from "../../../tmd/model/PickerItem";
 import DatePicker from "../../../tmd/components/picker/DatePicker";
 import TimePicker from "../../../tmd/components/picker/TimePicker";
 import MapPicker from "../../../tmd/components/picker/MapPicker";
+import Page from "../../../tmd/components/Page";
 
 export default function PickerScreen() {
   const theme = useTheme();
@@ -21,7 +22,7 @@ export default function PickerScreen() {
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
   const [initialMap, setInitialMap] = useState({});
   return (
-    <SafeAreaView>
+    <Page>
 
       <ScrollView
         keyboardShouldPersistTaps="always"
@@ -130,6 +131,6 @@ export default function PickerScreen() {
         </VStack>
 
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   )
 }

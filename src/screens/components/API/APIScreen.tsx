@@ -8,6 +8,7 @@ import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../../tmd";
 import useCredentialService from "../../../services/credential/useCredentialService";
 import { navigate } from "../../../navigations/RootNavigation";
+import Page from "../../../../tmd/components/Page";
 
 export default function APIScreen() {
   const { checkCredential, isLoadingCheckCredential } = useCredentialService();
@@ -17,7 +18,7 @@ export default function APIScreen() {
   };
 
   return (
-    <SafeAreaView>
+    <Page>
 
       <ScrollView>
         <VStack p={16} spacing={16}>
@@ -40,6 +41,6 @@ export default function APIScreen() {
           </Button>
         </VStack>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

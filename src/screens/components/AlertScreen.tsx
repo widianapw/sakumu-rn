@@ -6,10 +6,11 @@ import React from "react";
 import { SafeAreaView, ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import { Alert } from "../../../tmd";
+import Page from "../../../tmd/components/Page";
 
 export default function AlertScreen() {
   return (
-    <SafeAreaView>
+    <Page>
 
     <ScrollView style={{ flex: 1 }}>
       <VStack p={16} style={{ flex: 1 }} spacing={16}>
@@ -48,6 +49,6 @@ export default function AlertScreen() {
 
       </VStack>
     </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

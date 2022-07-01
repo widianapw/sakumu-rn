@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,6 +13,7 @@ import RHFTextField from "../../../tmd/components/RHF/RHFTextField";
 import RHFSelect from "../../../tmd/components/RHF/RHFSelect";
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
+import Page from "../../../tmd/components/Page";
 
 export default function FormScreen() {
   const schema = yup.object({
@@ -41,7 +42,7 @@ export default function FormScreen() {
 
   const onSubmit = data => console.log(data);
   return (
-    <SafeAreaView>
+    <Page>
 
       <ScrollView style={{
         flex: 1,
@@ -114,6 +115,6 @@ export default function FormScreen() {
           </VStack>
         </FormProvider>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

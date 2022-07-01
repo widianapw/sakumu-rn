@@ -3,12 +3,13 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Tag } from "../../../tmd";
+import Page from "../../../tmd/components/Page";
 
 export default function TagScreen() {
   return (
-    <SafeAreaView>
+    <Page>
 
       <ScrollView
         style={{
@@ -60,6 +61,6 @@ export default function TagScreen() {
 
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

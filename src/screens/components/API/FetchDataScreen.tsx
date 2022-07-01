@@ -3,16 +3,17 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import useFeaturedCatalogQuery from "../../../services/catalog/useFeaturedCatalogQuery";
 import Typography from "../../../../tmd/components/Typography/Typography";
 import { Button } from "../../../../tmd";
+import Page from "../../../../tmd/components/Page";
 
 export default function FetchDataScreen() {
   const { catalogs, isLoadingCatalog, refetch, isRefetching } = useFeaturedCatalogQuery();
   return (
-    <SafeAreaView>
+    <Page>
 
       <ScrollView>
         <VStack p={16}>
@@ -36,6 +37,6 @@ export default function FetchDataScreen() {
           }} onPress={refetch} loading={isLoadingCatalog}>Refetch Data</Button>
         </VStack>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   )
 }

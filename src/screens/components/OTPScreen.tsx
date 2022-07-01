@@ -3,13 +3,14 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import OTPInput from "../../../tmd/components/Otp/OTPInput";
+import Page from "../../../tmd/components/Page";
 
 export default function OTPScreen() {
   return (
-    <SafeAreaView>
+    <Page>
 
       <ScrollView>
         <VStack spacing={16} p={16}>
@@ -25,6 +26,6 @@ export default function OTPScreen() {
             pinCount={5} />
         </VStack>
       </ScrollView>
-    </SafeAreaView>
+    </Page>
   );
 }

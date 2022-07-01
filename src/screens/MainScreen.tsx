@@ -3,13 +3,14 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button } from "../../tmd";
 import Typography from "../../tmd/components/Typography/Typography";
 import { GoogleSignin, GoogleSigninButton, statusCodes } from "@react-native-google-signin/google-signin";
 import { VStack } from "react-native-flex-layout";
 import { useAuth } from "../providers/AuthProvider";
 import { useLocale } from "../providers/LocaleProvider";
+import Page from "../../tmd/components/Page";
 
 const MainScreen = ({ navigation }: any) => {
   const { user, logout, isLoadingLogout } = useAuth();
@@ -48,18 +49,20 @@ const MainScreen = ({ navigation }: any) => {
     }
   };
 
-  return <SafeAreaView>
-  <ScrollView>
-    <VStack
-      spacing={16}
-      p={16}
-      center
-    >
-      <Typography>Welcome, {user?.name}</Typography>
-      <Typography>{momentLocale.format("DD MMMM YYYY")}</Typography>
-      <View>
-        <GoogleSigninButton
-          style={{}}
+  return (
+    <Page>
+
+      <ScrollView>
+        <VStack
+          spacing={16}
+          p={16}
+          center
+        >
+          <Typography>Welcome, {user?.name}</Typography>
+          <Typography>{momentLocale.format("DD MMMM YYYY")}</Typography>
+          <View>
+            <GoogleSigninButton
+              style={{}}
           size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Dark}
           onPress={() => {
@@ -168,17 +171,18 @@ const MainScreen = ({ navigation }: any) => {
         Language Screen
       </Button>
 
-      <Button
-        color={"red"}
-        loading={isLoadingLogout}
-        onPress={logout}
-      >
-        Logout
-      </Button>
-    </VStack>
+          <Button
+            color={"red"}
+            loading={isLoadingLogout}
+            onPress={logout}
+          >
+            Logout
+          </Button>
+        </VStack>
 
-  </ScrollView>
-  </SafeAreaView>
+      </ScrollView>
+    </Page>
+  )
 };
 
 export default MainScreen;

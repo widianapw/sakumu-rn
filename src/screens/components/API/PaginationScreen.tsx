@@ -5,8 +5,9 @@
 import React from "react";
 import Typography from "../../../../tmd/components/Typography/Typography";
 import { CatalogItem } from "../../../models/catalog/Catalog";
-import { FlatList, SafeAreaView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import useCatalogInfiniteQuery from "../../../services/catalog/useCatalogInfiniteQuery";
+import Page from "../../../../tmd/components/Page";
 
 export default function PaginationScreen() {
   const { catalogs, isLoadingCatalog, isFetchingNextPage, fetchNext } = useCatalogInfiniteQuery();
@@ -19,7 +20,7 @@ export default function PaginationScreen() {
     </View>;
   };
   return (
-    <SafeAreaView>
+    <Page>
 
       <View style={{
         flex: 1,
@@ -50,6 +51,6 @@ export default function PaginationScreen() {
           </View>
         }
       </View>
-    </SafeAreaView>
+    </Page>
   );
 }
