@@ -14,16 +14,22 @@ import RHFSelect from "../../../tmd/components/RHF/RHFSelect";
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 import Page from "../../../tmd/components/Page";
+import RHFImagePicker from "../../../tmd/components/RHF/RHFImagePicker";
+import { useLocale } from "../../providers/LocaleProvider";
+import RHFMultiImagePicker from "../../../tmd/components/RHF/RHFMultiImagePicker";
 
 export default function FormScreen() {
+  const { t } = useLocale();
   const schema = yup.object({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    countryID: yup.string().required(),
-    phoneCode: yup.string().required(),
-    phone: yup.string().required().min(6).max(12),
-    date: yup.string().required(),
-    time: yup.string().required(),
+    firstName: yup.string().required().label(t("labels.first_name")),
+    lastName: yup.string().required().label(t("labels.last_name")),
+    countryID: yup.string().required().label(t("labels.country")),
+    phoneCode: yup.string().required().label(t("labels.phone_code")),
+    phone: yup.string().required().min(6).max(12).label(t("labels.phone")),
+    date: yup.string().required().label(t("labels.date")),
+    time: yup.string().required().label(t("labels.time")),
+    image: yup.mixed().required().label(t("labels.image")),
+    multiImage: yup.array().min(2).required()
   }).required();
 
   const method = useForm({
@@ -35,6 +41,7 @@ export default function FormScreen() {
       phone: "",
       date: "",
       time: "",
+      image: undefined,
     },
     resolver: yupResolver(schema),
   });
@@ -54,24 +61,24 @@ export default function FormScreen() {
           }}>
             <View>
               <RHFTextField
-                label={"First Name"}
+                label={t("labels.first_name")}
                 name={"firstName"}
-                placeholder={"Enter your first name"}
+                placeholder={t("labels.first_name")}
               />
             </View>
             <View>
               <RHFTextField
-                label={"Last Name"}
+                label={t("labels.last_name")}
                 name={"lastName"}
-                placeholder={"Enter your last name"}
+                placeholder={t("labels.last_name")}
 
               />
             </View>
             <View>
               <RHFSelect
-                label={"Country"}
+                label={t("labels.country")}
                 name={"countryID"}
-                placeholder={"Enter your country"}
+                placeholder={t("labels.country")}
                 options={_countries.map(it => {
                   const i: PickerItem = {
                     id: it.code,
@@ -86,7 +93,7 @@ export default function FormScreen() {
               <RHFPhoneField
                 name={"phone"}
                 phoneCodeName={"phoneCode"}
-                label={"Phone"}
+                label={t("labels.phone")}
                 placeholder={"Enter your phone"}
               />
             </View>
@@ -94,17 +101,45 @@ export default function FormScreen() {
             <View>
               <RHFDatePicker
                 name={"date"}
-                label={"Date"}
-                placeholder={"Enter your date"}
+                label={t("labels.date")}
+                placeholder={t("labels.date")}
               />
             </View>
             <View>
               <RHFTimePicker
                 name={"time"}
-                label={"Time"}
-                placeholder={"Enter your time"}
+                label={t("labels.time")}
+                placeholder={t("labels.time")}
               />
             </View>
+            <View>
+              <RHFImagePicker
+                description={"Pastikan foto KTP terlihat jelas dan dapat dibaca"}
+                buttonProps={{
+                  icon: {
+                    icon: "camera",
+                  },
+                }}
+                requiredLabel
+                name={"image"}
+                label={t("labels.image")} />
+            </View>
+
+            <View>
+              <RHFMultiImagePicker
+                ratio={'16:9'}
+                description={"Pastikan foto KTP terlihat jelas dan dapat dibaca"}
+                buttonProps={{
+                  icon: {
+                    icon: "camera",
+                  },
+                }}
+                requiredLabel
+                name={"multiImage"}
+                label={"Multi Image"}
+              />
+            </View>
+
             <Button
               containerStyle={{
                 marginTop: 16,

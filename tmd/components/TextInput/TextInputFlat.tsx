@@ -131,7 +131,7 @@ const TextInputFlat = ({
             label={label}
             type={"label1"}
             style={{ marginBottom: 4 }}
-            required={rest.required}
+            required={rest.requiredLabel}
           />
         }
         <Pressable

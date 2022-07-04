@@ -10,6 +10,7 @@ import { VStack } from "react-native-flex-layout";
 import { useAuth } from "../providers/AuthProvider";
 import { useLocale } from "../providers/LocaleProvider";
 import Page from "../../tmd/components/Page";
+import { navigate } from "../navigations/RootNavigation";
 
 const MainScreen = ({ navigation }: any) => {
   const { user, logout, isLoadingLogout } = useAuth();
@@ -100,31 +101,37 @@ const MainScreen = ({ navigation }: any) => {
       </Button>
 
 
-      <Button onPress={() => {
-        navigation.navigate("ChipScreen");
-      }}>
-        Chip Screen
-      </Button>
+          <Button onPress={() => {
+            navigation.navigate("ChipScreen");
+          }}>
+            Chip Screen
+          </Button>
 
-      <Button onPress={() => {
-        navigation.navigate("OTPScreen");
-      }}>
-        OTP INPUT
-      </Button>
+          <Button onPress={() => {
+            navigation.navigate("OTPScreen");
+          }}>
+            OTP INPUT
+          </Button>
 
-      <Button onPress={() => {
-        navigation.navigate("FormScreen");
-      }}>
-        Form Input
-      </Button>
+          <Button onPress={() => {
+            navigate("ImagePickerScreen");
+          }}>
+            Image Picker
+          </Button>
+
+          <Button onPress={() => {
+            navigation.navigate("FormScreen");
+          }}>
+            Form Input
+          </Button>
 
 
-      <Button
-        onPress={() => {
-          navigation.navigate("LanguageScreen");
-        }}>
-        Language Screen
-      </Button>
+          <Button
+            onPress={() => {
+              navigation.navigate("LanguageScreen");
+            }}>
+            Language Screen
+          </Button>
 
           <Button
             color={"red"}

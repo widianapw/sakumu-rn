@@ -53,7 +53,6 @@ const PermissionProvider = ({ children }: any) => {
     requestMultiple(osPermissions)
       .then((statuses) => {
         const results = osPermissions.map(it => statuses[it] == "granted");
-        console.log(results);
         if (!results.includes(false)) {
           if (onGranted) {
             onGranted();

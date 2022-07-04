@@ -9,13 +9,13 @@ import { useTheme } from "../../../core/theming";
 
 interface Props {
   label?: string;
-  disabled: boolean;
+  disabled?: boolean;
   required?: boolean;
 }
 
 export default function LabelInput({
                                      label,
-                                     disabled,
+                                     disabled=false,
                                      required,
                                      ...props
                                    }: Props & React.ComponentProps<typeof Typography>) {

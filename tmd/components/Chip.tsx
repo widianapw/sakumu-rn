@@ -183,12 +183,13 @@ export default function Chip({
             if (rest.onPickerChanges) {
               rest.onPickerChanges(item);
             }
+            setPickerInitial(item.id)
             setSelectedObj(item);
             setIsSelected(true);
             setIsOpenPicker(false);
           }
         }}
-        initial={pickerInitial}
+        value={pickerInitial}
         data={rest.pickerList}
       />
     }

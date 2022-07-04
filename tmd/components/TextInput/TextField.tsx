@@ -145,7 +145,7 @@ export type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput>
   onOpenPicker?: () => void;
 
 //  label
-  required?: boolean
+  requiredLabel?: boolean
 };
 
 interface CompoundedComponent

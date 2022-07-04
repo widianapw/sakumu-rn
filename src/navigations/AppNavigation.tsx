@@ -48,7 +48,6 @@ const AppNavigation = () => {
         {
           !isAuthenticated &&
           <>
-            <Stack.Screen name={"ImagePickerScreen"} component={ImagePickerScreen} />
             <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
           </>
         }
@@ -56,6 +55,7 @@ const AppNavigation = () => {
           isAuthenticated && (
             <>
               <Stack.Screen name={"MainScreen"} component={MainScreen} />
+              <Stack.Screen name={"ImagePickerScreen"} component={ImagePickerScreen} />
               <Stack.Screen name={"ButtonScreen"} component={ButtonScreen} />
               <Stack.Screen name={"TypographyScreen"} component={TypographyScreen} />
               <Stack.Screen name={"TextFieldScreen"} component={TextFieldScreen} />

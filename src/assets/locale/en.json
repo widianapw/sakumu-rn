@@ -63,6 +63,19 @@
     "start_date": "Start Date",
     "end_date": "End Date",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "pick_from_camera": "Pick from camera",
+    "pick_from_gallery": "Pick from gallery",
+    "pick_image": "Pick Image",
+    "labels": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "country": "Country",
+      "phone_code": "Phone Code",
+      "phone": "Phone",
+      "date": "Date",
+      "time": "Time",
+      "image": "Image"
+    }
   }
 }

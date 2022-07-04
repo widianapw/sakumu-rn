@@ -56,7 +56,7 @@ const PhoneField = ({
     />
 
     <PickerBottomSheet
-      initial={selected}
+      value={selected}
       open={isOpenPicker}
       search={search}
       onClose={() => {
