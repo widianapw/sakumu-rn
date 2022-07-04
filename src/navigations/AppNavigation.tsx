@@ -42,7 +42,7 @@ const AppNavigation = () => {
       theme={NavTheme}>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
         }}
       >
         {

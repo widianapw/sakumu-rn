@@ -6,7 +6,6 @@ import * as React from "react";
 import { useState } from "react";
 import {
   ColorValue,
-  I18nManager,
   Platform,
   Pressable,
   StyleSheet,
@@ -134,7 +133,8 @@ const TextInputFilled = ({
               flexDirection: "row",
               alignItems: "center",
               display: "flex",
-            }]}>
+            }]}
+            >
           {
             rest.search &&
             <View style={{
@@ -187,9 +187,13 @@ const TextInputFilled = ({
           }
 
           <View
+            pointerEvents={
+              editable ? "auto" : "none"
+            }
             style={{
               flexGrow: 1,
               flex: 1,
+
             }}
           >
             {render?.({
@@ -230,9 +234,7 @@ const TextInputFilled = ({
                   textAlignVertical: multiline ? "top" : "center",
                   textAlign: textAlign
                     ? textAlign
-                    : I18nManager.isRTL
-                      ? "right"
-                      : "left",
+                    : "auto",
                 },
                 Platform.OS === "web" && { outline: "none" },
               ],
@@ -388,6 +390,7 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
       borderRightColor: theme.colors.neutral.neutral_40,
       justifyContent: "center",
       alignItems: "center",
+      marginRight: 8,
     }}
   >
     <Pressable

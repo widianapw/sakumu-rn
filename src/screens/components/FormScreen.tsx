@@ -13,6 +13,7 @@ import RHFTextField from "../../../tmd/components/RHF/RHFTextField";
 import RHFSelect from "../../../tmd/components/RHF/RHFSelect";
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
+import Page from "../../../tmd/components/Page";
 
 export default function FormScreen() {
   const schema = yup.object({
@@ -41,76 +42,79 @@ export default function FormScreen() {
 
   const onSubmit = data => console.log(data);
   return (
-    <ScrollView style={{
-      flex: 1,
-    }}>
+    <Page>
 
-      <FormProvider {...method}>
-        <VStack p={16} spacing={16} style={{
-          flex: 1,
-        }}>
-          <View>
-            <RHFTextField
-              label={"First Name"}
-              name={"firstName"}
-              placeholder={"Enter your first name"}
-            />
-          </View>
-          <View>
-            <RHFTextField
-              label={"Last Name"}
-              name={"lastName"}
-              placeholder={"Enter your last name"}
+      <ScrollView style={{
+        flex: 1,
+      }}>
 
-            />
-          </View>
-          <View>
-            <RHFSelect
-              label={"Country"}
-              name={"countryID"}
-              placeholder={"Enter your country"}
-              options={_countries.map(it => {
-                const i: PickerItem = {
-                  id: it.code,
-                  name: it.name,
-                };
-                return i;
-              })}
-            />
-          </View>
+        <FormProvider {...method}>
+          <VStack p={16} spacing={16} style={{
+            flex: 1,
+          }}>
+            <View>
+              <RHFTextField
+                label={"First Name"}
+                name={"firstName"}
+                placeholder={"Enter your first name"}
+              />
+            </View>
+            <View>
+              <RHFTextField
+                label={"Last Name"}
+                name={"lastName"}
+                placeholder={"Enter your last name"}
 
-          <View>
-            <RHFPhoneField
-              name={"phone"}
-              phoneCodeName={"phoneCode"}
-              label={"Phone"}
-              placeholder={"Enter your phone"}
-            />
-          </View>
+              />
+            </View>
+            <View>
+              <RHFSelect
+                label={"Country"}
+                name={"countryID"}
+                placeholder={"Enter your country"}
+                options={_countries.map(it => {
+                  const i: PickerItem = {
+                    id: it.code,
+                    name: it.name,
+                  };
+                  return i;
+                })}
+              />
+            </View>
 
-          <View>
-            <RHFDatePicker
-              name={"date"}
-              label={"Date"}
-              placeholder={"Enter your date"}
-            />
-          </View>
-          <View>
-            <RHFTimePicker
-              name={"time"}
-              label={"Time"}
-              placeholder={"Enter your time"}
-            />
-          </View>
-          <Button
-            containerStyle={{
-              marginTop: 16,
-            }}
-            fullWidth
-            onPress={handleSubmit(onSubmit)}
-          >Submit Form</Button>
-        </VStack>
-      </FormProvider>
-    </ScrollView>
+            <View>
+              <RHFPhoneField
+                name={"phone"}
+                phoneCodeName={"phoneCode"}
+                label={"Phone"}
+                placeholder={"Enter your phone"}
+              />
+            </View>
+
+            <View>
+              <RHFDatePicker
+                name={"date"}
+                label={"Date"}
+                placeholder={"Enter your date"}
+              />
+            </View>
+            <View>
+              <RHFTimePicker
+                name={"time"}
+                label={"Time"}
+                placeholder={"Enter your time"}
+              />
+            </View>
+            <Button
+              containerStyle={{
+                marginTop: 16,
+              }}
+              fullWidth
+              onPress={handleSubmit(onSubmit)}
+            >Submit Form</Button>
+          </VStack>
+        </FormProvider>
+      </ScrollView>
+    </Page>
   );
 }

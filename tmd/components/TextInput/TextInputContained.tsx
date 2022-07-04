@@ -7,7 +7,6 @@ import * as React from "react";
 import { useState } from "react";
 import {
   ColorValue,
-  I18nManager,
   Platform,
   Pressable,
   StyleSheet,
@@ -119,23 +118,6 @@ const TextInputContained = ({
           This is so that the label can overlap the outline
           Otherwise the border will cut off the label on Android
           */}
-        {/*<View*/}
-        {/*  style={[*/}
-        {/*    multiline ? {} : {*/}
-        {/*      height: height ?? MIN_HEIGHT,*/}
-        {/*    },*/}
-        {/*    {*/}
-        {/*      marginTop: 6,*/}
-        {/*      backgroundColor,*/}
-        {/*      borderRadius: shape*/}
-        {/*        ? shape == "rect" ? 10 : 32*/}
-        {/*        : theme?.textInput?.shape == "rect" ? 10 : 32,*/}
-        {/*      borderWidth: 1,*/}
-        {/*      borderColor: hasActiveOutline ? activeColor : outlineColor,*/}
-        {/*    },*/}
-        {/*  ]}*/}
-        {/*>*/}
-
 
         <Pressable
           onPress={() => {
@@ -209,6 +191,9 @@ const TextInputContained = ({
           }
 
           <View
+            pointerEvents={
+              editable ? "auto" : "none"
+            }
             style={{
               flexGrow: 1,
               flex: 1,
@@ -252,9 +237,7 @@ const TextInputContained = ({
                   textAlignVertical: multiline ? "top" : "center",
                   textAlign: textAlign
                     ? textAlign
-                    : I18nManager.isRTL
-                      ? "right"
-                      : "left",
+                    : "auto",
                 },
                 Platform.OS === "web" && { outline: "none" },
               ],
@@ -415,6 +398,7 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
       borderBottomStartRadius: 10,
       justifyContent: "center",
       alignItems: "center",
+      marginRight: 8,
     }}
   >
     <Pressable
