@@ -6,7 +6,6 @@ import * as React from "react";
 import { useState } from "react";
 import {
   ColorValue,
-  I18nManager,
   Platform,
   Pressable,
   StyleSheet,
@@ -235,9 +234,7 @@ const TextInputFilled = ({
                   textAlignVertical: multiline ? "top" : "center",
                   textAlign: textAlign
                     ? textAlign
-                    : I18nManager.isRTL
-                      ? "right"
-                      : "left",
+                    : "auto",
                 },
                 Platform.OS === "web" && { outline: "none" },
               ],
@@ -393,6 +390,7 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
       borderRightColor: theme.colors.neutral.neutral_40,
       justifyContent: "center",
       alignItems: "center",
+      marginRight: 8,
     }}
   >
     <Pressable

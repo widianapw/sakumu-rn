@@ -8,7 +8,6 @@ import type { RenderProps } from "./types";
 import TextInputContained from "./TextInputContained";
 import TextInputFilled from "./TextInputFilled";
 import TextInputOutlined from "./TextInputOutlined";
-import FuckinTextField from "./FuckinTextField";
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -498,7 +497,7 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
 
     if (usedMode === "contained") {
       return (
-        <FuckinTextField
+        <TextInputContained
           disabled={disabled}
           password={password}
           counter={counter}
