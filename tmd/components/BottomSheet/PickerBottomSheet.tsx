@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 interface Props {
   open?: boolean;
   onClose?: () => void;
-  initial?: string;
+  value?: string | number;
   data?: PickerItem[];
   onReset?: () => void;
   onSave?: (item?: PickerItem) => void;
@@ -29,26 +29,36 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
   const modalizeRef = useRef<Modalize>(null);
   const [selected, setSelected] = useState();
   const [list, setList] = useState(props.data);
+  const [searchQuery, setSearchQuery] = useState("");
   const theme = useTheme();
   const { colors } = theme;
   const { t } = useTranslation();
 
   const isFullHeight = props.data?.length >= 6;
 
-  useEffect(() => {
-    // if (props?.initial) {
-    setSelected(props?.initial);
-    // }
-  }, [props.initial]);
+  // useEffect(() => {
+  //   // if (props?.initial) {
+  //   setSelected(props?.value);
+  //   // }
+  // }, [props.value]);
 
   useEffect(() => {
     if (props.open) {
+      setSelected(props?.value);
+      setSearchQuery("");
       modalizeRef?.current?.open();
     } else {
       modalizeRef?.current?.close();
     }
   }, [props.open]);
 
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      setList(props?.data?.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase())));
+    } else {
+      setList(props.data);
+    }
+  }, [searchQuery]);
 
   const renderItem = ({ item }) => {
     return <Pressable
@@ -93,7 +103,7 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
     <Modalize
       adjustToContentHeight={!isFullHeight}
       onClose={() => {
-        setList(props.data);
+        setSearchQuery("");
         if (props.onClose) {
           props.onClose();
         }
@@ -141,11 +151,7 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
                   <TextField
                     shape={"rounded"}
                     onInvokeTextChanged={(text) => {
-                      if (text.length > 0) {
-                        setList(props?.data?.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
-                      } else {
-                        setList(props.data);
-                      }
+                      setSearchQuery(text);
                     }}
                     search
                     placeholder={"Search"}

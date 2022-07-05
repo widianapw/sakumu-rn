@@ -66,7 +66,7 @@ const Select = ({
     />
 
     <PickerBottomSheet
-      initial={selected}
+      value={selected}
       search={search}
       open={isOpen}
       onClose={handleClose}

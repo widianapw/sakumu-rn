@@ -36,8 +36,8 @@ type BSContextType = {
   hideErrorBS: () => void;
   showPermissionBS: (type: PermissionType, props?: ConfirmationBSContext) => void;
   hidePermissionBS: () => void;
-
 }
+
 const initialState: BSContextType = {
   showConfirmationBS: () => {
   },

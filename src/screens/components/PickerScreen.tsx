@@ -55,25 +55,45 @@ export default function PickerScreen() {
         placeholder={"Time Picker"}
       />
 
-      <PhoneField
-        search={true}
-        initialPhoneCode={"62"}
-        placeholder={"Phone"}
-        label={"Phone"}
-        onPhoneCodeChange={(value) => {
-          //get value from this shit
-        }}
-        mode={"contained"} />
+          <PhoneField
+            search={true}
+            initialPhoneCode={"62"}
+            placeholder={"Phone"}
+            label={"Phone"}
+            onPhoneCodeChange={(value) => {
+              //get value from this shit
+            }}
+            mode={"contained"} />
 
-      {/*<PhoneField*/}
-      {/*  search={true}*/}
-      {/*  initialPhoneCode={"62"}*/}
-      {/*  placeholder={"Phone"}*/}
-      {/*  label={"Phone"}*/}
-      {/*  mode={"filled"} />*/}
+          <PhoneField
+            search={true}
+            initialPhoneCode={"62"}
+            placeholder={"Phone"}
+            label={"Phone"}
+            onPhoneCodeChange={(value) => {
+              //get value from this shit
+            }}
+            mode={"filled"} />
 
-      {/*<PhoneField*/}
-      {/*  error*/}
+          <PhoneField
+            search={true}
+            initialPhoneCode={"62"}
+            placeholder={"Phone"}
+            label={"Phone"}
+            onPhoneCodeChange={(value) => {
+              //get value from this shit
+            }}
+            mode={"flat"} />
+
+          {/*<PhoneField*/}
+          {/*  search={true}*/}
+          {/*  initialPhoneCode={"62"}*/}
+          {/*  placeholder={"Phone"}*/}
+          {/*  label={"Phone"}*/}
+          {/*  mode={"filled"} />*/}
+
+          {/*<PhoneField*/}
+          {/*  error*/}
       {/*  errorText={"Must filled"}*/}
       {/*  search={true}*/}
       {/*  initialPhoneCode={"62"}*/}

@@ -63,6 +63,19 @@
     "start_date": "Tanggal Mulai",
     "end_date": "Tanggal Selesai",
     "confirm": "Konfirmasi",
-    "cancel": "Batal"
+    "cancel": "Batal",
+    "pick_from_camera": "Ambil dari kamera",
+    "pick_from_gallery": "Ambil dari galeri",
+    "pick_image": "Ambil Foto",
+    "labels": {
+      "first_name": "Nama Awal",
+      "last_name": "Nama Akhir",
+      "country": "Negara",
+      "phone_code": "Kode Telpon",
+      "phone": "Telepon",
+      "date": "Tanggal",
+      "time": "Waktu",
+      "image": "Foto"
+    }
   }
 }

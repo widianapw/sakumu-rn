@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 27/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView } from "react-native";
 import { VStack } from "react-native-flex-layout";
 import useFeaturedCatalogQuery from "../../../services/catalog/useFeaturedCatalogQuery";
@@ -12,9 +12,9 @@ import Page from "../../../../tmd/components/Page";
 
 export default function FetchDataScreen() {
   const { catalogs, isLoadingCatalog, refetch, isRefetching } = useFeaturedCatalogQuery();
+
   return (
     <Page>
-
       <ScrollView>
         <VStack p={16}>
           {

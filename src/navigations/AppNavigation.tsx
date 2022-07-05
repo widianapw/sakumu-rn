@@ -24,6 +24,7 @@ import FormScreen from "../screens/components/FormScreen";
 import { navigationRef } from "./RootNavigation";
 import LoginScreen from "../screens/components/LoginScreen";
 import { useAuth } from "../providers/AuthProvider";
+import ImagePickerScreen from "../screens/components/ImagePickerScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -46,12 +47,15 @@ const AppNavigation = () => {
       >
         {
           !isAuthenticated &&
-          <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
+          <>
+            <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
+          </>
         }
         {
           isAuthenticated && (
             <>
               <Stack.Screen name={"MainScreen"} component={MainScreen} />
+              <Stack.Screen name={"ImagePickerScreen"} component={ImagePickerScreen} />
               <Stack.Screen name={"ButtonScreen"} component={ButtonScreen} />
               <Stack.Screen name={"TypographyScreen"} component={TypographyScreen} />
               <Stack.Screen name={"TextFieldScreen"} component={TextFieldScreen} />

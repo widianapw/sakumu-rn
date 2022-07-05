@@ -22,7 +22,7 @@ const Icon = ({
                 source = "ionicons", icon, size = 22, color, style,
               }: IconProps) => {
   const theme = useTheme();
-  const defaultColor = theme.colors.neutral.neutral_80;
+  const defaultColor = theme.colors.neutral.neutral_90;
   return <View>
     {
       source == "material-community" &&

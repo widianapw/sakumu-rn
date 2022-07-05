@@ -29,7 +29,7 @@ const TextFieldScreen = () => {
             <DEF />
 
             <TextInput
-              required
+              requiredLabel
               mode={"flat"}
               label="Search"
               placeholder={"Search"}
@@ -37,7 +37,7 @@ const TextFieldScreen = () => {
             />
 
             <TextInput
-              required
+              requiredLabel
               mode={"flat"}
               password
               label="Password"
@@ -64,7 +64,7 @@ const TextFieldScreen = () => {
             />
 
             <TextInput
-              required
+              requiredLabel
               mode={"contained"}
               label="Email"
               placeholder={"Email"}
@@ -112,10 +112,10 @@ const TextFieldScreen = () => {
               placeholder={"Filled"}
             />
 
-          </VStack>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </Page>
+          </VStack >
+        </ScrollView >
+      </KeyboardAvoidingView >
+    </Page >
   )
 };
 

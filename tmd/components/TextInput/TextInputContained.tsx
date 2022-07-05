@@ -399,7 +399,7 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
       borderBottomStartRadius: 10,
       justifyContent: "center",
       alignItems: "center",
-      marginRight: 8,
+      marginRight: 4,
     }}
   >
     <Pressable

@@ -391,7 +391,7 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
       borderRightColor: theme.colors.neutral.neutral_40,
       justifyContent: "center",
       alignItems: "center",
-      marginRight: 8,
+      marginRight: 4,
     }}
   >
     <Pressable
