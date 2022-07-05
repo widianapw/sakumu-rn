@@ -3,11 +3,12 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Box, VStack } from "react-native-flex-layout";
 import { Checkbox, RadioButton, Switch } from "../../../tmd";
 import RadioButtonGroup from "../../../tmd/components/RadioButton/RadioButtonGroup";
 import Page from "../../../tmd/components/Page";
+import RNSwitch from "../../../tmd/components/Switch/RNSwitch";
 
 export default function SelectorScreen() {
   const [isChecked, setIsChecked] = useState(true);

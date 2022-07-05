@@ -176,7 +176,6 @@ const Checkbox = ({
         style={styles.container}
         testID={testID}
       >
-        <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
           <View style={[{
             backgroundColor: bgColor,
             borderRadius: roundness,
@@ -206,16 +205,6 @@ const Checkbox = ({
               />
             }
           </View>
-          <View style={[StyleSheet.absoluteFill, styles.fillContainer]}>
-            <Animated.View
-              style={[
-                styles.fill,
-                { borderColor: checkboxColor },
-                { borderWidth },
-              ]}
-            />
-          </View>
-        </Animated.View>
       </TouchableRipple>
       {
         rest?.text &&

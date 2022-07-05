@@ -24,7 +24,7 @@ export { default as ProgressBar } from "./components/ProgressBar";
 export { default as RadioButton } from "./components/RadioButton";
 export { default as Snackbar } from "./components/Snackbar";
 export { default as Surface } from "./components/Surface";
-export { default as Switch } from "./components/Switch";
+export { default as Switch } from "./components/Switch/Switch";
 export { default as TouchableRipple } from "./components/TouchableRipple/TouchableRipple";
 export { default as TextInput } from "./components/TextInput/TextField";
 export { default as Icon } from "./components/Icon";

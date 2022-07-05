@@ -125,6 +125,8 @@ To keep an application scalable and organized, the global static resources that 
   - TimePicker
   - MapPicker
   - PhoneField
+  - ImagePicker
+  - MultiImagePicker
 - Portal
 - RadioButton
 - RHF: (react-hook-form)
