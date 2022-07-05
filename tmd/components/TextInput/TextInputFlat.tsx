@@ -78,7 +78,7 @@ const TextInputFlat = ({
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
-
+  const fontSize = fontSizeStyle
 
   let inputTextColor,
     activeColor,
@@ -131,7 +131,7 @@ const TextInputFlat = ({
             label={label}
             type={"label1"}
             style={{ marginBottom: 4 }}
-            required={rest.requiredLabel}
+            required={rest.required}
           />
         }
         <Pressable
@@ -228,28 +228,9 @@ const TextInputFlat = ({
                   ]}
                 >
 
-                  {!isAndroid && multiline && label && (
-                    // Workaround for: https://github.com/callstack/react-native-paper/issues/2799
-                    // Patch for a multiline TextInput with fixed height, which allow to avoid covering input label with its value.
-                    <View
-                      testID="patch-container"
-                      pointerEvents="none"
-                      style={[
-                        StyleSheet.absoluteFill,
-                        dense ? styles.densePatchContainer : styles.patchContainer,
-                        {
-                          backgroundColor:
-                            viewStyle.backgroundColor || containerStyle.backgroundColor,
-                          left: 0,
-                          right: 0,
-                        },
-                      ]}
-                    >
-                    </View>
-                  )}
                   {/*<InputLabel parentState={parentState} labelProps={labelProps} />*/}
                   {render?.({
-                    testID: "text-input-flat",
+                    testID: "text-input-filled",
                     secureTextEntry: !isShowPassword,
                     maxLength: maxLength,
                     value: value,
@@ -280,6 +261,7 @@ const TextInputFlat = ({
                       // paddingFlat,
                       {
                         ...font,
+                        fontSize,
                         fontWeight,
                         color: inputTextColor,
                         display: "flex",

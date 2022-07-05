@@ -38,84 +38,84 @@ const TextFieldScreen = () => {
 
             <TextInput
               requiredLabel
-          mode={"flat"}
-          password
-          label="Password"
-          placeholder={"password"}
-        />
+              mode={"flat"}
+              password
+              label="Password"
+              placeholder={"password"}
+            />
 
-        <TextInput
-          mode={"flat"}
-          label="Counter"
-          counter
-          multiline
-          numberOfLines={3}
-          maxLength={300}
-          placeholder={"Counter"}
-        />
+            <TextInput
+              mode={"flat"}
+              label="Counter"
+              counter
+              multiline
+              numberOfLines={3}
+              maxLength={300}
+              placeholder={"Counter"}
+            />
 
 
-        <TextInput
-          maxLength={8}
-          counter
-          label="Counter"
-          keyboardType={"numeric"}
-          placeholder={"counter"}
-        />
+            <TextInput
+              maxLength={8}
+              counter
+              label="Counter"
+              keyboardType={"numeric"}
+              placeholder={"counter"}
+            />
 
-        <TextInput
-          requiredLabel
-          mode={"contained"}
-          label="Email"
-          placeholder={"Email"}
-        />
+            <TextInput
+              requiredLabel
+              mode={"contained"}
+              label="Email"
+              placeholder={"Email"}
+            />
 
-        <TextInput
-          style={{
-            marginTop: 4,
-          }}
-          password
-          mode={"contained"}
-          label="Password"
-          placeholder={"Password"}
-        />
+            <TextInput
+              style={{
+                marginTop: 4,
+              }}
+              password
+              mode={"contained"}
+              label="Password"
+              placeholder={"Password"}
+            />
 
-        <TextField
-          mode={"contained"}
-          label="Search"
-          shape={"rect"}
-          placeholder={"Search"}
-          search
-        />
+            <TextField
+              mode={"contained"}
+              label="Search"
+              shape={"rect"}
+              placeholder={"Search"}
+              search
+            />
 
-        <TextField
-          search
-          mode={"filled"}
-          label="Filled"
-          shape={"rect"}
-          placeholder={"Filled"}
-        />
+            <TextField
+              search
+              mode={"filled"}
+              label="Filled"
+              shape={"rect"}
+              placeholder={"Filled"}
+            />
 
-        <TextField
-          mode={"filled"}
-          label="Filled"
-          shape={"rect"}
-          placeholder={"Filled"}
-        />
+            <TextField
+              mode={"filled"}
+              label="Filled"
+              shape={"rect"}
+              placeholder={"Filled"}
+            />
 
-        <TextField
-          error={true}
-          errorText={"Please input this field"}
-          mode={"filled"}
-          label="Filled"
-          shape={"rect"}
-          placeholder={"Filled"}
-        />
+            <TextField
+              error={true}
+              errorText={"Please input this field"}
+              mode={"filled"}
+              label="Filled"
+              shape={"rect"}
+              placeholder={"Filled"}
+            />
 
-          </VStack>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </Page>
+          </VStack >
+        </ScrollView >
+      </KeyboardAvoidingView >
+    </Page >
   )
 };
 
