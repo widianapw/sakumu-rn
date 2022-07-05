@@ -259,40 +259,39 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
 
             </View>
 
-            <View style={{ flex: 1 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                }}>
-                <IconButton
-                  themeSize={"lg"}
-                  variant={"tertiary"}
-                  color={theme.colors.neutral.neutral_80}
-                  style={{
-                    margin: 16,
-                    elevation: 8,
-                  }}
-                  onPress={() => {
-                    setIsModalOpen(false);
-                  }}
-                  icon={"arrow-back"}
-                />
-                <View style={{ flexGrow: 1 }} />
-                <IconButton
-                  themeSize={"lg"}
-                  color={theme.colors.neutral.neutral_80}
-                  variant={"tertiary"}
-                  style={{
-                    elevation: 8,
-                    margin: 16,
-                  }}
-                  onPress={() => {
-                    getUserCurrentLocation();
-                  }}
-                  icon={"locate"}
-                />
 
-              </View>
+            <View
+              style={{
+                flexDirection: "row",
+              }}>
+              <IconButton
+                themeSize={"lg"}
+                variant={"tertiary"}
+                color={theme.colors.neutral.neutral_80}
+                style={{
+                  margin: 16,
+                  elevation: 8,
+                }}
+                onPress={() => {
+                  setIsModalOpen(false);
+                }}
+                icon={"arrow-back"}
+              />
+              <View style={{ flexGrow: 1 }} />
+              <IconButton
+                themeSize={"lg"}
+                color={theme.colors.neutral.neutral_80}
+                variant={"tertiary"}
+                style={{
+                  elevation: 8,
+                  margin: 16,
+                }}
+                onPress={() => {
+                  getUserCurrentLocation();
+                }}
+                icon={"locate"}
+              />
+
             </View>
           </View>
         </SafeAreaView>
