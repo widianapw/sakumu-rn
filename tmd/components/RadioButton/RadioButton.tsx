@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Platform, StyleProp, TextStyle, View, ViewStyle } from "react-native";
+import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import RadioButtonAndroid from "./RadioButtonAndroid";
-import RadioButtonIOS from "./RadioButtonIOS";
 import { useTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
 import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
@@ -92,10 +91,7 @@ export type Props = {
  */
 const RadioButton = ({ onPress, value, ...props }: Props) => {
   const theme = useTheme();
-  const Button = Platform.select({
-    default: RadioButtonAndroid,
-    ios: RadioButtonIOS,
-  });
+  const Button = RadioButtonAndroid;
 
   const parentComponentStyle: StyleProp<ViewStyle> = [{
     flexDirection: "row",
