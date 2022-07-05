@@ -173,9 +173,6 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
                   marginBottom: 52
                 }}>
                   <Image
-                    style={{
-                      height: 60
-                    }}
                     source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
                 </View>
 
