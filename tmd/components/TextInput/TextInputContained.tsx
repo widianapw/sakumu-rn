@@ -145,6 +145,7 @@ const TextInputContained = ({
               justifyContent: "center",
               alignItems: "center",
               display: "flex",
+              marginRight:Platform.OS == "ios" ? 8 : 0
             }}>
               <Icon icon={"search"} size={20} color={colors.neutral.neutral_70} />
             </View>

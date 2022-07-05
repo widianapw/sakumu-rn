@@ -11,6 +11,7 @@ import IllustLocationPermission from "../../src/assets/illusts/permission_locati
 import IllustCameraPermission from "../../src/assets/illusts/permission_camera.svg";
 import { openSettings } from "react-native-permissions";
 import { useTranslation } from "react-i18next";
+import { Linking } from "react-native";
 
 export type PermissionType =
   "camera" | "storage" | "location" | "bluetooth" | "another";
@@ -103,6 +104,11 @@ const BottomSheetProvider = ({ children }: any) => {
     setIsOpenError(false);
   };
 
+  const openSetting = () => {
+    console.log('open setting from here')
+    Linking.openSettings()
+  }
+
   const showPermissionBS = (type: PermissionType, props?: ConfirmationBSContext) => {
     if (type != "another") {
       let data: ConfirmationBSContext;
@@ -112,7 +118,7 @@ const BottomSheetProvider = ({ children }: any) => {
             imageNode: <IllustCameraPermission />,
             title: t("permissions.camera_title"),
             description: t("permissions.camera_description"),
-            buttonPrimaryAction: openSettings,
+            buttonPrimaryAction: openSetting,
             buttonPrimaryTitle: t("allow"),
             buttonSecondary: true,
             buttonSecondaryTitle: t("back"),
@@ -124,7 +130,7 @@ const BottomSheetProvider = ({ children }: any) => {
           data = {
             title: t("permissions.bluetooth_title"),
             description: t("permissions.bluetooth_description"),
-            buttonPrimaryAction: openSettings,
+            buttonPrimaryAction: openSetting,
             buttonPrimaryTitle: t("allow"),
             buttonSecondary: true,
             buttonSecondaryTitle: t("back"),
@@ -137,7 +143,7 @@ const BottomSheetProvider = ({ children }: any) => {
             imageNode: <IllustLocationPermission />,
             title: t("permissions.bluetooth_title"),
             description: t("permissions.bluetooth_description"),
-            buttonPrimaryAction: openSettings,
+            buttonPrimaryAction: openSetting,
             buttonPrimaryTitle: t("allow"),
             buttonSecondary: true,
             buttonSecondaryTitle: t("back"),
@@ -150,7 +156,7 @@ const BottomSheetProvider = ({ children }: any) => {
             imageNode: <IllustLocationPermission />,
             title: t("permissions.storage_title"),
             description: t("permissions.storage_description"),
-            buttonPrimaryAction: openSettings,
+            buttonPrimaryAction: openSetting,
             buttonPrimaryTitle: t("allow"),
             buttonSecondary: true,
             buttonSecondaryTitle: t("back"),
