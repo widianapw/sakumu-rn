@@ -94,7 +94,6 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
   }, []);
 
   useEffect(() => {
-    console.log(initial);
     if (initial?.location) {
       setAddressObj({
         formattedAddress: initial?.fullAddress,
@@ -169,9 +168,12 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
             }}>
               <View style={{
                 zIndex: 200,
-                marginBottom: 52,
+                marginBottom:52
               }}>
                 <Image
+                  style={{
+                    height:60
+                  }}
                   source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
               </View>
 
