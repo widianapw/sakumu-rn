@@ -6,7 +6,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import TextField from "../TextInput/TextField";
 import Icon from "../Icon";
-import { Image, Modal, View } from "react-native";
+import { Image, Modal, SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { Button, useTheme } from "../../index";
 import IconButton from "../IconButton";
@@ -143,159 +143,163 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
         transparent={false}
         visible={isModalOpen}
       >
-        <View style={{
-          position: "relative",
-          flexGrow: 1,
-        }}>
-
-
-          <View
-            style={{
-              position: "absolute",
-              flex: 1,
-              top: 0,
-              bottom: 120,
-              left: 0,
-              right: 0,
-            }}
-          >
-
-            <View style={{
-              position: "relative",
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-              <View style={{
-                zIndex: 200,
-                marginBottom:52
-              }}>
-                <Image
-                  style={{
-                    height:60
-                  }}
-                  source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
-              </View>
-
-              <MapView
-                showsCompass={false}
-                style={{
-                  position: "absolute",
-                  top: 0, bottom: 0, left: 0, right: 0,
-                }}
-                ref={mapRef}
-                showsUserLocation={true}
-                showsMyLocationButton={false}
-                onRegionChangeComplete={(r, d) => {
-                  // console.log(r)
-                  handleAddressChange(r.latitude, r.longitude);
-                }}
-              >
-
-              </MapView>
-            </View>
-
-          </View>
+        <SafeAreaView style={{ flex: 1 }}>
 
           <View style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: 16,
-            zIndex: 50,
-            backgroundColor: "white",
-            borderTopStartRadius: 16,
-            borderTopEndRadius: 16,
+            position: "relative",
+            flexGrow: 1,
           }}>
-            <VStack>
 
-              <HStack justify={"between"} items={"center"}>
-                <Typography type={"title1"}>Select Location</Typography>
-                <Button
-                  variant={"secondary"}
-                  size={"sm"}
-                  shape={"rounded"}
-                  onPress={() => {
-                    openSearchModal();
-                  }}
-                >Search</Button>
-              </HStack>
 
-              <VStack style={{
-                marginTop: 16,
-              }}>
-                <HStack items={"center"}>
-                  <Icon icon={"location-sharp"} size={16} color={theme.colors.primary.main} />
-                  <Typography
-                    style={{ fontWeight: "600" }}
-                    type={"title3"}>{addressObj?.feature ?? addressObj?.streetName ?? "-"}</Typography>
-                </HStack>
-                <Typography
-                  type={"body2"}
-                  style={{ marginTop: 4 }}
-                >{addressObj?.formattedAddress}</Typography>
-              </VStack>
-
-              <Button
-                onPress={() => {
-                  const dataToSend: SelectedMap = {
-                    fullAddress: addressObj?.formattedAddress,
-                    location: {
-                      latitude: addressObj?.position?.lat,
-                      longitude: addressObj?.position?.lng,
-                    },
-                    nameAddress: addressObj?.feature ?? addressObj?.streetName ?? "",
-                  };
-                  if (onSelected) {
-                    setSavedMap(dataToSend);
-                    onSelected(dataToSend);
-                    // console.log(dataToSend);
-                    setIsModalOpen(false);
-                  }
-                }}
-                style={{ marginTop: 16 }}
-                fullWidth size={"md"}>Save</Button>
-            </VStack>
-
-          </View>
-
-          <View style={{ flex: 1 }}>
             <View
               style={{
-                flexDirection: "row",
+                position: "absolute",
+                flex: 1,
+                top: 0,
+                bottom: 120,
+                left: 0,
+                right: 0,
+              }}
+            >
+
+              <View style={{
+                position: "relative",
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
               }}>
-              <IconButton
-                themeSize={"lg"}
-                variant={"tertiary"}
-                color={theme.colors.neutral.neutral_80}
-                style={{
-                  margin: 16,
-                  elevation: 8,
-                }}
-                onPress={() => {
-                  setIsModalOpen(false);
-                }}
-                icon={"arrow-back"}
-              />
-              <View style={{ flexGrow: 1 }} />
-              <IconButton
-                themeSize={"lg"}
-                color={theme.colors.neutral.neutral_80}
-                variant={"tertiary"}
-                style={{
-                  elevation: 8,
-                  margin: 16,
-                }}
-                onPress={() => {
-                  getUserCurrentLocation();
-                }}
-                icon={"locate"}
-              />
+                <View style={{
+                  zIndex: 200,
+                  marginBottom: 52
+                }}>
+                  <Image
+                    style={{
+                      height: 60
+                    }}
+                    source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
+                </View>
+
+                <MapView
+                  showsCompass={false}
+                  style={{
+                    position: "absolute",
+                    top: 0, bottom: 0, left: 0, right: 0,
+                  }}
+                  ref={mapRef}
+                  showsUserLocation={true}
+                  showsMyLocationButton={false}
+                  onRegionChangeComplete={(r, d) => {
+                    // console.log(r)
+                    handleAddressChange(r.latitude, r.longitude);
+                  }}
+                >
+
+                </MapView>
+              </View>
 
             </View>
+
+            <View style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: 16,
+              zIndex: 50,
+              backgroundColor: "white",
+              borderTopStartRadius: 16,
+              borderTopEndRadius: 16,
+            }}>
+              <VStack>
+
+                <HStack justify={"between"} items={"center"}>
+                  <Typography type={"title1"}>Select Location</Typography>
+                  <Button
+                    variant={"secondary"}
+                    size={"sm"}
+                    shape={"rounded"}
+                    onPress={() => {
+                      openSearchModal();
+                    }}
+                  >Search</Button>
+                </HStack>
+
+                <VStack style={{
+                  marginTop: 16,
+                }}>
+                  <HStack items={"center"}>
+                    <Icon icon={"location-sharp"} size={16} color={theme.colors.primary.main} />
+                    <Typography
+                      style={{ fontWeight: "600" }}
+                      type={"title3"}>{addressObj?.feature ?? addressObj?.streetName ?? "-"}</Typography>
+                  </HStack>
+                  <Typography
+                    type={"body2"}
+                    style={{ marginTop: 4 }}
+                  >{addressObj?.formattedAddress}</Typography>
+                </VStack>
+
+                <Button
+                  onPress={() => {
+                    const dataToSend: SelectedMap = {
+                      fullAddress: addressObj?.formattedAddress,
+                      location: {
+                        latitude: addressObj?.position?.lat,
+                        longitude: addressObj?.position?.lng,
+                      },
+                      nameAddress: addressObj?.feature ?? addressObj?.streetName ?? "",
+                    };
+                    if (onSelected) {
+                      setSavedMap(dataToSend);
+                      onSelected(dataToSend);
+                      // console.log(dataToSend);
+                      setIsModalOpen(false);
+                    }
+                  }}
+                  style={{ marginTop: 16 }}
+                  fullWidth size={"md"}>Save</Button>
+              </VStack>
+
+            </View>
+
+            <View style={{ flex: 1 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                }}>
+                <IconButton
+                  themeSize={"lg"}
+                  variant={"tertiary"}
+                  color={theme.colors.neutral.neutral_80}
+                  style={{
+                    margin: 16,
+                    elevation: 8,
+                  }}
+                  onPress={() => {
+                    setIsModalOpen(false);
+                  }}
+                  icon={"arrow-back"}
+                />
+                <View style={{ flexGrow: 1 }} />
+                <IconButton
+                  themeSize={"lg"}
+                  color={theme.colors.neutral.neutral_80}
+                  variant={"tertiary"}
+                  style={{
+                    elevation: 8,
+                    margin: 16,
+                  }}
+                  onPress={() => {
+                    getUserCurrentLocation();
+                  }}
+                  icon={"locate"}
+                />
+
+              </View>
+            </View>
           </View>
-        </View>
+        </SafeAreaView>
+
       </Modal>
     </>
   );
