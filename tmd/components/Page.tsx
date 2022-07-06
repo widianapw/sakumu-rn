@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { KeyboardAvoidingView, SafeAreaView, StatusBar } from "react-native";
+import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar } from "react-native";
 import { useTheme } from "../core/theming";
 
 export default function Page({ children }: any) {
