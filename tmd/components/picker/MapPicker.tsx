@@ -3,20 +3,8 @@
  * Copyright (c) 2022 - Made with love
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import TextField from "../TextInput/TextField";
-import Icon from "../Icon";
-import { Image, Modal, SafeAreaView, View } from "react-native";
-import Typography from "../Typography/Typography";
-import { Button, useTheme } from "../../index";
-import IconButton from "../IconButton";
-import MapView from "react-native-maps";
-import { HStack, VStack } from "react-native-flex-layout";
-import Geocoder, { GeocodingObject } from "@timwangdev/react-native-geocoder";
-import RNGooglePlaces from "react-native-google-places";
-import { PERMISSIONS, requestMultiple } from "react-native-permissions";
-import Geolocation from "react-native-geolocation-service";
-import Config from "react-native-config";
 import MapPickerModal from "./MapPickerModal";
 import { usePermission } from "../../providers/PermissionProvider";
 import { LOCATION_PERMISSIONS } from "../../data/_permissionTypes";

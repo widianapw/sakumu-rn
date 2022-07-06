@@ -120,7 +120,7 @@ export default function ImagePicker({
   return (
     <>
       <ImageViewerModal
-        images={[selectedImageUrl]}
+        images={[selectedImageUrl??""]}
         onClose={() => {
         setIsShowViewer(false)
       }} open={isShowViewer}/>

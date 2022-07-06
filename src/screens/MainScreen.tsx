@@ -4,9 +4,8 @@
  */
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
-import { Button } from "../../tmd";
+import { Button, Stack } from "../../tmd";
 import Typography from "../../tmd/components/Typography/Typography";
-import { VStack } from "react-native-flex-layout";
 import { useAuth } from "../providers/AuthProvider";
 import { useLocale } from "../providers/LocaleProvider";
 import Page from "../../tmd/components/Page";
@@ -20,65 +19,67 @@ const MainScreen = ({ navigation }: any) => {
 
   return (
     <Page>
-
-      <ScrollView>
-        <VStack
+      <ScrollView style={{ flex: 1 }}>
+        <Stack
           spacing={16}
           p={16}
-          center
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <Typography>Welcome, {user?.name}</Typography>
           <Typography>{momentLocale.format("DD MMMM YYYY")}</Typography>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("ButtonScreen");
-        }}
-      >
-        Button
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("ButtonScreen");
+            }}
+          >
+            Button
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("TypographyScreen");
-        }}
-      >
-        Typography
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("TypographyScreen");
+            }}
+          >
+            Typography
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("TextFieldScreen");
-        }}
-      >
-        TextField
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("TextFieldScreen");
+            }}
+          >
+            TextField
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("PickerScreen");
-        }}
-      >
-        Picker
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("PickerScreen");
+            }}
+          >
+            Picker
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigation.navigate("BottomSheetScreen");
-        }}
-      >
-        Bottom Sheet
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("BottomSheetScreen");
+            }}
+          >
+            Bottom Sheet
+          </Button>
 
-      <Button onPress={() => {
-        navigation.navigate("TagScreen");
+          <Button onPress={() => {
+            navigate("TagScreen");
       }}>
         Tag
       </Button>
 
       <Button
         onPress={() => {
-          navigation.navigate("AlertScreen");
+          navigate("AlertScreen");
         }}
       >
         Alert
@@ -86,7 +87,7 @@ const MainScreen = ({ navigation }: any) => {
 
       <Button
         onPress={() => {
-          navigation.navigate("SelectorScreen");
+          navigate("SelectorScreen");
         }}
       >
         Selector
@@ -94,7 +95,7 @@ const MainScreen = ({ navigation }: any) => {
 
       <Button
         onPress={() => {
-          navigation.navigate("APIScreen");
+          navigate("APIScreen");
         }}
       >
         API Screen
@@ -102,13 +103,13 @@ const MainScreen = ({ navigation }: any) => {
 
 
           <Button onPress={() => {
-            navigation.navigate("ChipScreen");
+            navigate("ChipScreen");
           }}>
             Chip Screen
           </Button>
 
           <Button onPress={() => {
-            navigation.navigate("OTPScreen");
+            navigate("OTPScreen");
           }}>
             OTP INPUT
           </Button>
@@ -120,7 +121,13 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
-            navigation.navigate("FormScreen");
+            navigate("LayoutScreen");
+          }}>
+            Layout Screen
+          </Button>
+
+          <Button onPress={() => {
+            navigate("FormScreen");
           }}>
             Form Input
           </Button>
@@ -128,7 +135,7 @@ const MainScreen = ({ navigation }: any) => {
 
           <Button
             onPress={() => {
-              navigation.navigate("LanguageScreen");
+              navigate("LanguageScreen");
             }}>
             Language Screen
           </Button>
@@ -140,7 +147,7 @@ const MainScreen = ({ navigation }: any) => {
           >
             Logout
           </Button>
-        </VStack>
+        </Stack>
 
       </ScrollView>
     </Page>

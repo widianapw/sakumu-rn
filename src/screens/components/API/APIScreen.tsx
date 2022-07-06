@@ -4,11 +4,11 @@
  */
 import React from "react";
 import { SafeAreaView, ScrollView } from "react-native";
-import { VStack } from "react-native-flex-layout";
 import { Button } from "../../../../tmd";
 import useCredentialService from "../../../services/credential/useCredentialService";
 import { navigate } from "../../../navigations/RootNavigation";
 import Page from "../../../../tmd/components/Page";
+import Stack from "../../../../tmd/components/Layout/Stack";
 
 export default function APIScreen() {
   const { checkCredential, isLoadingCheckCredential } = useCredentialService();
@@ -21,7 +21,7 @@ export default function APIScreen() {
     <Page>
 
       <ScrollView>
-        <VStack p={16} spacing={16}>
+        <Stack p={16} spacing={16}>
           <Button
             onPress={() => {
               navigate("FetchDataScreen");
@@ -39,7 +39,7 @@ export default function APIScreen() {
             onPress={handlePost}>
             POST / PATCH API
           </Button>
-        </VStack>
+        </Stack>
       </ScrollView>
     </Page>
   );

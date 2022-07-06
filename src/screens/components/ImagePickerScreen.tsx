@@ -6,14 +6,14 @@ import React from "react";
 import Page from "../../../tmd/components/Page";
 import { ScrollView } from "react-native";
 import ImagePicker from "../../../tmd/components/picker/ImagePicker";
-import { VStack } from "react-native-flex-layout";
 import MultiImagePicker from "../../../tmd/components/picker/MultiImagePicker";
+import { Stack } from "../../../tmd";
 
 export default function ImagePickerScreen() {
   return (
     <Page>
       <ScrollView>
-        <VStack p={16}>
+        <Stack p={16}>
           <ImagePicker
             label={"Select Image"}
             description={"Pick an image from your camera roll"}
@@ -35,7 +35,7 @@ export default function ImagePickerScreen() {
             }}
           />
 
-        </VStack>
+        </Stack>
       </ScrollView>
     </Page>
   );

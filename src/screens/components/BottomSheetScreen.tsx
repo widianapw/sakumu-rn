@@ -4,8 +4,7 @@
  */
 import React, { useState } from "react";
 import { Alert, ScrollView } from "react-native";
-import { VStack } from "react-native-flex-layout";
-import { Button } from "../../../tmd";
+import { Button, Stack } from "../../../tmd";
 import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
 import DateFilterBottomSheet, { DateFilterPayload } from "../../../tmd/components/BottomSheet/DateFilterBottomSheet";
@@ -70,12 +69,13 @@ export default function BottomSheetScreen() {
             setIsShowDateFilter(false);
           }} />
         <ScrollView>
-          <VStack spacing={16} style={{
+          <Stack spacing={16} style={{
             padding: 16,
           }}>
             <Button onPress={() => {
               handleShowAlert();
             }}>Alert / Error BottomSheet</Button>
+
             <Button onPress={() => {
               handleShowConfirmation();
             }}
@@ -106,7 +106,7 @@ export default function BottomSheetScreen() {
             >
               PERMISSIONS (REJECT)
             </Button>
-          </VStack>
+          </Stack>
         </ScrollView>
       </Page>
     </>

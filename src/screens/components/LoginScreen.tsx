@@ -4,13 +4,13 @@
  */
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { VStack } from "react-native-flex-layout";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button, RHFPhoneField, RHFTextField } from "../../../tmd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../providers/AuthProvider";
 import Page from "../../../tmd/components/Page";
+import Stack from "../../../tmd/components/Layout/Stack";
 
 export default function LoginScreen() {
   const { login, isLoadingLogin } = useAuth();
@@ -39,7 +39,7 @@ export default function LoginScreen() {
         flex: 1,
       }}>
         <FormProvider {...method}>
-          <VStack p={16} spacing={16} style={{
+          <Stack p={16} spacing={16} style={{
             flex: 1,
           }}>
             <View>
@@ -67,7 +67,7 @@ export default function LoginScreen() {
               }}
               fullWidth
             >Login</Button>
-          </VStack>
+          </Stack>
         </FormProvider>
       </ScrollView>
     </Page>

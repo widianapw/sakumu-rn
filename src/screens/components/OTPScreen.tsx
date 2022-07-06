@@ -4,16 +4,20 @@
  */
 import React from "react";
 import { ScrollView } from "react-native";
-import { VStack } from "react-native-flex-layout";
 import OTPInput from "../../../tmd/components/Otp/OTPInput";
 import Page from "../../../tmd/components/Page";
+import Stack from "../../../tmd/components/Layout/Stack";
 
 export default function OTPScreen() {
   return (
     <Page>
 
       <ScrollView>
-        <VStack spacing={16} p={16}>
+        <Stack
+          spacing={16}
+          style={{
+            padding: 16,
+          }}>
           <OTPInput
             pinCount={5} />
 
@@ -24,7 +28,7 @@ export default function OTPScreen() {
           <OTPInput
             mode={"contained"}
             pinCount={5} />
-        </VStack>
+        </Stack>
       </ScrollView>
     </Page>
   );

@@ -8,8 +8,7 @@ import { Portal } from "react-native-portalize";
 import { SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { useTheme } from "../../core/theming";
-import { Button } from "../../index";
-import { HStack, VStack } from "react-native-flex-layout";
+import { Button, Stack } from "../../index";
 import { useTranslation } from "react-i18next";
 
 export interface BSProps {
@@ -59,62 +58,71 @@ export default function AlertBottomSheet(props: BSProps) {
         onClose={props.onClose}
         ref={modalizeRef}
       >
-        <SafeAreaView style={{flex:1}}>
+        <SafeAreaView style={{ flex: 1 }}>
 
-        <View style={{
-          flexDirection: "column",
-          paddingVertical: 16,
-        }}>
-          <VStack justify={"center"} items={"center"}>
-            {
-              props.imageNode &&
-              <View style={{ paddingBottom: 16 }}>
-                {
-                  props.imageNode
-                }
-              </View>
-            }
-            {
-              props.title &&
-              <Typography type={"title2"} style={{ textAlign: "center" }}>{props.title}</Typography>
-            }
-            {
-              props.description &&
-              <Typography type={"body2"} style={{
-                color: theme.colors.neutral.neutral_80, textAlign: "center",
-                marginTop: 8,
+          <View style={{
+            flexDirection: "column",
+            paddingVertical: 16,
+          }}>
+            <Stack style={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+              {
+                props.imageNode &&
+                <View style={{ paddingBottom: 16 }}>
+                  {
+                    props.imageNode
+                  }
+                </View>
+              }
+              {
+                props.title &&
+                <Typography type={"title2"} style={{ textAlign: "center" }}>{props.title}</Typography>
+              }
+              {
+                props.description &&
+                <Typography type={"body2"} style={{
+                  color: theme.colors.neutral.neutral_80, textAlign: "center",
+                  marginTop: 8,
 
-              }}>{props.description}</Typography>
-            }
-          </VStack>
-          <HStack spacing={16} mt={18}>
-            {
-              props.buttonSecondary &&
+                }}>{props.description}</Typography>
+              }
+            </Stack>
+            <Stack
+              direction={"row"}
+              spacing={16}
+              style={{
+                marginTop: 18,
+              }}>
+              {
+                props.buttonSecondary &&
+                <Button
+                  fullWidth
+                  variant={"secondary"}
+                  onPress={() => {
+                    if (props.buttonSecondaryAction) {
+                      props.buttonSecondaryAction();
+                    } else {
+                      handleClose();
+                    }
+                  }}
+                >{props.buttonSecondaryTitle ?? t("cancel")}</Button>
+              }
               <Button
-                fullWidth variant={"secondary"}
+                fullWidth
                 onPress={() => {
-                  if (props.buttonSecondaryAction) {
-                    props.buttonSecondaryAction();
+                  if (props.buttonPrimaryAction) {
+                    props.buttonPrimaryAction();
                   } else {
                     handleClose();
                   }
                 }}
-              >{props.buttonSecondaryTitle ?? t("cancel")}</Button>
-            }
-            <Button
-              fullWidth
-              onPress={() => {
-                if (props.buttonPrimaryAction) {
-                  props.buttonPrimaryAction();
-                } else {
-                  handleClose();
-                }
-              }}
-            >{props.buttonPrimaryTitle ?? t("back")}</Button>
+              >{props.buttonPrimaryTitle ?? t("back")}</Button>
 
-          </HStack>
+            </Stack>
 
-        </View>
+          </View>
         </SafeAreaView>
 
       </Modalize>

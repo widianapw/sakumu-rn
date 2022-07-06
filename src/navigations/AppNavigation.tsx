@@ -25,6 +25,7 @@ import { navigationRef } from "./RootNavigation";
 import LoginScreen from "../screens/components/LoginScreen";
 import { useAuth } from "../providers/AuthProvider";
 import ImagePickerScreen from "../screens/components/ImagePickerScreen";
+import LayoutScreen from "../screens/components/LayoutScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -71,6 +72,7 @@ const AppNavigation = () => {
               <Stack.Screen name={"ChipScreen"} component={ChipScreen} />
               <Stack.Screen name={"OTPScreen"} component={OTPScreen} />
               <Stack.Screen name={"FormScreen"} component={FormScreen} />
+              <Stack.Screen name={"LayoutScreen"} component={LayoutScreen} />
             </>
           )
         }

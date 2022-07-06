@@ -9,7 +9,6 @@ import { black, white } from "../../styles/colors";
 import { useTheme } from "../../core/theming";
 import Icon, { IconProps } from "../Icon";
 import Typography, { TypographyType } from "../Typography/Typography";
-import { VStack } from "react-native-flex-layout";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonShape = "rect" | "rounded"
@@ -177,6 +176,8 @@ const Button = ({
       .alpha(0.32)
       .rgb()
       .string();
+    borderColor = colors.neutral.neutral_50;
+
   } else if (variant === "primary") {
     let isDark;
 
@@ -279,7 +280,7 @@ const Button = ({
           style={touchableStyle}
           testID={testID}
         >
-          <VStack>
+          <View>
 
             <View style={[
               { marginVertical: marginSize },
@@ -348,7 +349,7 @@ const Button = ({
                 }
               />
             }
-          </VStack>
+          </View>
         </TouchableRipple>
       </Surface>
     </View>

@@ -5,8 +5,7 @@
 import React from "react";
 import Typography from "../../../tmd/components/Typography/Typography";
 import { ScrollView } from "react-native";
-import { VStack } from "react-native-flex-layout";
-import { Button } from "../../../tmd";
+import { Button, Stack } from "../../../tmd";
 import { useLocale } from "../../providers/LocaleProvider";
 import Page from "../../../tmd/components/Page";
 
@@ -16,10 +15,15 @@ export default function LanguageScreen() {
     <Page>
 
       <ScrollView>
-        <VStack spacing={16} p={16} items={"center"} justify={"center"}>
+        <Stack spacing={16} p={16}
+               style={{
+                 alignItems: "center",
+                 justifyContent: "center",
+               }}
+        >
           <Typography>{t("welcome_to_rnstarterkit")}</Typography>
           <Typography>current lang: {currentLanguage}</Typography>
-          <VStack spacing={8}>
+          <Stack spacing={8}>
             <Button
               onPress={() => {
                 changeLanguage("en");
@@ -30,8 +34,8 @@ export default function LanguageScreen() {
                 changeLanguage("id");
               }}
             >Change to Indonesia</Button>
-          </VStack>
-        </VStack>
+          </Stack>
+        </Stack>
       </ScrollView>
     </Page>
   );

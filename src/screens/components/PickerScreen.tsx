@@ -4,10 +4,9 @@
  */
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
-import { useTheme } from "../../../tmd";
+import { Stack, useTheme } from "../../../tmd";
 import PhoneField from "../../../tmd/components/picker/PhoneField";
 import _countries from "../../../tmd/data/_countries";
-import { VStack } from "react-native-flex-layout";
 import Select from "../../../tmd/components/Select/Select";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 import DatePicker from "../../../tmd/components/picker/DatePicker";
@@ -30,17 +29,17 @@ export default function PickerScreen() {
           flex: 1,
           backgroundColor: "white",
         }}>
-        <VStack
+        <Stack
           spacing={16}
           style={{
             padding: 16,
           }}>
 
-      <MapPicker
-        onSelected={(data) => {
-          setInitialMap(data);
-        }}
-        initial={initialMap}
+          <MapPicker
+            onSelected={(data) => {
+              setInitialMap(data);
+            }}
+            initial={initialMap}
         label={"Map Picker"}
         placeholder={"Map Picker"}
       />
@@ -148,7 +147,7 @@ export default function PickerScreen() {
         }
       />
 
-        </VStack>
+        </Stack>
 
       </ScrollView>
     </Page>

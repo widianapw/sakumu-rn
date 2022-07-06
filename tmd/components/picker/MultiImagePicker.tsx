@@ -4,17 +4,16 @@
  */
 import React, { ComponentProps, useEffect, useState } from "react";
 import { Button, HelperText, Icon, IconButton, useTheme } from "../../index";
-import { Dimensions, ImageBackground, Modal, View, ViewStyle } from "react-native";
+import { Dimensions, ImageBackground, View, ViewStyle } from "react-native";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import { usePermission } from "../../providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, STORAGE_PERMISSIONS } from "../../data/_permissionTypes";
 import color from "color";
-import Portal from "../Portal/Portal";
-import ImageViewer from "react-native-image-zoom-viewer";
 import ImagePickerBottomSheet, { ImagePickerBSProps } from "../BottomSheet/ImagePickerBottomSheet";
 import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
 import ImageViewerModal from "../Modal/ImageViewerModal";
+import Grid from "../Layout/Grid";
 
 interface Props {
   label?: string;
@@ -56,9 +55,10 @@ export default function MultiImagePicker({
     });
   };
   const colNum = 3;
+  const colSpacing = 8;
 
   const [viewWidth, setViewWidth] = useState(0);
-  const imageSize = Dimensions.get("window").width / colNum - 8;
+  const imageSize = Dimensions.get("window").width / colNum - (colSpacing * 2);
   const handleOpenViewer = (index: number) => {
     setViewerIndex(index);
     setIsShowViewer(true);
@@ -198,24 +198,18 @@ export default function MultiImagePicker({
                 }}
               >
 
-                {
-                  selectedImageUrls.map((item, index) => {
-                    const size = viewWidth ? (viewWidth / 3) : imageSize;
-                    return <>
-                      <View
-                        key={index}
-                        style={{
-                          padding: 4,
-                          height: size,
-                          width: size,
-                          // flex: 0.34,
-                        }}>
+                <Grid cols={colNum} spacing={colSpacing}>
+                  {
+                    selectedImageUrls.map((item, index) => {
+                      const size = viewWidth ? (viewWidth / colNum) + colSpacing : imageSize;
+                      return <>
                         <View style={{
                           alignItems: "center",
                           justifyContent: "center",
                           borderRadius: roundness,
                           backgroundColor: colors.primary.surface,
                           position: "relative",
+                          height: size - (colSpacing * 2),
                         }}
                         >
                           <ImageBackground
@@ -254,11 +248,10 @@ export default function MultiImagePicker({
                             </View>
                           </ImageBackground>
                         </View>
-                      </View>
-                    </>
-                      ;
-                  })
-                }
+                      </>;
+                    })
+                  }
+                </Grid>
               </View>
             </>
         }

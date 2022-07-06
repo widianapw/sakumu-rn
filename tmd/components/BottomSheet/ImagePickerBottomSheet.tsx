@@ -6,12 +6,12 @@ import React, { useEffect, useRef } from "react";
 import { Modalize } from "react-native-modalize";
 import { useTranslation } from "react-i18next";
 import { Portal } from "react-native-portalize";
-import { Pressable, View } from "react-native";
-import { Box, VStack } from "react-native-flex-layout";
+import { Pressable, SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
 import Divider from "../Divider";
 import Icon from "../Icon";
 import ImagePicker, { ImageOrVideo } from "react-native-image-crop-picker";
+import { Stack } from "../../index";
 
 export type ImageRatioCrop = "1:1" | "4:3" | "16:9" | "16:10" | "21:9";
 export interface ImagePickerBSProps {
@@ -116,20 +116,53 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
         onClose={props.onClose}
         ref={modalizeRef}
       >
-        <View style={{
-          flexDirection: "column",
-          paddingVertical: 16,
+        <SafeAreaView style={{
+          flex: 1,
         }}>
-          <VStack>
-            <>
-              <Typography type={"title2"}>{props.title ?? t("pick_image")}</Typography>
-              <Box pt={16} />
-            </>
-            {
-              camera &&
+
+          <View style={{
+            flexDirection: "column",
+            paddingVertical: 16,
+          }}>
+            <Stack>
               <>
+                <Typography type={"title2"}>{props.title ?? t("pick_image")}</Typography>
+                <View style={{ marginTop: 16 }} />
+              </>
+              {
+                camera &&
+                <>
+                  <Pressable
+                    onPress={handleOpenCamera}
+                  >
+
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        flex: 1,
+                        alignItems: "center",
+                        paddingVertical: 16,
+                      }}
+                    >
+
+                      <Icon icon={"camera"} />
+                      <Typography type={"label1"} style={{
+                        flexGrow: 1,
+                        marginStart: 16,
+                      }}>{t("pick_from_camera")}</Typography>
+                      <Icon icon={"chevron-forward"} />
+                    </View>
+                  </Pressable>
+                </>
+              }
+              {
+                (camera && gallery) &&
+                <Divider style={{ marginStart: 38 }} />
+              }
+              {
+                gallery &&
                 <Pressable
-                  onPress={handleOpenCamera}
+                  onPress={handleOpenGallery}
                 >
 
                   <View
@@ -141,49 +174,20 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
                     }}
                   >
 
-                    <Icon icon={"camera"} />
+                    <Icon icon={"folder-open"} />
                     <Typography type={"label1"} style={{
                       flexGrow: 1,
                       marginStart: 16,
-                    }}>{t("pick_from_camera")}</Typography>
+                    }}>{t("pick_from_gallery")}</Typography>
                     <Icon icon={"chevron-forward"} />
                   </View>
                 </Pressable>
-              </>
-            }
-            {
-              (camera && gallery) &&
-              <Divider style={{ marginStart: 38 }} />
-            }
-            {
-              gallery &&
-              <Pressable
-                onPress={handleOpenGallery}
-              >
 
-                <View
-                  style={{
-                    flexDirection: "row",
-                    flex: 1,
-                    alignItems: "center",
-                    paddingVertical: 16,
-                  }}
-                >
+              }
+            </Stack>
 
-                  <Icon icon={"folder-open"} />
-                  <Typography type={"label1"} style={{
-                    flexGrow: 1,
-                    marginStart: 16,
-                  }}>{t("pick_from_gallery")}</Typography>
-                  <Icon icon={"chevron-forward"} />
-                </View>
-              </Pressable>
-
-            }
-          </VStack>
-
-        </View>
-
+          </View>
+        </SafeAreaView>
       </Modalize>
     </Portal>
   );

@@ -4,11 +4,10 @@
  */
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { VStack } from "react-native-flex-layout";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, RHFDatePicker, RHFPhoneField, RHFTimePicker } from "../../../tmd";
+import { Button, RHFDatePicker, RHFPhoneField, RHFTimePicker, Stack } from "../../../tmd";
 import RHFTextField from "../../../tmd/components/RHF/RHFTextField";
 import RHFSelect from "../../../tmd/components/RHF/RHFSelect";
 import _countries from "../../../tmd/data/_countries";
@@ -56,7 +55,7 @@ export default function FormScreen() {
       }}>
 
         <FormProvider {...method}>
-          <VStack p={16} spacing={16} style={{
+          <Stack p={16} spacing={16} style={{
             flex: 1,
           }}>
             <View>
@@ -147,7 +146,7 @@ export default function FormScreen() {
               fullWidth
               onPress={handleSubmit(onSubmit)}
             >Submit Form</Button>
-          </VStack>
+          </Stack>
         </FormProvider>
       </ScrollView>
     </Page>

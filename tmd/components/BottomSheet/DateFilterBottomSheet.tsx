@@ -4,10 +4,9 @@ import { Portal } from "react-native-portalize";
 import { Pressable, SafeAreaView, View } from "react-native";
 import { _dateFilters } from "../../data/_dateFilters";
 import RadioButton from "../RadioButton/RadioButton";
-import { Button, Divider } from "../../index";
+import { Button, Divider, Stack } from "../../index";
 import Typography from "../Typography/Typography";
 import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
-import { HStack, VStack } from "react-native-flex-layout";
 import DatePicker from "../picker/DatePicker";
 import moment from "moment";
 import TmdConstants from "../../utils/TmdConstants";
@@ -203,10 +202,15 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                 }
               </RadioButtonGroup>
 
-              <HStack spacing={8} mt={16}>
+              <Stack
+                direction={"row"}
+                spacing={8}
+                style={{
+                  marginTop: 16,
+                }}>
                 <View style={{ flex: 1 }}>
                   <DatePicker
-                    placeholder={t('start_date')}
+                    placeholder={t("start_date")}
                     date={dateRange?.start_date}
                     onDateChangesFormatted={(date) => {
                       setDateRange({ ...dateRange, start_date: date });
@@ -217,7 +221,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                 </View>
                 <View style={{ flex: 1 }}>
                   <DatePicker
-                    placeholder={t('end_date')}
+                    placeholder={t("end_date")}
                     date={dateRange?.end_date}
                     onDateChangesFormatted={(date) => {
                       console.log(date);
@@ -227,9 +231,11 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                     label={t("end_date")}
                   />
                 </View>
-              </HStack>
+              </Stack>
 
-              <VStack mt={24}>
+              <Stack style={{
+                marginTop: 24,
+              }}>
                 <Button
                   disabled={!selectedId}
                   onPress={() => {
@@ -243,7 +249,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                     width: "100%",
                   }}
                 >{t("apply_filter")}</Button>
-              </VStack>
+              </Stack>
             </View>
           </SafeAreaView>
         </Modalize>

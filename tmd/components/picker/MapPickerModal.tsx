@@ -5,7 +5,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Image, Modal, SafeAreaView, View } from "react-native";
 import MapView from "react-native-maps";
-import { HStack, VStack } from "react-native-flex-layout";
 import Typography from "../Typography/Typography";
 import { Button, useTheme } from "../../index";
 import Icon from "../Icon";
@@ -16,6 +15,7 @@ import RNGooglePlaces from "react-native-google-places";
 import Geolocation from "react-native-geolocation-service";
 import { SelectedMap } from "./MapPicker";
 import { useLocale } from "../../../src/providers/LocaleProvider";
+import Stack from "../Layout/Stack";
 
 interface Props {
   open: boolean;
@@ -181,10 +181,15 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
             borderTopStartRadius: 16,
             borderTopEndRadius: 16,
           }}>
-            <VStack>
+            <Stack>
 
-              <HStack justify={"between"} items={"center"}>
-                <Typography type={"title1"}>{t('select_location')}</Typography>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}>
+                <Typography type={"title1"}>{t("select_location")}</Typography>
                 <Button
                   variant={"secondary"}
                   size={"sm"}
@@ -192,23 +197,28 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
                   onPress={() => {
                     openSearchModal();
                   }}
-                >{t('search')}</Button>
-              </HStack>
+                >{t("search")}</Button>
+              </View>
 
-              <VStack style={{
+              <Stack style={{
                 marginTop: 16,
               }}>
-                <HStack items={"center"}>
+                <Stack direction={"row"} spacing={2}
+                       style={{
+                         alignItems: "center",
+                       }}>
                   <Icon icon={"location-sharp"} size={16} color={theme.colors.primary.main} />
                   <Typography
+                    numberOfLines={1}
+                    ellipsizeMode={"tail"}
                     style={{ fontWeight: "600" }}
                     type={"title3"}>{addressObj?.feature ?? addressObj?.streetName ?? "-"}</Typography>
-                </HStack>
+                </Stack>
                 <Typography
                   type={"body2"}
                   style={{ marginTop: 4 }}
                 >{addressObj?.formattedAddress}</Typography>
-              </VStack>
+              </Stack>
 
               <Button
                 onPress={() => {
@@ -229,8 +239,8 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
                   }
                 }}
                 style={{ marginTop: 16 }}
-                fullWidth size={"md"}>{t('save')}</Button>
-            </VStack>
+                fullWidth size={"md"}>{t("save")}</Button>
+            </Stack>
 
           </View>
 

@@ -3,17 +3,17 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView } from "react-native";
-import { VStack } from "react-native-flex-layout";
+import { ScrollView } from "react-native";
 import { Alert } from "../../../tmd";
 import Page from "../../../tmd/components/Page";
+import Stack from "../../../tmd/components/Layout/Stack";
 
 export default function AlertScreen() {
   return (
     <Page>
 
     <ScrollView style={{ flex: 1 }}>
-      <VStack p={16} style={{ flex: 1 }} spacing={16}>
+      <Stack p={16} spacing={16}>
         <Alert
           dismissible={true}
           title={"Alert Title Here"}
@@ -52,7 +52,7 @@ export default function AlertScreen() {
           dismissible
           description={"Put your alert text here"} />
 
-      </VStack>
+      </Stack>
     </ScrollView>
     </Page>
   );

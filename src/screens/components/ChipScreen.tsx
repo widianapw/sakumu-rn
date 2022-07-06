@@ -5,33 +5,33 @@
 
 import React from "react";
 import { ScrollView } from "react-native";
-import { HStack, VStack } from "react-native-flex-layout";
 import Chip from "../../../tmd/components/Chip";
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 import Page from "../../../tmd/components/Page";
+import Stack from "../../../tmd/components/Layout/Stack";
 
 export default function ChipScreen() {
   return (
     <Page>
       <ScrollView>
-        <VStack p={16} spacing={8}>
-          <HStack spacing={8}>
+        <Stack p={16} spacing={8}>
+          <Stack direction={'row'} spacing={8}>
             <Chip
               text={"Widiana"}
               selected
             />
             <Chip text={"Widiana"} />
             <Chip text={"Widiana"} />
-          </HStack>
-          <HStack spacing={8}>
+          </Stack>
+          <Stack direction={'row'} spacing={8}>
             <Chip text={"Widiana"} selected variant={"outlined"} />
             <Chip text={"Widiana"} variant={"outlined"} />
             <Chip text={"Widiana"} variant={"outlined"} />
-          </HStack>
+          </Stack>
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <HStack spacing={8}>
+            <Stack direction={'row'} spacing={8}>
               <Chip
                 shape={"rect"}
                 onResetPicker={() => {
@@ -62,10 +62,10 @@ export default function ChipScreen() {
                 type={"picker"}
                 text={"Widiana"} />
               <Chip text={"Widiana"} />
-            </HStack>
+            </Stack>
 
           </ScrollView>
-        </VStack>
+        </Stack>
       </ScrollView>
     </Page>
   )
