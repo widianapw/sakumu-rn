@@ -19,6 +19,7 @@ import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
 import Icon from "../Icon";
+import { SvgUri } from "react-native-svg/lib/typescript";
 
 const INPUT_PADDING_HORIZONTAL = 8;
 const MIN_HEIGHT = 32;
@@ -131,7 +132,7 @@ const TextInputFlat = ({
             label={label}
             type={"label1"}
             style={{ marginBottom: 4 }}
-            required={rest.required}
+            required={rest.requiredLabel}
           />
         }
         <Pressable
@@ -171,7 +172,7 @@ const TextInputFlat = ({
             />
             <View
               style={[
-                multiline ? {} : { height: height ?? MIN_HEIGHT },
+                multiline ? {} : { height: height ?? MIN_HEIGHT, alignItems: 'center', justifyContent: 'center' },
                 {
                   flexDirection: "row",
                   alignItems: "center",
@@ -196,7 +197,11 @@ const TextInputFlat = ({
 
                   {
                     prefixIcon &&
-                    prefixIcon
+                    <Icon
+                      color={colors.neutral.neutral_70}
+                      size={18}
+                      {...prefixIcon}
+                    />
                   }
                   {
                     prefixText &&
@@ -257,7 +262,7 @@ const TextInputFlat = ({
                     multiline,
                     style: [
                       styles.input,
-                      !multiline || (multiline && height) ? { height: height ?? MIN_HEIGHT } : {},
+                      !multiline || (multiline && height) ? { height: height ?? MIN_HEIGHT} : {},
                       // paddingFlat,
                       {
                         ...font,
@@ -333,7 +338,7 @@ const TextInputFlat = ({
                     fitIcon
                     variant={'tertiary'}
                     color={
-                      isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_90
+                      isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_70
                     }
                     onPress={() => {
                       setIsShowPassword(!isShowPassword);
@@ -369,7 +374,11 @@ const TextInputFlat = ({
 
                   {
                     suffixIcon &&
-                    suffixIcon
+                    <Icon
+                      color={colors.neutral.neutral_70}
+                      size={18}
+                      {...suffixIcon}
+                      />
                   }
                 </View>
               }
@@ -430,11 +439,6 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
         justifyContent: "center",
         alignItems: "center",
       }}>
-      {/*<SvgUri*/}
-      {/*  height={24}*/}
-      {/*  width={30}*/}
-      {/*  uri={country?.flag ?? ""}*/}
-      {/*/>*/}
       <Typography style={{ marginRight: 4 }}>+{country?.phone_code}</Typography>
       <Icon icon={"chevron-down"} color={theme.colors.neutral.neutral_90} size={14} />
     </Pressable>

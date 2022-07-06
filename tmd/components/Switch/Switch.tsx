@@ -60,7 +60,6 @@ const Switch = ({
         style,
       ]
     }>
-      <View>
         <RNSwitch
           disabled={disabled}
           value={value}
@@ -68,7 +67,6 @@ const Switch = ({
           style={switchStyle}
           {...rest}
         />
-      </View>
       {text &&
         <Typography
           style={[

@@ -24,7 +24,7 @@ import IconButton from "../IconButton";
 import Icon from "../Icon";
 import _countries from "../../data/_countries";
 
-const INPUT_PADDING_HORIZONTAL = 8;
+const INPUT_PADDING_HORIZONTAL = 12;
 const MIN_HEIGHT = 40;
 const SHAPE_RADIUS = 10;
 const ROUNDED_RADIUS = 32;
@@ -101,7 +101,7 @@ const TextInputContained = ({
     inputTextColor = colors.text;
     activeColor = error ? colors.danger.main : activeOutlineColor || colors.primary.main;
     placeholderColor = colors.neutral.neutral_70;
-    outlineColor = colors.neutral.neutral_70;
+    outlineColor = colors.neutral.neutral_40;
   }
 
 
@@ -163,7 +163,12 @@ const TextInputContained = ({
             }}>
               {
                 prefixIcon &&
-                prefixIcon
+                <Icon
+                  color={colors.neutral.neutral_70}
+                  size={18}
+                  {...prefixIcon}
+                />
+
               }
               {
                 prefixText &&
@@ -292,7 +297,7 @@ const TextInputContained = ({
                 }}
                 variant={'tertiary'}
                 color={
-                  isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_90
+                  isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_70
                 }
                 onPress={() => {
                   disabled ? null
@@ -328,7 +333,12 @@ const TextInputContained = ({
 
               {
                 suffixIcon &&
-                suffixIcon
+                <Icon
+                  color={colors.neutral.neutral_70}
+                  size={18}
+                  {...suffixIcon}
+                />
+
               }
             </View>
           }
@@ -348,7 +358,7 @@ const TextInputContained = ({
 
       {
         (errorText || helperText || maxLength) &&
-        <View style={{ display: "flex", flexDirection: "row", marginTop: 2 }}>
+        <View style={{ display: "flex", flexDirection: "row", marginTop: 4 }}>
           <HelperText type={error ? "error" : "info"} style={{ flexGrow: 1, flex: 1 }}>
             {error ? errorText : helperText}
           </HelperText>

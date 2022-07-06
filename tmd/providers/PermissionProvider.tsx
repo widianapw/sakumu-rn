@@ -27,12 +27,15 @@ const PermissionProvider = ({ children }: any) => {
     if (permission) {
       const isAndroid = Platform.OS == "android";
       let type;
+      console.log(permission);
       if (isAndroid) {
         type = _permissionTypes.find((it) => it.permissions.android.includes(permission));
       } else {
         type = _permissionTypes.find((it) => it.permissions.ios.includes(permission));
       }
       if (type) {
+        console.log(type);
+
         return type.type;
       } else {
         return "another";

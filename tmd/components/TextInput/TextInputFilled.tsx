@@ -23,7 +23,7 @@ import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
 import Icon from "../Icon";
 
-const INPUT_PADDING_HORIZONTAL = 8;
+const INPUT_PADDING_HORIZONTAL = 12;
 const MIN_HEIGHT = 40;
 const SHAPE_RADIUS = 10;
 const ROUNDED_RADIUS = 32;
@@ -160,7 +160,11 @@ const TextInputFilled = ({
             }}>
               {
                 prefixIcon &&
-                prefixIcon
+                <Icon
+                  color={colors.neutral.neutral_70}
+                  size={18}
+                  {...prefixIcon}
+                />
               }
               {
                 prefixText &&
@@ -289,7 +293,7 @@ const TextInputFilled = ({
                 }}
                 variant={'tertiary'}
                 color={
-                  isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_90
+                  isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_70
                 }
                 onPress={() => {
                   disabled ? null
@@ -317,7 +321,7 @@ const TextInputFilled = ({
                 <Typography
                   type={"body2"}
                   style={{
-                    color: disabled ? colors.neutral.neutral_60 : colors.neutral.neutral_90,
+                    color: disabled ? colors.neutral.neutral_60 : colors.neutral.neutral_70,
                   }}>
                   {suffixText}
                 </Typography>
@@ -325,7 +329,12 @@ const TextInputFilled = ({
 
               {
                 suffixIcon &&
-                suffixIcon
+                <Icon
+                  color={colors.neutral.neutral_70}
+                  size={18}
+                  {...suffixIcon}
+                />
+
               }
             </View>
           }
@@ -351,7 +360,7 @@ const TextInputFilled = ({
 
       {
         (errorText || helperText || maxLength) &&
-        <View style={{ display: "flex", flexDirection: "row", marginTop: 2 }}>
+        <View style={{ display: "flex", flexDirection: "row", marginTop: 4 }}>
           <HelperText type={error ? "error" : "info"} style={{ flexGrow: 1, flex: 1 }}>
             {error ? errorText : helperText}
           </HelperText>
@@ -385,7 +394,7 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
     style={{
       display: "flex",
       paddingLeft: INPUT_PADDING_HORIZONTAL,
-      paddingRight: INPUT_PADDING_HORIZONTAL / 2,
+      paddingRight: INPUT_PADDING_HORIZONTAL/2,
       height: MIN_HEIGHT,
       borderRightWidth: 1,
       borderRightColor: theme.colors.neutral.neutral_40,
@@ -406,8 +415,8 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
       {/*  width={30}*/}
       {/*  uri={country?.flag ?? ""}*/}
       {/*/>*/}
-      <Typography>+{country?.phone_code}</Typography>
-      <Icon icon={"chevron-down"} color={theme.colors.neutral.neutral_90} size={14} />
+      <Typography type={'body2'}>+{country?.phone_code}</Typography>
+      <Icon icon={"chevron-down"} color={theme.colors.neutral.neutral_70} size={14} />
     </Pressable>
   </View>;
 };

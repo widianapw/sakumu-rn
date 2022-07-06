@@ -57,11 +57,10 @@ const Select = ({
       pickerType={"select"}
       editable={false}
       mode={rest.mode ?? theme?.textInput?.mode}
-      suffixIcon={
-        <Icon
-          icon={"chevron-down"}
-          size={16} />
-      }
+      suffixIcon={{
+        icon:"chevron-down",
+        size:16
+      }}
       {...rest}
     />
 

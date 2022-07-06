@@ -232,7 +232,7 @@ const Button = ({
     borderWidth,
     borderRadius: usedShape == "rect"
       ? roundness
-      : 32,
+      : 24,
   };
   const touchableStyle = {
       borderRadius: usedShape == "rect"
@@ -240,7 +240,7 @@ const Button = ({
           ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ||
           roundness
           : roundness
-        : 32,
+        : 24,
     }
   ;
 
@@ -324,7 +324,7 @@ const Button = ({
                   <Icon
                     icon={icon.icon}
                     source={icon.source}
-                    size={icon.size ?? customLabelSize ?? 20}
+                    size={icon.size ?? customLabelSize ?? 18}
                     color={
                       icon.color ??
                       typeof customLabelColor === "string"
@@ -400,14 +400,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   icon: {
-    marginRight: 4,
-    // marginLeft: 12,
-    // marginRight: -10,
+    marginRight: 8,
   },
   iconReverse: {
-    // marginRight: 12,
-    // marginLeft: -10,
-    marginLeft: 4,
+    marginLeft: 8,
   },
   iconButton: {
     margin: 8,

@@ -65,7 +65,7 @@ const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeo
     }
     case "title3": {
       fontSize = 16;
-      lineHeight = 22;
+      lineHeight = 24;
       break;
     }
     case "label1": {
@@ -127,7 +127,6 @@ const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeo
       lineHeight = 16;
       break;
     }
-
   }
 
 

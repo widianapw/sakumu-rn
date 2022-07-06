@@ -44,9 +44,10 @@ export default function TimePicker({ initial, ...rest }: React.ComponentProps<ty
         editable={false}
         pickerType={"date"}
         onOpenPicker={handleOpen}
-        suffixIcon={
-          <Icon icon={"time"} size={18} />
-        }
+        suffixIcon={{
+          icon:'time',
+          size:18
+        }}
         {...rest}
       />
       <DatePicker

@@ -56,9 +56,9 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
         editable={false}
         onOpenPicker={handleOpen}
         value={savedMap?.fullAddress}
-        suffixIcon={
-          <Icon icon={"map"} size={18} />
-        }
+        suffixIcon={{
+          icon: "map",
+        }}
         {...rest}
       />
 

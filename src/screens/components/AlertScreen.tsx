@@ -46,6 +46,11 @@ export default function AlertScreen() {
           type={"outlined"}
           title={"Alert Title Here"}
           description={"Put your alert text here"} />
+        <Alert
+          variant={"warning"}
+          type={"outlined"}
+          dismissible
+          description={"Put your alert text here"} />
 
       </VStack>
     </ScrollView>

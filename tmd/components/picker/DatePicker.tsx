@@ -43,9 +43,10 @@ export default function DatePicker({
         mode={theme?.textInput?.mode}
         onOpenPicker={handleOpen}
         {...rest}
-        suffixIcon={
-          <Icon source={'ionicons'} icon={"ios-calendar"} size={18} />
-        }
+        suffixIcon={{
+          icon:'ios-calendar',
+          size:18
+        }}
       />
 
       <DatePickerDialog

@@ -89,6 +89,7 @@ export default function Alert({ title, description, dismissible, type, variant, 
               <Icon
                 icon={iconName}
                 color={iconColor}
+                size={18}
               />
             </View>
             <View

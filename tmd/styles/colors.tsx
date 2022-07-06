@@ -329,7 +329,7 @@ const colors: ThemeColors = {
     hover: "#114CD6",
     surface: "#F0F3FF",
   },
-  accent: "#03dac4",
+  accent: "#4C4DDC",
   background: "#f6f6f6",
   surface: white,
   error: "#B00020",

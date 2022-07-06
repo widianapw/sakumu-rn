@@ -23,7 +23,7 @@ export interface BSProps {
   buttonPrimaryAction?: () => void;
   buttonSecondaryAction?: () => void;
   onClose: () => void;
-  dismissable?: boolean;
+  dismissible?: boolean;
 }
 
 export default function AlertBottomSheet(props: BSProps) {
@@ -46,8 +46,9 @@ export default function AlertBottomSheet(props: BSProps) {
   return (
     <Portal>
       <Modalize
-        closeOnOverlayTap={props.dismissable ? !props.dismissable : true}
+        closeOnOverlayTap={props.dismissible ? !props.dismissible : true}
         handlePosition={"inside"}
+        withHandle={!!props?.dismissible}
         adjustToContentHeight
         modalStyle={{
           padding: 16,

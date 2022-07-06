@@ -32,6 +32,7 @@ export default function ChipScreen() {
 
       <HStack spacing={8}>
         <Chip
+          shape={'rect'}
           onResetPicker={()=> {}}
           variant={'outlined'}
           type={"picker"}

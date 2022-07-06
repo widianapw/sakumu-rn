@@ -28,6 +28,7 @@ const TextFieldScreen = () => {
 
 
             <TextInput
+              helperText={"Helper Text"}
               requiredLabel
               mode={"flat"}
               label="Search"
@@ -64,8 +65,11 @@ const TextFieldScreen = () => {
 
             <TextInput
               requiredLabel
+              helperText={"Helper Text"}
               mode={"contained"}
               label="Email"
+              // error
+              // errorText={"Email is required"}
               placeholder={"Email"}
             />
 

@@ -119,7 +119,12 @@ export default function Chip({
         borderless
         style={[
           {
-            paddingVertical: isSelectedFilled ? 6 : 8, paddingHorizontal: isSelectedFilled ? 14 : 16,
+            paddingVertical: isSelectedFilled
+              ? 4
+              : 6,
+            paddingHorizontal: isSelectedFilled
+              ? 14 :
+              16,
             flexDirection: "row",
             alignItems: "center",
           },

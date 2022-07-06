@@ -8,6 +8,7 @@ import type { RenderProps } from "./types";
 import TextInputContained from "./TextInputContained";
 import TextInputFilled from "./TextInputFilled";
 import TextInputOutlined from "./TextInputOutlined";
+import { IconProps } from "../Icon";
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -125,9 +126,9 @@ export type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput>
   style?: StyleProp<TextStyle>;
 
   prefixText?: string;
-  prefixIcon?: React.ReactNode;
+  prefixIcon?: IconProps;
   suffixText?: string;
-  suffixIcon?: React.ReactNode;
+  suffixIcon?: IconProps;
   password?: boolean;
   counter?: boolean;
   search?: boolean;
