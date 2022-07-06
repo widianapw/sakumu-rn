@@ -56,7 +56,6 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
   }, [open]);
 
   useEffect(() => {
-    console.log(initial);
     setSelectedId(initial?.id);
     setDateRange(initial?.date_range);
   }, [initial]);

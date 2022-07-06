@@ -76,6 +76,8 @@
       "date": "Tanggal",
       "time": "Waktu",
       "image": "Foto"
-    }
+    },
+    "search": "Cari",
+    "select_location": "Pilih Lokasi"
   }
 }

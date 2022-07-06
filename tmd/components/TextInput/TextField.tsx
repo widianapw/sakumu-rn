@@ -420,7 +420,6 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
           multiline={multiline}
           editable={editable}
           render={render}
-          style={{backgroundColor: 'yellow', width:'50%'}}
           {...rest}
           value={value}
 

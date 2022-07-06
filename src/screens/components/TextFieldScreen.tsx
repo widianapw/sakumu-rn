@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { KeyboardAvoidingView, ScrollView, TextInput as DEF } from "react-native";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { TextInput, useTheme } from "../../../tmd";
 import TextField from "../../../tmd/components/TextInput/TextField";
 import { VStack } from "react-native-flex-layout";
@@ -26,7 +26,6 @@ const TextFieldScreen = () => {
               flexDirection: "column",
             }}>
 
-            <DEF />
 
             <TextInput
               requiredLabel

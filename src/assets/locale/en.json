@@ -76,6 +76,8 @@
       "date": "Date",
       "time": "Time",
       "image": "Image"
-    }
+    },
+    "search": "Search",
+    "select_location": "Select Location"
   }
 }
