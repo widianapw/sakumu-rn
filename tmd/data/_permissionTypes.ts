@@ -68,7 +68,7 @@ const _permissionTypes: PermissionPackage[] = [
   },
   {
     type: "location",
-    permissions: LOCATION_PERMISSIONS,
+    permissions: BLUETOOTH_PERMISSIONS,
   },
   {
     type: "bluetooth",
