@@ -6,7 +6,7 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { useTheme } from "../../core/theming";
 import { usePermission } from "../../providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, STORAGE_PERMISSIONS } from "../../data/_permissionTypes";
-import { ImageBackground, Modal, Platform, View, ViewStyle } from "react-native";
+import { ImageBackground, Modal, Platform, SafeAreaView, View, ViewStyle } from "react-native";
 import { Button, HelperText, Icon, IconButton } from "../../index";
 import ImagePickerBottomSheet, { ImagePickerBSProps } from "../BottomSheet/ImagePickerBottomSheet";
 import color from "color";
@@ -15,7 +15,8 @@ import Portal from "../Portal/Portal";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
-import { checkMultiple, PERMISSIONS } from "react-native-permissions";
+import { white } from "../../styles/colors";
+import ImageViewerModal from "../Modal/ImageViewerModal";
 
 interface Props {
   label?: string;
@@ -115,22 +116,12 @@ export default function ImagePicker({
 
   return (
     <>
-      <Portal>
-        <Modal
-          onRequestClose={() => {
-            setIsShowViewer(false);
-          }}
-          visible={isShowViewer} animationType={"fade"}>
-          <ImageViewer
-            renderIndicator={() => null}
-            show={isShowViewer}
-            imageUrls={[
-              {
-                url: selectedImageUrl,
-              },
-            ]} />
-        </Modal>
-      </Portal>
+      <ImageViewerModal
+        images={[selectedImageUrl]}
+        onClose={() => {
+        setIsShowViewer(false)
+      }} open={isShowViewer}/>
+
       <ImagePickerBottomSheet
         camera={rest.camera}
         gallery={rest.gallery}

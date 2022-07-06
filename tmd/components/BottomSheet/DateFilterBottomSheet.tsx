@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
-import { Pressable, View } from "react-native";
+import { Pressable, SafeAreaView, View } from "react-native";
 import { _dateFilters } from "../../data/_dateFilters";
 import RadioButton from "../RadioButton/RadioButton";
 import { Button, Divider } from "../../index";
@@ -51,6 +51,8 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
     if (open) {
       modalizeRef.current?.open();
     } else {
+      setSelectedId(initial?.id);
+      setDateRange(initial?.date_range);
       modalizeRef?.current?.close();
     }
   }, [open]);
@@ -162,40 +164,44 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
             handleClose();
           }}
         >
-          <View
-            style={{
-              paddingVertical: 16,
-            }}
-          >
-            <View style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}>
-              <Typography type={"title2"}>{props.title ?? t("choose_date")}</Typography>
-              {
-                props.onReset &&
-                <Button
-                  size={"sm"}
-                  shape={"rounded"}
-                  variant={"secondary"}
-                  onPress={props?.onReset}
-                >{t("reset")}</Button>
-              }
-            </View>
-            <RadioButtonGroup
-              onValueChange={(value) => {
-                // console.log(value);
-                setSelectedId(value);
-                // setSelectedItem(value);
+          <SafeAreaView style={{
+            flex: 1,
+          }}>
+
+            <View
+              style={{
+                paddingVertical: 16,
               }}
-              value={selectedId}>
-              {
-                list.map((item) => {
-                  return <RenderItem item={item} key={item.id} />;
-                })
-              }
-            </RadioButtonGroup>
+            >
+              <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}>
+                <Typography type={"title2"}>{props.title ?? t("choose_date")}</Typography>
+                {
+                  props.onReset &&
+                  <Button
+                    size={"sm"}
+                    shape={"rounded"}
+                    variant={"secondary"}
+                    onPress={props?.onReset}
+                  >{t("reset")}</Button>
+                }
+              </View>
+              <RadioButtonGroup
+                onValueChange={(value) => {
+                  // console.log(value);
+                  setSelectedId(value);
+                  // setSelectedItem(value);
+                }}
+                value={selectedId}>
+                {
+                  list.map((item) => {
+                    return <RenderItem item={item} key={item.id} />;
+                  })
+                }
+              </RadioButtonGroup>
 
               <HStack spacing={8} mt={16}>
                 <View style={{ flex: 1 }}>
@@ -223,21 +229,23 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                 </View>
               </HStack>
 
-            <VStack mt={24}>
-              <Button
-                onPress={() => {
-                  if (props.onSave) {
-                    const value = getValue();
-                    setSelectedItem(value);
-                    props.onSave(value);
-                  }
-                }}
-                style={{
-                  width: "100%",
-                }}
-              >{t("apply_filter")}</Button>
-            </VStack>
-          </View>
+              <VStack mt={24}>
+                <Button
+                  disabled={!selectedId}
+                  onPress={() => {
+                    if (props.onSave) {
+                      const value = getValue();
+                      setSelectedItem(value);
+                      props.onSave(value);
+                    }
+                  }}
+                  style={{
+                    width: "100%",
+                  }}
+                >{t("apply_filter")}</Button>
+              </VStack>
+            </View>
+          </SafeAreaView>
         </Modalize>
       </Portal>
     </>

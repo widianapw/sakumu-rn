@@ -25,43 +25,46 @@ export default function ChipScreen() {
             <Chip text={"Widiana"} />
           </HStack>
           <HStack spacing={8}>
-        <Chip text={"Widiana"} selected variant={"outlined"} />
-        <Chip text={"Widiana"} variant={"outlined"} />
-        <Chip text={"Widiana"} variant={"outlined"} />
-      </HStack>
+            <Chip text={"Widiana"} selected variant={"outlined"} />
+            <Chip text={"Widiana"} variant={"outlined"} />
+            <Chip text={"Widiana"} variant={"outlined"} />
+          </HStack>
 
-      <HStack spacing={8}>
-        <Chip
-          shape={'rect'}
-          onResetPicker={()=> {}}
-          variant={'outlined'}
-          type={"picker"}
-          pickerList={_countries.map(it => {
-            const i: PickerItem = {
-              id: it.code,
-              name: it.name,
-            };
-            return i;
-          })}
-          initial={"ID"}
-          icon={{
-            icon: "camera",
-          }}
-          text={"Widiana"}
-        />
-        <Chip
-          pickerList={_countries.slice(0,5).map(it => {
-            const i: PickerItem = {
-              id: it.code,
-              name: it.name,
-            };
-            return i;
-          })}
-          type={"picker"}
-          text={"Widiana"} />
-        <Chip text={"Widiana"} />
-      </HStack>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <HStack spacing={8}>
+              <Chip
+                shape={"rect"}
+                onResetPicker={() => {
+                }}
+                variant={"outlined"}
+                type={"picker"}
+                pickerList={_countries.map(it => {
+                  const i: PickerItem = {
+                    id: it.code,
+                    name: it.name,
+                  };
+                  return i;
+                })}
+                initial={"ID"}
+                icon={{
+                  icon: "camera",
+                }}
+                text={"Widiana"}
+              />
+              <Chip
+                pickerList={_countries.slice(0,5).map(it => {
+                  const i: PickerItem = {
+                    id: it.code,
+                    name: it.name,
+                  };
+                  return i;
+                })}
+                type={"picker"}
+                text={"Widiana"} />
+              <Chip text={"Widiana"} />
+            </HStack>
 
+          </ScrollView>
         </VStack>
       </ScrollView>
     </Page>

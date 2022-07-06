@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { Animated, StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
-import shadow from '../styles/shadow';
-import { withTheme } from '../core/theming';
-import overlay from '../styles/overlay';
+import * as React from "react";
+import { Animated, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import shadow from "../styles/shadow";
+import { useTheme } from "../core/theming";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -10,10 +9,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   children: React.ReactNode;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  elevation?: number;
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
 };
 
 /**
@@ -59,18 +58,16 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * });
  * ```
  */
-const Surface = ({ style, theme, ...rest }: Props) => {
-  const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const { dark: isDarkTheme, mode, colors } = theme;
+const Surface = ({ style, ...rest }: Props) => {
+  const { elevation = rest.elevation ?? 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const theme = useTheme();
+  const { colors } = theme;
   return (
     <Animated.View
       {...rest}
       style={[
         {
-          backgroundColor:
-            isDarkTheme && mode === 'adaptive'
-              ? overlay(elevation, colors.surface)
-              : colors.surface,
+          backgroundColor: colors.surface,
         },
         elevation ? shadow(elevation) : null,
         style,
@@ -79,4 +76,4 @@ const Surface = ({ style, theme, ...rest }: Props) => {
   );
 };
 
-export default withTheme(Surface);
+export default Surface;

@@ -14,6 +14,7 @@ import ImageViewer from "react-native-image-zoom-viewer";
 import ImagePickerBottomSheet, { ImagePickerBSProps } from "../BottomSheet/ImagePickerBottomSheet";
 import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
+import ImageViewerModal from "../Modal/ImageViewerModal";
 
 interface Props {
   label?: string;
@@ -128,23 +129,12 @@ export default function MultiImagePicker({
 
   return (
     <>
-      <Portal>
-        <Modal
-          onRequestClose={() => {
-            setIsShowViewer(false);
-          }}
-          visible={isShowViewer} animationType={"fade"}>
-          <ImageViewer
-            index={viewerIndex}
-            show={isShowViewer}
-            imageUrls={
-              selectedImageUrls.map(it => {
-                return {
-                  url: it,
-                };
-              })} />
-        </Modal>
-      </Portal>
+      <ImageViewerModal
+        index={viewerIndex}
+        images={selectedImageUrls}
+        onClose={() => {setIsShowViewer(false)}}
+        open={isShowViewer}/>
+
       <ImagePickerBottomSheet
         camera={rest.camera}
         gallery={rest.gallery}

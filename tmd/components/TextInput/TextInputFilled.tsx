@@ -394,7 +394,9 @@ const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
     style={{
       display: "flex",
       paddingLeft: INPUT_PADDING_HORIZONTAL,
-      paddingRight: INPUT_PADDING_HORIZONTAL/2,
+      paddingRight: INPUT_PADDING_HORIZONTAL / 2,
+      //marginVertical 1 because of the container border
+      marginVertical: 1,
       height: MIN_HEIGHT,
       borderRightWidth: 1,
       borderRightColor: theme.colors.neutral.neutral_40,

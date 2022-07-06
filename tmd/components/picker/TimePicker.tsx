@@ -5,7 +5,6 @@
 
 import React, { useEffect, useState } from "react";
 import TextField from "../TextInput/TextField";
-import Icon from "../Icon";
 import DatePicker from "react-native-date-picker";
 import moment from "moment";
 import { useLocale } from "../../../src/providers/LocaleProvider";
@@ -51,6 +50,7 @@ export default function TimePicker({ initial, ...rest }: React.ComponentProps<ty
         {...rest}
       />
       <DatePicker
+        theme={"light"}
         title={rest.title}
         modal={true}
         open={isOpenPicker}

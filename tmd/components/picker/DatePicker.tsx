@@ -50,6 +50,7 @@ export default function DatePicker({
       />
 
       <DatePickerDialog
+        theme={'light'}
         title={rest.title}
         modal={true}
         mode={"date"}

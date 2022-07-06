@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Animated, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
+import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import color from "color";
 
 import ActivityIndicator from "../ActivityIndicator";
@@ -142,35 +142,6 @@ const Button = ({
   }
 
 
-  const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(disabled || variant !== "primary" ? 0 : 2),
-  );
-  React.useEffect(() => {
-    elevation.setValue(disabled || variant !== "primary" ? 0 : 2);
-  }, [variant, elevation, disabled]);
-
-  const handlePressIn = () => {
-    if (variant === "primary") {
-      const { scale } = theme.animation;
-      Animated.timing(elevation, {
-        toValue: 8,
-        duration: 200 * scale,
-        useNativeDriver: true,
-      }).start();
-    }
-  };
-
-  const handlePressOut = () => {
-    if (variant === "primary") {
-      const { scale } = theme.animation;
-      Animated.timing(elevation, {
-        toValue: 2,
-        duration: 150 * scale,
-        useNativeDriver: true,
-      }).start();
-    }
-  };
-
   const { colors, roundness } = theme;
 
   let backgroundColor: string,
@@ -281,11 +252,11 @@ const Button = ({
       ]
     }>
       <Surface
+        elevation={0}
         {...rest}
         style={[
           styles.button,
           compact && styles.compact,
-          { elevation },
           buttonStyle,
           style,
         ]}
@@ -295,8 +266,6 @@ const Button = ({
           delayPressIn={0}
           onPress={onPress}
           onLongPress={onLongPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
           accessibilityLabel={accessibilityLabel}
           accessibilityHint={accessibilityHint}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
