@@ -116,6 +116,9 @@ To keep an application scalable and organized, the global static resources that 
   - IconButton
   - TextButton
 - CheckBox
+- Layout
+  - Grid
+  - Stack
 - Chip
 - Divider
 - Icon
