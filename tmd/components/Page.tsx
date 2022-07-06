@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { KeyboardAvoidingView, SafeAreaView, StatusBar } from "react-native";
 import { useTheme } from "../core/theming";
 
 export default function Page({ children }: any) {
@@ -18,7 +18,11 @@ export default function Page({ children }: any) {
           flex: 1,
         }}
       >
-        {children}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1 }}>
+          {children}
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </>
   );
