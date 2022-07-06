@@ -55,7 +55,10 @@ export default function ImagePicker({
         setIsOpen(true);
       });
     } else {
-      setIsOpen(true)
+      requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS], () => {
+        setIsOpen(true);
+      });
+      // setIsOpen(true)
     }
   };
 
