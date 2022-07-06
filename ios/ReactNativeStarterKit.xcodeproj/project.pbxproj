@@ -21,6 +21,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		85EE759E974348EF9F925D45 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CC601AD3E5A4833B3417DCD /* Inter-Thin.ttf */; };
 		8644224F8D084E6EAD587EE2 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7FD6AD9A143420D90CDBDCF /* Inter-Black.ttf */; };
+		A03F4F80287532F1004D8257 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A03F4F7F287532F1004D8257 /* Settings.bundle */; };
 		DBA19D047D32453796A72284 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0D8993BC99B4943927C533C /* Inter-Regular.ttf */; };
 		DBB9F86279DE4C95A6890A7B /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3094B3F2BA341A68F70894C /* Inter-Bold.ttf */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		A0101A19286E92670004D277 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		A0101A1A286E92670004D277 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		A0101A1B286E92670004D277 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		A03F4F7F287532F1004D8257 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A0D8993BC99B4943927C533C /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		A2BF8C9FA1D449A7834899E3 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		A67CFAF7F8424CCD86DB2A2E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A03F4F7F287532F1004D8257 /* Settings.bundle */,
 				A0101A0B286E92390004D277 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* ReactNativeStarterKit */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -353,6 +356,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				8644224F8D084E6EAD587EE2 /* Inter-Black.ttf in Resources */,
 				DBB9F86279DE4C95A6890A7B /* Inter-Bold.ttf in Resources */,
+				A03F4F80287532F1004D8257 /* Settings.bundle in Resources */,
 				0B3AA9979DFF4599B4643630 /* Inter-ExtraBold.ttf in Resources */,
 				6F3EABD746B240939AF7A475 /* Inter-ExtraLight.ttf in Resources */,
 				662B9D71BC1948E4A6F962D8 /* Inter-Light.ttf in Resources */,
