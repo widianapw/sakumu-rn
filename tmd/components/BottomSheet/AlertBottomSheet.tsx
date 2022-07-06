@@ -5,7 +5,7 @@
 import React, { useEffect, useRef } from "react";
 import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
-import { View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { useTheme } from "../../core/theming";
 import { Button } from "../../index";
@@ -58,6 +58,8 @@ export default function AlertBottomSheet(props: BSProps) {
         onClose={props.onClose}
         ref={modalizeRef}
       >
+        <SafeAreaView style={{flex:1}}>
+
         <View style={{
           flexDirection: "column",
           paddingVertical: 16,
@@ -112,6 +114,7 @@ export default function AlertBottomSheet(props: BSProps) {
           </HStack>
 
         </View>
+        </SafeAreaView>
 
       </Modalize>
     </Portal>

@@ -141,8 +141,8 @@ const BottomSheetProvider = ({ children }: any) => {
         case "location": {
           data = {
             imageNode: <IllustLocationPermission />,
-            title: t("permissions.bluetooth_title"),
-            description: t("permissions.bluetooth_description"),
+            title: t("permissions.location_title"),
+            description: t("permissions.location_description"),
             buttonPrimaryAction: openSetting,
             buttonPrimaryTitle: t("allow"),
             buttonSecondary: true,

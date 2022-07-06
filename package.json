@@ -6,7 +6,7 @@
     "android": "SET ENVFILE=.env && react-native run-android",
     "android:staging": "SET ENVFILE=.env.staging && react-native run-android",
     "android:debug": "SET ENVFILE=.env.debug && react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator=\"iPhone 11\"",
     "ios:staging": "SET ENVFILE=.env.staging && react-native run-ios",
     "ios:debug": "SET ENVFILE=.env.debug && react-native run-ios",
     "start": "react-native start",

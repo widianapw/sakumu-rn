@@ -7,6 +7,15 @@ install! 'cocoapods', :deterministic_uuids => false
 target 'ReactNativeStarterKit' do
   config = use_native_modules!
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
+  pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral"
+  pod 'Permission-LocationAccuracy', :path => "#{permissions_path}/LocationAccuracy"
+  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
+  pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+
   # Flags change depending on the env values.
   flags = get_default_flags()
 

@@ -6,7 +6,7 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { useTheme } from "../../core/theming";
 import { usePermission } from "../../providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, STORAGE_PERMISSIONS } from "../../data/_permissionTypes";
-import { ImageBackground, Modal, View, ViewStyle } from "react-native";
+import { ImageBackground, Modal, Platform, View, ViewStyle } from "react-native";
 import { Button, HelperText, Icon, IconButton } from "../../index";
 import ImagePickerBottomSheet, { ImagePickerBSProps } from "../BottomSheet/ImagePickerBottomSheet";
 import color from "color";
@@ -15,6 +15,7 @@ import Portal from "../Portal/Portal";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
+import { checkMultiple, PERMISSIONS } from "react-native-permissions";
 
 interface Props {
   label?: string;
@@ -31,17 +32,17 @@ interface Props {
 }
 
 export default function ImagePicker({
-                                      initialImageUrl,
-                                      buttonProps,
-                                      description,
-                                      buttonTitle,
-                                      pickerTitle,
-                                      editable = true,
-                                      error,
-                                      errorText,
-                                      style,
-                                      ...rest
-                                    }: Props & ImagePickerBSProps) {
+  initialImageUrl,
+  buttonProps,
+  description,
+  buttonTitle,
+  pickerTitle,
+  editable = true,
+  error,
+  errorText,
+  style,
+  ...rest
+}: Props & ImagePickerBSProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isShowViewer, setIsShowViewer] = useState(false);
   const { colors, roundness } = useTheme();
@@ -49,11 +50,15 @@ export default function ImagePicker({
   const { requestPermissions } = usePermission();
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | undefined>("");
   const handleOpenImagePicker = () => {
-    requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS], () => {
-      setIsOpen(true);
-    });
+    if (Platform.OS == 'android') {
+      requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS], () => {
+        setIsOpen(true);
+      });
+    } else {
+      setIsOpen(true)
+    }
   };
-  
+
   useEffect(() => {
     if (rest.onChangeImage) {
       rest.onChangeImage(selectedImageUrl);
