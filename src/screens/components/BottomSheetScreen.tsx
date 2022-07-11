@@ -13,6 +13,11 @@ import { usePermission } from "../../../tmd/providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, LOCATION_PERMISSIONS, STORAGE_PERMISSIONS } from "../../../tmd/data/_permissionTypes";
 import useBankService from "../../services/bank/useBankService";
 import Page from "../../../tmd/components/Page";
+import DateRangePickerBottomSheet, { DateRange } from "../../../tmd/components/BottomSheet/DateRangePickerBottomSheet";
+import MultiPickerBottomSheet from "../../../tmd/components/BottomSheet/MultiPickerBottomSheet";
+import _countries from "../../../tmd/data/_countries";
+import { PickerItem } from "../../../tmd/model/PickerItem";
+import DatePickerBottomSheet from "../../../tmd/components/BottomSheet/DatePickerBottomSheet";
 
 export default function BottomSheetScreen() {
   const { getBank } = useBankService();
@@ -51,10 +56,38 @@ export default function BottomSheetScreen() {
 
   const [isShowDateFilter, setIsShowDateFilter] = useState(false);
   const [selectedDate, setSelectedDate] = useState<DateFilterPayload | null>(null);
+
+  const [isOpenRange, setIsOpenRange] = useState(false);
+  const [selectedDateRange, setSelectedDateRange] = useState<DateRange | undefined>({});
+
+  const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
+
+  const [isOpenMulti, setIsOpenMulti] = useState(false);
   return (
     <>
       <Page>
 
+        <DatePickerBottomSheet open={isOpenDatePicker} onClose={() => {
+          setIsOpenDatePicker(false);
+        }} />
+        <MultiPickerBottomSheet
+          search
+          open={isOpenMulti}
+          onClose={() => setIsOpenMulti(false)}
+          data={
+            _countries.map((item) => {
+              const i: PickerItem = {
+                id: item.phone_code,
+                name: `+${item.phone_code} (${item.name})`,
+                image: item.flag,
+              };
+              return i;
+            })
+          }
+          onSave={(data) => {
+            console.log(JSON.stringify(data, null, 2));
+          }}
+        />
         <DateFilterBottomSheet
           open={isShowDateFilter}
           initial={selectedDate}
@@ -67,6 +100,19 @@ export default function BottomSheetScreen() {
           onSave={(data) => {
             setSelectedDate(data);
             setIsShowDateFilter(false);
+          }} />
+
+        <DateRangePickerBottomSheet
+          minDays={7} maxDays={30}
+          maxDate={"2022-08-05"}
+          minDate={"2022-06-01"}
+          selected={selectedDateRange}
+          onSave={(data) => {
+            setSelectedDateRange(data);
+          }}
+          open={isOpenRange}
+          onClose={() => {
+            setIsOpenRange(false);
           }} />
         <ScrollView>
           <Stack spacing={16} style={{
@@ -106,6 +152,24 @@ export default function BottomSheetScreen() {
             >
               PERMISSIONS (REJECT)
             </Button>
+
+            <Button onPress={() => {
+              setIsOpenRange(true);
+            }}>
+              Date Range
+            </Button>
+            {
+              selectedDateRange?.startDate &&
+              <Typography>{`Start date = ${selectedDateRange?.startDate}, End date = ${selectedDateRange?.endDate}`}</Typography>
+            }
+
+            <Button onPress={() => {
+              setIsOpenMulti(true);
+            }}>MultiPicker</Button>
+
+            <Button onPress={() => {
+              setIsOpenDatePicker(true);
+            }}>DatePicker</Button>
           </Stack>
         </ScrollView>
       </Page>

@@ -38,6 +38,7 @@ export default function ButtonScreen() {
           }}
         />
         <IconButton
+
           themeSize={"md"}
           icon={"arrow-back"} onPress={() => {
         }}
@@ -48,6 +49,7 @@ export default function ButtonScreen() {
         }}
         />
         <TextButton
+          size={'md'}
           onPress={() => {
           }}
         >

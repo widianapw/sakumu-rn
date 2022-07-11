@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { Button } from "../../../../tmd";
 import useCredentialService from "../../../services/credential/useCredentialService";
 import { navigate } from "../../../navigations/RootNavigation";

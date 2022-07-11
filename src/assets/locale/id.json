@@ -78,6 +78,9 @@
       "image": "Foto"
     },
     "search": "Cari",
-    "select_location": "Pilih Lokasi"
+    "select_location": "Pilih Lokasi",
+    "date_range": "Jarak Hari",
+    "choose_time": "Pilih Waktu",
+    "add_item": "Tambah Item"
   }
 }

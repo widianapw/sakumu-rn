@@ -8,6 +8,7 @@ import TextField from "../TextInput/TextField";
 import DatePicker from "react-native-date-picker";
 import moment from "moment";
 import { useLocale } from "../../../src/providers/LocaleProvider";
+import TimePickerBottomSheet from "../BottomSheet/TimePickerBottomSheet";
 
 interface Props {
   initial?: string;
@@ -18,7 +19,7 @@ interface Props {
 export default function TimePicker({ initial, ...rest }: React.ComponentProps<typeof TextField> & Props) {
   const { t } = useLocale();
   const [isOpenPicker, setIsOpenPicker] = useState(false);
-  const [selected, setSelected] = useState(initial ? new Date() : null);
+  const [selected, setSelected] = useState(initial ? new Date() : undefined);
   const handleOpen = () => {
     setIsOpenPicker(true);
   };
@@ -44,29 +45,40 @@ export default function TimePicker({ initial, ...rest }: React.ComponentProps<ty
         pickerType={"date"}
         onOpenPicker={handleOpen}
         suffixIcon={{
-          icon:'time',
-          size:18
+          icon: "time",
+          size: 18,
         }}
         {...rest}
       />
-      <DatePicker
-        theme={"light"}
-        title={rest.title}
-        modal={true}
+
+      <TimePickerBottomSheet
+        initTime={selected}
         open={isOpenPicker}
-        date={selected ?? new Date()}
-        mode={"time"}
-        confirmText={t("confirm")}
-        cancelText={t("cancel")}
-        androidVariant={"iosClone"}
-        onConfirm={(date) => {
+        onClose={() => {
           setIsOpenPicker(false);
+        }}
+        onSave={(date) => {
           setSelected(date);
         }}
-        onCancel={() => {
-          setIsOpenPicker(false);
-        }}
       />
+      {/*<DatePicker*/}
+      {/*  theme={"light"}*/}
+      {/*  title={rest.title}*/}
+      {/*  modal={true}*/}
+      {/*  open={isOpenPicker}*/}
+      {/*  date={selected ?? new Date()}*/}
+      {/*  mode={"time"}*/}
+      {/*  confirmText={t("confirm")}*/}
+      {/*  cancelText={t("cancel")}*/}
+      {/*  androidVariant={"iosClone"}*/}
+      {/*  onConfirm={(date) => {*/}
+      {/*    setIsOpenPicker(false);*/}
+      {/*    setSelected(date);*/}
+      {/*  }}*/}
+      {/*  onCancel={() => {*/}
+      {/*    setIsOpenPicker(false);*/}
+      {/*  }}*/}
+      {/*/>*/}
 
     </>
   );

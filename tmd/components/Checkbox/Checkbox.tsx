@@ -39,6 +39,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   onCheckedChange?: (checked: boolean) => void;
+  value?: string | number;
 
 };
 
@@ -67,6 +68,7 @@ const Checkbox = ({
                     checked,
                     indeterminate,
                     testID,
+                    value,
                     ...rest
                   }: Props) => {
   const { current: scaleAnim } = React.useRef<Animated.Value>(

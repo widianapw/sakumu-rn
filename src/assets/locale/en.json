@@ -78,6 +78,9 @@
       "image": "Image"
     },
     "search": "Search",
-    "select_location": "Select Location"
+    "select_location": "Select Location",
+    "date_range": "Date Range",
+    "choose_time": "Choose Time",
+    "add_item": "Add Item"
   }
 }

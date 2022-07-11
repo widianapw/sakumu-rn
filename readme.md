@@ -59,6 +59,8 @@ This template follows a very simple project structure:
   - `navigations`: Folder to store the navigators.
   - `screens`: Folder that contains all your application screens/features.
   - `services`: Folder that contains the application storage logic.
+  - `redux`: Folder that contains the application redux logic.
+  - `utils`: Folder that contains the application utility logic.
   - free styles
 - `tmd`: This folder is contains template code for starter kit
 
@@ -103,7 +105,7 @@ To keep an application scalable and organized, the global static resources that 
         - ic_home@3x.png
       - ic_marker.svg (SVG)
 
-### Components (Phase 1):
+### Components:
 
 - Alert
 - BottomSheet
@@ -111,6 +113,7 @@ To keep an application scalable and organized, the global static resources that 
   - ConfirmationBottomSheet
   - DateFilterBottomSheet
   - PickerBottomSheet
+  - MultiPickerBottomSheet
 - Button
   - Button
   - IconButton
@@ -125,26 +128,29 @@ To keep an application scalable and organized, the global static resources that 
 - OTPInput
 - Picker
   - DatePicker
+  - DateRangePicker
   - TimePicker
   - MapPicker
   - PhoneField
   - ImagePicker
   - MultiImagePicker
-- Portal
 - RadioButton
 - RHF: (react-hook-form)
   - RHFTextField
   - RHFSelect
+  - RHFMultiSelect
   - RHFPhoneField
   - RHFDatePicker
+  - RHFDateRangePicker
   - RHFTimePicker
 - Select
 - Tag
 - TextInput
+- Toast
 - TouchableRipple
 - Typography
 
-### Context Provider (Phase 1)
+### Context Provider: 
 
 - ThemeProvider
 - LocaleProvider

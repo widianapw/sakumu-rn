@@ -105,7 +105,7 @@ const Button = ({
                   fullWidth = false,
                   disabled,
                   compact,
-                  variant = "primary",
+                  variant,
                   dark,
                   loading,
                   icon,
@@ -142,13 +142,14 @@ const Button = ({
 
 
   const { colors, roundness } = theme;
-
+  const usedVariant = variant ?? theme.button.variant;
   let backgroundColor: string,
     borderColor: string,
     textColor: string,
     borderWidth: number;
 
-  if (variant === "primary") {
+
+  if (usedVariant === "primary") {
     if (disabled) {
       backgroundColor = color(theme.dark ? white : black)
         .alpha(0.12)
@@ -163,7 +164,7 @@ const Button = ({
     backgroundColor = "transparent";
   }
 
-  if (variant === "secondary") {
+  if (usedVariant === "secondary") {
     borderColor = colors.primary?.main;
     borderWidth = 1;
   } else {
@@ -178,7 +179,7 @@ const Button = ({
       .string();
     borderColor = colors.neutral.neutral_50;
 
-  } else if (variant === "primary") {
+  } else if (usedVariant === "primary") {
     let isDark;
 
     if (typeof dark === "boolean") {
@@ -226,8 +227,9 @@ const Button = ({
     : StyleSheet.flatten(contentStyle)?.flexDirection === "row-reverse"
       ? styles.iconReverse
       : styles.icon;
+
   let buttonType: TypographyType;
-  switch (size) {
+  switch (usedSize) {
     case "sm" : {
       buttonType = "button3";
       break;
@@ -380,7 +382,6 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: "center",
-    letterSpacing: 1,
   },
   compactLabel: {
     marginHorizontal: 8,

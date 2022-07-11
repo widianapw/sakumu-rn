@@ -111,7 +111,7 @@ const TextInputFilled = ({
           disabled={disabled}
           label={label}
           style={{ marginBottom: 4 }}
-          required={rest.required}
+          required={rest.requiredLabel}
         />
       }
       <View>

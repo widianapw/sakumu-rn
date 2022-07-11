@@ -65,6 +65,7 @@ const PermissionProvider = ({ children }: any) => {
         }
       });
   };
+
   return (
     <PermissionContext.Provider
       value={{ requestPermissions }}>

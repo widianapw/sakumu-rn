@@ -43,17 +43,18 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
     modalizeRef?.current?.open();
   };
 
+  const handleClose = () => {
+    modalizeRef?.current?.close();
+    // props.onClose();
+  };
+
+
   let imageCropSize = { width: imageSize, height: imageSize };
   if (props.ratio) {
     const ratio = props.ratio.split(":");
     imageCropSize = { width: imageSize, height: (imageSize / parseInt(ratio[0]) * parseInt(ratio[1])) };
   }
 
-
-  const handleClose = () => {
-    modalizeRef?.current?.close();
-    // props.onClose();
-  };
 
   const handleOpenCamera = () => {
     ImagePicker.openCamera({
@@ -62,7 +63,7 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
       cropping: props.crop ?? true,
     }).then(image => {
       if (props.onChangeImage) {
-        console.log(image);
+        console.log(JSON.stringify(image, null, 2));
         props?.onChangeImage(image);
       }
     }).catch(reason => {

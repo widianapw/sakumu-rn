@@ -6,16 +6,13 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { useTheme } from "../../core/theming";
 import { usePermission } from "../../providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, STORAGE_PERMISSIONS } from "../../data/_permissionTypes";
-import { ImageBackground, Modal, Platform, SafeAreaView, View, ViewStyle } from "react-native";
+import { ImageBackground, Platform, View, ViewStyle } from "react-native";
 import { Button, HelperText, Icon, IconButton } from "../../index";
 import ImagePickerBottomSheet, { ImagePickerBSProps } from "../BottomSheet/ImagePickerBottomSheet";
 import color from "color";
-import ImageViewer from "react-native-image-zoom-viewer";
-import Portal from "../Portal/Portal";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
-import { white } from "../../styles/colors";
 import ImageViewerModal from "../Modal/ImageViewerModal";
 
 interface Props {
@@ -30,20 +27,22 @@ interface Props {
   error?: boolean;
   errorText?: string;
   style?: ViewStyle;
+  onChangeImageUrl?: (imageUrl: string) => void;
 }
 
 export default function ImagePicker({
-  initialImageUrl,
-  buttonProps,
-  description,
-  buttonTitle,
-  pickerTitle,
-  editable = true,
-  error,
-  errorText,
-  style,
-  ...rest
-}: Props & ImagePickerBSProps) {
+                                      initialImageUrl,
+                                      buttonProps,
+                                      description,
+                                      buttonTitle,
+                                      pickerTitle,
+                                      editable = true,
+                                      error,
+                                      errorText,
+                                      style,
+                                      onChangeImageUrl,
+                                      ...rest
+                                    }: Props & ImagePickerBSProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isShowViewer, setIsShowViewer] = useState(false);
   const { colors, roundness } = useTheme();
@@ -64,8 +63,8 @@ export default function ImagePicker({
   };
 
   useEffect(() => {
-    if (rest.onChangeImage) {
-      rest.onChangeImage(selectedImageUrl);
+    if (onChangeImageUrl) {
+      onChangeImageUrl(selectedImageUrl);
     }
   }, [selectedImageUrl]);
 

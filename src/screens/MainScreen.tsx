@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 27/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView } from "react-native";
 import { Button, Stack } from "../../tmd";
 import Typography from "../../tmd/components/Typography/Typography";
@@ -10,11 +10,15 @@ import { useAuth } from "../providers/AuthProvider";
 import { useLocale } from "../providers/LocaleProvider";
 import Page from "../../tmd/components/Page";
 import { navigate } from "../navigations/RootNavigation";
+import Toast from "../../tmd/components/Toast";
 
 const MainScreen = ({ navigation }: any) => {
   const { user, logout, isLoadingLogout } = useAuth();
-  const [userInfo, setUserInfo] = useState({});
   const { momentLocale } = useLocale();
+
+  const showToast = () => {
+    Toast.show("Damn! You are logged in!");
+  };
 
 
   return (
@@ -26,10 +30,14 @@ const MainScreen = ({ navigation }: any) => {
           style={{
             alignItems: "center",
             justifyContent: "center",
-          }}
+          }}S
         >
           <Typography>Welcome, {user?.name}</Typography>
-          <Typography>{momentLocale.format("DD MMMM YYYY")}</Typography>
+          <Typography type={"body3"}>{momentLocale().format("DD MMMM YYYY")}</Typography>
+
+          <Button onPress={showToast}>
+            Show Toast
+          </Button>
 
           <Button
             onPress={() => {

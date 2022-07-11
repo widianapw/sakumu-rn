@@ -27,7 +27,7 @@ const TextFieldScreen = () => {
             }}>
 
 
-            <TextInput
+            <TextField
               helperText={"Helper Text"}
               requiredLabel
               mode={"flat"}
@@ -36,7 +36,7 @@ const TextFieldScreen = () => {
               search
             />
 
-            <TextInput
+            <TextField
               requiredLabel
               mode={"flat"}
               password
@@ -44,7 +44,7 @@ const TextFieldScreen = () => {
               placeholder={"password"}
             />
 
-            <TextInput
+            <TextField
               mode={"flat"}
               label="Counter"
               counter
@@ -55,7 +55,7 @@ const TextFieldScreen = () => {
             />
 
 
-            <TextInput
+            <TextField
               maxLength={8}
               counter
               label="Counter"
@@ -63,7 +63,7 @@ const TextFieldScreen = () => {
               placeholder={"counter"}
             />
 
-            <TextInput
+            <TextField
               requiredLabel
               helperText={"Helper Text"}
               mode={"contained"}
@@ -73,7 +73,7 @@ const TextFieldScreen = () => {
               placeholder={"Email"}
             />
 
-            <TextInput
+            <TextField
               style={{
                 marginTop: 4,
               }}
@@ -94,8 +94,7 @@ const TextFieldScreen = () => {
             <TextField
               search
               mode={"filled"}
-              label="Filled"
-              shape={"rect"}
+              shape={"rounded"}
               placeholder={"Filled"}
             />
 

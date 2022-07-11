@@ -110,7 +110,7 @@ const TextInputContained = ({
     <View style={viewStyle}>
       {
         label &&
-        <LabelInput disabled={disabled} label={label} style={{ marginBottom: 4 }} required={rest.required} />
+        <LabelInput disabled={disabled} label={label} style={{ marginBottom: 4 }} required={rest.requiredLabel} />
       }
       <View>
         {/*

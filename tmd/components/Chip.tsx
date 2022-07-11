@@ -19,6 +19,7 @@ export type ChipProps = {
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   icon?: IconProps;
+  suffixIcon?: IconProps;
   selected?: boolean;
   onPress?: () => void;
   type?: "filter" | "picker";
@@ -36,6 +37,7 @@ export default function Chip({
                                text,
                                selected,
                                type = "filter",
+                               suffixIcon,
                                ...rest
                              }: ChipProps) {
   const { colors, chip, roundness } = useTheme();
@@ -153,6 +155,18 @@ export default function Chip({
             type={"label1"}>
             {selectedObj?.name ?? text}
           </Typography>
+          {
+            suffixIcon &&
+            <Icon
+              style={{
+                marginLeft: 4,
+              }}
+              size={18}
+              color={txtColor}
+              {...suffixIcon}
+            />
+          }
+
           {
             type == "picker" &&
             <Icon

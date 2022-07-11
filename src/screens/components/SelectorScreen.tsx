@@ -43,6 +43,9 @@ export default function SelectorScreen() {
             <RadioButton value={"2"} text={"2"} />
           </RadioButtonGroup>
 
+          <RadioButton value={"2"} text={"2"}  />
+
+
           <Switch
             onChange={() => {
               setIsChecked(!isChecked);

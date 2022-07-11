@@ -1,24 +1,24 @@
 /**
- * Created by Widiana Putra on 29/06/2022
+ * Created by Widiana Putra on 08/07/2022
  * Copyright (c) 2022 - Made with love
  */
 import React, { ComponentProps } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import DatePicker from "../picker/DatePicker";
+import DateRangePicker from "../picker/DateRangePicker";
 
 interface Props {
   name: string;
 }
 
-export default function RHFDatePicker({ name, ...rest }: Props & ComponentProps<typeof DatePicker>) {
+export default function RHFDateRangePicker({ name, ...rest }: Props & ComponentProps<typeof DateRangePicker>) {
   const { control, setValue, clearErrors } = useFormContext();
   return (
     <Controller
       name={name}
       control={control}
       render={({ field: { onChange, onBlur, value }, fieldState }) => {
-        return <DatePicker
-          onDateChangeSendFormatted={(val) => {
+        return <DateRangePicker
+          onChangeRange={(val) => {
             setValue(name, val);
             clearErrors(name);
           }}

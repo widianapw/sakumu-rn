@@ -1,33 +1,33 @@
 /**
- * Created by Widiana Putra on 06/06/2022
+ * Created by Widiana Putra on 08/07/2022
  * Copyright (c) 2022 - Made with love
  */
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
-import { Portal } from "react-native-portalize";
 import { Modalize } from "react-native-modalize";
-import { Animated, FlatList, Image, Pressable, View } from "react-native";
-import Typography from "../Typography/Typography";
-import { Button, Divider, useTheme } from "../../index";
-import TextField from "../TextInput/TextField";
-import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
-import { PickerItem } from "../../model/PickerItem";
-import RadioButton from "../RadioButton/RadioButton";
+import { useTheme } from "../../core/theming";
 import { useTranslation } from "react-i18next";
+import { Animated, FlatList, Image, Pressable, View } from "react-native";
+import { Button, Checkbox, Divider } from "../../index";
+import { Portal } from "react-native-portalize";
+import Typography from "../Typography/Typography";
+import TextField from "../TextInput/TextField";
+import { PickerItem } from "../../model/PickerItem";
 
 interface Props {
   open?: boolean;
-  onClose?: () => void;
-  value?: string | number;
+  onClose: () => void;
+  value?: string[] | number[];
   data?: PickerItem[];
   onReset?: () => void;
-  onSave?: (item?: PickerItem) => void;
+  onSave?: (items?: PickerItem[]) => void;
   title?: string;
   search?: boolean;
 }
 
-export default function PickerBottomSheet(props: Props & ComponentProps<typeof Modalize>) {
+
+export default function MultiPickerBottomSheet(props: Props & ComponentProps<typeof Modalize>) {
   const modalizeRef = useRef<Modalize>(null);
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState<string[] | number[]>([]);
   const [list, setList] = useState(props.data);
   const [searchQuery, setSearchQuery] = useState("");
   const theme = useTheme();
@@ -36,15 +36,11 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
 
   const isFullHeight = props.data?.length >= 6;
 
-  // useEffect(() => {
-  //   // if (props?.initial) {
-  //   setSelected(props?.value);
-  //   // }
-  // }, [props.value]);
-
   useEffect(() => {
     if (props.open) {
-      setSelected(props?.value);
+      if (props?.value) {
+        setSelected(props?.value);
+      }
       setSearchQuery("");
       modalizeRef?.current?.open();
     } else {
@@ -60,10 +56,23 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
     }
   }, [searchQuery]);
 
+  const handleSelected = (id: number | string) => {
+    const arr = [...selected];
+    if (arr?.includes(id)) {
+      const index = arr.indexOf(id);
+      if (index !== -1) {
+        arr.splice(index, 1);
+      }
+    } else {
+      arr.push(id);
+    }
+    setSelected(arr);
+  };
+
   const renderItem = ({ item }) => {
     return <Pressable
       onPress={() => {
-        setSelected(item?.id);
+        handleSelected(item?.id);
       }}
     >
       <View
@@ -83,31 +92,31 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
           </View>
         }
 
-        <RadioButton
+        <Checkbox
+          checked={selected?.includes(item?.id)}
           containerStyle={{
             flexDirection: "row-reverse",
             flex: 1,
+            paddingVertical: 8,
+            paddingHorizontal: 4,
           }}
           text={item?.name}
           textStyle={{
             flexGrow: 1,
             color: colors.neutral.neutral_90,
+            marginLeft: 0,
           }}
-          value={item?.id}
         />
       </View>
       <Divider />
     </Pressable>;
   };
-
   return <Portal>
     <Modalize
       adjustToContentHeight={!isFullHeight}
       onClose={() => {
         setSearchQuery("");
-        if (props.onClose) {
-          props.onClose();
-        }
+        props.onClose();
       }}
       modalStyle={
         [{
@@ -160,14 +169,6 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
                 </View>
               }
             </View>
-            {/*{(props.search || props.onReset) &&*/}
-            {/*  <Divider*/}
-            {/*    variant={"dotted"}*/}
-            {/*    style={{*/}
-            {/*      marginTop: 8,*/}
-            {/*      marginBottom: 0,*/}
-            {/*    }} />*/}
-            {/*}*/}
           </View>
 
           <View
@@ -177,37 +178,24 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
                 : {}
             }
           >
-            <RadioButtonGroup
-              onValueChange={(value) => {
-                setSelected(value);
+            <FlatList
+              style={{
+                paddingHorizontal: 16,
               }}
-              value={selected}>
-              <FlatList
-                style={{
-                  paddingHorizontal: 16,
-                }}
-                data={list}
-                keyExtractor={(item) => item.name}
-                renderItem={renderItem}
-              />
-            </RadioButtonGroup>
+              data={list}
+              keyExtractor={(item) => item.name}
+              renderItem={renderItem}
+            />
           </View>
-          {/*<Divider*/}
-          {/*  style={{*/}
-          {/*    marginTop: 0,*/}
-          {/*  }}*/}
-          {/*  variant={"dotted"} />*/}
 
           <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
             <Button
               size={"lg"}
               onPress={() => {
                 if (props.onSave) {
-                  const obj = props.data?.find(it => it.id == selected);
-                  props.onSave(obj);
-                  if (props.onClose) {
-                    props?.onClose();
-                  }
+                  const objs = props?.data?.filter((item) => selected.includes(item?.id));
+                  props.onSave(objs);
+                  props.onClose();
                 }
               }}
               style={{

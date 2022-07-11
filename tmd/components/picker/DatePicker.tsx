@@ -4,39 +4,42 @@
  */
 import React, { ComponentProps, useState } from "react";
 import TextField from "../TextInput/TextField";
-import Icon from "../Icon";
-import { default as DatePickerDialog } from "react-native-date-picker";
 import moment from "moment";
 import { useTheme } from "../../core/theming";
-import TmdConstants from "../../utils/TmdConstants";
 import { useLocale } from "../../../src/providers/LocaleProvider";
+import DatePickerBottomSheet from "../BottomSheet/DatePickerBottomSheet";
+import TmdConstants from "../../utils/TmdConstants";
 
 interface Props {
   date?: string;
   onDateChanges?: (date: Date) => void;
   onDateChangesFormatted?: (date: string) => void;
+  onDateChangeSendFormatted?: (date: string) => void;
   title?: string;
 }
+
 
 export default function DatePicker({
                                      date,
                                      onDateChanges,
                                      onDateChangesFormatted,
+                                     onDateChangeSendFormatted,
                                      ...rest
                                    }: ComponentProps<typeof TextField> & Props) {
-  const { t } = useLocale();
+  const { t, momentLocale } = useLocale();
   const [isOpenPicker, setIsOpenPicker] = useState(false);
-  const [selected, setSelected] = useState(date ? moment(date).toDate() : null);
+  const [selected, setSelected] = useState(date ? moment(date).toDate() : undefined);
   const handleOpen = () => {
     setIsOpenPicker(true);
   };
   const theme = useTheme();
 
+  // @ts-ignore
   return (
     <>
       <TextField
         value={
-          selected ? moment(selected).format("D MMMM YYYY") : undefined
+          selected ? momentLocale(selected).format("D MMMM YYYY") : undefined
         }
         pickerType={"date"}
         editable={false}
@@ -44,36 +47,34 @@ export default function DatePicker({
         onOpenPicker={handleOpen}
         {...rest}
         suffixIcon={{
-          icon:'ios-calendar',
-          size:18
+          icon: "ios-calendar",
+          size: 18,
         }}
       />
 
-      <DatePickerDialog
-        theme={'light'}
+
+      <DatePickerBottomSheet
         title={rest.title}
-        modal={true}
-        mode={"date"}
-        open={isOpenPicker}
-        date={selected ?? new Date()}
-        confirmText={t("confirm")}
-        cancelText={t("cancel")}
-        androidVariant={"iosClone"}
-        onConfirm={(date) => {
-          setIsOpenPicker(false);
+        theme={"light"}
+        initDate={selected}
+        onSave={(date) => {
           setSelected(date);
           if (onDateChanges) {
             onDateChanges(date);
           }
           if (onDateChangesFormatted) {
-            const formatted = moment(date).format(TmdConstants.DATE_FORMAT_SEND_API);
-            onDateChangesFormatted(formatted);
+            const dateFormatted = momentLocale(date).format("D MMMM YYYY");
+            onDateChangesFormatted(dateFormatted);
+          }
+          if (onDateChangeSendFormatted) {
+            const dateFormatted = momentLocale(date).format(TmdConstants.DATE_FORMAT_SEND_API);
+            onDateChangeSendFormatted(dateFormatted);
           }
         }}
-        onCancel={() => {
-          setIsOpenPicker(false);
-        }}
+        open={isOpenPicker}
+        onClose={() => setIsOpenPicker(false)}
       />
+
 
     </>
   );

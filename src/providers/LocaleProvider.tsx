@@ -15,7 +15,7 @@ type LocaleProviderType = {
   changeLanguage: (lang: string) => void;
   currentLanguage: string;
   t: TFunction<"translation", undefined>;
-  momentLocale: moment.Moment;
+  momentLocale: (inp?: moment.MomentInput, format?: moment.MomentFormatSpecification, language?: string, strict?: boolean) => moment.Moment;
 }
 const initialState: LocaleProviderType = {
   changeLanguage: (lang: string) => {
@@ -23,7 +23,7 @@ const initialState: LocaleProviderType = {
   currentLanguage: "en",
   t: () => {
   },
-  momentLocale: moment(),
+  momentLocale: (inp?: moment.MomentInput, format?: moment.MomentFormatSpecification, language?: string, strict?: boolean) => moment(),
 };
 
 export const LocaleContext = createContext(initialState);
@@ -32,17 +32,22 @@ export const useLocale = () => useContext(LocaleContext);
 const LocaleChildProvider = ({ children }: any) => {
   const { i18n, t } = useTranslationi18n();
   const [currentLanguage, setCurrentLanguage] = useState("en");
-  const momentLocale = moment().locale(currentLanguage);
   const changeLanguage = (lang: string) => {
     AsyncStorage.setItem(StorageKey.LOCALE, lang);
     setCurrentLanguage(lang);
     i18n.changeLanguage(lang);
   };
 
+
+  const momentLocale = (inp?: moment.MomentInput, format?: moment.MomentFormatSpecification, language?: string, strict?: boolean) => {
+    return moment(inp, format, language, strict).locale(currentLanguage);
+  };
+
   const changeLanguageAsync = async () => {
     const lang = await AsyncStorage.getItem(StorageKey.LOCALE) ?? currentLanguage;
     changeLanguage(lang);
   };
+
 
   useEffect(() => {
     changeLanguageAsync();

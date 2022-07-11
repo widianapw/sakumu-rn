@@ -54,10 +54,11 @@ export default function Stack({
             activeChildren.map((child, index) => {
               return <>
                 {
+                  child &&
                   React.cloneElement(child, {
                     key: index,
                     style: [
-                      child.props.style,
+                      child?.props?.style,
                       spacingStyle(index),
                     ],
                   })

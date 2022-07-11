@@ -13,6 +13,8 @@ import DatePicker from "../../../tmd/components/picker/DatePicker";
 import TimePicker from "../../../tmd/components/picker/TimePicker";
 import MapPicker from "../../../tmd/components/picker/MapPicker";
 import Page from "../../../tmd/components/Page";
+import DateRangePicker from "../../../tmd/components/picker/DateRangePicker";
+import MultiSelect from "../../../tmd/components/Select/MultiSelect";
 
 export default function PickerScreen() {
   const theme = useTheme();
@@ -40,19 +42,28 @@ export default function PickerScreen() {
               setInitialMap(data);
             }}
             initial={initialMap}
-        label={"Map Picker"}
-        placeholder={"Map Picker"}
-      />
+            label={"Map Picker"}
+            placeholder={"Map Picker"}
+          />
 
-      <DatePicker
-        label={"Date Picker"}
-        placeholder={"Pick date"}
-      />
+          <DatePicker
+            label={"Date Picker"}
+            placeholder={"Pick date"}
+          />
 
-      <TimePicker
-        label={"Time Picker"}
-        placeholder={"Time Picker"}
-      />
+          <DateRangePicker
+            minDate={"2022-06-01"}
+            maxDate={"2022-08-05"}
+            minDays={7}
+            maxDays={30}
+            label={"Date Range Picker"}
+            placeholder={"Pick date range"}
+          />
+
+          <TimePicker
+            label={"Time Picker"}
+            placeholder={"Time Picker"}
+          />
 
           <PhoneField
             search={true}
@@ -146,6 +157,34 @@ export default function PickerScreen() {
           })
         }
       />
+
+          <MultiSelect
+            label={"Multi Select"}
+            search={true}
+            options={
+              _countries.map((item) => {
+                const i: PickerItem = {
+                  id: item.phone_code,
+                  name: `+${item.phone_code} (${item.name})`,
+                };
+                return i;
+              })
+            }
+          />
+
+          <MultiSelect
+            label={"Multi Select"}
+            search={true}
+            options={
+              _countries.map((item) => {
+                const i: PickerItem = {
+                  id: item.phone_code,
+                  name: `+${item.phone_code} (${item.name})`,
+                };
+                return i;
+              })
+            }
+          />
 
         </Stack>
 
