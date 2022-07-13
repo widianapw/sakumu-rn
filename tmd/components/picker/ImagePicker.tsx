@@ -64,7 +64,7 @@ export default function ImagePicker({
 
   useEffect(() => {
     if (onChangeImageUrl) {
-      onChangeImageUrl(selectedImageUrl);
+      onChangeImageUrl(selectedImageUrl ?? "");
     }
   }, [selectedImageUrl]);
 
@@ -125,6 +125,9 @@ export default function ImagePicker({
       }} open={isShowViewer}/>
 
       <ImagePickerBottomSheet
+        onDelete={() => {
+          setSelectedImageUrl("");
+        }}
         camera={rest.camera}
         gallery={rest.gallery}
         ratio={rest.ratio}

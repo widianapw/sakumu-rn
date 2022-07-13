@@ -44,9 +44,9 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => (
  *   <List.Section>
  *     <List.Subheader>Some title</List.Subheader>
- *     <List.Item title="First Item" left={() => <List.Icon icon="folder" />} />
- *     <List.Item
- *       title="Second Item"
+ *     <List.ListItem title="First ListItem" left={() => <List.Icon icon="folder" />} />
+ *     <List.ListItem
+ *       title="Second ListItem"
  *       left={() => <List.Icon color="#000" icon="folder" />}
  *     />
  *   </List.Section>

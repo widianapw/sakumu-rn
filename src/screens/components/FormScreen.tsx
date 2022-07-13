@@ -31,7 +31,7 @@ export default function FormScreen() {
     date: yup.string().required().label(t("labels.date")),
     dateRange: yup.mixed().required().label(t("labels.date_range")),
     time: yup.string().required().label(t("labels.time")),
-    image: yup.mixed().required().label(t("labels.image")),
+    image: yup.string().required().label(t("labels.image")),
     multiImage: yup.array().min(2).required(),
     map: yup.mixed().required(),
     multiSelect: yup.array().min(2).required(),
@@ -47,7 +47,7 @@ export default function FormScreen() {
       date: "",
       time: "",
       multiSelect: undefined,
-      image: undefined,
+      image: "",
       multiImage: undefined,
       dateRange: undefined,
       map: undefined,
@@ -58,6 +58,10 @@ export default function FormScreen() {
 
   const onSubmit = data => {
     console.log(JSON.stringify(data, null, 2));
+  };
+
+  const onError = errors => {
+    console.log(JSON.stringify(errors, null, 2));
   };
 
   return (
@@ -170,7 +174,7 @@ export default function FormScreen() {
                 marginTop: 16,
               }}
               fullWidth
-              onPress={handleSubmit(onSubmit)}
+              onPress={handleSubmit(onSubmit, onError)}
             >Submit Form</Button>
           </Stack>
         </FormProvider>

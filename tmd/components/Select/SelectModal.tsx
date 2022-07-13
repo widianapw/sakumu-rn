@@ -1,11 +1,11 @@
 /**
- * Created by Widiana Putra on 10/06/2022
+ * Created by Widiana Putra on 13/07/2022
  * Copyright (c) 2022 - Made with love
  */
-import TextField, { TextInputProps } from "../TextInput/TextField";
-import React, { ComponentProps, useEffect, useMemo, useState } from "react";
-import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
+import React, { useEffect, useMemo, useState } from "react";
 import { PickerItem } from "../../model/PickerItem";
+import TextField, { TextInputProps } from "../TextInput/TextField";
+import PickerModal, { PickerModalProps } from "../Modal/PickerModal";
 import { useTheme } from "../../core/theming";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   onSelectedValueChange?: (value: string | number) => void;
 }
 
-const Select = (
+export default function SelectModal(
   {
     initial,
     options,
@@ -22,8 +22,8 @@ const Select = (
     onSelectedValueChange,
     ...rest
   }:
-    Props & TextInputProps & ComponentProps<typeof PickerBottomSheet>
-) => {
+    Props & TextInputProps & PickerModalProps,
+) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string | number>(initial);
   const theme = useTheme();
@@ -36,23 +36,18 @@ const Select = (
     setIsOpen(false);
   };
 
-  const handleSave = () => {
-
-  };
-
   useEffect(() => {
     if (onSelectedValueChange) {
       onSelectedValueChange(selected);
     }
   }, [selected]);
 
-
   return <>
     <TextField
       label={rest.label}
       placeholder={rest.placeholder}
       onOpenPicker={() => {
-        console.log("OPEN THIS")
+        console.log("OPEN THIS");
         setIsOpen(true);
       }}
       value={selectedObj?.name}
@@ -60,13 +55,13 @@ const Select = (
       editable={false}
       mode={rest.mode ?? theme?.textInput?.mode}
       suffixIcon={{
-        icon:"chevron-down",
-        size:16
+        icon: "chevron-down",
+        size: 16,
       }}
       {...rest}
     />
 
-    <PickerBottomSheet
+    <PickerModal
       value={selected}
       search={search}
       open={isOpen}
@@ -75,8 +70,9 @@ const Select = (
       onSave={(value) => {
         setSelected(value?.id);
       }}
-      title={rest.title ?? rest.label} />
+      searchPlaceholder={rest.searchPlaceholder}
+      title={rest.title ?? rest.label}
+      renderCustomItem={rest.renderCustomItem}
+    />
   </>;
-};
-
-export default Select;
+}

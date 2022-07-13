@@ -17,6 +17,7 @@ export default function RHFMultiImagePicker({ name, ...rest }: Props & Component
       control={control}
       render={({ field: { onChange, onBlur, value }, fieldState }) => {
         return <MultiImagePicker
+
           onChangeSelectedUrls={(urls) => {
             clearErrors(name);
             setValue(name, urls);

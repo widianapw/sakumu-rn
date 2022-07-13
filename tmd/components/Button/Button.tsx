@@ -12,7 +12,7 @@ import Typography, { TypographyType } from "../Typography/Typography";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonShape = "rect" | "rounded"
-export type ButtonSize = "sm" | "md" | "lg"
+export type ButtonSize = "xs" | "sm" | "md" | "lg"
 
 interface Props {
   /**
@@ -79,10 +79,6 @@ interface Props {
    * Function to execute on long press.
    */
   onLongPress?: () => void;
-  /**
-   * Style of button's inner content.
-   * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
-   */
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -97,6 +93,7 @@ interface Props {
    * testID to be used on tests.
    */
   testID?: string;
+  suffixIcon?: IconProps;
 }
 
 const Button = ({
@@ -121,6 +118,7 @@ const Button = ({
                   labelStyle,
                   testID,
                   accessible,
+                  suffixIcon,
                   ...rest
                 }: Props & React.ComponentProps<typeof Surface>) => {
   const theme = useTheme();
@@ -128,9 +126,15 @@ const Button = ({
   let marginSize = 8;
 
   const usedSize = size ?? theme.button.size;
+  let defIconSize= 18
   switch (usedSize) {
+    case "xs":
+      marginSize = 4;
+      defIconSize = 14
+      break;
     case "sm":
       marginSize = 8;
+      defIconSize = 14
       break;
     case "md":
       marginSize = 10;
@@ -224,9 +228,7 @@ const Button = ({
   const isIconButton = !children && icon;
   const iconStyle = isIconButton
     ? { ...styles.iconButton, margin: marginSize }
-    : StyleSheet.flatten(contentStyle)?.flexDirection === "row-reverse"
-      ? styles.iconReverse
-      : styles.icon;
+    : styles.icon;
 
   let buttonType: TypographyType;
   switch (usedSize) {
@@ -248,9 +250,6 @@ const Button = ({
     <View style={
       [
         { display: "flex", flexDirection: fullWidth ? "column" : "row" },
-        fullWidth ? {
-          flex: 1,
-        } : {},
         rest.containerStyle,
       ]
     }>
@@ -279,7 +278,10 @@ const Button = ({
           accessible={accessible}
           disabled={disabled}
           rippleColor={rippleColor}
-          style={touchableStyle}
+          style={[
+            touchableStyle,
+            fullWidth && { width: "100%" },
+          ]}
           testID={testID}
         >
           <View>
@@ -296,13 +298,8 @@ const Button = ({
                   <Icon
                     icon={icon.icon}
                     source={icon.source}
-                    size={icon.size ?? customLabelSize ?? 18}
-                    color={
-                      icon.color ??
-                      typeof customLabelColor === "string"
-                        ? customLabelColor
-                        : textColor
-                    }
+                    size={icon.size ?? customLabelSize ?? defIconSize}
+                    color={icon.color ?? textColor}
                   />
                 </View>
               ) : null}
@@ -335,6 +332,17 @@ const Button = ({
                 >
                   {children}
                 </Typography>
+              }
+
+              {
+                suffixIcon &&
+                <View style={{ marginLeft: 8 }}>
+                  <Icon
+                    size={suffixIcon?.size ?? defIconSize}
+                    color={suffixIcon?.color ?? textColor}
+                    {...suffixIcon}
+                  />
+                </View>
               }
             </View>
 

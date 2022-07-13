@@ -3,8 +3,8 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { ComponentProps } from "react";
-import ImagePicker from "../picker/ImagePicker";
 import { Controller, useFormContext } from "react-hook-form";
+import ImagePicker from "../picker/ImagePicker";
 
 interface Props {
   name: string;
@@ -18,14 +18,14 @@ export default function RHFImagePicker({
   return (
     <>
       <Controller
-        name={name}
         control={control}
+        name={name}
         render={({ field, fieldState }) => {
           return <ImagePicker
             error={fieldState.error != undefined}
             errorText={fieldState.error?.message}
-            onChangeImageUrl={(image) => {
-              setValue(name, image);
+            onChangeImageUrl={(val) => {
+              setValue(name, val);
               clearErrors(name);
             }}
             {...rest}

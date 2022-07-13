@@ -120,9 +120,9 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
  * import { List } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <List.Item
- *     title="First Item"
- *     description="Item description"
+ *   <List.ListItem
+ *     title="First ListItem"
+ *     description="ListItem description"
  *     left={props => <List.Icon {...props} icon="folder" />}
  *   />
  * );
@@ -240,7 +240,7 @@ const ListItem = ({
   );
 };
 
-ListItem.displayName = 'List.Item';
+ListItem.displayName = 'List.ListItem';
 
 const styles = StyleSheet.create({
   container: {

@@ -7,7 +7,6 @@ import { useTheme } from "../../core/theming";
 import type { RenderProps } from "./types";
 import TextInputContained from "./TextInputContained";
 import TextInputFilled from "./TextInputFilled";
-import TextInputOutlined from "./TextInputOutlined";
 import { IconProps } from "../Icon";
 
 const BLUR_ANIMATION_DURATION = 180;
@@ -447,54 +446,14 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
           maxFontSizeMultiplier={maxFontSizeMultiplier}
           onClear={() => {
             root.current?.clear();
+            if (onClear) {
+              onClear();
+            }
           }}
         />
       );
     }
 
-    if (usedMode === "outlined") {
-      return (
-        <TextInputOutlined
-          onClear={() => {
-            root.current?.clear();
-          }}
-          disabled={disabled}
-          password={password}
-          counter={counter}
-          errorText={errorText}
-          helperText={helperText}
-          error={errorProp}
-          multiline={multiline}
-          editable={editable}
-          render={render}
-          {...rest}
-          value={value}
-
-          parentState={{
-            labeled,
-            error,
-            focused,
-            placeholder,
-            value,
-            labelLayout,
-            leftLayout,
-            rightLayout,
-          }}
-          innerRef={(ref) => {
-            root.current = ref;
-          }}
-          onFocus={handleFocus}
-          forceFocus={forceFocus}
-          onBlur={handleBlur}
-          onChangeText={handleChangeText}
-          onLayoutAnimatedText={handleLayoutAnimatedText}
-          onLeftAffixLayoutChange={onLeftAffixLayoutChange}
-          onRightAffixLayoutChange={onRightAffixLayoutChange}
-          maxFontSizeMultiplier={maxFontSizeMultiplier}
-        />
-
-      );
-    }
 
     if (usedMode === "contained") {
       return (
@@ -534,6 +493,9 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
           maxFontSizeMultiplier={maxFontSizeMultiplier}
           onClear={() => {
             root.current?.clear();
+            if (onClear) {
+              onClear();
+            }
           }}
         />
       );
@@ -575,6 +537,9 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
         maxFontSizeMultiplier={maxFontSizeMultiplier}
         onClear={() => {
           root.current?.clear();
+          if (onClear) {
+            onClear();
+          }
         }}
       />
     );

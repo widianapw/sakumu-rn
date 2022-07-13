@@ -38,7 +38,6 @@ core dependencies, and boilerplate to jumpstart development.
 - [react-query](https://github.com/TanStack/query) Hooks for fetching, caching and updating asynchronous data in React.
 - [react-native-modalize](https://github.com/jeremybarbet/react-native-modalize) A highly customizable modal/bottom
   sheet that loves scrolling content.
-- [react-native-date-picker](https://github.com/henninghall/react-native-date-picker) Date and time picker.
 - [react-native-permissions](https://github.com/zoontek/react-native-permissions) A unified permissions API for React.
   Native on iOS, Android and Windows.
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) Icon source.
@@ -125,6 +124,11 @@ To keep an application scalable and organized, the global static resources that 
 - Chip
 - Divider
 - Icon
+- Modal
+  - ImageViewerModal
+  - MapPickerModal
+  - MapPlacePickerModal
+  - PickerModal
 - OTPInput
 - Picker
   - DatePicker

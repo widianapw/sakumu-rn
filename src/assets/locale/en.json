@@ -81,6 +81,12 @@
     "select_location": "Select Location",
     "date_range": "Date Range",
     "choose_time": "Choose Time",
-    "add_item": "Add Item"
+    "add_item": "Add Item",
+    "choose_address": "Choose Address",
+    "choose_from_map": "Choose from Map",
+    "location_not_found": "Location not found",
+    "location_not_found_description": "Check your keyword or press choose from map to determine the location.",
+    "current_location": "Current Location",
+    "delete_image": "Delete Image"
   }
 }
