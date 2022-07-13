@@ -159,7 +159,7 @@ export default function Chip({
             suffixIcon &&
             <Icon
               style={{
-                marginLeft: 4,
+                marginLeft: 8,
               }}
               size={18}
               color={txtColor}

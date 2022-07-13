@@ -81,6 +81,11 @@
     "select_location": "Pilih Lokasi",
     "date_range": "Jarak Hari",
     "choose_time": "Pilih Waktu",
-    "add_item": "Tambah Item"
+    "add_item": "Tambah Item",
+    "choose_address": "Pilih Alamat",
+    "choose_from_map": "Pilih di Peta",
+    "location_not_found": "Lokasi tidak ditemukan",
+    "location_not_found_description": "Coba cek kata kuncimu atau tekan pilih di peta untuk menentukan lokasi.",
+    "current_location": "Lokasi Saat Ini"
   }
 }

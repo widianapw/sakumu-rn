@@ -64,7 +64,7 @@ export default function ImagePicker({
 
   useEffect(() => {
     if (onChangeImageUrl) {
-      onChangeImageUrl(selectedImageUrl);
+      onChangeImageUrl(selectedImageUrl ?? "");
     }
   }, [selectedImageUrl]);
 

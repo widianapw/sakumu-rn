@@ -66,42 +66,52 @@ export default function ButtonScreen() {
           TextButton
         </TextButton>
 
-        <Button
-          variant={"primary"}
-          onPress={() => {
-          }}>
-          Primary
-        </Button>
-        <Button
-          icon={{
-            icon: "camera",
-          }}
-          variant={"primary"}
-          onPress={() => {
-          }}>
-          Primary
-        </Button>
-        <Button
-          loading
-          variant={"primary"}
-          onPress={() => {
-          }}>
-          Primary
-        </Button>
-        <Button
-          onPress={() => {
-          }}
-          variant={"secondary"}
-        >
-          Secondary
-        </Button>
+            <Button
+              variant={"primary"}
+              onPress={() => {
+              }}>
+              Primary
+            </Button>
+            <Button
+              icon={{
+                icon: "camera",
+              }}
+              variant={"primary"}
+              onPress={() => {
+              }}>
+              Primary
+            </Button>
+            <Button
+              suffixIcon={{
+                icon: "camera",
+              }}
+              variant={"primary"}
+              onPress={() => {
+              }}>
+              Primary
+            </Button>
 
-        <Button
-          loading
-          onPress={() => {
-          }}
-          variant={"secondary"}
-        >
+            <Button
+              loading
+              variant={"primary"}
+              onPress={() => {
+              }}>
+              Primary
+            </Button>
+            <Button
+              onPress={() => {
+              }}
+              variant={"secondary"}
+            >
+              Secondary
+            </Button>
+
+            <Button
+              loading
+              onPress={() => {
+              }}
+              variant={"secondary"}
+            >
           Secondary
         </Button>
 

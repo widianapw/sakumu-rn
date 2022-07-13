@@ -9,13 +9,13 @@ import Typography from "../Typography/Typography";
 import { Button, useTheme } from "../../index";
 import Icon from "../Icon";
 import IconButton from "../IconButton";
-import Geocoder, { GeocodingObject } from "@timwangdev/react-native-geocoder";
+import Geocoder from "@timwangdev/react-native-geocoder";
 import Config from "react-native-config";
-import RNGooglePlaces from "react-native-google-places";
 import Geolocation from "react-native-geolocation-service";
-import { SelectedMap } from "./MapPicker";
+import { SelectedMap } from "../picker/MapPicker";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import Stack from "../Layout/Stack";
+import MapPlacePickerModal from "./MapPlacePickerModal";
 
 interface Props {
   open: boolean;
@@ -23,11 +23,11 @@ interface Props {
   onSelected?: (selected: SelectedMap) => void;
   onClose?: () => void;
 }
-
 export default function MapPickerModal({ open, initial, onSelected, onClose, ...rest }: Props) {
-  const {t} = useLocale()
-  const [addressObj, setAddressObj] = useState<GeocodingObject | null>(null);
+  const { t } = useLocale();
+  const [addressObj, setAddressObj] = useState<SelectedMap | null>(null);
   const [mapRegion, setMapRegion] = useState({});
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
   const mapRef = useRef<MapView>(null);
   const theme = useTheme();
 
@@ -39,25 +39,20 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
       apiKey: Config.GOOGLE_MAPS_API_KEY,
     }).then((res) => {
       const a = res[0];
-      a.position = {
-        lat: lat,
-        lng: lng,
+      const location = {
+        latitude: a.position.lat,
+        longitude: a.position.lng,
       };
-      setAddressObj(a);
+      setAddressObj({
+        fullAddress: a.formattedAddress,
+        location: location,
+        nameAddress: a.feature ?? a.streetName ?? a.subAdminArea,
+      });
     });
   };
 
   const openSearchModal = () => {
-    RNGooglePlaces.openAutocompleteModal({
-      useOverlay: true,
-    })
-      .then((place) => {
-        handleCameraChanges(
-          place.location?.latitude,
-          place.location?.longitude,
-        );
-      })
-      .catch(error => console.log(error.message));  // error is a Javascript Error object
+    setIsOpenSearch(true);
   };
 
   const handleCameraChanges = (lat: number, lng: number) => {
@@ -81,11 +76,7 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
   useEffect(() => {
     if (open) {
       if (initial?.location) {
-        setAddressObj({
-          formattedAddress: initial?.fullAddress,
-          feature: initial?.nameAddress,
-          position: initial?.location,
-        });
+        setAddressObj(initial);
         handleCameraChanges(initial?.location?.latitude, initial?.location?.longitude);
       } else {
         getUserCurrentLocation();
@@ -103,70 +94,71 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
         longitudeDelta: 0.0421,
       });
       handleCameraChanges(position.coords.latitude, position.coords.longitude);
-      handleAddressChange(position.coords.latitude, position.coords.longitude);
-    });
+    }, (err) => {
+      console.log(err);
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 });
   };
 
-  return (<Modal
-      onRequestClose={() => {
-        if (onClose) {
-          onClose();
-        }
-      }}
-      animationType="slide"
-      transparent={false}
-      visible={open}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
+  return (<>
+      <Modal
+        onRequestClose={() => {
+          if (onClose) {
+            onClose();
+          }
+        }}
+        animationType="slide"
+        transparent={false}
+        visible={open}
+      >
+        <SafeAreaView style={{ flex: 1 }}>
 
-        <View style={{
-          position: "relative",
-          flexGrow: 1,
-        }}>
+          <View style={{
+            position: "relative",
+            flexGrow: 1,
+          }}>
 
 
-          <View
-            style={{
-              position: "absolute",
-              flex: 1,
-              top: 0,
-              bottom: 120,
-              left: 0,
-              right: 0,
-            }}
-          >
+            <View
+              style={{
+                position: "absolute",
+                flex: 1,
+                top: 0,
+                bottom: 120,
+                left: 0,
+                right: 0,
+              }}
+            >
 
-            <View style={{
-              position: "relative",
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
               <View style={{
-                zIndex: 200,
-                marginBottom: 52,
+                position: "relative",
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
               }}>
-                <Image
-                  source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
+                <View style={{
+                  zIndex: 200,
+                  marginBottom: 52,
+                }}>
+                  <Image
+                    source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
+                </View>
+
+                <MapView
+                  showsCompass={false}
+                  style={{
+                    position: "absolute",
+                    top: 0, bottom: 0, left: 0, right: 0,
+                  }}
+                  ref={mapRef}
+                  showsUserLocation={true}
+                  showsMyLocationButton={false}
+                  onRegionChangeComplete={(r, d) => {
+                    handleAddressChange(r.latitude, r.longitude);
+                  }}
+                >
+
+                </MapView>
               </View>
-
-              <MapView
-                showsCompass={false}
-                style={{
-                  position: "absolute",
-                  top: 0, bottom: 0, left: 0, right: 0,
-                }}
-                ref={mapRef}
-                showsUserLocation={true}
-                showsMyLocationButton={false}
-                onRegionChangeComplete={(r, d) => {
-                  // console.log(r)
-                  handleAddressChange(r.latitude, r.longitude);
-                }}
-              >
-
-              </MapView>
-            </View>
 
           </View>
 
@@ -212,26 +204,18 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
                     numberOfLines={1}
                     ellipsizeMode={"tail"}
                     style={{ fontWeight: "600" }}
-                    type={"title3"}>{addressObj?.feature ?? addressObj?.streetName ?? "-"}</Typography>
+                    type={"title3"}>{addressObj?.nameAddress ?? "-"}</Typography>
                 </Stack>
                 <Typography
                   type={"body2"}
                   style={{ marginTop: 4 }}
-                >{addressObj?.formattedAddress}</Typography>
+                >{addressObj?.fullAddress}</Typography>
               </Stack>
 
               <Button
                 onPress={() => {
-                  const dataToSend: SelectedMap = {
-                    fullAddress: addressObj?.formattedAddress,
-                    location: {
-                      latitude: addressObj?.position?.lat,
-                      longitude: addressObj?.position?.lng,
-                    },
-                    nameAddress: addressObj?.feature ?? addressObj?.streetName ?? "",
-                  };
                   if (onSelected) {
-                    onSelected(dataToSend);
+                    onSelected(addressObj);
                     // console.log(dataToSend);
                     if (onClose) {
                       onClose();
@@ -280,9 +264,25 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
             />
 
           </View>
-        </View>
-      </SafeAreaView>
+          </View>
+        </SafeAreaView>
 
-    </Modal>
+      </Modal>
+
+      <MapPlacePickerModal
+        onCurrentLocation={() => {
+          getUserCurrentLocation();
+        }}
+        open={isOpenSearch}
+        onClose={() => {
+          setIsOpenSearch(false);
+        }}
+        onSelected={(data, detail) => {
+          const { lat, lng } = detail?.geometry?.location;
+          if (lat && lng) {
+            handleCameraChanges(lat, lng);
+          }
+        }} />
+    </>
   );
 }

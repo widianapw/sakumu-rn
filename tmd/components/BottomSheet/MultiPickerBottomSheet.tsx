@@ -164,7 +164,7 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
                       setSearchQuery(text);
                     }}
                     search
-                    placeholder={"Search"}
+                    placeholder={t('search')}
                   />
                 </View>
               }

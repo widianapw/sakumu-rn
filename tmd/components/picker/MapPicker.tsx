@@ -5,7 +5,7 @@
 
 import React, { useState } from "react";
 import TextField from "../TextInput/TextField";
-import MapPickerModal from "./MapPickerModal";
+import MapPickerModal from "../Modal/MapPickerModal";
 import { usePermission } from "../../providers/PermissionProvider";
 import { LOCATION_PERMISSIONS } from "../../data/_permissionTypes";
 
@@ -54,6 +54,7 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
       <MapPickerModal
         open={isModalOpen}
         onSelected={(val) => {
+          console.log(val);
           setSavedMap(val)
           if(onSelected){
             onSelected(val)

@@ -6,7 +6,7 @@ import React, { ComponentProps, useEffect, useMemo, useState } from "react";
 import { PickerItem } from "../../model/PickerItem";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
 import MultiPickerBottomSheet from "../BottomSheet/MultiPickerBottomSheet";
-import { Button, HelperText } from "../../index";
+import { Button, HelperText, useTheme } from "../../index";
 import LabelInput from "../TextInput/Label/LabelInput";
 import { View } from "react-native";
 import Chip from "../Chip";
@@ -46,6 +46,7 @@ export default function MultiSelect({
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string[] | number[]>(initial ?? []);
   const { t } = useLocale();
+  const {colors} = useTheme()
 
   const selectedObjs = useMemo(() => {
     return options.filter((it) => selected.includes(it?.id));
@@ -103,10 +104,12 @@ export default function MultiSelect({
               }}
               key={index}
               text={it?.name}
+              variant={'outlined'}
               suffixIcon={
                 editable ?
                   {
                     icon: "close",
+                    color: colors.danger.main
                   } : undefined
               }
               onPress={editable ? () => {
