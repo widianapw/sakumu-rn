@@ -12,7 +12,6 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "npx typesync"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.7",
