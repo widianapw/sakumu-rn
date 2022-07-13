@@ -125,6 +125,9 @@ export default function ImagePicker({
       }} open={isShowViewer}/>
 
       <ImagePickerBottomSheet
+        onDelete={() => {
+          setSelectedImageUrl("");
+        }}
         camera={rest.camera}
         gallery={rest.gallery}
         ratio={rest.ratio}

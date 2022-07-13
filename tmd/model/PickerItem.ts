@@ -6,4 +6,11 @@ export type PickerItem = {
   id: number | string,
   name: string,
   image?: string
+  description?: string
+}
+
+export type CustomRenderItemType ={
+  item: PickerItem,
+  onSelect: (item: PickerItem) => void
+  isSelected: boolean
 }

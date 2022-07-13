@@ -109,7 +109,7 @@ export default function MultiSelect({
                 editable ?
                   {
                     icon: "close",
-                    color: colors.danger.main
+                    color: colors.neutral.neutral_80,
                   } : undefined
               }
               onPress={editable ? () => {
@@ -124,7 +124,7 @@ export default function MultiSelect({
     {
       (error && errorText) &&
       <HelperText type={"error"} style={{
-        marginTop: 4,
+        marginTop: 8,
       }}>{errorText}</HelperText>
     }
 

@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 01/07/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
 import { useTranslation } from "react-i18next";
 import { Portal } from "react-native-portalize";
@@ -19,6 +19,7 @@ export interface ImagePickerBSProps {
   title?: string;
   onClose?: () => void;
   dismissable?: boolean;
+  onDelete?: () => void;
   onChangeImage?: (image: ImageOrVideo) => void;
   ratio?: ImageRatioCrop;
   crop?: boolean;
@@ -30,6 +31,7 @@ export interface ImagePickerBSProps {
 export default function ImagePickerBottomSheet({ camera = true, gallery = true, ...props }: ImagePickerBSProps) {
   const modalizeRef = useRef<Modalize>(null);
   const { t } = useTranslation();
+  const [currentImage, setCurrentImage] = useState(undefined);
   const imageSize = 500;
   useEffect(() => {
     if (props.open) {
@@ -63,7 +65,7 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
       cropping: props.crop ?? true,
     }).then(image => {
       if (props.onChangeImage) {
-        console.log(JSON.stringify(image, null, 2));
+        setCurrentImage(image);
         props?.onChangeImage(image);
       }
     }).catch(reason => {
@@ -78,7 +80,7 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
       cropping: props.crop ?? true,
     }).then(image => {
       if (props.onChangeImage) {
-        console.log(image);
+        setCurrentImage(image);
         props?.onChangeImage(image);
       }
     }).catch(reason => {
@@ -86,20 +88,30 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
     });
   };
 
-  useEffect(() => {
-    if (props.open) {
-      if (!camera) {
-        handleClose();
-        props.onClose();
-        handleOpenGallery();
-      }
-      if (!gallery) {
-        handleClose();
-        props.onClose();
-        handleOpenCamera();
-      }
+  const handleDeleteImage = () => {
+    if (props.onDelete) {
+      props.onDelete();
     }
-  }, [props.open, camera, gallery]);
+    setCurrentImage(undefined);
+    if (props.onClose) {
+      props.onClose();
+    }
+  };
+
+  // useEffect(() => {
+  //   if (props.open) {
+  //     if (!camera) {
+  //       handleClose();
+  //       props.onClose();
+  //       handleOpenGallery();
+  //     }
+  //     if (!gallery) {
+  //       handleClose();
+  //       props.onClose();
+  //       handleOpenCamera();
+  //     }
+  //   }
+  // }, [props.open, camera, gallery]);
 
 
   return (
@@ -146,7 +158,7 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
                       }}
                     >
 
-                      <Icon icon={"camera"} />
+                      <Icon icon={"camera"} size={20} />
                       <Typography type={"label1"} style={{
                         flexGrow: 1,
                         marginStart: 16,
@@ -175,7 +187,7 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
                     }}
                   >
 
-                    <Icon icon={"folder-open"} />
+                    <Icon icon={"folder-open"} size={20} />
                     <Typography type={"label1"} style={{
                       flexGrow: 1,
                       marginStart: 16,
@@ -183,7 +195,33 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
                     <Icon icon={"chevron-forward"} />
                   </View>
                 </Pressable>
+              }
+              {
+                (currentImage && props.onDelete) &&
+                <>
+                  <Divider style={{ marginStart: 38 }} />
+                  <Pressable
+                    onPress={handleDeleteImage}
+                  >
 
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        flex: 1,
+                        alignItems: "center",
+                        paddingVertical: 16,
+                      }}
+                    >
+
+                      <Icon icon={"trash"} size={20} />
+                      <Typography type={"label1"} style={{
+                        flexGrow: 1,
+                        marginStart: 16,
+                      }}>{t("delete_image")}</Typography>
+                      <Icon icon={"chevron-forward"} />
+                    </View>
+                  </Pressable>
+                </>
               }
             </Stack>
 

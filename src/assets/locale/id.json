@@ -86,6 +86,7 @@
     "choose_from_map": "Pilih di Peta",
     "location_not_found": "Lokasi tidak ditemukan",
     "location_not_found_description": "Coba cek kata kuncimu atau tekan pilih di peta untuk menentukan lokasi.",
-    "current_location": "Lokasi Saat Ini"
+    "current_location": "Lokasi Saat Ini",
+    "delete_image": "Hapus Foto"
   }
 }

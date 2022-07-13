@@ -76,7 +76,7 @@ export type Props = {
 };
 
 /**
- * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
+ * RadioButton.ListItem allows you to press the whole row (item) instead of only the RadioButton.
  *
  * <div class="screenshots">
  *   <figure>
@@ -95,8 +95,8 @@ export type Props = {
  *
  *   return (
  *     <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
- *       <RadioButton.Item label="First item" value="first" />
- *       <RadioButton.Item label="Second item" value="second" />
+ *       <RadioButton.ListItem label="First item" value="first" />
+ *       <RadioButton.ListItem label="Second item" value="second" />
  *     </RadioButton.Group>
  *   );
  * };
@@ -173,7 +173,7 @@ const RadioButtonItem = ({
   );
 };
 
-RadioButtonItem.displayName = 'RadioButton.Item';
+RadioButtonItem.displayName = 'RadioButton.ListItem';
 
 export default withTheme(RadioButtonItem);
 

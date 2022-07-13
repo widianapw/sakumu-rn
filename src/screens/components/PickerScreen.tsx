@@ -15,6 +15,8 @@ import MapPicker from "../../../tmd/components/picker/MapPicker";
 import Page from "../../../tmd/components/Page";
 import DateRangePicker from "../../../tmd/components/picker/DateRangePicker";
 import MultiSelect from "../../../tmd/components/Select/MultiSelect";
+import SelectModal from "../../../tmd/components/Select/SelectModal";
+import BranchListItem from "../../../tmd/components/ListItem/BranchListItem";
 
 export default function PickerScreen() {
   const theme = useTheme();
@@ -24,7 +26,6 @@ export default function PickerScreen() {
   const [initialMap, setInitialMap] = useState({});
   return (
     <Page>
-
       <ScrollView
         keyboardShouldPersistTaps="always"
         style={{
@@ -75,25 +76,6 @@ export default function PickerScreen() {
             }}
             mode={"contained"} />
 
-          <PhoneField
-            search={true}
-            initialPhoneCode={"62"}
-            placeholder={"Phone"}
-            label={"Phone"}
-            onPhoneCodeChange={(value) => {
-              //get value from this shit
-            }}
-            mode={"filled"} />
-
-          <PhoneField
-            search={true}
-            initialPhoneCode={"62"}
-            placeholder={"Phone"}
-            label={"Phone"}
-            onPhoneCodeChange={(value) => {
-              //get value from this shit
-            }}
-            mode={"flat"} />
 
           {/*<PhoneField*/}
           {/*  search={true}*/}
@@ -114,7 +96,7 @@ export default function PickerScreen() {
       <Select
         label={"Country"}
         search={true}
-        initial={"62"}
+        initial={"1"}
         options={
           _countries.map((item) => {
             const i: PickerItem = {
@@ -126,37 +108,26 @@ export default function PickerScreen() {
         }
       />
 
-      <Select
-        label={"Country"}
-        mode={"filled"}
-        search={true}
-        initial={"62"}
-        options={
-          _countries.map((item) => {
-            const i: PickerItem = {
-              id: item.phone_code,
-              name: `+${item.phone_code} (${item.name})`,
-            };
-            return i;
-          })
-        }
-      />
+          <SelectModal
+            label={"Modal Select"}
+            searchPlaceholder={"Search Modal Select"}
+            search={true}
+            initial={'62'}
+            options={
+              _countries.map((item) => {
+                const i: PickerItem = {
+                  id: item.phone_code,
+                  name: `+${item.phone_code} (${item.name})`,
+                  description: `${item.name} Description`,
+                };
+                return i;
+              })
+            }
+            renderCustomItem={(item) => {
+              return <BranchListItem {...item} key={item.item.id} />;
+            }}
+          />
 
-      <Select
-        mode={"flat"}
-        label={"Country"}
-        search={true}
-        initial={"62"}
-        options={
-          _countries.map((item) => {
-            const i: PickerItem = {
-              id: item.phone_code,
-              name: `+${item.phone_code} (${item.name})`,
-            };
-            return i;
-          })
-        }
-      />
 
           <MultiSelect
             label={"Multi Select"}

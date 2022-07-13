@@ -115,8 +115,8 @@ type Props = {
  *       <List.Accordion
  *         title="Uncontrolled Accordion"
  *         left={props => <List.Icon {...props} icon="folder" />}>
- *         <List.Item title="First item" />
- *         <List.Item title="Second item" />
+ *         <List.ListItem title="First item" />
+ *         <List.ListItem title="Second item" />
  *       </List.Accordion>
  *
  *       <List.Accordion
@@ -124,8 +124,8 @@ type Props = {
  *         left={props => <List.Icon {...props} icon="folder" />}
  *         expanded={expanded}
  *         onPress={handlePress}>
- *         <List.Item title="First item" />
- *         <List.Item title="Second item" />
+ *         <List.ListItem title="First item" />
+ *         <List.ListItem title="Second item" />
  *       </List.Accordion>
  *     </List.Section>
  *   );
