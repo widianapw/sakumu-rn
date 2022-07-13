@@ -11,7 +11,7 @@
     "ios:debug": "SET ENVFILE=.env.debug && react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.7",
