@@ -251,6 +251,9 @@ const Button = ({
       [
         { display: "flex", flexDirection: fullWidth ? "column" : "row" },
         rest.containerStyle,
+        fullWidth ? {
+          flex: 1,
+        } : {},
       ]
     }>
       <Surface

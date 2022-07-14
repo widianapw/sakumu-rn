@@ -142,19 +142,23 @@ To keep an application scalable and organized, the global static resources that 
 - RHF: (react-hook-form)
   - RHFTextField
   - RHFSelect
+  - RHFSelectModal
   - RHFMultiSelect
   - RHFPhoneField
   - RHFDatePicker
   - RHFDateRangePicker
   - RHFTimePicker
 - Select
+  - Select
+  - MultiSelect
+  - SelectModal
 - Tag
 - TextInput
 - Toast
 - TouchableRipple
 - Typography
 
-### Context Provider: 
+### Context Provider:
 
 - ThemeProvider
 - LocaleProvider

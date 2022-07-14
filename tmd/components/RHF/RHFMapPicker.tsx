@@ -23,6 +23,7 @@ export default function RHFMapPicker({ name, ...rest }: Props & ComponentProps<t
         render={
           ({ field: { onChange, onBlur, value }, fieldState }) => {
             return <MapPicker
+              initial={value}
               error={fieldState.error != undefined}
               errorText={fieldState.error?.message}
               onSelected={(val) => {

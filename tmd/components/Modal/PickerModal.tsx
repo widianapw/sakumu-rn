@@ -172,21 +172,29 @@ export default function PickerModal({
                 </RadioButtonGroup>
 
               </View>
-              <Button
-                size={"lg"}
-                onPress={() => {
-                  if (onSave) {
-                    const obj = data?.find(it => it.id == selected);
-                    onSave(obj);
-                    if (onClose) {
-                      onClose();
+              <View style={{
+                flexShrink: 1,
+              }}>
+                <Button
+                  size={"lg"}
+                  onPress={() => {
+                    if (onSave) {
+                      const obj = data?.find(it => it.id == selected);
+                      onSave(obj);
+                      if (onClose) {
+                        onClose();
+                      }
                     }
-                  }
-                }}
-                containerStyle={{
-                  marginVertical: 16,
-                  paddingHorizontal: 16,
-                }} fullWidth>{t("choose")}</Button>
+                  }}
+                  containerStyle={{
+                    marginVertical: 16,
+                    paddingHorizontal: 16,
+                  }}
+                  style={{
+                    width: "100%",
+                  }}
+                >{t("choose")}</Button>
+              </View>
             </Stack>
 
           </Stack>

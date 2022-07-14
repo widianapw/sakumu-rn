@@ -329,6 +329,8 @@ const colors: ThemeColors = {
     hover: "#114CD6",
     surface: "#F0F3FF",
   },
+
+  //not used
   accent: "#4C4DDC",
   background: "#f6f6f6",
   surface: white,
