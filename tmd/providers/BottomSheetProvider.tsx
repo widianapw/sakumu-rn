@@ -105,7 +105,6 @@ const BottomSheetProvider = ({ children }: any) => {
   };
 
   const openSetting = () => {
-    console.log('open setting from here')
     Linking.openSettings()
   }
 

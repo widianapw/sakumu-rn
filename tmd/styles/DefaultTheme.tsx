@@ -12,7 +12,7 @@ const DefaultTheme: Theme = {
   },
   button: {
     variant: "primary",
-    shape: "rounded",
+    shape: "rect",
     size: "md",
   },
   tag: {

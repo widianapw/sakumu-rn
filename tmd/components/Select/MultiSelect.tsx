@@ -101,7 +101,8 @@ export default function MultiSelect({
           return (
             <Chip
               style={{
-                margin: 4,
+                marginRight: 4,
+                marginVertical: 4,
               }}
               key={index}
               text={it?.name}

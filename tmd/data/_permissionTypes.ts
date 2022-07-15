@@ -37,6 +37,7 @@ export const STORAGE_PERMISSIONS =
       PERMISSIONS.IOS.PHOTO_LIBRARY,
     ],
   };
+
 export const CAMERA_PERMISSIONS = {
   android: [
     PERMISSIONS.ANDROID.CAMERA,
