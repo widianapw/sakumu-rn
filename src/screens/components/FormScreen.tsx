@@ -51,6 +51,14 @@ export default function FormScreen() {
       multiImage: undefined,
       dateRange: undefined,
       map: undefined,
+      //  map initial value
+      // map: {
+      //   location: {
+      //     latitude: -8.655302862265442,
+      //     longitude: 115.24373250416834,
+      //   },
+      //   fullAddress: "Jalan kenangan",
+      // },
     },
     resolver: yupResolver(schema),
   });
@@ -72,16 +80,20 @@ export default function FormScreen() {
       }}>
 
         <FormProvider {...method}>
-          <Stack p={16} spacing={16} style={{
-            flex: 1,
-          }}>
-              <RHFTextField
-                label={t("labels.first_name")}
-                name={"firstName"}
-                placeholder={t("labels.first_name")}
-              />
-              <RHFTextField
-                label={t("labels.last_name")}
+          <Stack
+            p={16}
+            spacing={16}
+            style={{
+              flex: 1,
+            }}>
+            <RHFTextField
+              mode={"contained"}
+              label={t("labels.first_name")}
+              name={"firstName"}
+              placeholder={t("labels.first_name")}
+            />
+            <RHFTextField
+              label={t("labels.last_name")}
                 name={"lastName"}
                 placeholder={t("labels.last_name")}
 

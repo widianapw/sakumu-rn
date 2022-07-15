@@ -17,7 +17,7 @@ const MainScreen = ({ navigation }: any) => {
   const { momentLocale } = useLocale();
 
   const showToast = () => {
-    Toast.show("Damn! You are logged in!");
+    Toast.show("Damn! You are logged in!",);
   };
 
 

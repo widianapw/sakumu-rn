@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "../TextInput/TextField";
 import MapPickerModal from "../Modal/MapPickerModal";
 import { usePermission } from "../../providers/PermissionProvider";
@@ -26,14 +26,23 @@ interface Props {
 export default function MapPicker({ onSelected, initial, ...rest }: React.ComponentProps<typeof TextField> & Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [savedMap, setSavedMap] = useState<SelectedMap | null>(null);
-  const {requestPermissions} = usePermission()
+  const { requestPermissions } = usePermission();
   const handleOpen = () => {
     requestPermissions(
       [LOCATION_PERMISSIONS], () => {
         setIsModalOpen(true);
-      }
-    )
+      },
+    );
   };
+
+  useEffect(() => {
+    if (initial) {
+      setSavedMap(initial);
+      if (onSelected) {
+        onSelected(initial);
+      }
+    }
+  }, []);
 
 
   return (

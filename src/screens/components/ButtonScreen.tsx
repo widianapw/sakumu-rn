@@ -142,21 +142,25 @@ export default function ButtonScreen() {
         >
           Tertiary
         </Button>
-        <Button
+            <Button
 
-          onPress={() => {
-          }}
-          variant={"tertiary"}
-        >
-          Tertiary
-        </Button>
+              onPress={() => {
+              }}
+              variant={"tertiary"}
+            >
+              Tertiary
+            </Button>
 
-        <Button
-          onPress={() => {
-          }}
-          size={"sm"}>
-          Button Small
-        </Button>
+            <Button onPress={() => {
+            }} size={"xs"}>
+              Button XS
+            </Button>
+            <Button
+              onPress={() => {
+              }}
+              size={"sm"}>
+              Button Small
+            </Button>
 
             <Button
               onPress={() => {

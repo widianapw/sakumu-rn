@@ -53,11 +53,14 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
       onLayout={(event) => {
         setParentWidth(event.nativeEvent.layout.width);
       }}
-      style={[{
-        flex: 1,
-        flexDirection: "row",
-        flexWrap: "wrap",
-      }, viewStyle]}>
+      style={[
+        {
+          flex: 1,
+          flexDirection: "row",
+          flexWrap: "wrap",
+        },
+        viewStyle,
+      ]}>
       {
         (children instanceof Array)
           ? <>

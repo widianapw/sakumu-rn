@@ -32,6 +32,7 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
   const theme = useTheme();
 
   const handleAddressChange = (lat: number, lng: number) => {
+
     Geocoder.geocodePositionGoogle({
       lat: lat,
       lng: lng,
@@ -64,14 +65,6 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
       zoom: 18,
     }, { duration: 500 });
   };
-  // useEffect(() => {
-  //   requestMultiple([PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION, PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION, PERMISSIONS.IOS.LOCATION_ALWAYS])
-  //     .then((statuses) => {
-  //       if (statuses["android.permission.ACCESS_COARSE_LOCATION"] == "granted" && statuses["android.permission.ACCESS_FINE_LOCATION"] == "granted" && statuses["ios.permission.LOCATION_ALWAYS"] == "granted") {
-  //         console.log("ALL GRANTED");
-  //       }
-  //     });
-  // }, []);
 
   useEffect(() => {
     if (open) {

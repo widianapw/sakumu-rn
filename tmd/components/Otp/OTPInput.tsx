@@ -78,7 +78,6 @@ export default function OTPInput({
     return (
       <OTPInputView
         onCodeChanged={handleChanges}
-
         selectionColor={colors.primary.main}
         codeInputFieldStyle={
           [

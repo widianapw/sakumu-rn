@@ -7,6 +7,7 @@ import { ScrollView } from "react-native";
 import OTPInput from "../../../tmd/components/Otp/OTPInput";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
+import { Toast } from "../../../tmd";
 
 export default function OTPScreen() {
   return (
@@ -19,13 +20,22 @@ export default function OTPScreen() {
             padding: 16,
           }}>
           <OTPInput
-            pinCount={5} />
+            onCodeFilled={(code) => {
+              Toast.show(code);
+            }}
+            pinCount={6} />
 
           <OTPInput
+            onCodeFilled={(code) => {
+              Toast.show(code);
+            }}
             mode={"flat"}
             pinCount={5} />
 
           <OTPInput
+            onCodeFilled={(code) => {
+              Toast.show(code);
+            }}
             mode={"contained"}
             pinCount={5} />
         </Stack>
