@@ -28,6 +28,10 @@ const DefaultTheme: Theme = {
     variant: "filled",
     shape: "rounded",
   },
+  toast: {
+    variant: "neutral",
+    shape: "rect"
+  },
   fonts: configureFonts(),
   animation: {
     scale: 1.0,

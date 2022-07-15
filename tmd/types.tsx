@@ -4,6 +4,7 @@ import { ButtonShape, ButtonSize, ButtonVariant } from "./components/Button/Butt
 import { TextInputMode, TextInputShape } from "./components/TextInput/TextField";
 import { AlertType, AlertVariant } from "./components/Alert/Alert";
 import { ChipShape, ChipVariant } from "./components/Chip";
+import { ToastShape, ToastVariant } from "./components/Toast";
 
 export type Font = {
   fontFamily: string;
@@ -43,10 +44,16 @@ export type Theme = {
   fonts: Fonts;
   alert: AlertTheme;
   chip: ChipTheme;
+  toast: ToastTheme;
   animation: {
     scale: number;
   };
 };
+
+interface ToastTheme {
+  variant: ToastVariant;
+  shape: ToastShape;
+}
 
 interface ChipTheme {
   variant: ChipVariant;

@@ -243,7 +243,7 @@ export default function MultiImagePicker({
                                   deleteImage(index);
                                 }}
                                 icon={"close"}
-                                themeSize={"sm"}
+                                themeSize={"xs"}
                               />
                             </View>
                           </ImageBackground>

@@ -79,6 +79,7 @@ export default function MultiSelect({
     {
       editable &&
       <Button
+        size={'sm'}
         style={[{
           marginTop: 8,
         }]}
@@ -87,7 +88,7 @@ export default function MultiSelect({
           setIsOpen(true);
         }}
         icon={{
-          icon: "add",
+          icon: "add-circle",
         }}
         {...buttonProps}
       >{buttonTitle ?? t("add_item")}</Button>
@@ -130,9 +131,9 @@ export default function MultiSelect({
 
     {
       helperText &&
-      <HelperText type={"error"} style={{
+      <HelperText type={"info"} style={{
         marginTop: 4,
-      }}>{errorText}</HelperText>
+      }}>{helperText}</HelperText>
     }
 
     <MultiPickerBottomSheet

@@ -101,6 +101,7 @@ export default function FormScreen() {
 
             <RHFMultiSelect
               search
+              requiredLabel
               name={"multiSelect"}
               label={"Multi Select"}
               options={_countries.map(it => {

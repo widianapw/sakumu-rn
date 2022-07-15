@@ -97,9 +97,14 @@ const IconButton = ({
     calculateButtonSize: number;
 
   switch (usedSize) {
+    case "xs" : {
+      usedIconSize = 10;
+      calculateButtonSize = 2.4;
+      break
+    }
     case "sm" : {
       usedIconSize = 12;
-      calculateButtonSize = 2;
+      calculateButtonSize = 2.6;
       break;
     }
     case "md": {
