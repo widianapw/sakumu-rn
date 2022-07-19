@@ -194,9 +194,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                 }}
                 textInputProps={{
                   InputComp: CustomTextField,
-                  shape: "rounded",
                   search: true,
-                  mode: "contained",
                   style: {
                     width: "100%",
                     backgroundColor: "white",

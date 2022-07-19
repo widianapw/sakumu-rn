@@ -1,8 +1,8 @@
 import useCatalogService from "./useCatalogService";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useQueryClient } from "react-query";
 import { CatalogListResponse } from "../../models/catalog/Catalog";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Created by Widiana Putra on 27/06/2022
@@ -11,6 +11,8 @@ import { useEffect } from "react";
 export default function useCatalogInfiniteQuery() {
   const { getCatalogs } = useCatalogService();
   const { showErrorBS } = useBottomSheet();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const client = useQueryClient();
   const {
     data,
     isLoading,
@@ -33,9 +35,24 @@ export default function useCatalogInfiniteQuery() {
     }
   }, [isError]);
 
+  // useEffect(() => {
+  //   client.removeQueries("catalogs");
+  // }, []);
+
+
   const fetchNext = () => {
     if (hasNextPage) {
       fetchNextPage();
+    }
+  };
+
+  const refresh = async () => {
+    try {
+      setIsRefreshing(true);
+      await rest.refetch();
+      setIsRefreshing(false);
+    } catch (e) {
+      setIsRefreshing(false);
     }
   };
 
@@ -43,6 +60,8 @@ export default function useCatalogInfiniteQuery() {
     catalogs: mappedData,
     isLoadingCatalog: isLoading,
     fetchNext,
+    refresh,
+    isRefreshing,
     ...rest,
   };
 }

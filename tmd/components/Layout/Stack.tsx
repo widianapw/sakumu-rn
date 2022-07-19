@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
+import { FlexAlignType, StyleProp, View, ViewStyle } from "react-native";
 
 interface Props {
   children: React.ReactNode[] | React.ReactNode;
@@ -12,6 +12,25 @@ interface Props {
   direction?: "row" | "column" | "row-reverse" | "column-reverse";
   style?: StyleProp<ViewStyle>;
   p?: number;
+  pt?: number;
+  pb?: number;
+  pl?: number;
+  pr?: number;
+
+  m?: number;
+  mt?: number;
+  mb?: number;
+  ml?: number;
+  mr?: number;
+  items?: FlexAlignType;
+  /**
+   * Shorthand for the `alignSelf` style property.
+   */
+  self?: FlexAlignType;
+  /**
+   * Shorthand for the `alignContent` style property.
+   */
+  content?: "flex-start" | "flex-end" | "center" | "space-evenly" | "space-between" | "space-around";
 }
 
 export default function Stack({
@@ -19,7 +38,11 @@ export default function Stack({
                                 spacing = 0,
                                 direction = "column",
                                 style: viewStyle,
+                                items,
+                                content, self,
                                 p = 0,
+                                pt, pb, pl, pr,
+                                m, mt, mb, ml, mr,
                               }: Props) {
   const activeChildren = (children instanceof Array) ? children?.filter(it => it != undefined) : children;
   const itemCount = (activeChildren instanceof Array) ? activeChildren.length : 1;
@@ -44,8 +67,20 @@ export default function Stack({
   };
 
   return <View style={[{
-    flexDirection: isMoreThanOneItem ? direction : "column",
+    flexDirection: direction ?? "column",
     padding: p,
+    paddingTop: pt,
+    paddingBottom: pb,
+    paddingLeft: pl,
+    paddingRight: pr,
+    margin: m,
+    marginTop: mt,
+    marginBottom: mb,
+    marginLeft: ml,
+    marginRight: mr,
+    alignItems: items,
+    justifyContent: content,
+    alignSelf: self,
   }, viewStyle]}>
     {
       (activeChildren instanceof Array)
@@ -67,13 +102,9 @@ export default function Stack({
             })
           }
         </>
-        : <View
-          style={[
-            spacingStyle(),
-          ]}
-        >
+        : <>
           {activeChildren}
-        </View>
+        </>
     }
   </View>;
 }

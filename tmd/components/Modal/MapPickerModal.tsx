@@ -178,7 +178,6 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
                 <Button
                   variant={"secondary"}
                   size={"sm"}
-                  shape={"rounded"}
                   onPress={() => {
                     openSearchModal();
                   }}
@@ -227,6 +226,7 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
               flexDirection: "row",
             }}>
             <IconButton
+              shape={"rounded"}
               themeSize={"lg"}
               variant={"tertiary"}
               color={theme.colors.neutral.neutral_80}
@@ -243,6 +243,7 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
             />
             <View style={{ flexGrow: 1 }} />
             <IconButton
+              shape={"rounded"}
               themeSize={"lg"}
               color={theme.colors.neutral.neutral_80}
               variant={"tertiary"}

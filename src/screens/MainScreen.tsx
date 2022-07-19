@@ -11,11 +11,11 @@ import { useLocale } from "../providers/LocaleProvider";
 import Page from "../../tmd/components/Page";
 import { navigate } from "../navigations/RootNavigation";
 import Toast from "../../tmd/components/Toast";
+import Toolbar from "../../tmd/components/Toolbar/Toolbar";
 
 const MainScreen = ({ navigation }: any) => {
   const { user, logout, isLoadingLogout } = useAuth();
   const { momentLocale } = useLocale();
-
   const showToast = () => {
     Toast.show("Damn! You are logged in!", {
       //add options here
@@ -27,6 +27,10 @@ const MainScreen = ({ navigation }: any) => {
 
   return (
     <Page>
+      <Toolbar
+        backable={false}
+        title={"MainScreen"}
+      />
       <ScrollView style={{ flex: 1 }}>
         <Stack
           spacing={16}
@@ -34,10 +38,11 @@ const MainScreen = ({ navigation }: any) => {
           style={{
             alignItems: "center",
             justifyContent: "center",
-          }}S
+          }}
         >
           <Typography>Welcome, {user?.name}</Typography>
           <Typography type={"body3"}>{momentLocale().format("DD MMMM YYYY")}</Typography>
+
 
           <Button onPress={showToast}>
             Show Toast
@@ -84,35 +89,54 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
+            navigate("ModalScreen");
+          }}>
+            Modal Screen
+          </Button>
+
+          <Button onPress={() => {
             navigate("TagScreen");
-      }}>
-        Tag
-      </Button>
+          }}>
+            Tag
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigate("AlertScreen");
-        }}
-      >
-        Alert
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("AlertScreen");
+            }}
+          >
+            Alert
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigate("SelectorScreen");
-        }}
-      >
-        Selector
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("SelectorScreen");
+            }}
+          >
+            Selector
+          </Button>
 
-      <Button
-        onPress={() => {
-          navigate("APIScreen");
-        }}
-      >
-        API Screen
-      </Button>
+          <Button
+            onPress={() => {
+              navigate("APIScreen");
+            }}
+          >
+            API Screen
+          </Button>
 
+          <Button
+            onPress={() => {
+              navigate("SkeletonScreen");
+            }}
+          >
+            Skeleton Screen
+          </Button>
+
+          <Button onPress={() => {
+            navigate("DividerScreen");
+          }}>
+            Divider Screen
+          </Button>
 
           <Button onPress={() => {
             navigate("ChipScreen");

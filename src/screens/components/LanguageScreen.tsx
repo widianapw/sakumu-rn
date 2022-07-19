@@ -8,11 +8,13 @@ import { ScrollView } from "react-native";
 import { Button, Stack } from "../../../tmd";
 import { useLocale } from "../../providers/LocaleProvider";
 import Page from "../../../tmd/components/Page";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function LanguageScreen() {
   const { changeLanguage, t, currentLanguage } = useLocale();
   return (
     <Page>
+      <Toolbar title={"LanguageScreen"} />
 
       <ScrollView>
         <Stack spacing={16} p={16}

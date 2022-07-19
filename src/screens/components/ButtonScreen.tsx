@@ -8,10 +8,26 @@ import { Button, IconButton } from "../../../tmd";
 import TextButton from "../../../tmd/components/Button/TextButton";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function ButtonScreen() {
   return (
     <Page>
+      <Toolbar
+        center
+        title={"ButtonScreen"}
+        description={"Deskripsikan dirimu"}
+        actionButton={
+          <IconButton
+            onPress={() => {
+              console.log("IconButton Pressed");
+            }}
+            variant={"tertiary"}
+            color={"black"}
+            icon={"search"}
+          />
+        }
+      />
       <ScrollView>
         <View style={{ padding: 16, flexDirection: "column" }}>
           <Stack spacing={8}>

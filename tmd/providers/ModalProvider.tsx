@@ -1,21 +1,15 @@
-/**
- * Created by Widiana Putra on 03/06/2022
- * Copyright (c) 2022 - Made with love
- */
 import React, { createContext, useContext, useState } from "react";
-import ConfirmationBottomSheet from "../components/BottomSheet/ConfirmationBottomSheet";
-import AlertBottomSheet from "../components/BottomSheet/AlertBottomSheet";
 import IllustNoConnection from "../../src/assets/illusts/no_internet_connection.svg";
 import IllustServerError from "../../src/assets/illusts/server_error.svg";
 import IllustLocationPermission from "../../src/assets/illusts/permission_location.svg";
 import IllustCameraPermission from "../../src/assets/illusts/permission_camera.svg";
 import { Linking } from "react-native";
 import { useLocale } from "../../src/providers/LocaleProvider";
+import { PermissionType } from "./BottomSheetProvider";
+import ConfirmationModal from "../components/Modal/ConfirmationModal";
+import AlertModal from "../components/Modal/AlertModal";
 
-export type PermissionType =
-  "camera" | "storage" | "location" | "bluetooth" | "another";
-
-type ConfirmationBSContext = {
+type ConfirmationModalContext = {
   imageNode?: React.ReactNode;
   title?: string;
   description?: string;
@@ -26,54 +20,54 @@ type ConfirmationBSContext = {
   buttonSecondary?: boolean;
   dismissible?: boolean;
 }
-type BSContextType = {
-  showConfirmationBS: (props: ConfirmationBSContext) => void;
-  hideConfirmationBS: () => void;
-  showAlertBS: (props: ConfirmationBSContext) => void;
-  hideAlertBS: () => void;
-  showErrorBS: (error: any, props?: ConfirmationBSContext) => void;
-  hideErrorBS: () => void;
-  showPermissionBS: (type: PermissionType, props?: ConfirmationBSContext) => void;
-  hidePermissionBS: () => void;
+type ModalContextType = {
+  showConfirmationModal: (props: ConfirmationModalContext) => void;
+  hideConfirmationModal: () => void;
+  showAlertModal: (props: ConfirmationModalContext) => void;
+  hideAlertModal: () => void;
+  showErrorModal: (error: any, props?: ConfirmationModalContext) => void;
+  hideErrorModal: () => void;
+  showPermissionModal: (type: PermissionType, props?: ConfirmationModalContext) => void;
+  hidePermissionModal: () => void;
 }
 
-const initialState: BSContextType = {
-  showConfirmationBS: () => {
+const initialState: ModalContextType = {
+  showConfirmationModal: () => {
   },
-  hideConfirmationBS: () => {
+  hideConfirmationModal: () => {
   },
-  showAlertBS: () => {
+  showAlertModal: () => {
   },
-  hideAlertBS: () => {
+  hideAlertModal: () => {
   },
-  showErrorBS: () => {
+  showErrorModal: () => {
   },
-  hideErrorBS: () => {
+  hideErrorModal: () => {
   },
-  showPermissionBS: () => {
+  showPermissionModal: () => {
   },
-  hidePermissionBS: () => {
+  hidePermissionModal: () => {
   },
 };
 
-export const BSContext = createContext(initialState);
-export const useBottomSheet = () => useContext(BSContext);
-const BottomSheetProvider = ({ children }: any) => {
+export const ModalContext = createContext(initialState);
+export const useModal = () => useContext(ModalContext);
+const ModalProvider = ({ children }: any) => {
   const { t } = useLocale();
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
-  const [confirmationProps, setConfirmationProps] = useState<ConfirmationBSContext>({});
+  const [confirmationProps, setConfirmationProps] = useState<ConfirmationModalContext>({});
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [alertProps, setAlertProps] = useState<ConfirmationBSContext>({});
+  const [alertProps, setAlertProps] = useState<ConfirmationModalContext>({});
 
   const [isOpenError, setIsOpenError] = useState(false);
-  const [errorProps, setErrorProps] = useState<ConfirmationBSContext>({});
+  const [errorProps, setErrorProps] = useState<ConfirmationModalContext>({});
 
   const [isOpenPermission, setIsOpenPermission] = useState(false);
-  const [permissionProps, setPermissionProps] = useState<ConfirmationBSContext>({});
+  const [permissionProps, setPermissionProps] = useState<ConfirmationModalContext>({});
 
 
-  const showErrorBS = (error: any, props?: ConfirmationBSContext) => {
-    let data: ConfirmationBSContext;
+  const showErrorModal = (error: any, props?: ConfirmationModalContext) => {
+    let data: ConfirmationModalContext;
     if (error?.error?.errors) {
       data = {
         title: props?.title ?? error?.error?.errors[0]?.title,
@@ -99,17 +93,17 @@ const BottomSheetProvider = ({ children }: any) => {
     setIsOpenError(true);
   };
 
-  const hideErrorBS = () => {
+  const hideErrorModal = () => {
     setIsOpenError(false);
   };
 
   const openSetting = () => {
-    Linking.openSettings()
-  }
+    Linking.openSettings();
+  };
 
-  const showPermissionBS = (type: PermissionType, props?: ConfirmationBSContext) => {
+  const showPermissionModal = (type: PermissionType, props?: ConfirmationModalContext) => {
     if (type != "another") {
-      let data: ConfirmationBSContext;
+      let data: ConfirmationModalContext;
       switch (type) {
         case "camera": {
           data = {
@@ -168,69 +162,70 @@ const BottomSheetProvider = ({ children }: any) => {
     }
   };
 
-  const hidePermissionBS = () => {
+  const hidePermissionModal = () => {
     setIsOpenPermission(false);
   };
 
-  const showConfirmationBS = (props: ConfirmationBSContext) => {
+  const showConfirmationModal = (props: ConfirmationModalContext) => {
     setConfirmationProps(props);
     setIsOpenConfirmation(true);
   };
 
-  const showAlertBS = (props: ConfirmationBSContext) => {
+  const showAlertModal = (props: ConfirmationModalContext) => {
+    console.log(props);
     setAlertProps(props);
     setIsOpenAlert(true);
   };
 
-  const hideConfirmationBS = () => {
+  const hideConfirmationModal = () => {
     setIsOpenConfirmation(false);
   };
 
-  const hideAlertBS = () => {
+  const hideAlertModal = () => {
     setIsOpenAlert(false);
   };
 
   const renderComponent = () => {
     return <>
-      <ConfirmationBottomSheet
+      <ConfirmationModal
         {...confirmationProps}
         open={isOpenConfirmation}
         onClose={() => {
-          hideConfirmationBS();
+          hideConfirmationModal();
         }} />
 
-      <AlertBottomSheet
+      <AlertModal
         open={isOpenAlert}
-        onClose={hideAlertBS}
+        onClose={hideAlertModal}
         {...alertProps} />
 
-      <AlertBottomSheet
+      <AlertModal
         open={isOpenError}
-        onClose={hideErrorBS}
+        onClose={hideErrorModal}
         {...errorProps} />
 
-      <AlertBottomSheet
+      <AlertModal
         open={isOpenPermission}
-        onClose={hidePermissionBS}
+        onClose={hidePermissionModal}
         {...permissionProps} />
 
     </>;
   };
   return (
-    <BSContext.Provider value={{
-      showConfirmationBS,
-      hideConfirmationBS,
-      showAlertBS,
-      hideAlertBS,
-      showErrorBS,
-      hideErrorBS,
-      showPermissionBS,
-      hidePermissionBS,
+    <ModalContext.Provider value={{
+      showConfirmationModal,
+      hideConfirmationModal,
+      showAlertModal,
+      hideAlertModal,
+      showErrorModal,
+      hideErrorModal,
+      showPermissionModal,
+      hidePermissionModal,
     }}>
       {renderComponent()}
       {children}
-    </BSContext.Provider>
+    </ModalContext.Provider>
   );
 };
 
-export default BottomSheetProvider;
+export default ModalProvider;

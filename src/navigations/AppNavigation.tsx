@@ -26,6 +26,9 @@ import LoginScreen from "../screens/components/LoginScreen";
 import { useAuth } from "../providers/AuthProvider";
 import ImagePickerScreen from "../screens/components/ImagePickerScreen";
 import LayoutScreen from "../screens/components/LayoutScreen";
+import ModalScreen from "../screens/components/ModalScreen";
+import SkeletonScreen from "../screens/components/SkeletonScreen";
+import DividerScreen from "../screens/components/DividerScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -43,7 +46,7 @@ const AppNavigation = () => {
       theme={NavTheme}>
       <Stack.Navigator
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
         }}
       >
         {
@@ -62,6 +65,7 @@ const AppNavigation = () => {
               <Stack.Screen name={"TextFieldScreen"} component={TextFieldScreen} />
               <Stack.Screen name={"PickerScreen"} component={PickerScreen} />
               <Stack.Screen name={"BottomSheetScreen"} component={BottomSheetScreen} />
+              <Stack.Screen name={"ModalScreen"} component={ModalScreen} />
               <Stack.Screen name={"TagScreen"} component={TagScreen} />
               <Stack.Screen name={"AlertScreen"} component={AlertScreen} />
               <Stack.Screen name={"SelectorScreen"} component={SelectorScreen} />
@@ -73,6 +77,8 @@ const AppNavigation = () => {
               <Stack.Screen name={"OTPScreen"} component={OTPScreen} />
               <Stack.Screen name={"FormScreen"} component={FormScreen} />
               <Stack.Screen name={"LayoutScreen"} component={LayoutScreen} />
+              <Stack.Screen name={"SkeletonScreen"} component={SkeletonScreen} />
+              <Stack.Screen name={"DividerScreen"} component={DividerScreen} />
             </>
           )
         }

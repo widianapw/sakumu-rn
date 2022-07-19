@@ -7,10 +7,12 @@ import { ScrollView } from "react-native";
 import { Alert } from "../../../tmd";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function AlertScreen() {
   return (
     <Page>
+      <Toolbar title={"AlertScreen"} />
 
     <ScrollView style={{ flex: 1 }}>
       <Stack p={16} spacing={16}>

@@ -5,6 +5,8 @@ import { TextInputMode, TextInputShape } from "./components/TextInput/TextField"
 import { AlertType, AlertVariant } from "./components/Alert/Alert";
 import { ChipShape, ChipVariant } from "./components/Chip";
 import { ToastShape, ToastVariant } from "./components/Toast";
+import { SkeletonAnimation } from "./components/Skeleton/Skeleton";
+import { ToolbarSize } from "./components/Toolbar/Toolbar";
 
 export type Font = {
   fontFamily: string;
@@ -45,10 +47,23 @@ export type Theme = {
   alert: AlertTheme;
   chip: ChipTheme;
   toast: ToastTheme;
+  skeleton: SkeletonTheme;
+  toolbar: ToolbarTheme;
   animation: {
     scale: number;
   };
 };
+
+interface ToolbarTheme {
+  elevation: number;
+  size: ToolbarSize;
+
+}
+
+interface SkeletonTheme {
+  animation: SkeletonAnimation;
+  borderRadius: number;
+}
 
 interface ToastTheme {
   variant: ToastVariant;

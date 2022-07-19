@@ -123,6 +123,8 @@ To keep an application scalable and organized, the global static resources that 
   - Stack
 - Chip
 - Divider
+- FlatList
+  - GridList
 - Icon
 - Modal
   - ImageViewerModal
@@ -152,6 +154,7 @@ To keep an application scalable and organized, the global static resources that 
   - Select
   - MultiSelect
   - SelectModal
+- Skeleton 
 - Tag
 - TextInput
 - Toast

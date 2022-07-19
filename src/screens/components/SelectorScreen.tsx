@@ -8,12 +8,14 @@ import { Checkbox, RadioButton, Switch } from "../../../tmd";
 import RadioButtonGroup from "../../../tmd/components/RadioButton/RadioButtonGroup";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function SelectorScreen() {
   const [isChecked, setIsChecked] = useState(true);
   const [rbVal, setRbVal] = useState("1");
   return (
     <Page>
+      <Toolbar title={"Selector Screen"} />
 
       <ScrollView style={{
         flex: 1,

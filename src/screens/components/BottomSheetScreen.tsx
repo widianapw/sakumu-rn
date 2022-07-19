@@ -4,7 +4,7 @@
  */
 import React, { useState } from "react";
 import { Alert, ScrollView } from "react-native";
-import { Button, Stack } from "../../../tmd";
+import { Button, Divider, Stack } from "../../../tmd";
 import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
 import DateFilterBottomSheet, { DateFilterPayload } from "../../../tmd/components/BottomSheet/DateFilterBottomSheet";
@@ -18,6 +18,8 @@ import MultiPickerBottomSheet from "../../../tmd/components/BottomSheet/MultiPic
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 import DatePickerBottomSheet from "../../../tmd/components/BottomSheet/DatePickerBottomSheet";
+import MonthPickerBottomSheet from "../../../tmd/components/BottomSheet/MonthPickerBottomSheet";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function BottomSheetScreen() {
   const { getBank } = useBankService();
@@ -43,6 +45,7 @@ export default function BottomSheetScreen() {
       title: "Hmm, Internet kamu putus",
       imageNode: <IllustNoConnection />,
       description: "Tenang, cek koneksi internet atau Wi-fi kamu dan coba lagi ya...",
+      dismissable: false,
     });
   };
 
@@ -61,12 +64,18 @@ export default function BottomSheetScreen() {
   const [selectedDateRange, setSelectedDateRange] = useState<DateRange | undefined>({});
 
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
+  const [isOpenMonthPicker, setIsOpenMonthPicker] = useState(false);
 
   const [isOpenMulti, setIsOpenMulti] = useState(false);
   return (
     <>
       <Page>
-
+        <Toolbar
+          title={"BottomSheetScreen"}
+        />
+        <MonthPickerBottomSheet open={isOpenMonthPicker} onClose={() => {
+          setIsOpenMonthPicker(false);
+        }} value={new Date()} />
         <DatePickerBottomSheet open={isOpenDatePicker} onClose={() => {
           setIsOpenDatePicker(false);
         }} />
@@ -118,6 +127,7 @@ export default function BottomSheetScreen() {
           <Stack spacing={16} style={{
             padding: 16,
           }}>
+
             <Button onPress={() => {
               handleShowAlert();
             }}>Alert / Error BottomSheet</Button>
@@ -170,6 +180,13 @@ export default function BottomSheetScreen() {
             <Button onPress={() => {
               setIsOpenDatePicker(true);
             }}>DatePicker</Button>
+
+            <Button onPress={() => {
+              setIsOpenMonthPicker(true);
+            }}>
+              MonthPicker
+            </Button>
+
           </Stack>
         </ScrollView>
       </Page>

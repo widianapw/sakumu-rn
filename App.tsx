@@ -26,6 +26,7 @@ import AuthProvider from "./src/providers/AuthProvider";
 import { Provider } from "react-redux";
 import { persistor, store } from "./src/redux/stores/store";
 import { PersistGate } from "redux-persist/integration/react";
+import ModalProvider from "./tmd/providers/ModalProvider";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -40,9 +41,11 @@ const App = () => {
                 <Host>
                   <AuthProvider>
                     <BottomSheetProvider>
-                      <PermissionProvider>
-                        <AppNavigation />
-                      </PermissionProvider>
+                      <ModalProvider>
+                        <PermissionProvider>
+                          <AppNavigation />
+                        </PermissionProvider>
+                      </ModalProvider>
                     </BottomSheetProvider>
                   </AuthProvider>
                 </Host>

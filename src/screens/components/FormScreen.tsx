@@ -19,6 +19,7 @@ import RHFMultiImagePicker from "../../../tmd/components/RHF/RHFMultiImagePicker
 import RHFDateRangePicker from "../../../tmd/components/RHF/RHFDateRangePicker";
 import RHFMapPicker from "../../../tmd/components/RHF/RHFMapPicker";
 import RHFMultiSelect from "../../../tmd/components/RHF/RHFMultiSelect";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function FormScreen() {
   const { t } = useLocale();
@@ -74,6 +75,7 @@ export default function FormScreen() {
 
   return (
     <Page>
+      <Toolbar title={"Form Screen"} />
 
       <ScrollView style={{
         flex: 1,

@@ -8,6 +8,7 @@ import { requestMultiple } from "react-native-permissions";
 import _permissionTypes, { PermissionOS } from "../data/_permissionTypes";
 import { PermissionType, useBottomSheet } from "./BottomSheetProvider";
 import { Platform } from "react-native";
+import { useModal } from "./ModalProvider";
 
 type PermissionContextType = {
   requestPermissions: (permissions: PermissionOS[], onGranted?: () => void) => void;
@@ -23,6 +24,7 @@ export const usePermission = () => useContext(PermissionContext);
 
 const PermissionProvider = ({ children }: any) => {
   const { showPermissionBS, hidePermissionBS } = useBottomSheet();
+  const { showPermissionModal } = useModal();
   const getPermissionType = (permission: Permission | undefined): PermissionType => {
     if (permission) {
       const isAndroid = Platform.OS == "android";
@@ -61,7 +63,10 @@ const PermissionProvider = ({ children }: any) => {
           //get first that are not granted
           const notGranted = osPermissions.find(it => statuses[it] != "granted");
           const type = getPermissionType(notGranted);
-          showPermissionBS(type);
+
+          //select which one you want to use
+          // showPermissionBS(type);
+          showPermissionModal(type);
         }
       });
   };

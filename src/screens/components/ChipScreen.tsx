@@ -10,10 +10,13 @@ import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function ChipScreen() {
   return (
     <Page>
+      <Toolbar title={"Chip Screen"} />
+
       <ScrollView>
         <Stack p={16} spacing={8}>
           <Stack direction={'row'} spacing={8}>

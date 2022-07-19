@@ -19,6 +19,20 @@ export default function useCatalogService() {
     });
   };
 
+  const getCatalogPagination = async  (page: number) => {
+    try {
+      return await getAPI<CatalogListResponse>(`catalog`, {
+        params: {
+          page: page,
+          store: 1,
+        },
+      });
+    } catch (e) {
+      showErrorBS(e);
+    }
+
+  }
+
   const getFeaturedCatalog = async () => {
     try {
       return await getAPI<CatalogListResponse>("catalog/featured?store=1");

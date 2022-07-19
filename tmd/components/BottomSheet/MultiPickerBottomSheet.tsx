@@ -148,7 +148,6 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
                   props.onReset &&
                   <Button
                     size={"sm"}
-                    shape={"rounded"}
                     variant={"secondary"}
                     onPress={props?.onReset}
                   >
@@ -159,7 +158,6 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
               {props.search &&
                 <View style={{ marginTop: 8 }}>
                   <TextField
-                    shape={"rounded"}
                     onInvokeTextChanged={(text) => {
                       setSearchQuery(text);
                     }}
@@ -201,7 +199,6 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
               style={{
                 width: "100%",
               }}
-              shape={"rounded"}
             >{t("save")}</Button>
           </View>
         </Animated.View>

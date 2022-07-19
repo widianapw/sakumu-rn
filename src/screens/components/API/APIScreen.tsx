@@ -9,6 +9,7 @@ import useCredentialService from "../../../services/credential/useCredentialServ
 import { navigate } from "../../../navigations/RootNavigation";
 import Page from "../../../../tmd/components/Page";
 import Stack from "../../../../tmd/components/Layout/Stack";
+import Toolbar from "../../../../tmd/components/Toolbar/Toolbar";
 
 export default function APIScreen() {
   const { checkCredential, isLoadingCheckCredential } = useCredentialService();
@@ -19,6 +20,8 @@ export default function APIScreen() {
 
   return (
     <Page>
+      <Toolbar title={"API Screen"} />
+
       <ScrollView>
         <Stack p={16} spacing={16}>
           <Button

@@ -9,10 +9,13 @@ import { ScrollView, View } from "react-native";
 import Grid from "../../../tmd/components/Layout/Grid";
 import { Stack } from "../../../tmd";
 import Typography from "../../../tmd/components/Typography/Typography";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function LayoutScreen() {
   return (
     <Page>
+      <Toolbar title={"LayoutScreen"} />
+
       <ScrollView>
         <Stack style={{ padding: 16 }}>
           <Typography type={"title2"}>GRID LAYOUT</Typography>

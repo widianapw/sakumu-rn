@@ -139,7 +139,6 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
                   props.onReset &&
                   <Button
                     size={"sm"}
-                    shape={"rounded"}
                     variant={"secondary"}
                     onPress={props?.onReset}
                   >
@@ -150,7 +149,6 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
               {props.search &&
                 <View style={{ marginTop: 8 }}>
                   <TextField
-                    shape={"rounded"}
                     onInvokeTextChanged={(text) => {
                       setSearchQuery(text);
                     }}
@@ -213,7 +211,6 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
               style={{
                 width: "100%",
               }}
-              shape={"rounded"}
             >{t("save")}</Button>
           </View>
         </Animated.View>

@@ -19,7 +19,7 @@ export default function Page({ children }: any) {
         }}
       >
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}>
           {children}
         </KeyboardAvoidingView>

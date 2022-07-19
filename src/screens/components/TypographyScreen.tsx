@@ -6,10 +6,25 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import Typography from "../../../tmd/components/Typography/Typography";
 import Page from "../../../tmd/components/Page";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
+import { Button } from "../../../tmd";
 
 export default function TypographyScreen() {
   return (
     <Page>
+      <Toolbar
+        center
+        title={"TypographyScreen"}
+        description={"Deskripsikan dirimu"}
+        size={"md"}
+        actionButton={
+          <Button
+            onPress={() => {
+              console.log("Button Pressed");
+            }}
+            size={"sm"} variant={"secondary"}>Button</Button>
+        }
+      />
       <ScrollView>
         <View
           style={{ padding: 16, flexDirection: "column" }}

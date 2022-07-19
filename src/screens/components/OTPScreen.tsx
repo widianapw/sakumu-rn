@@ -8,10 +8,12 @@ import OTPInput from "../../../tmd/components/Otp/OTPInput";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
 import { Toast } from "../../../tmd";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function OTPScreen() {
   return (
     <Page>
+      <Toolbar title={"OTP Screen"} />
 
       <ScrollView>
         <Stack

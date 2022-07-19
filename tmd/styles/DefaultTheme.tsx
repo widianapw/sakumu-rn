@@ -8,11 +8,11 @@ const DefaultTheme: Theme = {
   colors: colors,
   textInput: {
     mode: "filled",
-    shape: "rect",
+    shape: "rounded",
   },
   button: {
     variant: "primary",
-    shape: "rect",
+    shape: "rounded",
     size: "md",
   },
   tag: {
@@ -30,7 +30,15 @@ const DefaultTheme: Theme = {
   },
   toast: {
     variant: "neutral",
-    shape: "rect"
+    shape: "rect",
+  },
+  skeleton: {
+    animation: "pulse",
+    borderRadius: 8,
+  },
+  toolbar:{
+    elevation: 4,
+    size: "sm"
   },
   fonts: configureFonts(),
   animation: {

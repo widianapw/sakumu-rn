@@ -8,10 +8,13 @@ import { ScrollView } from "react-native";
 import ImagePicker from "../../../tmd/components/picker/ImagePicker";
 import MultiImagePicker from "../../../tmd/components/picker/MultiImagePicker";
 import { Stack } from "../../../tmd";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function ImagePickerScreen() {
   return (
     <Page>
+      <Toolbar title={"ImagePicker Screen"} />
+
       <ScrollView>
         <Stack p={16}>
           <ImagePicker

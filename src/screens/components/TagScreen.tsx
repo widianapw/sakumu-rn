@@ -6,15 +6,15 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Tag } from "../../../tmd";
 import Page from "../../../tmd/components/Page";
+import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function TagScreen() {
   return (
     <Page>
-
+      <Toolbar title={"TagScreen"} />
       <ScrollView
         style={{
           flex: 1,
-          backgroundColor: "white",
         }}>
         <View
           style={{

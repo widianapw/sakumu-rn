@@ -8,12 +8,15 @@ import useFeaturedCatalogQuery from "../../../services/catalog/useFeaturedCatalo
 import Typography from "../../../../tmd/components/Typography/Typography";
 import { Button, Stack } from "../../../../tmd";
 import Page from "../../../../tmd/components/Page";
+import Toolbar from "../../../../tmd/components/Toolbar/Toolbar";
 
 export default function FetchDataScreen() {
   const { catalogs, isLoadingCatalog, refetch, isRefetching } = useFeaturedCatalogQuery();
 
   return (
     <Page>
+      <Toolbar title={"FetchDataScreen"} />
+
       <ScrollView>
         <Stack p={16}>
           {
