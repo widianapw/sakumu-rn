@@ -1,0 +1,69 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  
+  desc "upload to gdrive"
+  lane :upload_drive do |options|
+    file_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+
+    upload_to_google_drive(
+      drive_keyfile: "fastlane/google_account.json",
+      service_account: true,
+      folder_id: ENV['GOOGLE_DRIVE_FOLDER_ID'],
+      upload_files: [''+file_path+'']
+    )
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :dev do
+    gradle(task: "clean assembleDebug")
+    upload_drive()
+
+    file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
+    sh "echo Link to apk :" + file_upload_path
+  end
+
+
+  
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :staging do
+    gradle(task: "clean assembleStaging")
+    upload_drive()
+
+    file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
+    sh "echo Link to apk :" + file_upload_path
+  end
+
+
+
+  desc "test upload firebase app distribution"
+  lane :release do |options|
+    gradle(task: "clean bundleRelease")
+    file_path_aab = lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]
+
+    upload_to_google_drive(
+      drive_keyfile: "fastlane/google_account.json",
+      service_account: true,
+      folder_id: ENV['GOOGLE_DRIVE_FOLDER_ID'],
+      upload_files: [''+file_path_aab+'']
+    )
+
+    file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
+    sh "echo Link to apk :" + file_upload_path
+  end
+end
