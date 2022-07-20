@@ -29,6 +29,7 @@ import LayoutScreen from "../screens/components/LayoutScreen";
 import ModalScreen from "../screens/components/ModalScreen";
 import SkeletonScreen from "../screens/components/SkeletonScreen";
 import DividerScreen from "../screens/components/DividerScreen";
+import TabScreen from "../screens/components/TabScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -77,6 +78,7 @@ const AppNavigation = () => {
               <Stack.Screen name={"OTPScreen"} component={OTPScreen} />
               <Stack.Screen name={"FormScreen"} component={FormScreen} />
               <Stack.Screen name={"LayoutScreen"} component={LayoutScreen} />
+              <Stack.Screen name={"TabScreen"} component={TabScreen} />
               <Stack.Screen name={"SkeletonScreen"} component={SkeletonScreen} />
               <Stack.Screen name={"DividerScreen"} component={DividerScreen} />
             </>

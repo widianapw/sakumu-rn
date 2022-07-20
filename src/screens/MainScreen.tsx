@@ -163,6 +163,12 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
+            navigate("TabScreen");
+          }}>
+            Tab Screen
+          </Button>
+
+          <Button onPress={() => {
             navigate("FormScreen");
           }}>
             Form Input
