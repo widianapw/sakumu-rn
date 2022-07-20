@@ -19,18 +19,18 @@ platform :ios do
   desc "upload staging to testflight"
   lane :staging do
     build_app(scheme: "RecipeApp", configuration: "Staging")
-    # upload_to_testflight
+    upload_to_testflight
   end
 
   desc "Upload dev to testflight"
   lane :debug do
     build_app(scheme: "RecipeApp", configuration: "Debug")
-    # upload_to_testflight
+    upload_to_testflight
   end
 
   desc "Release to testflight"
-  lane :debug do
+  lane :release do
     build_app(scheme: "RecipeApp", configuration: "Release")
-    # upload_to_testflight
+    upload_to_testflight
   end
 end
