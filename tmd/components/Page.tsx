@@ -6,12 +6,17 @@ import React from "react";
 import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar } from "react-native";
 import { useTheme } from "../core/theming";
 
-export default function Page({ children }: any) {
+interface Props {
+  children: React.ReactNode;
+  statusBarColor?: string;
+}
+
+export default function Page({ children, statusBarColor }: Props) {
   const { colors } = useTheme();
   return (
     <>
       <StatusBar
-        backgroundColor={colors.primary.pressed}
+        backgroundColor={statusBarColor ?? colors.primary.pressed}
       />
       <SafeAreaView
         style={{

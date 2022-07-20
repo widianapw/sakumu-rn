@@ -4,7 +4,7 @@
  */
 import React, { useState } from "react";
 import { Alert, ScrollView } from "react-native";
-import { Button, Divider, Stack } from "../../../tmd";
+import { Button, Stack } from "../../../tmd";
 import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
 import DateFilterBottomSheet, { DateFilterPayload } from "../../../tmd/components/BottomSheet/DateFilterBottomSheet";
@@ -19,7 +19,7 @@ import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 import DatePickerBottomSheet from "../../../tmd/components/BottomSheet/DatePickerBottomSheet";
 import MonthPickerBottomSheet from "../../../tmd/components/BottomSheet/MonthPickerBottomSheet";
-import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
+import SearchToolbar from "../../../tmd/components/Toolbar/SearchToolbar";
 
 export default function BottomSheetScreen() {
   const { getBank } = useBankService();
@@ -70,9 +70,12 @@ export default function BottomSheetScreen() {
   return (
     <>
       <Page>
-        <Toolbar
-          title={"BottomSheetScreen"}
-        />
+        <SearchToolbar
+          searchPlaceholder={"Search BS"}
+          onPressSearch={(val) => {
+          }}
+          onTextChange={(val) => {
+          }} />
         <MonthPickerBottomSheet open={isOpenMonthPicker} onClose={() => {
           setIsOpenMonthPicker(false);
         }} value={new Date()} />
