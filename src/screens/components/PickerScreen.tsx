@@ -17,7 +17,7 @@ import DateRangePicker from "../../../tmd/components/picker/DateRangePicker";
 import MultiSelect from "../../../tmd/components/Select/MultiSelect";
 import SelectModal from "../../../tmd/components/Select/SelectModal";
 import BranchListItem from "../../../tmd/components/ListItem/BranchListItem";
-import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
+import SearchToolbar from "../../../tmd/components/Toolbar/SearchToolbar";
 
 export default function PickerScreen() {
   const theme = useTheme();
@@ -27,7 +27,9 @@ export default function PickerScreen() {
   const [initialMap, setInitialMap] = useState({});
   return (
     <Page>
-      <Toolbar title={"Picker Screen"} />
+      <SearchToolbar
+        title={"PickerScreen"}
+      />
       <ScrollView
         keyboardShouldPersistTaps="always"
         style={{
