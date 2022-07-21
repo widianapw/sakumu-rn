@@ -25,7 +25,7 @@ platform :ios do
   desc "Upload dev to testflight"
   lane :debug do
     build_app(scheme: "RecipeApp", configuration: "Debug")
-    upload_to_testflight
+    # upload_to_testflight
   end
 
   desc "Release to testflight"
