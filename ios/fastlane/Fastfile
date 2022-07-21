@@ -16,6 +16,18 @@
 default_platform(:ios)
 
 platform :ios do
+  desc "fetch certificate"
+  lane :featch_certificates do
+    bundle_identifiers = [BUNDLE_ID, EXTENSION_BUNDLE_ID]
+    match(type: "appstore", app_identifier: bundle_identifiers, readonly: true)
+  end
+  
+  desc "update certificate"
+  lane :update_certificates do
+    bundle_identifiers = [BUNDLE_ID, EXTENSION_BUNDLE_ID]
+    match(type: "appstore", app_identifier: bundle_identifiers, force: true)
+  end
+
   desc "upload staging to testflight"
   lane :staging do
     build_app(scheme: "RecipeApp", configuration: "Staging")
@@ -23,7 +35,7 @@ platform :ios do
   end
 
   desc "Upload dev to testflight"
-  lane :debug do
+  lane :dev do
     build_app(scheme: "RecipeApp", configuration: "Debug")
     # upload_to_testflight
   end
