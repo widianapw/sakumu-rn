@@ -16,33 +16,29 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "fetch certificate"
-  lane :featch_certificates do
-    bundle_identifiers = [BUNDLE_ID, EXTENSION_BUNDLE_ID]
-    match(type: "appstore", app_identifier: bundle_identifiers, readonly: true)
-  end
-  
-  desc "update certificate"
-  lane :update_certificates do
-    bundle_identifiers = [BUNDLE_ID, EXTENSION_BUNDLE_ID]
-    match(type: "appstore", app_identifier: bundle_identifiers, force: true)
-  end
+  # desc "Push a new beta build to TestFlight"
+  # lane :beta do
+  #   increment_build_number(xcodeproj: "ReactNativeStarterKit.xcodeproj")
+  #   build_app(workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit")
+  #   # upload_to_testflight
+  # end
 
   desc "upload staging to testflight"
   lane :staging do
-    build_app(scheme: "RecipeApp", configuration: "Staging")
+    build_app(scheme: "ReactNativeStarterKit", configuration: "Staging")
     upload_to_testflight
   end
 
   desc "Upload dev to testflight"
   lane :dev do
-    build_app(scheme: "RecipeApp", configuration: "Debug")
-    # upload_to_testflight
+    match(git_basic_authorization: 'dG1kX21vYmlsZV90ZWFtOkRZaEM2YkZlNVRZa3pxVmhiTFFV')
+    build_app(configuration: "Debug", workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit")
+    upload_to_testflight
   end
 
   desc "Release to testflight"
   lane :release do
-    build_app(scheme: "RecipeApp", configuration: "Release")
+    build_app(scheme: "ReactNativeStarterKit", configuration: "Release")
     upload_to_testflight
   end
 end
