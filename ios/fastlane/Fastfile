@@ -23,6 +23,11 @@ platform :ios do
   #   # upload_to_testflight
   # end
 
+  before_all do
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "qjnf-rmpg-mewx-pmug"
+    ENV["FASTLANE_SESSION"] = ' session cookie'
+  end
+
   desc "upload staging to testflight"
   lane :staging do
     build_app(scheme: "ReactNativeStarterKit", configuration: "Staging")
