@@ -45,19 +45,18 @@ platform :ios do
     # match(git_basic_authorization: 'dG1kX21vYmlsZV90ZWFtOkRZaEM2YkZlNVRZa3pxVmhiTFFV')
     match(
       type: 'appstore', 
-      app_identifier: ["com.fastlane.test2.fastline2"],
     )
-    sync_code_signing(
-      type: 'appstore',
-      api_key: api_key,
-      readonly: true,
-      verbose: true
-    )
+    # sync_code_signing(
+    #   type: 'appstore',
+    #   api_key: api_key,
+    #   readonly: true,
+    #   verbose: true
+    # )
     
-    build_app(configuration: "Debug", workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit")
-    deliver(
-      api_key: api_key
-    )
+    build_app(configuration: "Debug", workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit", xcargs: "-allowProvisioningUpdates")
+    # deliver(
+    #   api_key: api_key
+    # )
   end
 
   desc "Release to testflight"
