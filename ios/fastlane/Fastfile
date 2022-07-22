@@ -36,7 +36,7 @@ platform :ios do
 
   desc "Upload dev to testflight"
   lane :dev do
-    # match(git_basic_authorization: 'dG1kX21vYmlsZV90ZWFtOkRZaEM2YkZlNVRZa3pxVmhiTFFV')
+    match(git_basic_authorization: 'dG1kX21vYmlsZV90ZWFtOkRZaEM2YkZlNVRZa3pxVmhiTFFV')
     build_app(configuration: "Debug", workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit")
     upload_to_testflight
   end
