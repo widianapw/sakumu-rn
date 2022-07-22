@@ -36,20 +36,29 @@ platform :ios do
 
   desc "Upload dev to testflight"
   lane :dev do
-    app_store_connect_api_key(
+    api_key = app_store_connect_api_key(
       key_id: "9798GP8947",
       issuer_id: "1b68b333-3d19-4123-9402-30290b20ad4d",
       key_content: "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ0RlTTBLVkRENUJETWU5SmgKcDlpTFZhTzR4bEc3cTN3cEtLSXVmelM0VHVxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFRbnlMZkVjVWZhL1JrawpQMzFmbUVYckJTSlR4NnBUc3U0a2dIWU8wUnRFOTVSeTdWUnFCQ0lFeEQydmFaeDZybnZxMjdOK2UyRndMOWVnCmp5Ym1xRVdnCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=",
       is_key_content_base64: true
     )
     # match(git_basic_authorization: 'dG1kX21vYmlsZV90ZWFtOkRZaEM2YkZlNVRZa3pxVmhiTFFV')
-    match(
-      type: 'appstore', 
-      app_identifier: ["com.fastlane.test2.fastline2"],
-      readonly: true
+    # match(
+    #   type: 'appstore', 
+    #   app_identifier: ["com.fastlane.test2.fastline2"],
+    #   readonly: true
+    # )
+    sync_code_signing(
+      type: 'Debug'
+      api_key: api_key,
+      readonly: true,
+      verbose: true
     )
+    
     build_app(configuration: "Debug", workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit")
-    upload_to_testflight
+    deliver(
+      api_key: api_key
+    )
   end
 
   desc "Release to testflight"
