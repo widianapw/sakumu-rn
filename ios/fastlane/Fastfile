@@ -46,7 +46,6 @@ platform :ios do
     match(
       type: 'appstore', 
       app_identifier: ["com.fastlane.test2.fastline2"],
-      readonly: true
     )
     sync_code_signing(
       type: 'appstore',
