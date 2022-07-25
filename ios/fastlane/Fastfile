@@ -20,8 +20,6 @@ platform :ios do
 
   desc "Upload dev to testflight"
   lane :build do
-    #change based on env_type, example : Debug, Staging, Release
-    ENV_TYPE = "Debug"
 
     api_key = app_store_connect_api_key(
       key_id: "9798GP8947",
@@ -36,7 +34,7 @@ platform :ios do
       readonly: true
     )
     
-    build_app(configuration: ENV_TYPE, workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit", xcargs: "-allowProvisioningUpdates")
+    build_app(workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit", xcargs: "-allowProvisioningUpdates")
     upload_to_testflight(
       api_key: api_key,
       skip_submission: true,
