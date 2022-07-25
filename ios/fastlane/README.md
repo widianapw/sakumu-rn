@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 upload staging to testflight
 
+### ios cert
+
+```sh
+[bundle exec] fastlane ios cert
+```
+
+generate new certificates
+
 ### ios dev
 
 ```sh
