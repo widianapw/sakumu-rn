@@ -37,6 +37,8 @@
 		</dict>
 		<key>NSBluetoothPeripheralUsageDescription</key>
 		<string>To Access Printer Device</string>
+		<key>NSBluetoothAlwaysUsageDescription</key>
+		<string>To Access Printer Device</string>
 		<key>NSCameraUsageDescription</key>
 		<string>To access camera and take picture</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
