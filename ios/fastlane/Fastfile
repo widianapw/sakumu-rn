@@ -37,11 +37,11 @@ platform :ios do
     )
     
     build_app(configuration: ENV_TYPE, workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit", xcargs: "-allowProvisioningUpdates")
-    # upload_to_testflight(
-    #   api_key: api_key,
-    #   skip_submission: true,
-    #   notify_external_testers: false
-    # )
+    upload_to_testflight(
+      api_key: api_key,
+      skip_submission: true,
+      notify_external_testers: false
+    )
   end
 
 end
