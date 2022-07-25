@@ -39,7 +39,6 @@ platform :ios do
       api_key: api_key,
       skip_submission: true,
       notify_external_testers: false,
-      skip_waiting_for_build_processing: true
     )
   end
 
