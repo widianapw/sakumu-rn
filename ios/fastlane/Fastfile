@@ -1,37 +1,11 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
 
 default_platform(:ios)
 
 platform :ios do
-  # desc "Push a new beta build to TestFlight"
-  # lane :beta do
-  #   increment_build_number(xcodeproj: "ReactNativeStarterKit.xcodeproj")
-  #   build_app(workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit")
-  #   # upload_to_testflight
-  # end
 
   before_all do
     ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "qjnf-rmpg-mewx-pmug"
     ENV["FASTLANE_SESSION"] = ' session cookie'
-  end
-
-  desc "upload staging to testflight"
-  lane :staging do
-    build_app(scheme: "ReactNativeStarterKit", configuration: "Staging")
-    upload_to_testflight
   end
 
   desc "generate new certificates"
@@ -45,36 +19,29 @@ platform :ios do
   end
 
   desc "Upload dev to testflight"
-  lane :dev do
+  lane :build do
+    #change based on env_type, example : Debug, Staging, Release
+    ENV_TYPE = "Debug"
+
     api_key = app_store_connect_api_key(
       key_id: "9798GP8947",
       issuer_id: "1b68b333-3d19-4123-9402-30290b20ad4d",
       key_content: "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ0RlTTBLVkRENUJETWU5SmgKcDlpTFZhTzR4bEc3cTN3cEtLSXVmelM0VHVxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFRbnlMZkVjVWZhL1JrawpQMzFmbUVYckJTSlR4NnBUc3U0a2dIWU8wUnRFOTVSeTdWUnFCQ0lFeEQydmFaeDZybnZxMjdOK2UyRndMOWVnCmp5Ym1xRVdnCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=",
       is_key_content_base64: true
     )
-    # match(git_basic_authorization: 'dG1kX21vYmlsZV90ZWFtOkRZaEM2YkZlNVRZa3pxVmhiTFFV')
+
     match(
       type: 'appstore',
       force_for_new_devices: true,
       readonly: true
     )
-    # sync_code_signing(
-    #   type: 'appstore',
-    #   api_key: api_key,
-    #   readonly: true,
-    #   verbose: true
-    # )
     
-    build_app(configuration: "Debug", workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit", xcargs: "-allowProvisioningUpdates")
-    upload_to_testflight(
-      api_key: api_key,
-      skip_submission: true,
-    )
+    build_app(configuration: ENV_TYPE, workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit", xcargs: "-allowProvisioningUpdates")
+    # upload_to_testflight(
+    #   api_key: api_key,
+    #   skip_submission: true,
+    #   notify_external_testers: false
+    # )
   end
 
-  desc "Release to testflight"
-  lane :release do
-    build_app(scheme: "ReactNativeStarterKit", configuration: "Release")
-    upload_to_testflight
-  end
 end
