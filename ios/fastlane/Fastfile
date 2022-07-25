@@ -66,8 +66,9 @@ platform :ios do
     # )
     
     build_app(configuration: "Debug", workspace: "ReactNativeStarterKit.xcworkspace", scheme: "ReactNativeStarterKit", xcargs: "-allowProvisioningUpdates")
-    deliver(
-      api_key: api_key
+    upload_to_testflight(
+      api_key: api_key,
+      skip_submission: true,
     )
   end
 
