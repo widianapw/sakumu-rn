@@ -23,29 +23,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 upload to gdrive
 
-### android dev
+### android build
 
 ```sh
-[bundle exec] fastlane android dev
+[bundle exec] fastlane android build
 ```
 
 Submit a new Beta Build to Crashlytics Beta
-
-### android staging
-
-```sh
-[bundle exec] fastlane android staging
-```
-
-Submit a new Beta Build to Crashlytics Beta
-
-### android release
-
-```sh
-[bundle exec] fastlane android release
-```
-
-test upload firebase app distribution
 
 ----
 
