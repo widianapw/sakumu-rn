@@ -137,6 +137,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 46
         versionName "2.0.0"
+        manifestPlaceholders = [GOOGLE_MAPS_API_KEY: project.env.get("GOOGLE_MAPS_API_KEY")]
     }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
