@@ -107,12 +107,16 @@ To keep an application scalable and organized, the global static resources that 
 ### Components:
 
 - Alert
+- Avatar
 - BottomSheet
   - AlertBottomSheet
   - ConfirmationBottomSheet
   - DateFilterBottomSheet
   - PickerBottomSheet
   - MultiPickerBottomSheet
+- Badge
+  - Badge
+  - Ribbon
 - Button
   - Button
   - IconButton
@@ -159,6 +163,9 @@ To keep an application scalable and organized, the global static resources that 
 - TextInput
 - Toast
 - TouchableRipple
+- Tooltip
+  - Tooltip
+  - TooltipStepper
 - Typography
 
 ### Context Provider:
@@ -168,6 +175,8 @@ To keep an application scalable and organized, the global static resources that 
 - BottomSheetProvider
 - PermissionProvider
 - AuthProvider
+- ModalProvider
+- TooltipStepperProvider
 
 ## StarterKit Usage
 

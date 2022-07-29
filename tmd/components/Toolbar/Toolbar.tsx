@@ -21,6 +21,7 @@ interface Props {
 const smHeight = 64;
 const mdHeight = 116;
 const lgHeight = 156;
+
 export default function Toolbar({
                                   title,
                                   description,
@@ -40,12 +41,12 @@ export default function Toolbar({
   const [iconViewWidth, setIconViewWidth] = useState(0);
   const [actionButtonWidth, setActionButtonWidth] = useState(0);
 
+  const usedSize = size ?? toolbar.size;
+  const usedElevation = elevation ?? toolbar.elevation;
 
-  const usedSize = size || toolbar.size;
-  const usedElevation = elevation || toolbar.elevation;
   const SmToolbar = () => {
     return (
-      <>
+      <View>
         <Stack
           spacing={16}
           direction={"row"}
@@ -74,35 +75,39 @@ export default function Toolbar({
               </View>
             )
           }
-          <Stack
-            direction={"column"}
-            spacing={2}
-            style={
-              [
-                { flex: 1 },
-                center && { alignItems: "center", justifyContent: "center" },
-                (isShowBack && center) && {
-                  marginLeft: -iconViewWidth - 16,
-                },
-                (actionButton != undefined && center) && {
-                  marginLeft: actionButtonWidth - 16,
-                },
-              ]
-            }>
-            <Typography
-              numberOfLines={1}
-              ellipsizeMode={"tail"}
-              type={"title2"}
-              style={{ color: usedTitleColor }}>{title}</Typography>
-            {
-              description &&
+          <View style={{
+            flex: 1,
+          }}>
+            <Stack
+              direction={"column"}
+              spacing={2}
+              style={
+                [
+                  { flex: 1, flexGrow: 1 },
+                  { justifyContent: "center" },
+                  center && { alignItems: "center", justifyContent: "center" },
+                  (isShowBack && center) && {
+                    marginLeft: -iconViewWidth - 16,
+                  },
+                  (actionButton != undefined && center) && {
+                    marginLeft: actionButtonWidth - 16,
+                  },
+                ]
+              }>
               <Typography
                 numberOfLines={1}
                 ellipsizeMode={"tail"}
-                type={"body3"} style={{ color: usedDescColor }}>{description} </Typography>
-            }
-          </Stack>
-
+                type={"title2"}
+                style={{ color: usedTitleColor }}>{title}</Typography>
+              {
+                description &&
+                <Typography
+                  numberOfLines={1}
+                  ellipsizeMode={"tail"}
+                  type={"body3"} style={{ color: usedDescColor }}>{description} </Typography>
+              }
+            </Stack>
+          </View>
           {
             actionButton &&
             <View onLayout={(e) => {
@@ -112,7 +117,7 @@ export default function Toolbar({
             </View>
           }
         </Stack>
-      </>
+      </View>
     );
   };
 
@@ -123,10 +128,12 @@ export default function Toolbar({
           height: mdHeight,
           backgroundColor: usedBg,
         }}>
-        <Stack direction={"row"} style={{
-          padding: 16,
-          flexGrow: 1,
-        }} spacing={16}>
+        <Stack
+          direction={"row"}
+          style={{
+            padding: 16,
+            flexGrow: 1,
+          }} spacing={16}>
           {
             isShowBack &&
             (
@@ -243,8 +250,11 @@ export default function Toolbar({
     <Surface elevation={usedElevation} style={{ zIndex: 10 }}>
       {
         usedSize == "sm" &&
-        <SmToolbar />
+        <View style={{ width: "100%" }}>
+          <SmToolbar />
+        </View>
       }
+
       {
         usedSize == "md" &&
         <MdToolbar />
@@ -254,7 +264,6 @@ export default function Toolbar({
         usedSize == "lg" &&
         <LgToolbar />
       }
-
     </Surface>
   );
 }

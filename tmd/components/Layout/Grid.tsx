@@ -9,7 +9,7 @@ import { StyleProp, View, ViewStyle } from "react-native";
 interface Props {
   cols?: number;
   spacing?: number;
-  children?: React.ReactNode[] | React.ReactNode;
+  children: React.ReactNode[] | React.ReactNode;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -28,6 +28,7 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
     }
     return result;
   }
+
 
   const marginStyle = (index?: number) => {
     if (index != undefined) {
@@ -50,8 +51,10 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
 
   return (
     <View
+
       onLayout={(event) => {
-        setParentWidth(event.nativeEvent.layout.width);
+        const { width } = event.nativeEvent.layout;
+        setParentWidth(width);
       }}
       style={[
         {
@@ -62,21 +65,24 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
         viewStyle,
       ]}>
       {
-        (children instanceof Array)
+        (activeChildren instanceof Array)
           ? <>
-            {children?.map((child, index) => {
-              return (
-                <View key={index} style={[
-                  {
-                    width: ((parentWidth - (spacing * (cols - 1))) / cols),
-                  },
-                  marginStyle(index),
-                ]
-                }>
-                  {child}
-                </View>
-              );
-            })}
+            {
+              activeChildren.map((child, index) => {
+                return (
+                  React.cloneElement(child, {
+                    key: index,
+                    style: [
+                      child?.props?.style,
+                      marginStyle(index),
+                      {
+                        width: ((parentWidth - (spacing * (cols - 1))) / cols),
+                      },
+                    ],
+                  })
+                );
+              })
+            }
           </>
           : <View style={[marginStyle()]}>
             {children}

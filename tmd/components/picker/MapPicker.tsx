@@ -5,9 +5,9 @@
 
 import React, { useEffect, useState } from "react";
 import TextField from "../TextInput/TextField";
-import MapPickerModal from "../Modal/MapPickerModal";
 import { usePermission } from "../../providers/PermissionProvider";
 import { LOCATION_PERMISSIONS } from "../../data/_permissionTypes";
+import { navigate } from "../../../src/navigations/RootNavigation";
 
 export interface SelectedMap {
   fullAddress?: string;
@@ -30,7 +30,13 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
   const handleOpen = () => {
     requestPermissions(
       [LOCATION_PERMISSIONS], () => {
-        setIsModalOpen(true);
+        navigate("MapPickerScreen", {
+          onSelected: (selected: SelectedMap) => {
+            setSavedMap(selected);
+            onSelected && onSelected(selected);
+          },
+          initial: initial,
+        });
       },
     );
   };
@@ -58,19 +64,6 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
         }}
         {...rest}
       />
-
-
-      <MapPickerModal
-        open={isModalOpen}
-        onSelected={(val) => {
-          console.log(val);
-          setSavedMap(val)
-          if(onSelected){
-            onSelected(val)
-          }
-        }}
-        initial={initial}
-        onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

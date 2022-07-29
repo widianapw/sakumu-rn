@@ -53,49 +53,24 @@ export default function Tag({ size, variant, text, shape, ...rest }: Props) {
   }
 
   const usedVariant = variant ?? tag?.variant;
-  let bgColor = colors.primary.surface;
-  let textColor = colors.primary.main;
-  switch (usedVariant) {
-    case "primary": {
-      bgColor = colors.primary.surface;
-      textColor = colors.primary.main;
-      break;
-    }
-    case "success": {
-      bgColor = colors.success.surface;
-      textColor = colors.success.main;
-      break;
-    }
-    case "info": {
-      bgColor = colors.info.surface;
-      textColor = colors.info.main;
-      break;
-    }
-    case "warning": {
-      bgColor = colors.warning.surface;
-      textColor = colors.warning.main;
-      break;
-    }
-    case "danger": {
-      bgColor = colors.danger.surface;
-      textColor = colors.danger.main;
-      break;
-    }
-  }
-
+  let bgColor = colors[usedVariant]["surface"];
+  let textColor = colors[usedVariant]["main"];
 
   return (
     <View style={
-      [{
-        backgroundColor: bgColor,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: borderRadius,
-        paddingVertical: 4,
-        paddingHorizontal: 8,
-        alignSelf: "baseline",
-      }, rest.style]}>
+      [
+        {
+          backgroundColor: bgColor,
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: borderRadius,
+          paddingVertical: 4,
+          paddingHorizontal: 8,
+          alignSelf: "baseline",
+        },
+        rest.style,
+      ]}>
       {
         rest.prefixIcon &&
         <View style={{ marginRight: 4 }}>

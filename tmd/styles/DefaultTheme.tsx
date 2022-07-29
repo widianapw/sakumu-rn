@@ -7,8 +7,8 @@ const DefaultTheme: Theme = {
   roundness: 8,
   colors: colors,
   textInput: {
-    mode: "filled",
-    shape: "rounded",
+    mode: "contained",
+    shape: "rect",
   },
   button: {
     variant: "primary",
@@ -36,9 +36,18 @@ const DefaultTheme: Theme = {
     animation: "pulse",
     borderRadius: 8,
   },
-  toolbar:{
+  avatar: {
+    variant: "icon",
+    size: "2xl",
+  },
+  badge: {
+    size: "md",
+    shape: "rounded",
+    variant: "danger",
+  },
+  toolbar: {
     elevation: 4,
-    size: "sm"
+    size: "sm",
   },
   fonts: configureFonts(),
   animation: {

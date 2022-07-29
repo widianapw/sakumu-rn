@@ -25,13 +25,14 @@ export interface ImagePickerBSProps {
   crop?: boolean;
   camera?: boolean;
   gallery?: boolean;
+  selectedImage?: string
 }
 
 
-export default function ImagePickerBottomSheet({ camera = true, gallery = true, ...props }: ImagePickerBSProps) {
+export default function ImagePickerBottomSheet({ selectedImage,camera = true, gallery = true, ...props }: ImagePickerBSProps) {
   const modalizeRef = useRef<Modalize>(null);
   const { t } = useTranslation();
-  const [currentImage, setCurrentImage] = useState(undefined);
+  const [currentImage, setCurrentImage] = useState(selectedImage);
   const imageSize = 500;
   useEffect(() => {
     if (props.open) {
@@ -65,7 +66,7 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
       cropping: props.crop ?? true,
     }).then(image => {
       if (props.onChangeImage) {
-        setCurrentImage(image);
+        setCurrentImage(image?.path);
         props?.onChangeImage(image);
       }
     }).catch(reason => {
@@ -80,7 +81,7 @@ export default function ImagePickerBottomSheet({ camera = true, gallery = true, 
       cropping: props.crop ?? true,
     }).then(image => {
       if (props.onChangeImage) {
-        setCurrentImage(image);
+        setCurrentImage(image?.path);
         props?.onChangeImage(image);
       }
     }).catch(reason => {

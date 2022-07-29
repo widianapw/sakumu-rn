@@ -11,7 +11,7 @@ export { default as overlay } from "./styles/overlay";
 export { default as configureFonts } from "./styles/fonts";
 
 export { default as Alert } from "./components/Alert/Alert";
-export { default as Badge } from "./components/Badge";
+export { default as Badge } from "./components/Badge/Badge";
 export { default as Tag } from "./components/Tag/Tag";
 export { default as ActivityIndicator } from "./components/ActivityIndicator";
 export { default as Banner } from "./components/Banner";

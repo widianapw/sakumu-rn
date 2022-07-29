@@ -19,7 +19,7 @@ export default function LayoutScreen() {
       <ScrollView>
         <Stack style={{ padding: 16 }}>
           <Typography type={"title2"}>GRID LAYOUT</Typography>
-          <Grid cols={3}  spacing={16}>
+          <Grid cols={3} spacing={8}>
             <View style={{
               height: 100,
               backgroundColor: "green",
@@ -48,8 +48,8 @@ export default function LayoutScreen() {
           </Grid>
 
           <Typography type={"title2"} style={{ marginTop: 16 }}>STACK (V/H) LAYOUT</Typography>
-          <Stack spacing={8}>
 
+          <Stack spacing={8}>
             <View style={{
               height: 100,
               backgroundColor: "green",

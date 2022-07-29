@@ -20,6 +20,7 @@ import RHFDateRangePicker from "../../../tmd/components/RHF/RHFDateRangePicker";
 import RHFMapPicker from "../../../tmd/components/RHF/RHFMapPicker";
 import RHFMultiSelect from "../../../tmd/components/RHF/RHFMultiSelect";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
+import RHFAvatarImagePicker from "../../../tmd/components/RHF/RHFAvatarImagePicker";
 
 export default function FormScreen() {
   const { t } = useLocale();
@@ -33,6 +34,7 @@ export default function FormScreen() {
     dateRange: yup.mixed().required().label(t("labels.date_range")),
     time: yup.string().required().label(t("labels.time")),
     image: yup.string().required().label(t("labels.image")),
+    avatar: yup.string().required(),
     multiImage: yup.array().min(2).required(),
     map: yup.mixed().required(),
     multiSelect: yup.array().min(2).required(),
@@ -49,6 +51,7 @@ export default function FormScreen() {
       time: "",
       multiSelect: undefined,
       image: "",
+      avatar: "",
       multiImage: undefined,
       dateRange: undefined,
       map: undefined,
@@ -175,6 +178,11 @@ export default function FormScreen() {
               requiredLabel
               name={"multiImage"}
               label={"Multi Image"}
+            />
+
+            <RHFAvatarImagePicker
+              name={"avatar"}
+
             />
 
             <RHFMapPicker

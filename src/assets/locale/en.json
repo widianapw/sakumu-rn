@@ -87,6 +87,10 @@
     "location_not_found": "Location not found",
     "location_not_found_description": "Check your keyword or press choose from map to determine the location.",
     "current_location": "Current Location",
-    "delete_image": "Delete Image"
+    "delete_image": "Delete Image",
+    "next": "Next",
+    "previous": "Previous",
+    "finish": "Finish",
+    "change_photo": "Change Photo"
   }
 }

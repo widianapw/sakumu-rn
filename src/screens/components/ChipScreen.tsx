@@ -16,7 +16,6 @@ export default function ChipScreen() {
   return (
     <Page>
       <Toolbar title={"Chip Screen"} />
-
       <ScrollView>
         <Stack p={16} spacing={8}>
           <Stack direction={'row'} spacing={8}>

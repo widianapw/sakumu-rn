@@ -7,6 +7,8 @@ import { ChipShape, ChipVariant } from "./components/Chip";
 import { ToastShape, ToastVariant } from "./components/Toast";
 import { SkeletonAnimation } from "./components/Skeleton/Skeleton";
 import { ToolbarSize } from "./components/Toolbar/Toolbar";
+import { BadgeShape, BadgeSize, BadgeVariant } from "./components/Badge/Badge";
+import { AvatarSize, AvatarVariant } from "./components/Avatar/Avatar";
 
 export type Font = {
   fontFamily: string;
@@ -49,10 +51,23 @@ export type Theme = {
   toast: ToastTheme;
   skeleton: SkeletonTheme;
   toolbar: ToolbarTheme;
+  avatar: AvatarTheme;
+  badge: BadgeTheme;
   animation: {
     scale: number;
   };
 };
+
+interface BadgeTheme{
+  size: BadgeSize
+  shape: BadgeShape
+  variant: BadgeVariant
+}
+
+interface AvatarTheme{
+  size: AvatarSize
+  variant: AvatarVariant
+}
 
 interface ToolbarTheme {
   elevation: number;

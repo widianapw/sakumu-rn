@@ -169,6 +169,24 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
+            navigate("AvatarScreen");
+          }}>
+            Avatar Screen
+          </Button>
+
+          <Button onPress={() => {
+            navigate("BadgeScreen");
+          }}>
+            Badge Screen
+          </Button>
+
+          <Button onPress={() => {
+            navigate("TooltipScreen")
+          }}>
+            Tooltip Screen
+          </Button>
+
+          <Button onPress={() => {
             navigate("FormScreen");
           }}>
             Form Input

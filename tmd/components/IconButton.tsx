@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ReactNode } from "react";
 import { GestureResponderEvent, StyleProp, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 import color from "color";
 
@@ -29,6 +30,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   shape?: ButtonShape;
   color?: string;
   themeSize?: ButtonSize;
+  iconNode?: ReactNode
   /**
    * @optional
    */
@@ -79,6 +81,7 @@ const IconButton = ({
                       variant,
                       shape,
                       themeSize,
+                      iconNode,
                       ...rest
                     }: Props & React.ComponentProps<typeof Icon>) => {
   const theme = useTheme();
@@ -190,7 +193,17 @@ const IconButton = ({
       {...rest}
     >
       <View>
-        <IconComponent color={iconColor ? iconColor : textColor} icon={icon} size={usedIconSize} source={rest.source} />
+        {
+          icon &&
+          <IconComponent color={iconColor ? iconColor : textColor} icon={icon} size={usedIconSize}
+                         source={rest.source} />
+        }
+        {
+          iconNode &&
+          <>
+            {iconNode}
+          </>
+        }
       </View>
     </TouchableRipple>
   );

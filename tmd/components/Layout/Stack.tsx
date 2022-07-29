@@ -46,7 +46,6 @@ export default function Stack({
                               }: Props) {
   const activeChildren = (children instanceof Array) ? children?.filter(it => it != undefined) : children;
   const itemCount = (activeChildren instanceof Array) ? activeChildren.length : 1;
-  const isMoreThanOneItem = itemCount > 1;
 
   const spacingStyle = (index?: number) => {
     if (index != undefined) {
@@ -92,10 +91,10 @@ export default function Stack({
                   child &&
                   React.cloneElement(child, {
                     key: index,
-                    style: [
-                      child?.props?.style,
-                      spacingStyle(index),
-                    ],
+                    style: {
+                      ...child?.props?.style,
+                      ...spacingStyle(index),
+                    },
                   })
                 }
               </>;

@@ -9,14 +9,14 @@ import TextButton from "../../../tmd/components/Button/TextButton";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
+import SocialButton from "../../../tmd/components/Button/SocialButton";
 
 export default function ButtonScreen() {
   return (
     <Page>
       <Toolbar
-        center
         title={"ButtonScreen"}
-        description={"Deskripsikan dirimu"}
+        description={"Deskripsikan "}
         actionButton={
           <IconButton
             onPress={() => {
@@ -28,6 +28,7 @@ export default function ButtonScreen() {
           />
         }
       />
+
       <ScrollView>
         <View style={{ padding: 16, flexDirection: "column" }}>
           <Stack spacing={8}>
@@ -191,6 +192,64 @@ export default function ButtonScreen() {
               size={"lg"}>
               Button Large
             </Button>
+
+
+            <View>
+              <SocialButton
+                fullWidth
+                social={"apple"}
+                onPress={() => {
+                }}
+              >
+                Sign in With me
+              </SocialButton>
+            </View>
+
+            <View>
+              <SocialButton
+                disabled
+                shape={"rect"}
+                socialVariant={"icon"}
+                fullWidth
+                onPress={() => {
+
+                }}
+              />
+            </View>
+
+            <View>
+              <SocialButton
+                social={"twitter"}
+                fullWidth
+                onPress={() => {
+                }}
+              >
+                Sign in With me
+              </SocialButton>
+            </View>
+            <View>
+              <SocialButton
+                social={"twitter"}
+                fullWidth
+                disabled
+                onPress={() => {
+                }}
+              >
+                Sign in With me
+              </SocialButton>
+            </View>
+
+            <View>
+              <SocialButton
+
+                fullWidth
+                onPress={() => {
+                }}
+                disabled
+              >
+                Sign in With me
+              </SocialButton>
+            </View>
 
           </Stack>
         </View>

@@ -30,9 +30,15 @@ import ModalScreen from "../screens/components/ModalScreen";
 import SkeletonScreen from "../screens/components/SkeletonScreen";
 import DividerScreen from "../screens/components/DividerScreen";
 import TabScreen from "../screens/components/TabScreen";
+import AvatarScreen from "../screens/components/AvatarScreen";
+import BadgeScreen from "../screens/components/BadgeScreen";
+import TooltipScreen from "../screens/components/TooltipScreen";
+import TooltipStepperScreen from "../screens/components/TooltipStepperScreen";
+import MapPickerScreen from "../screens/utils/MapPickerScreen";
+import AppNavigationType from "./AppNavigationType";
 
 const AppNavigation = () => {
-  const Stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator<AppNavigationType>();
   const { isAuthenticated } = useAuth();
   const NavTheme = {
     ...DefaultTheme,
@@ -79,11 +85,18 @@ const AppNavigation = () => {
               <Stack.Screen name={"FormScreen"} component={FormScreen} />
               <Stack.Screen name={"LayoutScreen"} component={LayoutScreen} />
               <Stack.Screen name={"TabScreen"} component={TabScreen} />
+              <Stack.Screen name={"AvatarScreen"} component={AvatarScreen} />
+              <Stack.Screen name={"BadgeScreen"} component={BadgeScreen} />
+              <Stack.Screen name={"TooltipScreen"} component={TooltipScreen} />
+              <Stack.Screen name={"TooltipStepperScreen"} component={TooltipStepperScreen} />
               <Stack.Screen name={"SkeletonScreen"} component={SkeletonScreen} />
               <Stack.Screen name={"DividerScreen"} component={DividerScreen} />
             </>
           )
         }
+        <Stack.Screen name={"MapPickerScreen"} component={MapPickerScreen} options={{
+          headerShown: false,
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

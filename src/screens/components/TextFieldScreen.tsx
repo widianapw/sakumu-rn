@@ -9,6 +9,7 @@ import TextField from "../../../tmd/components/TextInput/TextField";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
+import PriceField from "../../../tmd/components/TextInput/PriceField";
 
 const TextFieldScreen = () => {
   const { colors } = useTheme();
@@ -130,17 +131,9 @@ const TextFieldScreen = () => {
             placeholder={"Filled"}
           />
 
-          <TextField
-            error={true}
-            errorText={"Please input this field"}
-            mode={"filled"}
-            label="Filled"
-            shape={"rect"}
-            placeholder={"Filled"}
-          />
-
+          <PriceField prefixText={"Rp"} label={"Currency"} placeholder={"Currency"} />
         </Stack>
-        </ScrollView>
+      </ScrollView>
     </Page >
   )
 };

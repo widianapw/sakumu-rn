@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ReactNode } from "react";
 import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import color from "color";
 
@@ -51,6 +52,7 @@ interface Props {
    * Icon to display for the `Button`.
    */
   icon?: IconProps;
+  iconNode?: ReactNode;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -119,6 +121,7 @@ const Button = ({
                   testID,
                   accessible,
                   suffixIcon,
+                  iconNode,
                   ...rest
                 }: Props & React.ComponentProps<typeof Surface>) => {
   const theme = useTheme();
@@ -306,6 +309,15 @@ const Button = ({
                   />
                 </View>
               ) : null}
+
+              {/*social media button*/}
+              {
+                iconNode &&
+                <View style={[iconStyle]}>
+                  {iconNode}
+                </View>
+              }
+
               {loading ? (
                 <ActivityIndicator
                   size={customLabelSize ?? 16}
