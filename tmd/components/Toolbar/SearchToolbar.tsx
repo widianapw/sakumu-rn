@@ -60,6 +60,7 @@ export default function SearchToolbar(
                   setIconViewWidth(event.nativeEvent.layout.width);
                 }}>
                   <IconButton
+                    shape={"rounded"}
                     onPress={() => {
                       goBack();
                     }}
@@ -111,6 +112,7 @@ export default function SearchToolbar(
                 setIconViewWidth(event.nativeEvent.layout.width);
               }}>
                 <IconButton
+                  shape={"rounded"}
                   onPress={() => {
                     goBack();
                   }}

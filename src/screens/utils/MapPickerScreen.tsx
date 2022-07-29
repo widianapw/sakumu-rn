@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocale } from "../../providers/LocaleProvider";
 import { SelectedMap } from "../../../tmd/components/picker/MapPicker";
 import MapView from "react-native-maps";
-import { Button, useTheme } from "../../../tmd";
+import { Button, Page, useTheme } from "../../../tmd";
 import Geocoder from "@timwangdev/react-native-geocoder";
 import Config from "react-native-config";
 import Geolocation from "react-native-geolocation-service";
@@ -88,183 +88,186 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
   };
 
   return (<>
-      <View style={{
-        flex: 1,
-      }}>
-        <SafeAreaView style={{ flex: 1 }}>
+      <Page>
 
-          <View style={{
-            position: "relative",
-            flexGrow: 1,
-          }}>
-
-
-            <View
-              style={{
-                position: "absolute",
-                flex: 1,
-                top: 0,
-                bottom: 120,
-                left: 0,
-                right: 0,
-              }}
-            >
-
-              <View style={{
-                position: "relative",
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}>
-                <View style={{
-                  zIndex: 200,
-                  marginBottom: 52,
-                }}>
-                  <Image
-                    source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
-                </View>
-
-                <MapView
-                  showsCompass={false}
-                  style={{
-                    position: "absolute",
-                    top: 0, bottom: 0, left: 0, right: 0,
-                  }}
-                  ref={mapRef}
-                  showsUserLocation={true}
-                  showsMyLocationButton={false}
-                  onRegionChangeComplete={(r, d) => {
-                    handleAddressChange(r.latitude, r.longitude);
-                  }}
-                >
-
-                </MapView>
-              </View>
-
-            </View>
+        <View style={{
+          flex: 1,
+        }}>
+          <SafeAreaView style={{ flex: 1 }}>
 
             <View style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              padding: 16,
-              zIndex: 50,
-              backgroundColor: "white",
-              borderTopStartRadius: 16,
-              borderTopEndRadius: 16,
+              position: "relative",
+              flexGrow: 1,
             }}>
-              <Stack>
 
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
+
+              <View
+                style={{
+                  position: "absolute",
+                  flex: 1,
+                  top: 0,
+                  bottom: 120,
+                  left: 0,
+                  right: 0,
+                }}
+              >
+
+                <View style={{
+                  position: "relative",
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}>
+                  <View style={{
+                    zIndex: 200,
+                    marginBottom: 52,
                   }}>
-                  <Typography type={"title1"}>{t("select_location")}</Typography>
-                  <Button
-                    variant={"secondary"}
-                    size={"sm"}
-                    onPress={() => {
-                      openSearchModal();
+                    <Image
+                      source={require("../../../src/assets/icons/ic_marker/ic_marker.png")} />
+                  </View>
+
+                  <MapView
+                    showsCompass={false}
+                    style={{
+                      position: "absolute",
+                      top: 0, bottom: 0, left: 0, right: 0,
                     }}
-                  >{t("search")}</Button>
+                    ref={mapRef}
+                    showsUserLocation={true}
+                    showsMyLocationButton={false}
+                    onRegionChangeComplete={(r, d) => {
+                      handleAddressChange(r.latitude, r.longitude);
+                    }}
+                  >
+
+                  </MapView>
                 </View>
 
-                <Stack style={{
-                  marginTop: 16,
-                }}>
-                  <Stack direction={"row"} spacing={2}
-                         style={{
-                           alignItems: "center",
-                         }}>
-                    <Icon icon={"location-sharp"} size={16} color={theme.colors.primary.main} />
+              </View>
+
+              <View style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: 16,
+                zIndex: 50,
+                backgroundColor: "white",
+                borderTopStartRadius: 16,
+                borderTopEndRadius: 16,
+              }}>
+                <Stack>
+
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}>
+                    <Typography type={"title1"}>{t("select_location")}</Typography>
+                    <Button
+                      variant={"secondary"}
+                      size={"sm"}
+                      onPress={() => {
+                        openSearchModal();
+                      }}
+                    >{t("search")}</Button>
+                  </View>
+
+                  <Stack style={{
+                    marginTop: 16,
+                  }}>
+                    <Stack direction={"row"} spacing={2}
+                           style={{
+                             alignItems: "center",
+                           }}>
+                      <Icon icon={"location-sharp"} size={16} color={theme.colors.primary.main} />
+                      <Typography
+                        numberOfLines={1}
+                        ellipsizeMode={"tail"}
+                        style={{ fontWeight: "600" }}
+                        type={"title3"}>{addressObj?.nameAddress ?? "-"}</Typography>
+                    </Stack>
                     <Typography
-                      numberOfLines={1}
-                      ellipsizeMode={"tail"}
-                      style={{ fontWeight: "600" }}
-                      type={"title3"}>{addressObj?.nameAddress ?? "-"}</Typography>
+                      type={"body2"}
+                      style={{ marginTop: 4 }}
+                    >{addressObj?.fullAddress}</Typography>
                   </Stack>
-                  <Typography
-                    type={"body2"}
-                    style={{ marginTop: 4 }}
-                  >{addressObj?.fullAddress}</Typography>
+
+                  <Button
+                    onPress={() => {
+                      if (onSelected) {
+                        onSelected(addressObj);
+                        // console.log(dataToSend);
+                        if (onClose) {
+                          onClose();
+                        }
+                      }
+                    }}
+                    style={{ marginTop: 16 }}
+                    fullWidth size={"md"}>{t("save")}</Button>
                 </Stack>
 
-                <Button
+              </View>
+
+
+              <View
+                style={{
+                  flexDirection: "row",
+                }}>
+                <IconButton
+                  shape={"rounded"}
+                  themeSize={"lg"}
+                  variant={"tertiary"}
+                  color={theme.colors.neutral.neutral_80}
+                  style={{
+                    margin: 16,
+                    elevation: 8,
+                  }}
                   onPress={() => {
-                    if (onSelected) {
-                      onSelected(addressObj);
-                      // console.log(dataToSend);
-                      if (onClose) {
-                        onClose();
-                      }
+                    if (onClose) {
+                      onClose();
                     }
                   }}
-                  style={{ marginTop: 16 }}
-                  fullWidth size={"md"}>{t("save")}</Button>
-              </Stack>
+                  icon={"arrow-back"}
+                />
+                <View style={{ flexGrow: 1 }} />
+                <IconButton
+                  shape={"rounded"}
+                  themeSize={"lg"}
+                  color={theme.colors.neutral.neutral_80}
+                  variant={"tertiary"}
+                  style={{
+                    elevation: 8,
+                    margin: 16,
+                  }}
+                  onPress={() => {
+                    getUserCurrentLocation();
+                  }}
+                  icon={"locate"}
+                />
 
+              </View>
             </View>
+          </SafeAreaView>
 
+        </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-              }}>
-              <IconButton
-                shape={"rounded"}
-                themeSize={"lg"}
-                variant={"tertiary"}
-                color={theme.colors.neutral.neutral_80}
-                style={{
-                  margin: 16,
-                  elevation: 8,
-                }}
-                onPress={() => {
-                  if (onClose) {
-                    onClose();
-                  }
-                }}
-                icon={"arrow-back"}
-              />
-              <View style={{ flexGrow: 1 }} />
-              <IconButton
-                shape={"rounded"}
-                themeSize={"lg"}
-                color={theme.colors.neutral.neutral_80}
-                variant={"tertiary"}
-                style={{
-                  elevation: 8,
-                  margin: 16,
-                }}
-                onPress={() => {
-                  getUserCurrentLocation();
-                }}
-                icon={"locate"}
-              />
-
-            </View>
-          </View>
-        </SafeAreaView>
-
-      </View>
-
-      <MapPlacePickerModal
-        onCurrentLocation={() => {
-          getUserCurrentLocation();
-        }}
-        open={isOpenSearch}
-        onClose={() => {
-          setIsOpenSearch(false);
-        }}
-        onSelected={(data, detail) => {
-          const { lat, lng } = detail?.geometry?.location;
-          if (lat && lng) {
-            handleCameraChanges(lat, lng);
-          }
-        }} />
+        <MapPlacePickerModal
+          onCurrentLocation={() => {
+            getUserCurrentLocation();
+          }}
+          open={isOpenSearch}
+          onClose={() => {
+            setIsOpenSearch(false);
+          }}
+          onSelected={(data, detail) => {
+            const { lat, lng } = detail?.geometry?.location;
+            if (lat && lng) {
+              handleCameraChanges(lat, lng);
+            }
+          }} />
+      </Page>
     </>
   );
 }

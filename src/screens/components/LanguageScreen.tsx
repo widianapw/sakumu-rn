@@ -25,7 +25,7 @@ export default function LanguageScreen() {
         >
           <Typography>{t("welcome_to_rnstarterkit")}</Typography>
           <Typography>current lang: {currentLanguage}</Typography>
-          <Stack spacing={8}>
+          <Stack spacing={8} items={"center"}>
             <Button
               onPress={() => {
                 changeLanguage("en");

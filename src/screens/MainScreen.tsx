@@ -29,6 +29,7 @@ const MainScreen = ({ navigation }: any) => {
     <Page>
       <Toolbar
         backable={false}
+        center
         title={"MainScreen"}
       />
       <ScrollView style={{ flex: 1 }}>

@@ -58,7 +58,6 @@ export default function TagScreen() {
             text={"Tag SM"} variant={"info"}
           />
 
-
         </View>
       </ScrollView>
     </Page>

@@ -19,6 +19,7 @@ interface Props {
   helperText?: string;
   error?: boolean;
   errorText?: string;
+  isEditable?: boolean;
 }
 
 export default function AvatarImagePicker({
@@ -28,7 +29,7 @@ export default function AvatarImagePicker({
                                             bsProps,
                                             buttonStyle,
                                             avatarStyle, style, buttonTitle,
-                                            helperText, error, errorText,
+                                            helperText, error, errorText, isEditable = true,
                                             ...rest
                                           }: Props & ComponentProps<typeof Avatar>) {
   const [isOpenBS, setIsOpenBS] = useState(false);
@@ -70,13 +71,16 @@ export default function AvatarImagePicker({
             (error && errorText) &&
             <HelperText type={"error"}>{errorText}</HelperText>
           }
-          <TextButton
-            style={[buttonStyle]}
-            onPress={() => {
-              setIsOpenBS(true);
-            }}>
-            {buttonTitle ?? t("change_photo")}
-          </TextButton>
+          {
+            isEditable &&
+            <TextButton
+              style={[buttonStyle]}
+              onPress={() => {
+                setIsOpenBS(true);
+              }}>
+              {buttonTitle ?? t("change_photo")}
+            </TextButton>
+          }
         </Stack>
       </Stack>
       <ImageViewerModal onClose={() => {

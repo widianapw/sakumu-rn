@@ -64,6 +64,7 @@ export default function Toolbar({
                 setIconViewWidth(event.nativeEvent.layout.width);
               }}>
                 <IconButton
+                  shape={"rounded"}
                   onPress={() => {
                     goBack();
                   }}
@@ -145,6 +146,7 @@ export default function Toolbar({
                     }}
               >
                 <IconButton
+                  shape={"rounded"}
                   onPress={() => {
                     goBack();
                   }}
@@ -206,6 +208,7 @@ export default function Toolbar({
                   setIconViewWidth(event.nativeEvent.layout.width);
                 }}>
                 <IconButton
+                  shape={"rounded"}
                   onPress={() => {
                     goBack();
                   }}
