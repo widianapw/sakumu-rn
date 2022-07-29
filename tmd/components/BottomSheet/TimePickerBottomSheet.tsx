@@ -55,6 +55,7 @@ export default function TimePickerBottomSheet({
   const modalizeRef = useRef<Modalize>(null);
   const { t, momentLocale, currentLanguage } = useLocale();
   const [date, setDate] = useState(initTime ? momentLocale(initTime).toDate() : momentLocale().toDate());
+  const [parentWidth, setParentWidth] = useState(0);
   useEffect(() => {
     if (open) {
       handleOpen();
@@ -102,10 +103,14 @@ export default function TimePickerBottomSheet({
           flex: 1,
         }}>
 
-          <View style={{
-            flexDirection: "column",
-            paddingVertical: 16,
-          }}>
+          <View
+            onLayout={(event) => {
+              setParentWidth(event.nativeEvent.layout.width);
+            }}
+            style={{
+              flexDirection: "column",
+              paddingVertical: 16,
+            }}>
             <Stack spacing={16}>
               <Typography type={"title2"}>
                 {title ?? t("choose_time")}
@@ -114,7 +119,7 @@ export default function TimePickerBottomSheet({
                 locale={currentLanguage}
                 style={{
                   flex: 1,
-                  width: "100%",
+                  width: parentWidth,
                 }}
                 mode={"time"}
                 date={date}

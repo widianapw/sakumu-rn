@@ -55,6 +55,7 @@ export default function DatePickerBottomSheet({
   const modalizeRef = useRef<Modalize>(null);
   const { t, momentLocale, currentLanguage } = useLocale();
   const [date, setDate] = useState(initDate ? momentLocale(initDate).toDate() : momentLocale().toDate());
+  const [parentWidth, setParentWidth] = useState(0);
   useEffect(() => {
     if (open) {
       handleOpen();
@@ -102,10 +103,15 @@ export default function DatePickerBottomSheet({
           flex: 1,
         }}>
 
-          <View style={{
-            flexDirection: "column",
-            paddingVertical: 16,
-          }}>
+          <View
+            onLayout={(event) => {
+              const { width } = event.nativeEvent.layout;
+              setParentWidth(width);
+            }}
+            style={{
+              flexDirection: "column",
+              paddingVertical: 16,
+            }}>
             <Stack spacing={16}>
               <Typography type={"title2"}>
                 {title ?? t("choose_date")}
@@ -114,8 +120,10 @@ export default function DatePickerBottomSheet({
                 locale={currentLanguage}
                 style={{
                   flex: 1,
-                  width: "100%",
+                  width: parentWidth,
+                  // width: "100%",
                 }}
+
                 mode={"date"}
                 date={date}
                 onDateChange={(date) => {
