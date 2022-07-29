@@ -5,6 +5,7 @@
 import React from "react";
 import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View } from "react-native";
 import { useTheme } from "../core/theming";
+import Color from "color";
 
 interface Props {
   children: React.ReactNode;
@@ -13,16 +14,18 @@ interface Props {
 
 export default function Page({ children, statusBarColor }: Props) {
   const { colors } = useTheme();
-  const statusBarHeight = StatusBar.currentHeight
-
+  const statusBarHeight = StatusBar.currentHeight;
+  const statusBarBackgroundColor = statusBarColor ?? colors.primary.pressed;
+  const isLight = Color(statusBarBackgroundColor).isLight();
 
 
   const CStatusBar = ({ backgroundColor, ...props }: any) => (
     <View style={[{
-      height: statusBarHeight
+      height: statusBarHeight,
     }, { backgroundColor }]}>
       <SafeAreaView>
-        <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+        <StatusBar translucent backgroundColor={backgroundColor}
+                   barStyle={isLight ? "dark-content" : "light-content"} {...props} />
       </SafeAreaView>
     </View>
   );
@@ -35,10 +38,10 @@ export default function Page({ children, statusBarColor }: Props) {
 
         <CStatusBar
           backgroundColor={statusBarColor ?? colors.primary.pressed}
-          barStyle="light-content" 
         />
+
         <SafeAreaView style={{flex:1}}>
-          
+
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}>
