@@ -5,7 +5,7 @@
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import { Portal } from "react-native-portalize";
 import { Modalize } from "react-native-modalize";
-import { Animated, FlatList, Image, Pressable, View } from "react-native";
+import { Animated, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { Button, Divider, useTheme } from "../../index";
 import TextField from "../TextInput/TextField";
@@ -123,6 +123,8 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
           flexGrow: 1,
           flexDirection: "column",
         }}>
+          <SafeAreaView style={{flex:1}}>
+
           <View
             style={{ flexDirection: "column", paddingTop: 24, paddingBottom: 8 }}>
 
@@ -213,6 +215,8 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
               }}
             >{t("save")}</Button>
           </View>
+
+          </SafeAreaView>
         </Animated.View>
       }
       disableScrollIfPossible

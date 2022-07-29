@@ -6,7 +6,7 @@ import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
 import { useTheme } from "../../core/theming";
 import { useTranslation } from "react-i18next";
-import { Animated, FlatList, Image, Pressable, View } from "react-native";
+import { Animated, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
 import { Button, Checkbox, Divider } from "../../index";
 import { Portal } from "react-native-portalize";
 import Typography from "../Typography/Typography";
@@ -132,6 +132,10 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
           flexGrow: 1,
           flexDirection: "column",
         }}>
+          <SafeAreaView style={{
+            flex:1
+          }}>
+
           <View
             style={{ flexDirection: "column", paddingTop: 24, paddingBottom: 8 }}>
 
@@ -201,6 +205,8 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
               }}
             >{t("save")}</Button>
           </View>
+          </SafeAreaView>
+ 
         </Animated.View>
       }
       disableScrollIfPossible
