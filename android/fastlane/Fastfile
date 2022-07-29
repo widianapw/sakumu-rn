@@ -61,5 +61,20 @@ platform :android do
       file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
       sh "echo Link to apk :" + file_upload_path
     end
+
+    discord_notifier(
+      webhook_url: "https://discord.com/api/webhooks/996684792760369225/pCNz_I0HsZ4dpEU-FAqt2lwnkagaJ-3TT0Ap-Td2u5i1jEtfohShrha-A64OT4t7pHzA",
+      title: "rn-starter-kit Android builder",
+      description: "Success build rn-starter-kit builder",
+      success: true,
+      thumbnail_url:"https://cdn.discordapp.com/embed/avatars/0.png",
+      image_url:"https://cdn.discordapp.com/embed/avatars/0.png",
+      fields:[
+        {
+          name: "google drive link",
+          value: file_upload_path
+        }
+      ]
+    )
   end
 end
