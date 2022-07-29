@@ -61,39 +61,5 @@ platform :android do
       file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
       sh "echo Link to apk :" + file_upload_path
     end
-
-    # gradle(task: "clean assembleRelease")
-    # upload_drive()
-
-    # file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
-    # sh "echo Link to apk :" + file_upload_path
   end
-
-  
-  # desc "Submit a new Beta Build to Crashlytics Beta"
-  # lane :staging do
-  #   gradle(task: "clean assembleStaging")
-  #   upload_drive()
-
-  #   file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
-  #   sh "echo Link to apk :" + file_upload_path
-  # end
-
-
-
-  # desc "test upload firebase app distribution"
-  # lane :release do |options|
-  #   gradle(task: "clean bundleRelease")
-  #   file_path_aab = lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]
-
-  #   upload_to_google_drive(
-  #     drive_keyfile: "fastlane/google_account.json",
-  #     service_account: true,
-  #     folder_id: ENV['GOOGLE_DRIVE_FOLDER_ID'],
-  #     upload_files: [''+file_path_aab+'']
-  #   )
-
-  #   file_upload_path=lane_context[SharedValues::GDRIVE_UPLOADED_FILE_URLS][0]
-  #   sh "echo Link to apk :" + file_upload_path
-  # end
 end
