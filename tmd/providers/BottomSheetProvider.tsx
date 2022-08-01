@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 03/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { createContext, useContext, useState } from "react";
+import React, { ComponentProps, createContext, useContext, useState } from "react";
 import ConfirmationBottomSheet from "../components/BottomSheet/ConfirmationBottomSheet";
 import AlertBottomSheet from "../components/BottomSheet/AlertBottomSheet";
 import IllustNoConnection from "../../src/assets/illusts/no_internet_connection.svg";
@@ -11,6 +11,8 @@ import IllustLocationPermission from "../../src/assets/illusts/permission_locati
 import IllustCameraPermission from "../../src/assets/illusts/permission_camera.svg";
 import { Linking } from "react-native";
 import { useLocale } from "../../src/providers/LocaleProvider";
+import { LinearProgressBar } from "../index";
+import ProgressBottomSheet from "../components/BottomSheet/ProgressBottomSheet";
 
 export type PermissionType =
   "camera" | "storage" | "location" | "bluetooth" | "another";
@@ -35,7 +37,16 @@ type BSContextType = {
   hideErrorBS: () => void;
   showPermissionBS: (type: PermissionType, props?: ConfirmationBSContext) => void;
   hidePermissionBS: () => void;
+  showLoadingBS: (props?: ProgressBSProps) => void;
+  hideLoadingBS: () => void;
 }
+type ProgressBSProps = {
+  title?: string;
+  description?: string;
+  dismissible?: boolean;
+  linearProgressProps?: ComponentProps<typeof LinearProgressBar>;
+}
+
 
 const initialState: BSContextType = {
   showConfirmationBS: () => {
@@ -54,6 +65,12 @@ const initialState: BSContextType = {
   },
   hidePermissionBS: () => {
   },
+  showLoadingBS: () => {
+
+  },
+  hideLoadingBS: () => {
+
+  },
 };
 
 export const BSContext = createContext(initialState);
@@ -70,6 +87,9 @@ const BottomSheetProvider = ({ children }: any) => {
 
   const [isOpenPermission, setIsOpenPermission] = useState(false);
   const [permissionProps, setPermissionProps] = useState<ConfirmationBSContext>({});
+
+  const [isOpenLoading, setIsOpenLoading] = useState(false);
+  const [loadingProps, setLoadingProps] = useState<ProgressBSProps>({});
 
 
   const showErrorBS = (error: any, props?: ConfirmationBSContext) => {
@@ -190,6 +210,17 @@ const BottomSheetProvider = ({ children }: any) => {
     setIsOpenAlert(false);
   };
 
+  const showLoadingBS = (props?: ProgressBSProps) => {
+    if (props) {
+      setLoadingProps(props);
+    }
+    setIsOpenLoading(true);
+  };
+
+  const hideLoadingBS = () => {
+    setIsOpenLoading(false);
+  };
+
   const renderComponent = () => {
     return <>
       <ConfirmationBottomSheet
@@ -214,6 +245,7 @@ const BottomSheetProvider = ({ children }: any) => {
         onClose={hidePermissionBS}
         {...permissionProps} />
 
+      <ProgressBottomSheet open={isOpenLoading} onClose={hideLoadingBS} {...loadingProps} />
     </>;
   };
   return (
@@ -226,6 +258,8 @@ const BottomSheetProvider = ({ children }: any) => {
       hideErrorBS,
       showPermissionBS,
       hidePermissionBS,
+      showLoadingBS,
+      hideLoadingBS,
     }}>
       {renderComponent()}
       {children}

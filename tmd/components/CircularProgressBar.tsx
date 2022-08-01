@@ -1,14 +1,6 @@
-import * as React from 'react';
-import {
-  Animated,
-  Easing,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
-import { withTheme } from '../core/theming';
+import * as React from "react";
+import { Animated, Easing, Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { useTheme } from "../core/theming";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -22,7 +14,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Size of the indicator.
    */
-  size?: 'small' | 'large' | number;
+  size?: "sm" | "md" | "lg" | number;
   /**
    * Whether the indicator should hide when not animating.
    */
@@ -31,7 +23,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
 };
 
 const DURATION = 2400;
@@ -56,15 +47,14 @@ const DURATION = 2400;
  * export default MyComponent;
  * ```
  */
-const ActivityIndicator = ({
-  animating = true,
-  color: indicatorColor,
-  hidesWhenStopped = true,
-  size: indicatorSize = 'small',
-  style,
-  theme,
-  ...rest
-}: Props) => {
+const CircularProgressBar = ({
+                             animating = true,
+                             color: indicatorColor,
+                             hidesWhenStopped = true,
+                             size: indicatorSize = "sm",
+                             style,
+                             ...rest
+                           }: Props) => {
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -73,8 +63,9 @@ const ActivityIndicator = ({
   );
 
   const rotation = React.useRef<Animated.CompositeAnimation | undefined>(
-    undefined
+    undefined,
   );
+  const theme = useTheme();
 
   const {
     animation: { scale },
@@ -131,22 +122,34 @@ const ActivityIndicator = ({
     }
   }, [animating, fade, hidesWhenStopped, startRotation, scale, timer]);
 
-  const color = indicatorColor || theme.colors.primary;
-  const size =
-    typeof indicatorSize === 'string'
-      ? indicatorSize === 'small'
-        ? 24
-        : 48
-      : indicatorSize
-      ? indicatorSize
-      : 24;
+  const color = indicatorColor ?? theme.colors.primary.main;
+
+  let size = 24;
+  if (typeof indicatorSize === "string") {
+    switch (indicatorSize) {
+      case "sm": {
+        size = 24;
+        break;
+      }
+      case "md": {
+        size = 32;
+        break;
+      }
+      case "lg": {
+        size = 48;
+        break;
+      }
+    }
+  } else {
+    size = indicatorSize ? indicatorSize : 24;
+  }
 
   const frames = (60 * DURATION) / 1000;
   const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);
   const containerStyle = {
     width: size,
     height: size / 2,
-    overflow: 'hidden' as const,
+    overflow: "hidden" as const,
   };
 
   return (
@@ -252,4 +255,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ActivityIndicator);
+export default CircularProgressBar;

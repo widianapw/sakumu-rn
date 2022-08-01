@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { ComponentProps, createContext, useContext, useState } from "react";
 import IllustNoConnection from "../../src/assets/illusts/no_internet_connection.svg";
 import IllustServerError from "../../src/assets/illusts/server_error.svg";
 import IllustLocationPermission from "../../src/assets/illusts/permission_location.svg";
@@ -8,6 +8,9 @@ import { useLocale } from "../../src/providers/LocaleProvider";
 import { PermissionType } from "./BottomSheetProvider";
 import ConfirmationModal from "../components/Modal/ConfirmationModal";
 import AlertModal from "../components/Modal/AlertModal";
+import ProgressModal from "../components/Modal/ProgressModal";
+import { CircularProgressBar } from "../index";
+import { StackDirection } from "../components/Layout/Stack";
 
 type ConfirmationModalContext = {
   imageNode?: React.ReactNode;
@@ -19,7 +22,9 @@ type ConfirmationModalContext = {
   buttonSecondaryAction?: () => void;
   buttonSecondary?: boolean;
   dismissible?: boolean;
+  buttonOrientation?: "horizontal" | "vertical";
 }
+
 type ModalContextType = {
   showConfirmationModal: (props: ConfirmationModalContext) => void;
   hideConfirmationModal: () => void;
@@ -29,6 +34,15 @@ type ModalContextType = {
   hideErrorModal: () => void;
   showPermissionModal: (type: PermissionType, props?: ConfirmationModalContext) => void;
   hidePermissionModal: () => void;
+  showLoadingModal: (props?: ProgressModalProps) => void;
+  hideLoadingModal: () => void;
+}
+
+type ProgressModalProps = {
+  title?: string;
+  description?: string;
+  dismissible?: boolean;
+  circularProgressProps?: ComponentProps<typeof CircularProgressBar>;
 }
 
 const initialState: ModalContextType = {
@@ -48,6 +62,12 @@ const initialState: ModalContextType = {
   },
   hidePermissionModal: () => {
   },
+  showLoadingModal: () => {
+
+  },
+  hideLoadingModal: () => {
+
+  },
 };
 
 export const ModalContext = createContext(initialState);
@@ -64,6 +84,9 @@ const ModalProvider = ({ children }: any) => {
 
   const [isOpenPermission, setIsOpenPermission] = useState(false);
   const [permissionProps, setPermissionProps] = useState<ConfirmationModalContext>({});
+
+  const [isOpenProgress, setIsOpenProgress] = useState(false);
+  const [progressProps, setProgressProps] = useState<ProgressModalProps>({});
 
 
   const showErrorModal = (error: any, props?: ConfirmationModalContext) => {
@@ -185,6 +208,17 @@ const ModalProvider = ({ children }: any) => {
     setIsOpenAlert(false);
   };
 
+  const showLoadingModal = (props?: ProgressModalProps) => {
+    if (props) {
+      setProgressProps(props);
+    }
+    setIsOpenProgress(true);
+  };
+
+  const hideLoadingModal = () => {
+    setIsOpenProgress(false);
+  };
+
   const renderComponent = () => {
     return <>
       <ConfirmationModal
@@ -209,6 +243,7 @@ const ModalProvider = ({ children }: any) => {
         onClose={hidePermissionModal}
         {...permissionProps} />
 
+      <ProgressModal open={isOpenProgress} onClose={hideLoadingModal} {...progressProps} />
     </>;
   };
   return (
@@ -221,6 +256,8 @@ const ModalProvider = ({ children }: any) => {
       hideErrorModal,
       showPermissionModal,
       hidePermissionModal,
+      showLoadingModal,
+      hideLoadingModal,
     }}>
       {renderComponent()}
       {children}

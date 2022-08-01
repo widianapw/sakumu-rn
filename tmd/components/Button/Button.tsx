@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import color from "color";
 
-import ActivityIndicator from "../ActivityIndicator";
+import CircularProgressBar from "../CircularProgressBar";
 import Surface from "../Surface";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
 import { black, white } from "../../styles/colors";
@@ -297,68 +297,74 @@ const Button = ({
               styles.content,
               contentStyle,
             ]}>
-              {icon && loading !== true ? (
-                <View style={[
-                  iconStyle,
-                ]}>
-                  <Icon
-                    icon={icon.icon}
-                    source={icon.source}
-                    size={icon.size ?? customLabelSize ?? defIconSize}
-                    color={icon.color ?? textColor}
-                  />
-                </View>
-              ) : null}
 
-              {/*social media button*/}
-              {
-                iconNode &&
-                <View style={[iconStyle]}>
-                  {iconNode}
-                </View>
-              }
 
               {loading ? (
-                <ActivityIndicator
-                  size={customLabelSize ?? 16}
-                  color={
-                    typeof customLabelColor === "string"
-                      ? customLabelColor
-                      : textColor
+                  <View style={{ alignSelf: "center" }}>
+                    <CircularProgressBar
+                      size={customLabelSize ?? 16}
+                      color={
+                        typeof customLabelColor === "string"
+                          ? customLabelColor
+                          : textColor
+                      }
+                    />
+                  </View>
+                ) :
+                <>
+                  {icon ? (
+                    <View style={[
+                      iconStyle,
+                    ]}>
+                      <Icon
+                        icon={icon.icon}
+                        source={icon.source}
+                        size={icon.size ?? customLabelSize ?? defIconSize}
+                        color={icon.color ?? textColor}
+                      />
+                    </View>
+                  ) : null}
+
+                  {/*social media button*/}
+                  {
+                    iconNode &&
+                    <View style={[iconStyle]}>
+                      {iconNode}
+                    </View>
                   }
-                  style={[
-                    iconStyle,
-                  ]}
-                />
-              ) : null}
-              {
-                !isIconButton &&
-                <Typography
-                  type={buttonType}
-                  selectable={false}
-                  numberOfLines={1}
-                  style={[
-                    styles.label,
-                    uppercase && styles.uppercaseLabel,
-                    textStyle,
-                    labelStyle,
-                    {},
-                  ]}
-                >
-                  {children}
-                </Typography>
+
+                  {
+                    (!isIconButton) &&
+                    <Typography
+                      type={buttonType}
+                      selectable={false}
+                      numberOfLines={1}
+                      style={[
+                        styles.label,
+                        uppercase && styles.uppercaseLabel,
+                        textStyle,
+                        labelStyle,
+                        {},
+                      ]}
+                    >
+                      {children}
+                    </Typography>
+                  }
+
+                  {
+                    suffixIcon &&
+                    <View style={{ marginLeft: 8 }}>
+                      <Icon
+                        size={suffixIcon?.size ?? defIconSize}
+                        color={suffixIcon?.color ?? textColor}
+                        {...suffixIcon}
+                      />
+                    </View>
+                  }
+                </>
+
               }
 
-              {
-                suffixIcon &&
-                <View style={{ marginLeft: 8 }}>
-                  <Icon
-                    size={suffixIcon?.size ?? defIconSize}
-                    color={suffixIcon?.color ?? textColor}
-                    {...suffixIcon}
-                  />
-                </View>
-              }
             </View>
 
             {rest?.underline &&

@@ -19,9 +19,10 @@ export interface ModalProps {
   buttonSecondaryAction?: () => void;
   onClose: () => void;
   dismissible?: boolean;
+  buttonOrientation?: "horizontal" | "vertical";
 }
 
-export default function AlertModal({ dismissible = true, ...props }: ModalProps) {
+export default function AlertModal({ dismissible = true, buttonOrientation = "horizontal", ...props }: ModalProps) {
   const { colors } = useTheme();
   const { t } = useTranslation();
   useEffect(() => {
@@ -33,6 +34,8 @@ export default function AlertModal({ dismissible = true, ...props }: ModalProps)
   const handleClose = () => {
     props.onClose();
   };
+
+  const isHorizontal = buttonOrientation == "horizontal";
 
   const theme = useTheme();
   return (
@@ -104,16 +107,21 @@ export default function AlertModal({ dismissible = true, ...props }: ModalProps)
             </Stack>
 
             <Stack
-              spacing={16}
-              direction={"row"}
+              spacing={isHorizontal ? 16 : 8}
+              direction={buttonOrientation == "horizontal" ? "row" : "column-reverse"}
               style={{
                 marginTop: 18,
               }}>
               {
                 props.buttonSecondary &&
                 <Button
-                  fullWidth
-                  variant={"secondary"}
+                  fullWidth={isHorizontal}
+                  style={
+                    !isHorizontal && {
+                      width: "100%",
+                    }
+                  }
+                  variant={isHorizontal ? "secondary" : "tertiary"}
                   onPress={() => {
                     if (props.buttonSecondaryAction) {
                       props.buttonSecondaryAction();
@@ -125,7 +133,12 @@ export default function AlertModal({ dismissible = true, ...props }: ModalProps)
               }
 
               <Button
-                fullWidth
+                fullWidth={isHorizontal}
+                style={
+                  !isHorizontal && {
+                    width: "100%",
+                  }
+                }
                 onPress={() => {
                   if (props.buttonPrimaryAction) {
                     props.buttonPrimaryAction();

@@ -37,6 +37,7 @@ import TooltipStepperScreen from "../screens/components/TooltipStepperScreen";
 import MapPickerScreen from "../screens/utils/MapPickerScreen";
 import AppNavigationType from "./AppNavigationType";
 import MapTrackingScreen from "../screens/components/MapTrackingScreen";
+import ProgressBarScreen from "../screens/components/ProgressBarScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator<AppNavigationType>();
@@ -93,6 +94,7 @@ const AppNavigation = () => {
               <Stack.Screen name={"SkeletonScreen"} component={SkeletonScreen} />
               <Stack.Screen name={"DividerScreen"} component={DividerScreen} />
               <Stack.Screen name={"MapTrackingScreen"} component={MapTrackingScreen} />
+              <Stack.Screen name={"ProgressBarScreen"} component={ProgressBarScreen} />
             </>
           )
         }

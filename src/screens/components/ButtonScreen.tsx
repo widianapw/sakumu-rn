@@ -4,7 +4,7 @@
  */
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Button, IconButton } from "../../../tmd";
+import { Button, IconButton, Toast } from "../../../tmd";
 import TextButton from "../../../tmd/components/Button/TextButton";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
@@ -111,6 +111,7 @@ export default function ButtonScreen() {
             <Button
               loading
               variant={"primary"}
+              fullWidth
               onPress={() => {
               }}>
               Primary
@@ -128,6 +129,7 @@ export default function ButtonScreen() {
               onPress={() => {
               }}
               variant={"secondary"}
+              fullWidth
             >
           Secondary
         </Button>

@@ -58,6 +58,7 @@ export default function ImageViewerModal({ images, index = 0, onClose, open }: P
                 <IconButton
                   color={"white"}
                   variant={"tertiary"}
+                  shape={'rounded'}
                   style={{
                     backgroundColor: "transparent",
                   }}

@@ -25,7 +25,7 @@ export interface BSProps {
   dismissible?: boolean;
 }
 
-export default function AlertBottomSheet(props: BSProps) {
+export default function AlertBottomSheet({ dismissible = true, ...props }: BSProps) {
   const modalizeRef = useRef<Modalize>(null);
   const { t } = useTranslation();
   useEffect(() => {
@@ -45,9 +45,9 @@ export default function AlertBottomSheet(props: BSProps) {
   return (
     <Portal>
       <Modalize
-        closeOnOverlayTap={props.dismissible ? !props.dismissible : true}
+        closeOnOverlayTap={dismissible ? dismissible : true}
         handlePosition={"inside"}
-        withHandle={!!props?.dismissible}
+        withHandle={dismissible}
         adjustToContentHeight
         modalStyle={{
           padding: 16,
@@ -55,7 +55,7 @@ export default function AlertBottomSheet(props: BSProps) {
           borderTopLeftRadius: 16,
         }}
 
-        onClose={props.onClose}
+        onClose={dismissible ? props.onClose : undefined}
         ref={modalizeRef}
       >
         <SafeAreaView style={{ flex: 1 }}>

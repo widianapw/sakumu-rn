@@ -6,10 +6,11 @@
 import React from "react";
 import { FlexAlignType, StyleProp, View, ViewStyle } from "react-native";
 
+export type StackDirection ="row" | "column" | "row-reverse" | "column-reverse"
 interface Props {
   children: React.ReactNode[] | React.ReactNode;
   spacing?: number;
-  direction?: "row" | "column" | "row-reverse" | "column-reverse";
+  direction?: StackDirection;
   style?: StyleProp<ViewStyle>;
   p?: number;
   pt?: number;

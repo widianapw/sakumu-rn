@@ -21,6 +21,7 @@ import RHFMapPicker from "../../../tmd/components/RHF/RHFMapPicker";
 import RHFMultiSelect from "../../../tmd/components/RHF/RHFMultiSelect";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 import RHFAvatarImagePicker from "../../../tmd/components/RHF/RHFAvatarImagePicker";
+import RHFPriceField from "../../../tmd/components/RHF/RHFPriceField";
 
 export default function FormScreen() {
   const { t } = useLocale();
@@ -38,11 +39,12 @@ export default function FormScreen() {
     multiImage: yup.array().min(2).required(),
     map: yup.mixed().required(),
     multiSelect: yup.array().min(2).required(),
+    price: yup.number().min(1000_000).required(),
   }).required();
 
   const method = useForm({
     defaultValues: {
-      firstName: "",
+      firstName: "Widiana",
       lastName: "",
       countryID: "",
       phoneCode: "62",
@@ -55,6 +57,7 @@ export default function FormScreen() {
       multiImage: undefined,
       dateRange: undefined,
       map: undefined,
+      price: 100000,
       //  map initial value
       // map: {
       //   location: {
@@ -190,6 +193,12 @@ export default function FormScreen() {
               requiredLabel
               placeholder={t("labels.map")}
               name={"map"} />
+
+            <RHFPriceField
+              prefixText={"Rp"}
+              name={"price"}
+              placeholder={t("labels.price")}
+              label={t("labels.price")} />
 
             <Button
               containerStyle={{

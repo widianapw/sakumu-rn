@@ -188,9 +188,15 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
-            navigate("TooltipScreen")
+            navigate("TooltipScreen");
           }}>
             Tooltip Screen
+          </Button>
+
+          <Button onPress={() => {
+            navigate("ProgressBarScreen");
+          }}>
+            ProgressBar Screen
           </Button>
 
           <Button onPress={() => {
@@ -210,6 +216,7 @@ const MainScreen = ({ navigation }: any) => {
           <Button
             color={"red"}
             loading={isLoadingLogout}
+            // loading={true}
             onPress={logout}
           >
             Logout

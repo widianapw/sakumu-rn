@@ -1,16 +1,16 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
+  I18nManager,
+  LayoutChangeEvent,
   Platform,
+  StyleProp,
   StyleSheet,
   View,
   ViewStyle,
-  StyleProp,
-  LayoutChangeEvent,
-  I18nManager,
-} from 'react-native';
-import setColor from 'color';
-import { withTheme } from '../core/theming';
+} from "react-native";
+import setColor from "color";
+import { useTheme } from "../core/theming";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -33,7 +33,6 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
 };
 
 const INDETERMINATE_DURATION = 2000;
@@ -59,18 +58,18 @@ const { isRTL } = I18nManager;
  * export default MyComponent;
  * ```
  */
-const ProgressBar = ({
-  color,
-  indeterminate,
-  style,
-  progress = 0,
-  visible = true,
-  theme,
-  ...rest
-}: Props) => {
+const LinearProgressBar = ({
+                             color: indicatorColor,
+                             indeterminate,
+                             style,
+                             progress = 0,
+                             visible = true,
+                             ...rest
+                           }: Props) => {
   const { current: timer } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(0),
   );
+  const theme = useTheme();
   const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(0));
   const [width, setWidth] = React.useState<number>(0);
   const [prevWidth, setPrevWidth] = React.useState<number>(0);
@@ -78,7 +77,9 @@ const ProgressBar = ({
   const indeterminateAnimation =
     React.useRef<Animated.CompositeAnimation | null>(null);
 
+  const { colors } = theme;
   const { scale } = theme.animation;
+  const color = indicatorColor ?? colors.primary.main;
 
   const startAnimation = React.useCallback(() => {
     // Show progress bar
@@ -234,4 +235,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ProgressBar);
+export default LinearProgressBar;

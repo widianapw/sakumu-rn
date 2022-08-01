@@ -58,5 +58,8 @@ const App = () => {
   );
 };
 
+const ZustandPersistGate = ({children}: any) => {
+
+}
 
 export default App;

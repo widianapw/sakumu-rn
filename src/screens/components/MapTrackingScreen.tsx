@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Page } from "../../../tmd";
+import { Page, useTheme } from "../../../tmd";
 import { Image, View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Polyline } from "react-native-maps";
 import Geolocation from "react-native-geolocation-service";
+import polyline from "@mapbox/polyline";
 
 export default function MapTrackingScreen() {
   const mapRef = useRef<MapView>(null);
   const [markerPos, setMarkerPos] = useState<Geolocation.GeoCoordinates | null>(null);
   const [cameraHeading, setCameraHeading] = useState(0);
+  const {colors} = useTheme()
   useEffect(() => {
     Geolocation.getCurrentPosition((position) => {
       console.log(JSON.stringify(position, null, 2));
@@ -44,8 +46,14 @@ export default function MapTrackingScreen() {
       setCameraHeading(camera.heading);
     });
   };
-  console.log(markerPos?.heading);
-  console.log(cameraHeading);
+  const decodedPolylineArrs = polyline.decode("hs~s@e|j~T^Eh@CT@n@BN?BfFJpCBpCuCEqCL_FDgAFaG@wEDCkBAMwA@A?_BAiBEgBBmB@gADc@?sC?A^InFOlECdAsGIkGEIAMCC?ICCBo@@cDBoA?yA@}E@@QJyDLoJb@CDMBE`A?rC@");
+  const decodedPolyline = decodedPolylineArrs.map((arr) => {
+    return {
+      latitude: arr[0],
+      longitude: arr[1],
+    };
+  })
+  console.log(decodedPolyline);
   return (
     <Page>
       <View style={{
@@ -70,6 +78,12 @@ export default function MapTrackingScreen() {
           style={{
             flex: 1,
           }}>
+          {
+            decodedPolyline &&
+            <Polyline
+              coordinates={decodedPolyline} strokeWidth={3} strokeColor={colors.primary.main}
+            />
+          }
           {
             markerPos && (
               <Marker

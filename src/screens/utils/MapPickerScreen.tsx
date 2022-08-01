@@ -22,6 +22,7 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
   const [addressObj, setAddressObj] = useState<SelectedMap | null>(null);
   const [mapRegion, setMapRegion] = useState({});
   const [isOpenSearch, setIsOpenSearch] = useState(false);
+  const [isLoadingGeocode, setIsLoadingGeocode] = useState(false);
   const mapRef = useRef<MapView>(null);
   const theme = useTheme();
 
@@ -30,6 +31,7 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
   };
 
   const handleAddressChange = (lat: number, lng: number) => {
+    setIsLoadingGeocode(true);
     Geocoder.geocodePositionGoogle({
       lat: lat,
       lng: lng,
@@ -41,11 +43,14 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
         latitude: a.position.lat,
         longitude: a.position.lng,
       };
+      setIsLoadingGeocode(false);
       setAddressObj({
         fullAddress: a.formattedAddress,
         location: location,
         nameAddress: a.feature ?? a.streetName ?? a.subAdminArea,
       });
+    }).catch((e) => {
+      setIsLoadingGeocode(false);
     });
   };
 
@@ -195,6 +200,7 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
                   </Stack>
 
                   <Button
+                    loading={isLoadingGeocode}
                     onPress={() => {
                       if (onSelected) {
                         onSelected(addressObj);
