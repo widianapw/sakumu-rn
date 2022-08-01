@@ -49,6 +49,12 @@ const MainScreen = ({ navigation }: any) => {
             Show Toast
           </Button>
 
+          <Button onPress={() => {
+            navigate("MapTrackingScreen");
+          }}>
+            Map Tracking
+          </Button>
+
           <Button
             onPress={() => {
               navigate("ButtonScreen");

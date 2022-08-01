@@ -1,6 +1,7 @@
 import { SelectedMap } from "../../tmd/components/picker/MapPicker";
 
 type AppNavigationType = {
+  MapTrackingScreen:undefined,
   MapPickerScreen: {
     onSelected: (selected: SelectedMap) => void;
     initial?: SelectedMap
