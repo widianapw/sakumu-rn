@@ -4,16 +4,13 @@ import client from "../utils/network/client";
  * Created by Widiana Putra on 23/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import { QueryCache } from 'react-query'
+// import { QueryCache } from 'react-query'
 
-export const queryCache = new QueryCache({
-  onError: error => {
-    console.log(error)
-  },
-  onSuccess: data => {
-    console.log(data)
-  }
-})
+// export const queryCache = new QueryCache({
+//   onError: error => {
+//     console.log(error)
+//   }
+// })
 export const postAPI = async (route: string, body: any) => {
   try {
     const res = await client.post(route, body);
