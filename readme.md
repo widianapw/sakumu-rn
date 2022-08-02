@@ -14,7 +14,7 @@ core dependencies, and boilerplate to jumpstart development.
 
 ### Git Config
 
-- Clone this repository
+- Clone this repository 
 - Change the package name to your project
 - Change git origin to your project
 
