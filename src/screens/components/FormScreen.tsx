@@ -39,7 +39,7 @@ export default function FormScreen() {
     multiImage: yup.array().min(2).required(),
     map: yup.mixed().required(),
     multiSelect: yup.array().min(2).required(),
-    price: yup.number().min(1000_000).required(),
+    price: yup.number().min(1000000).required(),
   }).required();
 
   const method = useForm({
