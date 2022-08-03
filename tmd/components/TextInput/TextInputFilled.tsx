@@ -157,6 +157,7 @@ const TextInputFilled = ({
               justifyContent: "center",
               alignItems: "center",
               display: "flex",
+              marginRight:Platform.OS == "ios" ? 8 : 0,
             }}>
               {
                 prefixIcon &&

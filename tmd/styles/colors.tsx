@@ -289,6 +289,22 @@ const colors: ThemeColors = {
     pressed: "#21217A",
     focus: "#4C4DDC33",
   },
+  secondary: {
+    main: "#009499",
+    surface: "#EBFEFF",
+    border: "#C2FAFD",
+    hover: "#0EB9BF",
+    pressed: "#0D6B6F",
+    focus: "#00949933",
+  },
+  tertiary: {
+    main: "#FC9918",
+    surface: "#FFF6EB",
+    border: "#F4CFA2",
+    hover: "#FFAC41",
+    pressed: "#CE7E15",
+    focus: "#4C4DDC33",
+  },
   neutral: {
     neutral_10: "#FFFFFF",
     neutral_20: "#F5F5F5",

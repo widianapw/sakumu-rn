@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { LayoutRectangle, Modal, Pressable, SafeAreaView, StyleProp, View, ViewStyle } from "react-native";
+import { LayoutRectangle, Modal, Pressable, StyleProp, View, ViewStyle } from "react-native";
 import Portal from "../Portal/Portal";
 import Color from "color";
 import { useTheme } from "../../core/theming";
@@ -172,7 +172,7 @@ export default function Tooltip({
           ref={ref}
           onLayout={(e) => {
             const { x, y, width, height } = e.nativeEvent.layout;
-           
+
             if (!isEqual(layoutRect, { x, y, width, height })) {
               setLayoutRect({ x, y, width, height });
             }
@@ -183,17 +183,17 @@ export default function Tooltip({
 
 
       <Portal>
-        <Modal 
-        visible={isOpen} animationType={"fade"} transparent={true}
-               onRequestClose={dismissible ? onClose : undefined}>
+        <Modal
+          visible={isOpen} animationType={"fade"} transparent={true}
+          onRequestClose={dismissible ? onClose : undefined}>
           {/* <SafeAreaView style={{
             flex: 1,
           }}> */}
-            <View style={{
-              position: "relative",
-              flex: 1,
-              backgroundColor: Color(colors.neutral.neutral_100).alpha(0.25).rgb().toString(),
-            }}>
+          <View style={{
+            position: "relative",
+            flex: 1,
+            backgroundColor: Color(colors.neutral.neutral_100).alpha(0.25).rgb().toString(),
+          }}>
               <Pressable
                 onPress={dismissible ? onClose : undefined}
                 style={{
@@ -272,6 +272,7 @@ export default function Tooltip({
                                 {
                                   closable &&
                                   <IconButton
+                                    shape={"rounded"}
                                     icon={"close"}
                                     onPress={onClose}
                                     color={descColor}
@@ -304,6 +305,7 @@ export default function Tooltip({
                               {
                                 (closable && !title) &&
                                 <IconButton
+                                  shape={"rounded"}
                                   icon={"close"}
                                   onPress={onClose}
                                   color={descColor}

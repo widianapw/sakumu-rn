@@ -44,7 +44,6 @@ export default function Avatar({
                                  showOnlineStatus, isOnline,
                                }: Props) {
   const { colors, avatar } = useTheme();
-  const [isPressed, setIsPressed] = useState(false);
   let viewSize = 40, typographyType: TypographyType = "title1";
   const animation = new Animated.Value(0);
   const usedVariant = variant ?? avatar.variant;

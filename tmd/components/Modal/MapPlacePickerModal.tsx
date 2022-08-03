@@ -112,6 +112,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                 backgroundColor: "white",
               }}>
                 <IconButton
+                  shape={'rounded'}
                   onPress={() => {
                     onClose();
                   }}

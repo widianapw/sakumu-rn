@@ -105,6 +105,7 @@ export default function MultiImagePicker({
         backgroundColor: color(colors.primary.focus).alpha(0.2).rgb().string(),
       }}>
         <IconButton
+          shape={"rounded"}
           onPress={() => {
             handleOpenViewer(index);
           }}
@@ -236,6 +237,7 @@ export default function MultiImagePicker({
                               }}
                             >
                               <IconButton
+                                shape={"rounded"}
                                 style={{
                                   backgroundColor: colors.danger.main,
                                 }}

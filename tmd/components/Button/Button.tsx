@@ -299,8 +299,9 @@ const Button = ({
             ]}>
 
 
-              {loading ? (
-                  <View style={{ alignSelf: "center" }}>
+              <>
+                {loading && (
+                  <View style={{ alignSelf: "center", marginRight: 8 }}>
                     <CircularProgressBar
                       size={customLabelSize ?? 16}
                       color={
@@ -310,37 +311,37 @@ const Button = ({
                       }
                     />
                   </View>
-                ) :
-                <>
-                  {icon ? (
-                    <View style={[
-                      iconStyle,
-                    ]}>
-                      <Icon
-                        icon={icon.icon}
-                        source={icon.source}
-                        size={icon.size ?? customLabelSize ?? defIconSize}
-                        color={icon.color ?? textColor}
-                      />
-                    </View>
-                  ) : null}
+                )
+                }
+                {icon ? (
+                  <View style={[
+                    iconStyle,
+                  ]}>
+                    <Icon
+                      icon={icon.icon}
+                      source={icon.source}
+                      size={icon.size ?? customLabelSize ?? defIconSize}
+                      color={icon.color ?? textColor}
+                    />
+                  </View>
+                ) : null}
 
-                  {/*social media button*/}
-                  {
-                    iconNode &&
-                    <View style={[iconStyle]}>
-                      {iconNode}
-                    </View>
-                  }
+                {/*social media button*/}
+                {
+                  iconNode &&
+                  <View style={[iconStyle]}>
+                    {iconNode}
+                  </View>
+                }
 
-                  {
-                    (!isIconButton) &&
-                    <Typography
-                      type={buttonType}
-                      selectable={false}
-                      numberOfLines={1}
-                      style={[
-                        styles.label,
+                {
+                  (!isIconButton) &&
+                  <Typography
+                    type={buttonType}
+                    selectable={false}
+                    numberOfLines={1}
+                    style={[
+                      styles.label,
                         uppercase && styles.uppercaseLabel,
                         textStyle,
                         labelStyle,
@@ -363,7 +364,6 @@ const Button = ({
                   }
                 </>
 
-              }
 
             </View>
 

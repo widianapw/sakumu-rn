@@ -15,7 +15,6 @@ interface Props {
   index?: number;
   onClose: () => void;
   open: boolean;
-
 }
 
 export default function ImageViewerModal({ images, index = 0, onClose, open }: Props) {

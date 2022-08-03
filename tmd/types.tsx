@@ -124,6 +124,15 @@ export interface PrimaryColorProps extends BaseColorProps {
   focus?: string;
 }
 
+export interface SecondaryColorProps extends BaseColorProps {
+  focus?: string;
+}
+
+export interface TertiaryColorProps extends BaseColorProps {
+  focus?: string;
+}
+
+
 export interface DangerColorProps extends BaseColorProps {
 }
 
@@ -152,6 +161,8 @@ export interface NeutralColorProps {
 
 export interface ThemeColors {
   primary: PrimaryColorProps,
+  secondary: SecondaryColorProps,
+  tertiary: TertiaryColorProps,
   neutral: NeutralColorProps,
   danger: DangerColorProps,
   warning: WarningColorProps,

@@ -44,6 +44,7 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
       if (isBottomEdge) {
         styles.marginBottom = 0;
       }
+      console.log(styles);
       return styles;
     }
     return {};
@@ -70,16 +71,18 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
             {
               activeChildren.map((child, index) => {
                 return (
-                  React.cloneElement(child, {
-                    key: index,
-                    style: [
+                  <View
+                    key={index}
+                    style={[
                       child?.props?.style,
                       marginStyle(index),
                       {
                         width: ((parentWidth - (spacing * (cols - 1))) / cols),
-                      },
-                    ],
-                  })
+                      }]}>
+                    {
+                      child
+                    }
+                  </View>
                 );
               })
             }

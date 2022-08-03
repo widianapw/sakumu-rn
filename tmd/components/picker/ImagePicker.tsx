@@ -107,6 +107,7 @@ export default function ImagePicker({
         backgroundColor: color(colors.primary.focus).alpha(0.2).rgb().string(),
       }}>
         <IconButton
+          shape={"rounded"}
           onPress={handleOpenViewer}
           size={size / 3}
           variant={"tertiary"}
@@ -125,6 +126,7 @@ export default function ImagePicker({
       }} open={isShowViewer}/>
 
       <ImagePickerBottomSheet
+        selectedImage={selectedImageUrl}
         onDelete={() => {
           setSelectedImageUrl("");
         }}
