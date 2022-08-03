@@ -302,7 +302,7 @@ PODS:
     - React
   - react-native-geolocation-service (5.3.0-beta.4):
     - React
-  - react-native-maps (0.31.1):
+  - react-native-maps (1.1.0):
     - React-Core
   - react-native-pager-view (5.4.25):
     - React-Core
@@ -678,7 +678,7 @@ SPEC CHECKSUMS:
   react-native-date-picker: 9088350e06918f7d842a34c171acadc66583cb94
   react-native-geocoder: 225895386f04bf37515eaa09c419dea9b923f40b
   react-native-geolocation-service: c0efb872258ed9240f1003a70fca9e9757e5c785
-  react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
+  react-native-maps: de23d141fa0289d1896739d0ddc8c5d11d9ca800
   react-native-pager-view: da490aa1f902c9a5aeecf0909cc975ad0e92e53e
   react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   React-perflogger: a18b4f0bd933b8b24ecf9f3c54f9bf65180f3fe6
@@ -707,6 +707,6 @@ SPEC CHECKSUMS:
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: fef56c3555a3d7251d139929bad382b6e5853ddc
+PODFILE CHECKSUM: 2d2ef42a9571b8559964e8c21b34fa013a1db9e8
 
 COCOAPODS: 1.11.3
