@@ -38,6 +38,8 @@ import MapPickerScreen from "../screens/utils/MapPickerScreen";
 import AppNavigationType from "./AppNavigationType";
 import MapTrackingScreen from "../screens/components/MapTrackingScreen";
 import ProgressBarScreen from "../screens/components/ProgressBarScreen";
+import SignatureCanvasScreen from "../screens/components/SignatureCanvasScreen";
+import ImageScreen from "../screens/components/ImageScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator<AppNavigationType>();
@@ -95,6 +97,8 @@ const AppNavigation = () => {
               <Stack.Screen name={"DividerScreen"} component={DividerScreen} />
               <Stack.Screen name={"MapTrackingScreen"} component={MapTrackingScreen} />
               <Stack.Screen name={"ProgressBarScreen"} component={ProgressBarScreen} />
+              <Stack.Screen name={"SignatureCanvasScreen"} component={SignatureCanvasScreen} />
+              <Stack.Screen name={"ImageScreen"} component={ImageScreen} />
             </>
           )
         }

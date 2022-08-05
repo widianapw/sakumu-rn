@@ -1,6 +1,8 @@
 import { SelectedMap } from "../../tmd/components/picker/MapPicker";
 
 type AppNavigationType = {
+  ImageScreen: undefined,
+  SignatureCanvasScreen: undefined,
   ProgressBarScreen: undefined,
   MapTrackingScreen: undefined,
   MapPickerScreen: {

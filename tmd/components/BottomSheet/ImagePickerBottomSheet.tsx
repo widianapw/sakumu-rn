@@ -33,7 +33,7 @@ export default function ImagePickerBottomSheet({ selectedImage,camera = true, ga
   const modalizeRef = useRef<Modalize>(null);
   const { t } = useTranslation();
   const [currentImage, setCurrentImage] = useState(selectedImage);
-  const imageSize = 500;
+  const imageSize = 800;
   useEffect(() => {
     if (props.open) {
       handleOpen();
@@ -41,6 +41,7 @@ export default function ImagePickerBottomSheet({ selectedImage,camera = true, ga
       handleClose();
     }
   }, [props.open]);
+
 
   const handleOpen = () => {
     modalizeRef?.current?.open();
@@ -50,7 +51,6 @@ export default function ImagePickerBottomSheet({ selectedImage,camera = true, ga
     modalizeRef?.current?.close();
     // props.onClose();
   };
-
 
   let imageCropSize = { width: imageSize, height: imageSize };
   if (props.ratio) {
@@ -98,21 +98,6 @@ export default function ImagePickerBottomSheet({ selectedImage,camera = true, ga
       props.onClose();
     }
   };
-
-  // useEffect(() => {
-  //   if (props.open) {
-  //     if (!camera) {
-  //       handleClose();
-  //       props.onClose();
-  //       handleOpenGallery();
-  //     }
-  //     if (!gallery) {
-  //       handleClose();
-  //       props.onClose();
-  //       handleOpenCamera();
-  //     }
-  //   }
-  // }, [props.open, camera, gallery]);
 
 
   return (
@@ -173,6 +158,7 @@ export default function ImagePickerBottomSheet({ selectedImage,camera = true, ga
                 (camera && gallery) &&
                 <Divider style={{ marginStart: 38 }} />
               }
+
               {
                 gallery &&
                 <Pressable
@@ -198,12 +184,11 @@ export default function ImagePickerBottomSheet({ selectedImage,camera = true, ga
                 </Pressable>
               }
               {
-                (currentImage && props.onDelete) &&
+                ((currentImage) && props.onDelete) &&
                 <>
                   <Divider style={{ marginStart: 38 }} />
                   <Pressable
-                    onPress={handleDeleteImage}
-                  >
+                    onPress={handleDeleteImage}>
 
                     <View
                       style={{

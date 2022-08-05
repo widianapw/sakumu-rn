@@ -23,9 +23,11 @@ interface Props {
   onSave?: (item?: PickerItem) => void;
   title?: string;
   search?: boolean;
+  fullHeight?: boolean;
 }
 
-export default function PickerBottomSheet(props: Props & ComponentProps<typeof Modalize>) {
+export default function PickerBottomSheet({ fullHeight = true, ...props }: Props & ComponentProps<typeof Modalize>) {
+
   const modalizeRef = useRef<Modalize>(null);
   const [selected, setSelected] = useState();
   const [list, setList] = useState(props.data);
@@ -34,7 +36,11 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
   const { colors } = theme;
   const { t } = useTranslation();
 
-  const isFullHeight = props.data?.length >= 6;
+  // const isFullHeight = props.data?.length >= 6;
+  const isFullHeight = fullHeight;
+  console.log(isFullHeight);
+  const [contentHeight, setContentHeight] = useState(null);
+
 
   // useEffect(() => {
   //   // if (props?.initial) {
@@ -120,102 +126,117 @@ export default function PickerBottomSheet(props: Props & ComponentProps<typeof M
       {...props}
       customRenderer={
         <Animated.View style={{
-          flexGrow: 1,
+          height: isFullHeight
+            ? "100%"
+            : contentHeight ?? "100%",
           flexDirection: "column",
         }}>
-          <SafeAreaView style={{flex:1}}>
-
-          <View
-            style={{ flexDirection: "column", paddingTop: 24, paddingBottom: 8 }}>
-
+          <SafeAreaView style={{ flex: 1 }}>
             <View
-              style={{ flexDirection: "column", paddingHorizontal: 16 }}>
-
-              <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}>
-                <Typography type={"title2"}>{props.title ?? "Pick Data"}</Typography>
-                {
-                  props.onReset &&
-                  <Button
-                    size={"sm"}
-                    variant={"secondary"}
-                    onPress={props?.onReset}
-                  >
-                    {t("reset")}
-                  </Button>
-                }
-              </View>
-              {props.search &&
-                <View style={{ marginTop: 8 }}>
-                  <TextField
-                    onInvokeTextChanged={(text) => {
-                      setSearchQuery(text);
-                    }}
-                    search
-                    placeholder={"Search"}
-                  />
-                </View>
-              }
-            </View>
-            {/*{(props.search || props.onReset) &&*/}
-            {/*  <Divider*/}
-            {/*    variant={"dotted"}*/}
-            {/*    style={{*/}
-            {/*      marginTop: 8,*/}
-            {/*      marginBottom: 0,*/}
-            {/*    }} />*/}
-            {/*}*/}
-          </View>
-
-          <View
-            style={
-              isFullHeight
-                ? { flexGrow: 1, flex: 1 }
-                : {}
-            }
-          >
-            <RadioButtonGroup
-              onValueChange={(value) => {
-                setSelected(value);
+              style={isFullHeight && {
+                flex: 1,
               }}
-              value={selected}>
-              <FlatList
-                style={{
-                  paddingHorizontal: 16,
-                }}
-                data={list}
-                keyExtractor={(item) => item.name}
-                renderItem={renderItem}
-              />
-            </RadioButtonGroup>
-          </View>
-          {/*<Divider*/}
-          {/*  style={{*/}
-          {/*    marginTop: 0,*/}
-          {/*  }}*/}
-          {/*  variant={"dotted"} />*/}
+              onLayout={(event) => {
+                const { height } = event.nativeEvent.layout;
+                if (!isFullHeight) {
+                  console.log(height);
+                  setContentHeight(height);
+                }
+              }}
+            >
 
-          <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
-            <Button
-              size={"lg"}
-              onPress={() => {
-                if (props.onSave) {
-                  const obj = props.data?.find(it => it.id == selected);
-                  props.onSave(obj);
-                  if (props.onClose) {
-                    props?.onClose();
+              <View
+                style={{ flexDirection: "column", paddingTop: 24, paddingBottom: 8 }}>
+
+                <View
+                  style={{ flexDirection: "column", paddingHorizontal: 16 }}>
+
+                  <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}>
+                    <Typography type={"title2"}>{props.title ?? "Pick Data"}</Typography>
+                    {
+                      props.onReset &&
+                      <Button
+                        size={"sm"}
+                        variant={"secondary"}
+                        onPress={props?.onReset}
+                      >
+                        {t("reset")}
+                      </Button>
+                    }
+                  </View>
+                  {props.search &&
+                    <View style={{ marginTop: 8 }}>
+                      <TextField
+                        onInvokeTextChanged={(text) => {
+                          setSearchQuery(text);
+                        }}
+                        search
+                        placeholder={"Search"}
+                      />
+                    </View>
                   }
-                }
-              }}
-              style={{
-                width: "100%",
-              }}
-            >{t("save")}</Button>
-          </View>
+                </View>
+                {/*{(props.search || props.onReset) &&*/}
+                {/*  <Divider*/}
+                {/*    variant={"dotted"}*/}
+                {/*    style={{*/}
+                {/*      marginTop: 8,*/}
+                {/*      marginBottom: 0,*/}
+                {/*    }} />*/}
+                {/*}*/}
+              </View>
 
+              <View
+                style={
+                  isFullHeight
+                    ? { flexGrow: 1, flex: 1, height: "100%" }
+                    : {}
+                }
+              >
+                <RadioButtonGroup
+                  onValueChange={(value) => {
+                    setSelected(value);
+                  }}
+                  value={selected}>
+                  <FlatList
+                    style={{
+                      paddingHorizontal: 16,
+                    }}
+                    data={list}
+                    keyExtractor={(item) => item.name}
+                    renderItem={renderItem}
+                  />
+                </RadioButtonGroup>
+              </View>
+              {/*<Divider*/}
+              {/*  style={{*/}
+              {/*    marginTop: 0,*/}
+              {/*  }}*/}
+              {/*  variant={"dotted"} />*/}
+
+              <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
+                <Button
+                  size={"lg"}
+                  onPress={() => {
+                    if (props.onSave) {
+                      const obj = props.data?.find(it => it.id == selected);
+                      props.onSave(obj);
+                      if (props.onClose) {
+                        props?.onClose();
+                      }
+                    }
+                  }}
+                  style={{
+                    width: "100%",
+                  }}
+                >{t("save")}</Button>
+              </View>
+
+            </View>
           </SafeAreaView>
         </Animated.View>
       }

@@ -20,22 +20,27 @@ export default function Page({ children, statusBarColor }: Props) {
 
 
   const CStatusBar = ({ backgroundColor, ...props }: any) => (
-    <View style={[{
-      height: statusBarHeight,
-    }, { backgroundColor }]}>
-      <SafeAreaView>
-        <StatusBar translucent backgroundColor={backgroundColor}
-                   barStyle={isLight ? "dark-content" : "light-content"} {...props} />
-      </SafeAreaView>
-    </View>
+    <>{
+      Platform.OS === "ios"
+        ? (
+          <View style={[{
+            height: statusBarHeight,
+          }, { backgroundColor }]}>
+            <SafeAreaView>
+              <StatusBar translucent backgroundColor={backgroundColor}
+                         barStyle={isLight ? "dark-content" : "light-content"} {...props} />
+            </SafeAreaView>
+          </View>
+        ) : (
+          <StatusBar backgroundColor={backgroundColor}
+                     barStyle={isLight ? "dark-content" : "light-content"} {...props} />
+        )
+    }
+    </>
   );
 
   return (
     <>
-      <View style={{
-        flex: 1,
-      }}>
-
         <CStatusBar
           backgroundColor={statusBarColor ?? colors.primary.pressed}
         />
@@ -49,7 +54,6 @@ export default function Page({ children, statusBarColor }: Props) {
         </KeyboardAvoidingView>
 
         </SafeAreaView>
-      </View>
     </>
   );
 }

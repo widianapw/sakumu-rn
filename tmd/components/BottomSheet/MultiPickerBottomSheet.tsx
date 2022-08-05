@@ -9,9 +9,9 @@ import { useTranslation } from "react-i18next";
 import { Animated, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
 import { Button, Checkbox, Divider } from "../../index";
 import { Portal } from "react-native-portalize";
+import { PickerItem } from "../../model/PickerItem";
 import Typography from "../Typography/Typography";
 import TextField from "../TextInput/TextField";
-import { PickerItem } from "../../model/PickerItem";
 
 interface Props {
   open?: boolean;
@@ -22,10 +22,14 @@ interface Props {
   onSave?: (items?: PickerItem[]) => void;
   title?: string;
   search?: boolean;
+  fullHeight?: boolean;
 }
 
 
-export default function MultiPickerBottomSheet(props: Props & ComponentProps<typeof Modalize>) {
+export default function MultiPickerBottomSheet({
+                                                 fullHeight = true,
+                                                 ...props
+                                               }: Props & ComponentProps<typeof Modalize>) {
   const modalizeRef = useRef<Modalize>(null);
   const [selected, setSelected] = useState<string[] | number[]>([]);
   const [list, setList] = useState(props.data);
@@ -34,7 +38,9 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
   const { colors } = theme;
   const { t } = useTranslation();
 
-  const isFullHeight = props.data?.length >= 6;
+  const isFullHeight = fullHeight;
+
+  const [contentHeight, setContentHeight] = useState(null);
 
   useEffect(() => {
     if (props.open) {
@@ -116,7 +122,9 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
       adjustToContentHeight={!isFullHeight}
       onClose={() => {
         setSearchQuery("");
-        props.onClose();
+        if (props.onClose) {
+          props.onClose();
+        }
       }}
       modalStyle={
         [{
@@ -126,90 +134,106 @@ export default function MultiPickerBottomSheet(props: Props & ComponentProps<typ
           isFullHeight ? { flex: 1 } : {},
         ]}
       handlePosition={"inside"}
-      {...props}
       customRenderer={
         <Animated.View style={{
-          flexGrow: 1,
+          height: isFullHeight
+            ? "100%"
+            : contentHeight ?? "100%",
           flexDirection: "column",
         }}>
           <SafeAreaView style={{
-            flex:1
+            flex: 1,
           }}>
-
-          <View
-            style={{ flexDirection: "column", paddingTop: 24, paddingBottom: 8 }}>
-
             <View
-              style={{ flexDirection: "column", paddingHorizontal: 16 }}>
-
-              <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}>
-                <Typography type={"title2"}>{props.title ?? "Pick Data"}</Typography>
-                {
-                  props.onReset &&
-                  <Button
-                    size={"sm"}
-                    variant={"secondary"}
-                    onPress={props?.onReset}
-                  >
-                    {t("reset")}
-                  </Button>
+              style={isFullHeight && {
+                flex: 1,
+              }}
+              onLayout={(e) => {
+                const { height } = e.nativeEvent.layout;
+                if (!isFullHeight) {
+                  console.log(height);
+                  setContentHeight(height);
                 }
-              </View>
-              {props.search &&
-                <View style={{ marginTop: 8 }}>
-                  <TextField
-                    onInvokeTextChanged={(text) => {
-                      setSearchQuery(text);
-                    }}
-                    search
-                    placeholder={t('search')}
-                  />
+              }}
+            >
+
+
+              <View
+                style={{ flexDirection: "column", paddingTop: 24, paddingBottom: 8 }}>
+
+                <View
+                  style={{ flexDirection: "column", paddingHorizontal: 16 }}>
+
+                  <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}>
+                    <Typography type={"title2"}>{props.title ?? "Pick Data"}</Typography>
+                    {
+                      props.onReset &&
+                      <Button
+                        size={"sm"}
+                        variant={"secondary"}
+                        onPress={props?.onReset}
+                      >
+                        {t("reset")}
+                      </Button>
+                    }
+                  </View>
+                  {props.search &&
+                    <View style={{ marginTop: 8 }}>
+                      <TextField
+                        onInvokeTextChanged={(text) => {
+                          setSearchQuery(text);
+                        }}
+                        search
+                        placeholder={t("search")}
+                      />
+                    </View>
+                  }
                 </View>
-              }
-            </View>
-          </View>
+              </View>
 
-          <View
-            style={
-              isFullHeight
-                ? { flexGrow: 1, flex: 1 }
-                : {}
-            }
-          >
-            <FlatList
-              style={{
-                paddingHorizontal: 16,
-              }}
-              data={list}
-              keyExtractor={(item) => item.name}
-              renderItem={renderItem}
-            />
-          </View>
-
-          <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
-            <Button
-              size={"lg"}
-              onPress={() => {
-                if (props.onSave) {
-                  const objs = props?.data?.filter((item) => selected.includes(item?.id));
-                  props.onSave(objs);
-                  props.onClose();
+              <View
+                style={
+                  isFullHeight
+                    ? { flexGrow: 1, flex: 1, height: "100%" }
+                    : {}
                 }
-              }}
-              style={{
-                width: "100%",
-              }}
-            >{t("save")}</Button>
-          </View>
+              >
+                <FlatList
+                  style={{
+                    paddingHorizontal: 16,
+                  }}
+                  data={list}
+                  keyExtractor={(item) => item.name}
+                  renderItem={renderItem}
+                />
+              </View>
+
+              <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
+                <Button
+                  size={"lg"}
+                  onPress={() => {
+                    if (props.onSave) {
+                      const objs = props?.data?.filter((item) => selected.includes(item?.id));
+                      props.onSave(objs);
+                      props.onClose();
+                    }
+                  }}
+                  style={{
+                    width: "100%",
+                  }}
+                >{t("save")}</Button>
+              </View>
+
+            </View>
           </SafeAreaView>
- 
+
         </Animated.View>
       }
-      disableScrollIfPossible
+      {...props}
       ref={modalizeRef}>
     </Modalize>
 

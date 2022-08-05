@@ -44,7 +44,6 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
       if (isBottomEdge) {
         styles.marginBottom = 0;
       }
-      console.log(styles);
       return styles;
     }
     return {};

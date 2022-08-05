@@ -48,9 +48,9 @@ export default function ImagePicker({
   const { colors, roundness } = useTheme();
   const { t } = useLocale();
   const { requestPermissions } = usePermission();
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string | undefined>("");
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | undefined>(undefined);
   const handleOpenImagePicker = () => {
-    if (Platform.OS == 'android') {
+    if (Platform.OS == "android") {
       requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS], () => {
         setIsOpen(true);
       });

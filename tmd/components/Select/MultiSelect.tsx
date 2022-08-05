@@ -147,6 +147,7 @@ export default function MultiSelect({
         const ids = value?.map((it) => it?.id);
         setSelected(ids);
       }}
+      fullHeight={rest.fullHeight}
       title={rest.pickerTitle ?? label} />
   </View>;
 }

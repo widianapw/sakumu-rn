@@ -99,9 +99,10 @@ export default function PickerScreen() {
       <Select
         label={"Country"}
         search={true}
-        initial={"1"}
+        initial={"61"}
+        fullHeight={false}
         options={
-          _countries.map((item) => {
+          _countries.slice(0, 6).map((item) => {
             const i: PickerItem = {
               id: item.phone_code,
               name: `+${item.phone_code} (${item.name})`,
@@ -149,8 +150,9 @@ export default function PickerScreen() {
           <MultiSelect
             label={"Multi Select"}
             search={true}
+            fullHeight={false}
             options={
-              _countries.map((item) => {
+              _countries.slice(0, 5).map((item) => {
                 const i: PickerItem = {
                   id: item.phone_code,
                   name: `+${item.phone_code} (${item.name})`,

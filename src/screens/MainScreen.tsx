@@ -200,6 +200,18 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
+            navigate("SignatureCanvasScreen");
+          }}>
+            Signature Canvas Screen
+          </Button>
+
+          <Button onPress={() => {
+            navigate("ImageScreen");
+          }}>
+            Image Screen
+          </Button>
+
+          <Button onPress={() => {
             navigate("FormScreen");
           }}>
             Form Input

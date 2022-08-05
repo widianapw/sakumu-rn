@@ -188,3 +188,4 @@ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<React.Co
 
 export type EllipsizeProp = "head" | "middle" | "tail" | "clip";
 
+export type ImageRatioType = "1:1" | "4:3" | "16:9" | "16:10" | "21:9";
