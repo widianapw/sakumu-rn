@@ -3,8 +3,9 @@
  * Copyright (c) 2022 - Made with love
  */
 
-import React, { useState } from "react";
+import React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
+import useLayout from "../../utils/useLayout";
 
 interface Props {
   cols?: number;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle }: Props) {
-  const [parentWidth, setParentWidth] = useState(0);
+  const [parentSize, setParentSize] = useLayout();
   const activeChildren = (children instanceof Array) ? children?.filter(it => it != undefined) : children;
   const itemCount = (activeChildren instanceof Array) ? activeChildren.length : 1;
 
@@ -49,13 +50,12 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
     return {};
   };
 
+  const childWidth = (parentSize.width - (spacing * (cols - 1))) / cols;
+
   return (
     <View
 
-      onLayout={(event) => {
-        const { width } = event.nativeEvent.layout;
-        setParentWidth(width);
-      }}
+      onLayout={setParentSize}
       style={[
         {
           flex: 1,
@@ -68,6 +68,7 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
         (activeChildren instanceof Array)
           ? <>
             {
+              (parentSize.measured) &&
               activeChildren.map((child, index) => {
                 return (
                   <View
@@ -76,7 +77,7 @@ export default function Grid({ children, cols = 1, spacing = 0, style: viewStyle
                       child?.props?.style,
                       marginStyle(index),
                       {
-                        width: ((parentWidth - (spacing * (cols - 1))) / cols),
+                        width: childWidth,
                       }]}>
                     {
                       child

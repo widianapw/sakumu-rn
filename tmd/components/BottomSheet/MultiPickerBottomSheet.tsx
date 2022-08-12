@@ -222,7 +222,7 @@ export default function MultiPickerBottomSheet({
                       props.onClose();
                     }
                   }}
-                  style={{
+                  buttonStyle={{
                     width: "100%",
                   }}
                 >{t("save")}</Button>

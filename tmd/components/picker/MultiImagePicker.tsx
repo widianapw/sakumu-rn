@@ -132,8 +132,10 @@ export default function MultiImagePicker({
     <>
       <ImageViewerModal
         index={viewerIndex}
-        images={selectedImageUrls}
-        onClose={() => {setIsShowViewer(false)}}
+        images={selectedImageUrls.map((url) => ({ image: url }))}
+        onClose={() => {
+          setIsShowViewer(false);
+        }}
         open={isShowViewer}/>
 
       <ImagePickerBottomSheet
@@ -287,7 +289,7 @@ export default function MultiImagePicker({
             editable &&
             <Button
               size={buttonProps?.size ?? "sm"}
-              containerStyle={{
+              style={{
                 marginTop: 8,
               }}
               variant={buttonProps?.variant ?? "secondary"}

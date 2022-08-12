@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocale } from "../../providers/LocaleProvider";
 import { SelectedMap } from "../../../tmd/components/picker/MapPicker";
 import MapView from "react-native-maps";
-import { Button, Page, useTheme } from "../../../tmd";
+import { Button, Page, Skeleton, useTheme } from "../../../tmd";
 import Geocoder from "@timwangdev/react-native-geocoder";
 import Config from "react-native-config";
 import Geolocation from "react-native-geolocation-service";
@@ -187,16 +187,30 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
                              alignItems: "center",
                            }}>
                       <Icon icon={"location-sharp"} size={16} color={theme.colors.primary.main} />
-                      <Typography
-                        numberOfLines={1}
-                        ellipsizeMode={"tail"}
-                        style={{ fontWeight: "600" }}
-                        type={"title3"}>{addressObj?.nameAddress ?? "-"}</Typography>
+                      {
+                        isLoadingGeocode
+                          ? <Skeleton
+                            width={"50%"}
+                            height={14} />
+                          : <Typography
+                            numberOfLines={1}
+                            ellipsizeMode={"tail"}
+                            style={{ fontWeight: "600" }}
+                            type={"title3"}>{addressObj?.nameAddress ?? "-"}</Typography>
+                      }
                     </Stack>
-                    <Typography
-                      type={"body2"}
-                      style={{ marginTop: 4 }}
-                    >{addressObj?.fullAddress}</Typography>
+                    {
+                      isLoadingGeocode
+                        ? <Stack spacing={8} mt={4}>
+                          <Skeleton width={"100%"} />
+                          <Skeleton width={"80%"} />
+                        </Stack>
+                        :
+                        <Typography
+                          type={"body2"}
+                          style={{ marginTop: 4 }}
+                        >{addressObj?.fullAddress}</Typography>
+                    }
                   </Stack>
 
                   <Button

@@ -9,6 +9,7 @@ import { useDeepEffect } from "../../../src/hooks/useDeepEffect";
 import { isEqual } from "lodash";
 import TextButton from "../Button/TextButton";
 import { useLocale } from "../../../src/providers/LocaleProvider";
+import useLayout from "../../utils/useLayout";
 
 export interface TooltipOptionalProps {
   position?: "top" | "bottom";
@@ -54,7 +55,7 @@ export default function Tooltip({
                                 }: TooltipOptionalProps & RequiredProps) {
   const ref = useRef<View>(null);
   const [layoutRect, setLayoutRect] = useState<LayoutRectangle | undefined>(undefined);
-  const [popoverSize, setPopoverSize] = useState<LayoutRectangle | undefined>(undefined);
+  const [popoverSize, setPopoverSize] = useLayout();
   const arrowSize = 12;
   const modalPadding = 16;
   const { colors } = useTheme();
@@ -112,7 +113,7 @@ export default function Tooltip({
     return (
       <>
         {
-          (layoutRect && popoverSize) &&
+          (layoutRect && popoverSize.measured) &&
           <>
             {
               position == "bottom" &&
@@ -142,7 +143,7 @@ export default function Tooltip({
 
   const getPosition = (isArrow?: boolean) => {
     // console.log(isArrow);
-    if (layoutRect && popoverSize) {
+    if (layoutRect && popoverSize.measured) {
       if (position === "bottom") {
         return {
           top: layoutRect.y + layoutRect.height + (!isArrow ? arrowSize : 0),
@@ -236,13 +237,7 @@ export default function Tooltip({
                     >
 
                       <View
-                        onLayout={(e) => {
-                          console.log(e.nativeEvent.layout);
-                          if (e.nativeEvent.layout.width != popoverSize?.width) {
-                            setPopoverSize(e.nativeEvent.layout);
-                          }
-                        }}
-
+                        onLayout={setPopoverSize}
                         style={{
                           backgroundColor: bgColor,
                           padding: 16,

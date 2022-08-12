@@ -2,9 +2,11 @@
  * Created by Widiana Putra on 25/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import { StyleProp, StyleSheet, Text as NativeText, TextStyle } from "react-native";
+import { StyleProp, StyleSheet, TextStyle } from "react-native";
 import * as React from "react";
 import { useTheme } from "../../index";
+import Text from "./Text";
+import { normalizeSize } from "../../utils/normalizeSize";
 
 export type TypographyType =
   "h1"
@@ -29,7 +31,7 @@ interface Props {
   type?: TypographyType;
 }
 
-const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeof NativeText>) => {
+const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeof Text>) => {
   const theme = useTheme();
 
   let fontSize = 14;
@@ -131,13 +133,13 @@ const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeo
 
 
   return (
-    <NativeText
+    <Text
       {...rest}
       style={[
         {
           color: theme.colors.neutral.neutral_90,
           letterSpacing: spacing,
-          fontSize: fontSize,
+          fontSize: normalizeSize(fontSize),
           ...fontTheme,
         },
         type ? {

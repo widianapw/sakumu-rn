@@ -40,7 +40,7 @@ export default function FormScreen() {
     map: yup.mixed().required(),
     multiSelect: yup.array().min(2).required(),
     price: yup.number().min(1000000).required(),
-  }).required();
+  })
 
   const method = useForm({
     defaultValues: {
@@ -57,7 +57,7 @@ export default function FormScreen() {
       multiImage: undefined,
       dateRange: undefined,
       map: undefined,
-      price: 100000,
+      price: "1000000",
       //  map initial value
       // map: {
       //   location: {

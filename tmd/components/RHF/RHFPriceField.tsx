@@ -1,7 +1,7 @@
 import React, { ComponentProps } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import PriceField from "../TextInput/PriceField";
 import { TextField } from "../../index";
+import PriceField from "../TextInput/PriceField";
 
 interface Props {
   name: string;
@@ -18,15 +18,12 @@ export default function RHFPriceField({ name, ...rest }: Props & ComponentProps<
         render={({ field: { onChange, onBlur, value }, fieldState }) => {
           return <PriceField
             onBlur={onBlur}
-            initial={value}
+            value={value}
+            onChangePriceValue={(val) => {
+              onChange(val);
+            }}
             error={fieldState?.error != undefined}
             errorText={fieldState?.error?.message}
-            onChangePriceValue={(value) => {
-              if (fieldState.error) {
-                clearErrors(name);
-              }
-              setValue(name, value);
-            }}
             {...rest}
           />;
         }}

@@ -1,24 +1,34 @@
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
-import { Button, Stack, useTheme } from "../../index";
+import { Button, HelperText, Stack, useTheme } from "../../index";
 import LabelInput from "../TextInput/Label/LabelInput";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 import SignatureScreen, { SignatureViewRef } from "react-native-signature-canvas";
 import { useLocale } from "../../../src/providers/LocaleProvider";
+import RFNS from "react-native-fs";
+import uniqid from "../../utils/uniqid";
 
 interface Props {
-  onChanged?: (signature: string) => void;
+  onChangedBase64?: (signature: string) => void;
+  onChangePath?: (path: string) => void;
   onReset?: () => void;
   label?: string;
   requiredLabel?: boolean;
   resetTitle?: string;
+  error?: boolean;
+  errorText?: string;
+  helperText?: string;
+  onProgress?: (isOnProgress: boolean) => void;
+  canvasStyle?: StyleProp<ViewStyle>;
 }
 
 export default function SignatureCanvas({
-                                          onChanged,
+                                          onChangedBase64, onChangePath,
                                           onReset,
                                           label,
                                           requiredLabel,
                                           resetTitle,
+                                          error, errorText, helperText,
+                                          onProgress, canvasStyle,
                                           ...rest
                                         }: Props & ComponentProps<typeof SignatureScreen>) {
   const ref = useRef<SignatureViewRef>(null);
@@ -26,15 +36,30 @@ export default function SignatureCanvas({
   const { colors } = useTheme();
 
   useEffect(() => {
-    if (onChanged) {
-      onChanged(signature);
+    if (onChangedBase64) {
+      onChangedBase64(signature);
     }
+
+    if (onChangePath) {
+      if (signature) {
+        const path = RFNS.DocumentDirectoryPath + `/signature_${uniqid()}.png`;
+        RFNS.writeFile(path, signature.replace("data:image/png;base64,", ""), "base64").then(() => {
+          const finalPath = "file://" + path;
+          onChangePath(finalPath);
+        }).catch(err => {
+          // console.log(err);
+        });
+      } else {
+        onChangePath("");
+      }
+    }
+
   }, [signature]);
 
 
   const { t } = useLocale();
   return (
-    <View style={{ flex: 1 }}>
+    <View style={[{ flex: 1 }, rest.style]}>
       <Stack direction={"row"} items={"center"} content={"space-between"}>
         <View>
           {
@@ -60,15 +85,25 @@ export default function SignatureCanvas({
           onOK={(data) => {
             setSignature(data);
           }}
+          onBegin={() => {
+            if (onProgress) {
+              onProgress(true);
+            }
+          }}
           onEnd={() => {
             ref?.current?.readSignature();
+            if (onProgress) {
+              onProgress(false);
+            }
           }}
           onEmpty={() => {
             setSignature("");
           }}
-          style={{
+          scrollable={false}
+          {...rest}
+          style={[{
             height: "100%",
-          }}
+          }, canvasStyle]}
           webviewContainerStyle={{
             height: "100%",
           }}
@@ -86,9 +121,22 @@ export default function SignatureCanvas({
                   }`
           }
           ref={ref}
-          {...rest}
         />
       </View>
+      {
+        (error || helperText) &&
+        <Stack spacing={4} mt={4}>
+          {
+            (helperText) &&
+            <HelperText type={"info"}>{helperText}</HelperText>
+          }
+
+          {
+            (error && errorText) &&
+            <HelperText type={"error"}>{errorText}</HelperText>
+          }
+        </Stack>
+      }
     </View>
   );
 }

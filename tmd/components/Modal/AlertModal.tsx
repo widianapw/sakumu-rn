@@ -150,7 +150,6 @@ export default function AlertModal({ dismissible = true, buttonOrientation = "ho
             </Stack>
           </View>
         </View>
-
       </Modal>
     </Portal>
   );

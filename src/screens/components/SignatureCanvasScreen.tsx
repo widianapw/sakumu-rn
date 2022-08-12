@@ -17,9 +17,9 @@ export default function SignatureCanvasScreen() {
         <SignatureCanvas
           label={"Tanda Tangan Digital"}
           requiredLabel
-          onChanged={setSignature}
-
+          onChangePath={setSignature}
         />
+
         <Stack
           direction={"row"} spacing={8} mt={16}>
           <Button

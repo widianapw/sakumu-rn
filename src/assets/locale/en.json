@@ -91,6 +91,9 @@
     "next": "Next",
     "previous": "Previous",
     "finish": "Finish",
-    "change_photo": "Change Photo"
+    "change_photo": "Change Photo",
+    "latest_search": "Latest Search",
+    "clear_history": "Clear History",
+    "see_more": "See more"
   }
 }

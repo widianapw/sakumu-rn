@@ -49,12 +49,16 @@ export default function ProgressModal({
             pb={description ? 16 : 24}
             pl={24}
             pr={24}
-            spacing={16}
+            spacing={8}
+            items={"center"}
+            content={"center"}
             style={{
               backgroundColor: "white",
               borderRadius: 8,
             }}>
-            <CircularProgressBar size={"md"} {...circularProgressProps} />
+            <CircularProgressBar size={"lg"} style={{
+              alignSelf: "center",
+            }} {...circularProgressProps} />
             {
               (title || description) &&
               <Stack items={"center"}>

@@ -212,6 +212,12 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
+            navigate("StepperScreen");
+          }}>
+            Stepper Screen
+          </Button>
+
+          <Button onPress={() => {
             navigate("FormScreen");
           }}>
             Form Input

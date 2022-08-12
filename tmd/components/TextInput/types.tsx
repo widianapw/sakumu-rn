@@ -1,10 +1,4 @@
-import type {
-  TextInput as NativeTextInput,
-  Animated,
-  TextStyle,
-  LayoutChangeEvent,
-  ColorValue,
-} from "react-native";
+import type { Animated, ColorValue, LayoutChangeEvent, TextInput as NativeTextInput, TextStyle } from "react-native";
 import type { TextInputProps } from "./TextField";
 import type { $Omit } from "../../types";
 
@@ -43,7 +37,7 @@ export type ChildTextInputProps = {
   onFocus?: (args: any) => void;
   onBlur?: (args: any) => void;
   forceFocus: () => void;
-  onChangeText?: (value: string) => void;
+  onChangeText?: (value: string, extracted: string) => void;
   onLayoutAnimatedText: (args: any) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
   onRightAffixLayoutChange: (event: LayoutChangeEvent) => void;

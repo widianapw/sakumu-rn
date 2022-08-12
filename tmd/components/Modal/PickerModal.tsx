@@ -186,11 +186,11 @@ export default function PickerModal({
                       }
                     }
                   }}
-                  containerStyle={{
+                  style={{
                     marginVertical: 16,
                     paddingHorizontal: 16,
                   }}
-                  style={{
+                  buttonStyle={{
                     width: "100%",
                   }}
                 >{t("choose")}</Button>

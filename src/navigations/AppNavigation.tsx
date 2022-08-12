@@ -40,6 +40,8 @@ import MapTrackingScreen from "../screens/components/MapTrackingScreen";
 import ProgressBarScreen from "../screens/components/ProgressBarScreen";
 import SignatureCanvasScreen from "../screens/components/SignatureCanvasScreen";
 import ImageScreen from "../screens/components/ImageScreen";
+import GalleryListScreen from "../screens/utils/GalleryListScreen";
+import StepperScreen from "../screens/components/StepperScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator<AppNavigationType>();
@@ -99,12 +101,21 @@ const AppNavigation = () => {
               <Stack.Screen name={"ProgressBarScreen"} component={ProgressBarScreen} />
               <Stack.Screen name={"SignatureCanvasScreen"} component={SignatureCanvasScreen} />
               <Stack.Screen name={"ImageScreen"} component={ImageScreen} />
+              <Stack.Screen name={"StepperScreen"} component={StepperScreen} />
             </>
           )
         }
-        <Stack.Screen name={"MapPickerScreen"} component={MapPickerScreen} options={{
-          headerShown: false,
-        }} />
+        <Stack.Screen name={"MapPickerScreen"} component={MapPickerScreen}
+                      options={{
+                        headerShown: false,
+                      }}
+        />
+        <Stack.Screen name={"GalleryListScreen"} component={GalleryListScreen}
+                      options={{
+                        headerShown: false,
+                      }}
+
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import color from "color";
 
-import CircularProgressBar from "../CircularProgressBar";
+import CircularProgressBar from "../ProgressBar/CircularProgressBar";
 import Surface from "../Surface";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
 import { black, white } from "../../styles/colors";
@@ -83,7 +83,7 @@ interface Props {
   onLongPress?: () => void;
   contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
-  containerStyle?: StyleProp<ViewStyle>;
+  buttonStyle?: StyleProp<ViewStyle>;
   /**
    * Style for the button text.
    */
@@ -253,7 +253,7 @@ const Button = ({
     <View style={
       [
         { display: "flex", flexDirection: fullWidth ? "column" : "row" },
-        rest.containerStyle,
+        style,
         fullWidth ? {
           flex: 1,
         } : {},
@@ -266,7 +266,8 @@ const Button = ({
           styles.button,
           compact && styles.compact,
           buttonStyle,
-          style,
+          rest.buttonStyle,
+          fullWidth && { width: "100%" },
         ]}
       >
         <TouchableRipple
@@ -286,7 +287,6 @@ const Button = ({
           rippleColor={rippleColor}
           style={[
             touchableStyle,
-            fullWidth && { width: "100%" },
           ]}
           testID={testID}
         >

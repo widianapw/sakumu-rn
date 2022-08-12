@@ -98,7 +98,7 @@ export default function PickerScreen() {
 
       <Select
         label={"Country"}
-        search={true}
+        // search={true}
         initial={"61"}
         fullHeight={false}
         options={
@@ -110,6 +110,7 @@ export default function PickerScreen() {
             return i;
           })
         }
+        pickerMode={"auto"}
       />
 
           <SelectModal

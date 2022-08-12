@@ -19,8 +19,8 @@ export default function ProgressBarScreen() {
           <LinearProgressBar indeterminate />
           <Button onPress={() => {
             showLoadingModal({
-              // description: "Please wait...",
-              // title: "Loading",
+              description: "Please wait...",
+              title: "Loading",
               // circularProgressProps: {
               //   size: "lg",
               // },

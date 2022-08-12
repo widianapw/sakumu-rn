@@ -91,6 +91,9 @@
     "next": "Selanjutnya",
     "previous": "Sebelumnya",
     "finish": "Selesai",
-    "change_photo": "Ubah Foto"
+    "change_photo": "Ubah Foto",
+    "latest_search": "Pencarian Terakhir",
+    "clear_history": "Hapus Riwayat",
+    "see_more": "Lihat lainnya"
   }
 }

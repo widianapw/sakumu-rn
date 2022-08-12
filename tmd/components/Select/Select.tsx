@@ -52,7 +52,6 @@ const Select = (
       label={rest.label}
       placeholder={rest.placeholder}
       onOpenPicker={() => {
-        console.log("OPEN THIS")
         setIsOpen(true);
       }}
       value={selectedObj?.name}
@@ -76,7 +75,10 @@ const Select = (
         setSelected(value?.id);
       }}
       fullHeight={rest.fullHeight}
-      title={rest.title ?? rest.label} />
+      title={rest.title ?? rest.label}
+      pickerMode={rest.pickerMode ?? "select"}
+    />
+
   </>;
 };
 

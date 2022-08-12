@@ -120,7 +120,7 @@ export default function ImagePicker({
   return (
     <>
       <ImageViewerModal
-        images={[selectedImageUrl??""]}
+        images={[{image: selectedImageUrl ?? ""}]}
         onClose={() => {
         setIsShowViewer(false)
       }} open={isShowViewer}/>
@@ -218,7 +218,7 @@ export default function ImagePicker({
             editable &&
             <Button
               size={buttonProps?.size ?? "sm"}
-              containerStyle={{
+              style={{
                 marginTop: 8,
               }}
               variant={buttonProps?.variant ?? "secondary"}

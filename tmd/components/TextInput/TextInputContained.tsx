@@ -241,7 +241,7 @@ const TextInputContained = ({
                   fontSize,
                   fontWeight,
                   color: inputTextColor,
-                  textAlignVertical: multiline ? "top" : "center",
+                  textAlignVertical: "center",
                   textAlign: textAlign
                     ? textAlign
                     : "auto",
@@ -268,11 +268,12 @@ const TextInputContained = ({
                 color={
                   colors.neutral.neutral_70
                 }
+                shape={"rounded"}
                 onPress={() => {
-                  if(rest.onClear){
+                  if (rest.onClear) {
                     rest?.onClear();
                   }
-                  if(rest.onInvokeTextChanged){
+                  if (rest.onInvokeTextChanged) {
                     rest?.onInvokeTextChanged("");
                   }
                   setIsShowSearch(false);

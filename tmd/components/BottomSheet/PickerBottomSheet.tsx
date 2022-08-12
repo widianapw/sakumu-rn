@@ -24,11 +24,17 @@ interface Props {
   title?: string;
   search?: boolean;
   fullHeight?: boolean;
+  pickerMode?: "select" | "auto";
 }
 
-export default function PickerBottomSheet({ fullHeight = true, ...props }: Props & ComponentProps<typeof Modalize>) {
+export default function PickerBottomSheet({
+                                            fullHeight = true,
+                                            pickerMode = "select",
+                                            ...props
+                                          }: Props & ComponentProps<typeof Modalize>) {
 
   const modalizeRef = useRef<Modalize>(null);
+  const flatListRef = useRef<FlatList>(null);
   const [selected, setSelected] = useState();
   const [list, setList] = useState(props.data);
   const [searchQuery, setSearchQuery] = useState("");
@@ -66,10 +72,24 @@ export default function PickerBottomSheet({ fullHeight = true, ...props }: Props
     }
   }, [searchQuery]);
 
+
+  const handleSave = (value: string) => {
+    if (props.onSave) {
+      const obj = props.data?.find(it => it.id == value);
+      props.onSave(obj);
+      if (props.onClose) {
+        props?.onClose();
+      }
+    }
+  };
+
   const renderItem = ({ item }) => {
     return <Pressable
       onPress={() => {
         setSelected(item?.id);
+        if (pickerMode == "auto") {
+          handleSave(item?.id);
+        }
       }}
     >
       <View
@@ -139,7 +159,6 @@ export default function PickerBottomSheet({ fullHeight = true, ...props }: Props
               onLayout={(event) => {
                 const { height } = event.nativeEvent.layout;
                 if (!isFullHeight) {
-                  console.log(height);
                   setContentHeight(height);
                 }
               }}
@@ -200,9 +219,13 @@ export default function PickerBottomSheet({ fullHeight = true, ...props }: Props
                 <RadioButtonGroup
                   onValueChange={(value) => {
                     setSelected(value);
+                    if (pickerMode == "auto") {
+                      handleSave(value);
+                    }
                   }}
                   value={selected}>
                   <FlatList
+                    ref={flatListRef}
                     style={{
                       paddingHorizontal: 16,
                     }}
@@ -218,23 +241,26 @@ export default function PickerBottomSheet({ fullHeight = true, ...props }: Props
               {/*  }}*/}
               {/*  variant={"dotted"} />*/}
 
-              <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
-                <Button
-                  size={"lg"}
-                  onPress={() => {
-                    if (props.onSave) {
-                      const obj = props.data?.find(it => it.id == selected);
-                      props.onSave(obj);
-                      if (props.onClose) {
-                        props?.onClose();
+              {
+                pickerMode == "select" &&
+                <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>
+                  <Button
+                    size={"lg"}
+                    onPress={() => {
+                      if (props.onSave) {
+                        const obj = props.data?.find(it => it.id == selected);
+                        props.onSave(obj);
+                        if (props.onClose) {
+                          props?.onClose();
+                        }
                       }
-                    }
-                  }}
-                  style={{
-                    width: "100%",
-                  }}
-                >{t("save")}</Button>
-              </View>
+                    }}
+                    buttonStyle={{
+                      width: "100%",
+                    }}
+                  >{t("save")}</Button>
+                </View>
+              }
 
             </View>
           </SafeAreaView>

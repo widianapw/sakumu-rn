@@ -3,18 +3,19 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, FlatList, Image, Modal, Pressable, SafeAreaView, View, ViewToken } from "react-native";
+import { Animated, Dimensions, FlatList,  Modal, Pressable, SafeAreaView, View, ViewToken } from "react-native";
 import { useTheme } from "../../core/theming";
 import { IconButton, Stack } from "../../index";
 import Portal from "../Portal/Portal";
-import { ImageRatioType } from "../../types";
+import { GalleryItem, ImageRatioType } from "../../types";
 import Typography from "../Typography/Typography";
 import { gestureHandlerRootHOC, PinchGestureHandler } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
 import ImageZoom from "../Image/ImageZoom";
+import { Image } from "../../index";
 
 interface Props {
-  images?: string[];
+  images?: GalleryItem[];
   index?: number;
   onClose: () => void;
   open: boolean;
@@ -82,7 +83,7 @@ export default function ImageViewerModal({ images, index = 0, onClose, open, rat
           position: "relative",
         }}
       >
-        <Image source={{ uri: item }} style={{
+        <Image source={{ uri: item?.image }} style={{
           width: previewWidth,
           height: previewHeight,
         }} />
@@ -158,10 +159,10 @@ export default function ImageViewerModal({ images, index = 0, onClose, open, rat
                 height: "100%",
                 alignSelf: "center",
               }}
-              uri={item} />
+              uri={item?.image} />
             : <Image
               resizeMode={"contain"}
-              source={{ uri: item }}
+              source={{ uri: item?.image }}
               style={{
                 width: imageWidth,
                 height: "100%",
@@ -237,9 +238,19 @@ export default function ImageViewerModal({ images, index = 0, onClose, open, rat
                     renderItem={renderPreview}
                   />
 
-                  <Typography
-                    style={{ color: colors.neutral.neutral_10, marginVertical: 16, alignSelf: "center" }}
-                    type={"label1"}>{`${currIndex + 1}/${images?.length}`}</Typography>
+                  <Stack direction={"row"} pl={16} pr={16} items={"center"}>
+                    <View style={{
+                      flex: 1, flexGrow: 1,
+                    }}>
+                      <Typography style={{
+                        color: colors.neutral.neutral_10,
+                        paddingVertical: 8,
+                      }}>{images[currIndex]?.title}</Typography>
+                    </View>
+                    <Typography
+                      style={{ color: colors.neutral.neutral_10, marginVertical: 16, alignSelf: "center" }}
+                      type={"label1"}>{`${currIndex + 1}/${images?.length}`}</Typography>
+                  </Stack>
 
                 </Stack>
               </>

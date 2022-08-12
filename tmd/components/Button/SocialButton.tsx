@@ -74,7 +74,7 @@ export default function SocialButton({
             </View>
           }
           disabled={rest.disabled}
-          style={{
+          buttonStyle={{
             backgroundColor: usedBg,
             borderColor: colors.neutral.neutral_40,
             borderWidth: 1,

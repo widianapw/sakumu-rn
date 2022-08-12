@@ -1,5 +1,6 @@
-import React, { ComponentProps, useState } from "react";
+import React, { ComponentProps } from "react";
 import { FlatList, View, ViewStyle } from "react-native";
+import useLayout from "../../utils/useLayout";
 
 interface Props {
   cols: number;
@@ -17,7 +18,8 @@ export default function GridList({
   const dataLength = rest.data?.length ?? 0;
   const allArray = Array.from(Array(dataLength).keys());
   const chunkedArray = chunk(allArray, cols);
-  const [listWidth, setListWidth] = useState(0);
+  // const [listWidth, setListWidth] = useState(0);
+  const [listSize, setListSize] = useLayout();
 
   function chunk(array: any[], chunk: number) {
     let result = [];
@@ -48,12 +50,13 @@ export default function GridList({
 
   // const padding = (rest.contentContainerStyle?.padding ?? 0) * 2;
 
+  const childWidth = (((listSize.width - (spacing * (cols - 1))) / cols) - (padding * 2 / cols));
 
   const RenderItemWrapper = ({ children, index }: any) => {
     return <View style={[
-      listWidth ?
+      listSize.measured ?
         {
-          width: (((listWidth - (spacing * (cols - 1))) / cols) - (padding * 2 / cols)),
+          width: childWidth,
         } : { flex: 1 }, marginStyle(index)]}>
       {children}
     </View>;
@@ -61,22 +64,23 @@ export default function GridList({
   return (
     <>
       <FlatList
-        onLayout={(event) => {
-          setListWidth(event.nativeEvent.layout.width);
-        }}
+        onLayout={setListSize}
         numColumns={cols}
         renderItem={({ item, index }) => {
           return <>
-            <RenderItemWrapper index={index}>
-              {
-                renderItem &&
-                <>
-                  {
-                    renderItem({ item, index })
-                  }
-                </>
-              }
-            </RenderItemWrapper>
+            {
+              listSize.measured &&
+              <RenderItemWrapper index={index}>
+                {
+                  renderItem &&
+                  <>
+                    {
+                      renderItem({ item, index })
+                    }
+                  </>
+                }
+              </RenderItemWrapper>
+            }
           </>;
         }}
         contentContainerStyle={[

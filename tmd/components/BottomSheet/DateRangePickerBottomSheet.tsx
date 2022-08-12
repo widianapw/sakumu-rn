@@ -212,7 +212,7 @@ const DateRangePickerBottomSheet = ({
                 disabled={!dateRange?.startDate || !dateRange?.endDate}
                 onPress={handleSubmit}
                 size={"lg"}
-                style={{
+                buttonStyle={{
                   width: "100%",
                 }}>{t("save")}</Button>
             </View>

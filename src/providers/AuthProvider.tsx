@@ -61,6 +61,7 @@ const AuthProvider = ({ children }: any) => {
       });
       setIsLoadingLogout(false);
     } catch (e) {
+      console.log(JSON.stringify(e, null, 2));
       setIsLoadingLogout(false);
     }
   };

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Animated, Image, Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native";
+import React from "react";
+import { Animated, Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native";
+import { Icon, Image } from "../../index";
 import { useTheme } from "../../core/theming";
 import Typography, { TypographyType } from "../Typography/Typography";
 import Color from "color";
-import { Icon } from "../../index";
 
 export type AvatarVariant = "text" | "image" | "icon"
 export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl"

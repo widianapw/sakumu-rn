@@ -122,14 +122,17 @@ To keep an application scalable and organized, the global static resources that 
   - IconButton
   - TextButton
 - CheckBox
-- Layout
-  - Grid
-  - Stack
 - Chip
 - Divider
 - FlatList
   - GridList
 - Icon
+- Image
+  - ImageSlider
+  - ImageZoom
+- Layout
+  - Grid
+  - Stack
 - Modal
   - ImageViewerModal
   - MapPickerModal
@@ -158,6 +161,7 @@ To keep an application scalable and organized, the global static resources that 
   - Select
   - MultiSelect
   - SelectModal
+- SignatureCanvas
 - Skeleton 
 - Tag
 - TextInput

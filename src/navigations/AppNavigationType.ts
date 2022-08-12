@@ -1,14 +1,22 @@
 import { SelectedMap } from "../../tmd/components/picker/MapPicker";
+import { GalleryItem } from "../../tmd/types";
 
 type AppNavigationType = {
-  ImageScreen: undefined,
-  SignatureCanvasScreen: undefined,
-  ProgressBarScreen: undefined,
-  MapTrackingScreen: undefined,
+  //utils
+  GalleryListScreen: {
+    images: GalleryItem[],
+    title?: string
+  },
   MapPickerScreen: {
     onSelected: (selected: SelectedMap) => void;
     initial?: SelectedMap
   },
+  //end utils
+  StepperScreen: undefined,
+  ImageScreen: undefined,
+  SignatureCanvasScreen: undefined,
+  ProgressBarScreen: undefined,
+  MapTrackingScreen: undefined,
   LoginScreen: undefined,
   MainScreen: undefined,
   ImagePickerScreen: undefined,

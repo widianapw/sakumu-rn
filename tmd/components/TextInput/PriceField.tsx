@@ -1,5 +1,4 @@
 import React, { ComponentProps, useEffect, useState } from "react";
-import { Stack } from "../../index";
 import NumberFormat from "react-number-format";
 import TextField from "./TextField";
 
@@ -9,7 +8,6 @@ interface Props {
 }
 
 export default function PriceField({ initial, onChangePriceValue, ...rest }: ComponentProps<typeof TextField> & Props) {
-
   const [textVal, setTextVal] = useState(initial);
   useEffect(() => {
     if (onChangePriceValue) {
@@ -17,36 +15,24 @@ export default function PriceField({ initial, onChangePriceValue, ...rest }: Com
     }
   }, [textVal]);
 
-  useEffect(() => {
-    if (initial) {
-      setTextVal(initial);
-    }
-  }, []);
-
-
-  console.log("rendered PriceField");
-
   return (
-    <Stack>
+    <>
       <NumberFormat
-        value={textVal}
+        value={rest.value}
         displayType={"text"}
-        isNumericString={true}
-        thousandSeparator
-        pattern="[0-9]*"
-        thousandsGroupStyle={"thousand"}
-        customInput={TextField}
-        renderText={(value: string) =>
+        thousandSeparator={true}
+        renderText={value => (
           <TextField
-            onChangeText={(text) => {
-              const newText = text.split(",").join("");
-              setTextVal(newText);
+            onChangeText={(val) => {
+              const newVal = val.split(",").join("");
+              setTextVal(newVal);
             }}
-            value={value}
             {...rest}
+            value={value}
+            keyboardType="numeric"
           />
-        }
+        )}
       />
-    </Stack>
+    </>
   );
 }

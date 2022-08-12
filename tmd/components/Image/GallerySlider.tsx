@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, FlatList, Image, Pressable, View, ViewToken } from "react-native";
-import Typography from "../Typography/Typography";
-import { ImageRatioType } from "../../types";
+import { Dimensions, FlatList,  Pressable, View, ViewToken } from "react-native";
+import { GalleryItem, ImageRatioType } from "../../types";
+
 import { useTheme } from "../../core/theming";
-import { IconButton } from "../../index";
+import { IconButton, Image } from "../../index";
 import ImageViewerModal from "../Modal/ImageViewerModal";
-import { TapGestureHandler } from "react-native-gesture-handler";
+import elevation from "../../styles/elevation";
+import { goBack } from "../../../src/navigations/RootNavigation";
 
 interface Props {
-  images: string[];
+  images: GalleryItem[];
   ratio?: ImageRatioType;
+  backAble?: boolean;
 }
 
-export default function ImageSlider({ images, ratio = "16:9" }: Props) {
+export default function GallerySlider({ images, ratio = "16:9", backAble = false }: Props) {
   const ref = useRef<FlatList>(null);
 
   const width = Dimensions.get("screen").width;
@@ -99,12 +101,38 @@ export default function ImageSlider({ images, ratio = "16:9" }: Props) {
                 setIsOpenViewer(true);
               }}
               style={{ flex: 1 }}>
-              <Image source={{ uri: item }} style={{
-                height: height,
-                width: Dimensions.get("screen").width,
-              }} />
+              <Image
+                source={{ uri: item?.image }}
+                style={{
+                  height: height,
+                  width: Dimensions.get("screen").width,
+                }} />
             </Pressable>;
           }} />
+
+        {
+          backAble &&
+          <View style={{
+            position: "absolute",
+            margin: 16,
+          }}>
+            <IconButton
+              onPress={() => {
+                goBack();
+              }}
+              themeSize={"md"}
+              color={colors.neutral.neutral_90}
+              style={[{
+                backgroundColor: colors.neutral.neutral_10,
+              },
+                elevation({
+                  elevation: 4,
+                }),
+              ]}
+              icon={"arrow-back"} />
+          </View>
+        }
+
         <View
           style={{
             position: "absolute",

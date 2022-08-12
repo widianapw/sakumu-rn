@@ -9,8 +9,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import setColor from "color";
-import { useTheme } from "../core/theming";
+import { useTheme } from "../../core/theming";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -21,6 +20,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * Color of the progress bar. The background color will be calculated based on this but you can change it by passing `backgroundColor` to `style` prop.
    */
   color?: string;
+  trackColor?: string;
   /**
    * If the progress bar will show indeterminate progress.
    */
@@ -30,6 +30,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   visible?: boolean;
   style?: StyleProp<ViewStyle>;
+  shape?: "rounded" | "rect";
   /**
    * @optional
    */
@@ -64,6 +65,8 @@ const LinearProgressBar = ({
                              style,
                              progress = 0,
                              visible = true,
+                             trackColor,
+                             shape = "rounded",
                              ...rest
                            }: Props) => {
   const { current: timer } = React.useRef<Animated.Value>(
@@ -147,60 +150,64 @@ const LinearProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color || theme.colors.primary;
-  const trackTintColor = setColor(tintColor).alpha(0.38).rgb().string();
+  const tintColor = color ?? theme.colors.primary.main;
+  const trackTintColor = trackColor ?? theme.colors.primary.border;
 
   return (
-    <View
-      onLayout={onLayout}
-      {...rest}
-      accessible
-      accessibilityRole="progressbar"
-      accessibilityState={{ busy: visible }}
-      accessibilityValue={
-        indeterminate ? {} : { min: 0, max: 100, now: progress * 100 }
-      }
-    >
-      <Animated.View
-        style={[
-          styles.container,
-          { backgroundColor: trackTintColor, opacity: fade },
-          style,
-        ]}
+    <>
+      <View
+        onLayout={onLayout}
+        {...rest}
+        accessible
+        accessibilityRole="progressbar"
+        accessibilityState={{ busy: visible }}
+        accessibilityValue={
+          indeterminate ? {} : { min: 0, max: 100, now: progress * 100 }
+        }
       >
-        {width ? (
-          <Animated.View
-            style={[
-              styles.progressBar,
-              {
-                width,
-                backgroundColor: tintColor,
-                transform: [
-                  {
-                    translateX: timer.interpolate(
-                      indeterminate
-                        ? {
+        <Animated.View
+          style={[
+            styles.container,
+            {
+              borderRadius: shape == "rounded" ? 3 : 0,
+            },
+            { backgroundColor: trackTintColor, opacity: fade },
+            style,
+          ]}
+        >
+          {width ? (
+            <Animated.View
+              style={[
+                styles.progressBar,
+                {
+                  width,
+                  backgroundColor: tintColor,
+                  transform: [
+                    {
+                      translateX: timer.interpolate(
+                        indeterminate
+                          ? {
                             inputRange: [0, 0.5, 1],
                             outputRange: [
                               (isRTL ? 1 : -1) * 0.5 * width,
                               (isRTL ? 1 : -1) *
-                                0.5 *
-                                INDETERMINATE_MAX_WIDTH *
-                                width,
+                              0.5 *
+                              INDETERMINATE_MAX_WIDTH *
+                              width,
                               (isRTL ? -1 : 1) * 0.7 * width,
                             ],
                           }
-                        : {
+                          : {
                             inputRange: [0, 1],
                             outputRange: [(isRTL ? 1 : -1) * 0.5 * width, 0],
-                          }
-                    ),
-                  },
-                  {
-                    // Workaround for workaround for https://github.com/facebook/react-native/issues/6278
-                    scaleX: timer.interpolate(
-                      indeterminate
-                        ? {
+                          },
+                      ),
+                    },
+                    {
+                      // Workaround for workaround for https://github.com/facebook/react-native/issues/6278
+                      scaleX: timer.interpolate(
+                        indeterminate
+                          ? {
                             inputRange: [0, 0.5, 1],
                             outputRange: [
                               0.0001,
@@ -208,26 +215,27 @@ const LinearProgressBar = ({
                               0.0001,
                             ],
                           }
-                        : {
+                          : {
                             inputRange: [0, 1],
                             outputRange: [0.0001, 1],
-                          }
-                    ),
-                  },
-                ],
-              },
-            ]}
-          />
-        ) : null}
-      </Animated.View>
-    </View>
+                          },
+                      ),
+                    },
+                  ],
+                },
+              ]}
+            />
+          ) : null}
+        </Animated.View>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 4,
-    overflow: 'hidden',
+    height: 6,
+    overflow: "hidden",
   },
 
   progressBar: {

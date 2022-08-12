@@ -132,7 +132,7 @@ export default function TimePickerBottomSheet({
 
               <Button
                 onPress={handleSave}
-                style={{
+                buttonStyle={{
                   width: "100%",
                 }}>{t("save")}</Button>
             </Stack>

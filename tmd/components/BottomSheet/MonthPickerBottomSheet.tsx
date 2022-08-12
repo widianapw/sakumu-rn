@@ -127,7 +127,7 @@ export default function MonthPickerBottomSheet({
 
               <Button
                 onPress={handleSave}
-                style={{
+                buttonStyle={{
                   width: "100%",
                 }}>{t("save")}</Button>
             </Stack>

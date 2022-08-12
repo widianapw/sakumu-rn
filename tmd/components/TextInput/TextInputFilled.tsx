@@ -22,6 +22,7 @@ import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
 import Icon from "../Icon";
+import TextInputMask from "react-native-text-input-mask";
 
 const INPUT_PADDING_HORIZONTAL = 12;
 const MIN_HEIGHT = 40;
@@ -237,7 +238,7 @@ const TextInputFilled = ({
                   fontSize,
                   fontWeight,
                   color: inputTextColor,
-                  textAlignVertical: multiline ? "top" : "center",
+                  textAlignVertical: "center",
                   textAlign: textAlign
                     ? textAlign
                     : "auto",
@@ -264,6 +265,7 @@ const TextInputFilled = ({
                 color={
                   colors.neutral.neutral_70
                 }
+                shape={"rounded"}
                 onPress={() => {
                   if (rest.onClear) {
                     rest?.onClear();

@@ -19,7 +19,6 @@ import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
 import Icon from "../Icon";
-import { SvgUri } from "react-native-svg/lib/typescript";
 
 const INPUT_PADDING_HORIZONTAL = 8;
 const MIN_HEIGHT = 32;
@@ -271,7 +270,7 @@ const TextInputFlat = ({
                         color: inputTextColor,
                         display: "flex",
                         paddingVertical: 4,
-                        textAlignVertical: multiline ? "top" : "center",
+                        textAlignVertical: "center",
                         textAlign: textAlign
                           ? textAlign
                           : I18nManager.isRTL

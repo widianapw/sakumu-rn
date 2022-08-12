@@ -245,7 +245,7 @@ export default function DateFilterBottomSheet({ open, initial, onClose, ...props
                       props.onSave(value);
                     }
                   }}
-                  style={{
+                  buttonStyle={{
                     width: "100%",
                   }}
                 >{t("apply_filter")}</Button>

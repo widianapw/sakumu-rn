@@ -90,24 +90,26 @@ export default function AlertBottomSheet({ dismissible = true, ...props }: BSPro
               }
             </Stack>
             <Stack
-              direction={"row"}
               spacing={16}
+              direction={"row"}
               style={{
                 marginTop: 18,
               }}>
               {
                 props.buttonSecondary &&
-                <Button
-                  fullWidth
-                  variant={"secondary"}
-                  onPress={() => {
-                    if (props.buttonSecondaryAction) {
-                      props.buttonSecondaryAction();
-                    } else {
-                      handleClose();
-                    }
-                  }}
-                >{props.buttonSecondaryTitle ?? t("cancel")}</Button>
+                <View style={{ flex: 1 }}>
+                  <Button
+                    fullWidth
+                    variant={"secondary"}
+                    onPress={() => {
+                      if (props.buttonSecondaryAction) {
+                        props.buttonSecondaryAction();
+                      } else {
+                        handleClose();
+                      }
+                    }}
+                  >{props.buttonSecondaryTitle ?? t("cancel")}</Button>
+                </View>
               }
               <Button
                 fullWidth
