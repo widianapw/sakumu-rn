@@ -11,7 +11,6 @@ interface Props {
 export default function Image({ ...rest }: Props & ComponentProps<typeof ImageFactory>) {
   const [size, setSize] = useLayout();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [imageSrc, setImageSrc] = useState(rest.source);
   const [isError, setIsError] = useState(false);
   const opacityErrorAnimation = useRef(new Animated.Value(0)).current;
   const opacityLoadingAnimation = useRef(new Animated.Value(1)).current;
@@ -45,6 +44,7 @@ export default function Image({ ...rest }: Props & ComponentProps<typeof ImageFa
   //   }
   // }, [isLoaded]);
 
+
   return (
     <View
       onLayout={setSize}
@@ -67,22 +67,21 @@ export default function Image({ ...rest }: Props & ComponentProps<typeof ImageFa
         }}
         style={rest.style}
         {...rest}
-        source={imageSrc}
       />
 
       {/*<Animated.View*/}
       {/*  style={{*/}
-      {/*    position: "absolute",*/}
-      {/*    width: size.width,*/}
-      {/*    height: size.height,*/}
-      {/*    opacity: opacityLoadingAnimation,*/}
-      {/*  }}>*/}
-      {/*  <Skeleton style={{*/}
-      {/*    borderRadius: 0,*/}
-      {/*    width: size.width,*/}
-      {/*    height: size.height,*/}
-      {/*  }} />*/}
-      {/*</Animated.View>*/}
+      {/*     position: "absolute",*/}
+      {/*     width: size.width,*/}
+      {/*     height: size.height,*/}
+      {/*     opacity: opacityLoadingAnimation,*/}
+      {/*   }}>*/}
+      {/*   <Skeleton style={{*/}
+      {/*     borderRadius: 0,*/}
+      {/*     width: size.width,*/}
+      {/*     height: size.height,*/}
+      {/*   }} />*/}
+      {/* </Animated.View>*/}
 
       <Animated.View
         style={{

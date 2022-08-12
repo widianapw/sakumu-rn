@@ -17,6 +17,7 @@ export default function RHFPriceField({ name, ...rest }: Props & ComponentProps<
         name={name}
         render={({ field: { onChange, onBlur, value }, fieldState }) => {
           return <PriceField
+            isRHF
             onBlur={onBlur}
             value={value}
             onChangePriceValue={(val) => {

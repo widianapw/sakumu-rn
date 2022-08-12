@@ -103,7 +103,8 @@ export default function SignatureCanvas({
           {...rest}
           style={[{
             height: "100%",
-          }, canvasStyle]}
+          },
+            canvasStyle]}
           webviewContainerStyle={{
             height: "100%",
           }}

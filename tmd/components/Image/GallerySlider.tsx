@@ -3,10 +3,11 @@ import { Dimensions, FlatList,  Pressable, View, ViewToken } from "react-native"
 import { GalleryItem, ImageRatioType } from "../../types";
 
 import { useTheme } from "../../core/theming";
-import { IconButton, Image } from "../../index";
+import { IconButton } from "../../index";
 import ImageViewerModal from "../Modal/ImageViewerModal";
 import elevation from "../../styles/elevation";
 import { goBack } from "../../../src/navigations/RootNavigation";
+import Image from "./Image";
 
 interface Props {
   images: GalleryItem[];

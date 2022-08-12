@@ -5,9 +5,15 @@ import TextField from "./TextField";
 interface Props {
   initial?: string;
   onChangePriceValue?: (value?: string) => void;
+  isRHF?: boolean;
 }
 
-export default function PriceField({ initial, onChangePriceValue, ...rest }: ComponentProps<typeof TextField> & Props) {
+export default function PriceField({
+                                     initial,
+                                     isRHF = false,
+                                     onChangePriceValue,
+                                     ...rest
+                                   }: ComponentProps<typeof TextField> & Props) {
   const [textVal, setTextVal] = useState(initial);
   useEffect(() => {
     if (onChangePriceValue) {
@@ -18,7 +24,7 @@ export default function PriceField({ initial, onChangePriceValue, ...rest }: Com
   return (
     <>
       <NumberFormat
-        value={rest.value}
+        value={isRHF ? rest.value : textVal}
         displayType={"text"}
         thousandSeparator={true}
         renderText={value => (

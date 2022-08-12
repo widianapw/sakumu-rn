@@ -17,7 +17,7 @@ export default function SignatureCanvasScreen() {
         <SignatureCanvas
           label={"Tanda Tangan Digital"}
           requiredLabel
-          onChangePath={setSignature}
+          onChangedBase64={setSignature}
         />
 
         <Stack
