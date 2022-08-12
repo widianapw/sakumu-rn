@@ -4,24 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ReactNativeStarterKit.iml" filepath="$PROJECT_DIR$/.idea/modules/ReactNativeStarterKit.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ReactNativeStarterKit.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ReactNativeStarterKit.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1570769787/ReactNativeStarterKit.react-native-async-storage_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/-1570769787/ReactNativeStarterKit.react-native-async-storage_async-storage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/127299952/ReactNativeStarterKit.react-native-community_clipboard.iml" filepath="$PROJECT_DIR$/.idea/modules/127299952/ReactNativeStarterKit.react-native-community_clipboard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1297157678/ReactNativeStarterKit.react-native-config.iml" filepath="$PROJECT_DIR$/.idea/modules/-1297157678/ReactNativeStarterKit.react-native-config.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/667556541/ReactNativeStarterKit.react-native-date-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/667556541/ReactNativeStarterKit.react-native-date-picker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1179830302/ReactNativeStarterKit.react-native-geolocation-service.iml" filepath="$PROJECT_DIR$/.idea/modules/1179830302/ReactNativeStarterKit.react-native-geolocation-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-609483530/ReactNativeStarterKit.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-609483530/ReactNativeStarterKit.react-native-gesture-handler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/413078160/ReactNativeStarterKit.react-native-google-places.iml" filepath="$PROJECT_DIR$/.idea/modules/413078160/ReactNativeStarterKit.react-native-google-places.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/317272105/ReactNativeStarterKit.react-native-image-crop-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/317272105/ReactNativeStarterKit.react-native-image-crop-picker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-444736473/ReactNativeStarterKit.react-native-maps.iml" filepath="$PROJECT_DIR$/.idea/modules/-444736473/ReactNativeStarterKit.react-native-maps.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/400664575/ReactNativeStarterKit.react-native-pager-view.iml" filepath="$PROJECT_DIR$/.idea/modules/400664575/ReactNativeStarterKit.react-native-pager-view.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-66845516/ReactNativeStarterKit.react-native-permissions.iml" filepath="$PROJECT_DIR$/.idea/modules/-66845516/ReactNativeStarterKit.react-native-permissions.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/907728742/ReactNativeStarterKit.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/907728742/ReactNativeStarterKit.react-native-reanimated.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-946751521/ReactNativeStarterKit.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/-946751521/ReactNativeStarterKit.react-native-safe-area-context.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/806916791/ReactNativeStarterKit.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/806916791/ReactNativeStarterKit.react-native-screens.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1492074860/ReactNativeStarterKit.react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/-1492074860/ReactNativeStarterKit.react-native-svg.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1153751392/ReactNativeStarterKit.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/-1153751392/ReactNativeStarterKit.react-native-vector-icons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1900797071/ReactNativeStarterKit.timwangdev_react-native-geocoder.iml" filepath="$PROJECT_DIR$/.idea/modules/1900797071/ReactNativeStarterKit.timwangdev_react-native-geocoder.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1170852937/react-native-gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/1170852937/react-native-gradle-plugin.iml" />
     </modules>
   </component>
 </project>

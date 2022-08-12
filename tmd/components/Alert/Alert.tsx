@@ -2,8 +2,8 @@
  * Created by Widiana Putra on 23/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useState } from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
+import React, { useRef, useState } from "react";
+import { Animated, StyleProp, View, ViewStyle } from "react-native";
 import { useTheme } from "../../core/theming";
 import Icon from "../Icon";
 import Typography from "../Typography/Typography";
@@ -24,6 +24,7 @@ interface Props {
 export default function Alert({ title, description, dismissible, type, variant, ...rest }: Props) {
   const { colors, roundness, alert } = useTheme();
   const [isShown, setIsShown] = useState(true);
+  const opacityAnimation = useRef(new Animated.Value(1)).current;
   let backgroundColor = colors.info.surface;
   let iconName = "information-circle";
   let textColor = colors.neutral.neutral_100;
@@ -57,6 +58,17 @@ export default function Alert({ title, description, dismissible, type, variant, 
     }
   }
 
+  const handleDismiss = () => {
+    Animated.timing(opacityAnimation, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      setIsShown(false);
+    });
+
+  };
+
   if (usedType == "filled") {
     backgroundColor = iconColor;
     textColor = colors.neutral.neutral_10;
@@ -66,19 +78,21 @@ export default function Alert({ title, description, dismissible, type, variant, 
   return (
     <>
       {isShown &&
-        <View style={[
-          {
-            backgroundColor: backgroundColor,
-            padding: 8,
-            borderRadius: roundness,
+        <Animated.View
 
-          },
-          usedType == "outlined" ? {
-            borderWidth: 1,
-            borderColor: iconColor,
-          } : {},
-          rest.style,
-        ]}>
+          style={[
+            {
+              backgroundColor: backgroundColor,
+              padding: 8,
+              borderRadius: roundness,
+              opacity: opacityAnimation,
+            },
+            usedType == "outlined" ? {
+              borderWidth: 1,
+              borderColor: iconColor,
+            } : {},
+            rest.style,
+          ]}>
           <View
             style={{
               alignItems: title ? "flex-start" : "center",
@@ -130,8 +144,10 @@ export default function Alert({ title, description, dismissible, type, variant, 
                   }}
                   fitIcon
                   onPress={() => {
-                    setIsShown(false);
+                    // setIsShown(false);
+                    handleDismiss();
                   }}
+
                   color={usedType == "filled" ? colors.neutral.neutral_10 : colors.neutral.neutral_80}
                   size={22}
                   icon={"close"} />
@@ -141,7 +157,7 @@ export default function Alert({ title, description, dismissible, type, variant, 
           </View>
 
 
-        </View>
+        </Animated.View>
       }
     </>
   );

@@ -44,12 +44,12 @@ export default function TabScreen() {
   const [routes] = useState([
     {
       key: "first",
-      title: "First",
+      title: "On Progress",
       iconProp: {
         icon: "location",
       },
     },
-    { key: "second", title: "Second" },
+    { key: "second", title: "Selesai" },
     { key: "third", title: "Third" },
     { key: "forth", title: "Forth" },
   ]);
@@ -62,7 +62,7 @@ export default function TabScreen() {
           // lazy={true}
           // tabBarPosition={"bottom"}
           tabBarPosition={"top"}
-          // scrollable={true}
+          scrollable={true}
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={setIndex}

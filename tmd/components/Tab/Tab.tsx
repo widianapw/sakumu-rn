@@ -14,6 +14,10 @@ export default function Tab({ scrollable, ...rest }: Props & ComponentProps<type
     <>
       <TabView
         renderTabBar={(props) => <TabBar
+          tabStyle={[
+            scrollable && {
+              width: "auto",
+            }]}
           scrollEnabled={scrollable}
           renderLabel={(lbl) => {
             const isSelected = lbl.focused;
@@ -74,6 +78,7 @@ export default function Tab({ scrollable, ...rest }: Props & ComponentProps<type
 
         />
         }
+
 
         {...rest}
       />

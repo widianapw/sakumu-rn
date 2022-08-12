@@ -2,11 +2,11 @@ import React from "react";
 import { Button, Page, Stack, Toast, Toolbar, useTheme } from "../../../tmd";
 import StepperProvider, { StepperContext } from "../../../tmd/providers/StepperProvider";
 import { StepperItem } from "../../../tmd/model/StepperItem";
-import LabelStepper from "../../../tmd/components/Stepper/LabelStepper";
 import { View } from "react-native";
 import Step from "../../../tmd/components/Stepper/Step";
 import Typography from "../../../tmd/components/Typography/Typography";
 import ProgressStepper from "../../../tmd/components/Stepper/ProgressStepper";
+import LabelStepper from "../../../tmd/components/Stepper/LabelStepper";
 
 export default function StepperScreen() {
   const { colors } = useTheme();
