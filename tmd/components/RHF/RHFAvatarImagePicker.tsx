@@ -16,6 +16,7 @@ export default function RHFAvatarImagePicker({ name, ...rest }: Props & Componen
         render={({ field: { onChange, onBlur, value }, fieldState }) => {
           return (
             <AvatarImagePicker
+              initialImageUrl={value}
               onImageChange={(val) => {
                 setValue(name, val);
                 clearErrors(name);

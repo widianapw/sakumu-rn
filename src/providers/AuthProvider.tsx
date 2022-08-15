@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import StorageKey from "../utils/StorageKey";
 import { getAPI } from "../services/baseService";
-import { useStore } from "../zustand/store";
 
 export type AuthContextType = {
   login: (credential: string, phone_code: string, password: string) => void;
@@ -56,6 +55,7 @@ const AuthProvider = ({ children }: any) => {
     try {
       setIsLoadingLogout(true);
       await getAPI("logout");
+      await AsyncStorage.setItem(StorageKey.ACCESS_TOKEN, "");
       dispatch({
         type: "LOGOUT",
       });
