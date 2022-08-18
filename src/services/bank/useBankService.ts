@@ -9,6 +9,7 @@ export default function useBankService() {
   const { getAPI } = useBaseService();
   const { showErrorBS } = useBottomSheet();
   const getBank = async () => {
+
     try {
       return await getAPI("bank");
     } catch (e) {

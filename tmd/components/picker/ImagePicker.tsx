@@ -14,6 +14,7 @@ import { useLocale } from "../../../src/providers/LocaleProvider";
 import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
 import ImageViewerModal from "../Modal/ImageViewerModal";
+import RNFS from "react-native-fs";
 
 interface Props {
   label?: string;
@@ -28,6 +29,7 @@ interface Props {
   errorText?: string;
   style?: ViewStyle;
   onChangeImageUrl?: (imageUrl: string) => void;
+  onChangeImageBase64?: (imageBase64: string) => void;
 }
 
 export default function ImagePicker({
@@ -41,6 +43,7 @@ export default function ImagePicker({
                                       errorText,
                                       style,
                                       onChangeImageUrl,
+                                      onChangeImageBase64,
                                       ...rest
                                     }: Props & ImagePickerBSProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +69,18 @@ export default function ImagePicker({
     if (onChangeImageUrl) {
       onChangeImageUrl(selectedImageUrl ?? "");
     }
+    if (selectedImageUrl && onChangeImageBase64) {
+      convertToBase64(selectedImageUrl, (data) => {
+        onChangeImageBase64(data);
+      });
+    }
   }, [selectedImageUrl]);
+
+  const convertToBase64 = async (uri: string, onSuccess: (base64: string) => void) => {
+    await RNFS.readFile(uri, "base64").then((data) => {
+      onSuccess(data);
+    });
+  };
 
   const handleOpenViewer = () => {
     setIsShowViewer(true);

@@ -22,13 +22,14 @@ import RHFMultiSelect from "../../../tmd/components/RHF/RHFMultiSelect";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 import RHFAvatarImagePicker from "../../../tmd/components/RHF/RHFAvatarImagePicker";
 import RHFPriceField from "../../../tmd/components/RHF/RHFPriceField";
+import RHFSelectModal from "../../../tmd/components/RHF/RHFSelectModal";
 
 export default function FormScreen() {
   const { t } = useLocale();
   const schema = yup.object({
     firstName: yup.string().required().label(t("labels.first_name")),
     lastName: yup.string().required().label(t("labels.last_name")),
-    countryID: yup.string().required().label(t("labels.country")),
+    countryID: yup.string().label(t("labels.country")),
     phoneCode: yup.string().required().label(t("labels.phone_code")),
     phone: yup.string().required().min(6).max(12).label(t("labels.phone")),
     date: yup.string().required().label(t("labels.date")),
@@ -94,18 +95,21 @@ export default function FormScreen() {
             style={{
               flex: 1,
             }}>
+
             <RHFTextField
+              requiredLabel
               label={t("labels.first_name")}
               name={"firstName"}
               placeholder={t("labels.first_name")}
             />
+
             <RHFTextField
               label={t("labels.last_name")}
                 name={"lastName"}
                 placeholder={t("labels.last_name")}
 
               />
-              <RHFSelect
+              <RHFSelectModal
                 label={t("labels.country")}
                 name={"countryID"}
                 placeholder={t("labels.country")}

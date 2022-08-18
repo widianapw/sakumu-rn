@@ -39,15 +39,15 @@ const App = () => {
             <ThemeProvider theme={DefaultTheme}>
               <LocaleProvider>
                 <Host>
-                  <AuthProvider>
-                    <BottomSheetProvider>
-                      <ModalProvider>
-                        <PermissionProvider>
+                  <BottomSheetProvider>
+                    <ModalProvider>
+                      <PermissionProvider>
+                        <AuthProvider>
                           <AppNavigation />
-                        </PermissionProvider>
-                      </ModalProvider>
-                    </BottomSheetProvider>
-                  </AuthProvider>
+                        </AuthProvider>
+                      </PermissionProvider>
+                    </ModalProvider>
+                  </BottomSheetProvider>
                 </Host>
               </LocaleProvider>
             </ThemeProvider>
