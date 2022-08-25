@@ -14,7 +14,7 @@ export default function RHFSignatureCanvas({ name, ...rest }: Props & ComponentP
       control={control}
       render={({ field: { onChange, onBlur, value }, fieldState }) => (
         <SignatureCanvas
-          onChangePath={(data) => {
+          onChangedBase64={(data) => {
             onChange(data);
           }}
           error={fieldState.error != undefined}

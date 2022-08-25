@@ -17,12 +17,11 @@ import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
 import { useTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
-import { HelperText } from "../../index";
+import { CircularProgressBar, HelperText } from "../../index";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
 import Icon from "../Icon";
-import TextInputMask from "react-native-text-input-mask";
 
 const INPUT_PADDING_HORIZONTAL = 12;
 const MIN_HEIGHT = 40;
@@ -350,6 +349,25 @@ const TextInputFilled = ({
           backgroundColor={backgroundColors}
           shape={shape ?? theme?.textInput?.shape}
         />
+
+        {
+          rest?.loading &&
+          <View
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              right: 8,
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+            <CircularProgressBar
+              size={"sm"}
+              {...rest?.loadingProps}
+            />
+          </View>
+        }
+
         {/*      marginTop: 6,*/}
         {/*      backgroundColor: backgroundColors,*/}
         {/*      borderRadius: shape*/}

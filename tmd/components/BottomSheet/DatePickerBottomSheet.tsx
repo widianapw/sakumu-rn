@@ -123,7 +123,6 @@ export default function DatePickerBottomSheet({
                   width: parentWidth,
                   // width: "100%",
                 }}
-
                 mode={"date"}
                 date={date}
                 onDateChange={(date) => {

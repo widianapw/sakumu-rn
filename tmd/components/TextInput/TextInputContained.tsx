@@ -18,7 +18,7 @@ import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
 import { useTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
-import { HelperText } from "../../index";
+import { CircularProgressBar, HelperText } from "../../index";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import Icon from "../Icon";
@@ -355,6 +355,25 @@ const TextInputContained = ({
           backgroundColor={backgroundColor}
           shape={shape ?? theme?.textInput?.shape}
         />
+
+        {
+          rest?.loading &&
+          <View
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              right: 8,
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+            <CircularProgressBar
+              size={"sm"}
+              {...rest?.loadingProps}
+            />
+          </View>
+        }
+
         {/*</View>*/}
       </View>
 

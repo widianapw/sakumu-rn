@@ -74,7 +74,6 @@ const Select = (
       onSave={(value) => {
         setSelected(value?.id);
       }}
-      fullHeight={rest.fullHeight}
       title={rest.title ?? rest.label}
       pickerMode={rest.pickerMode ?? "select"}
     />

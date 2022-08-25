@@ -45,7 +45,7 @@ export default function BottomSheetScreen() {
       title: "Hmm, Internet kamu putus",
       imageNode: <IllustNoConnection />,
       description: "Tenang, cek koneksi internet atau Wi-fi kamu dan coba lagi ya...",
-      dismissable: false,
+      dismissible: false,
     });
   };
 
@@ -67,6 +67,8 @@ export default function BottomSheetScreen() {
   const [isOpenMonthPicker, setIsOpenMonthPicker] = useState(false);
 
   const [isOpenMulti, setIsOpenMulti] = useState(false);
+
+
   return (
     <>
       <Page>
@@ -76,6 +78,8 @@ export default function BottomSheetScreen() {
           }}
           onTextChange={(val) => {
           }} />
+
+
         <MonthPickerBottomSheet open={isOpenMonthPicker} onClose={() => {
           setIsOpenMonthPicker(false);
         }} value={new Date()} />

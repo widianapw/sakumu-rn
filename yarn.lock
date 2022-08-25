@@ -6912,10 +6912,10 @@ react-native-maps@^1.1.0:
   dependencies:
     "@types/geojson" "^7946.0.8"
 
-react-native-modalize@^2.0.13:
-  version "2.0.13"
-  resolved "https://registry.npmjs.org/react-native-modalize/-/react-native-modalize-2.0.13.tgz"
-  integrity sha512-BMJlpTnpeDVp5LbbE6kdO+3+yLzowRvPgcIu1QCCM+//uY7oON4VcL8ISilSgAfOYeNQc6vhaD5chVtmpTl/dw==
+react-native-modalize@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-modalize/-/react-native-modalize-2.1.1.tgz#dcb67d208f4c5bdc76f45075e727be43fd008561"
+  integrity sha512-4/7EZWsrUqAAkkAVEnOsSdpAPQaEBewX7TvwFuzgvGDzxKpq3O58I9SnSeU8QtG/r91XYHJNaU5dAuDrcLjUaQ==
 
 react-native-pager-view@^5.4.25:
   version "5.4.25"

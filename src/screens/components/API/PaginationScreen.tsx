@@ -20,7 +20,6 @@ export default function PaginationScreen() {
     fetchNext,
     refresh,
     isRefreshing,
-
   } = useCatalogInfiniteQuery();
 
   const renderItem = (item: CatalogItem, index: number) => {

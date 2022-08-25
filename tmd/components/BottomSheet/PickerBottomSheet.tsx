@@ -4,15 +4,16 @@
  */
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import { Portal } from "react-native-portalize";
-import { Modalize } from "react-native-modalize";
-import { Animated, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
-import Typography from "../Typography/Typography";
-import { Button, Divider, useTheme } from "../../index";
-import TextField from "../TextInput/TextField";
-import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
+import { Modalize } from "../Modalize";
+import { Dimensions, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
+import { Button, Divider, TextField, useTheme } from "../../index";
 import { PickerItem } from "../../model/PickerItem";
 import RadioButton from "../RadioButton/RadioButton";
 import { useTranslation } from "react-i18next";
+import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
+import Typography from "../Typography/Typography";
+import useLayout from "../../utils/useLayout";
+import { useDeepEffect } from "../../../src/hooks/useDeepEffect";
 
 interface Props {
   open?: boolean;
@@ -23,16 +24,13 @@ interface Props {
   onSave?: (item?: PickerItem) => void;
   title?: string;
   search?: boolean;
-  fullHeight?: boolean;
   pickerMode?: "select" | "auto";
 }
 
 export default function PickerBottomSheet({
-                                            fullHeight = true,
                                             pickerMode = "select",
                                             ...props
                                           }: Props & ComponentProps<typeof Modalize>) {
-
   const modalizeRef = useRef<Modalize>(null);
   const flatListRef = useRef<FlatList>(null);
   const [selected, setSelected] = useState();
@@ -42,11 +40,10 @@ export default function PickerBottomSheet({
   const { colors } = theme;
   const { t } = useTranslation();
 
-  // const isFullHeight = props.data?.length >= 6;
-  const isFullHeight = fullHeight;
-  console.log(isFullHeight);
-  const [contentHeight, setContentHeight] = useState(null);
 
+  // const isFullHeight = props.data?.length >= 6;
+  const [isFullHeight, setIsFullHeight] = useState((props?.data?.length ?? 0) > 8);
+  const [contentSize, setContentSize] = useLayout();
 
   // useEffect(() => {
   //   // if (props?.initial) {
@@ -71,6 +68,18 @@ export default function PickerBottomSheet({
       setList(props.data);
     }
   }, [searchQuery]);
+
+  useDeepEffect(() => {
+    setSearchQuery("");
+    setList(props.data);
+  }, [props.data]);
+
+
+  useDeepEffect(() => {
+    if (contentSize.height > (Dimensions.get("window").height / 1.5)) {
+      setIsFullHeight(true);
+    }
+  }, [contentSize]);
 
 
   const handleSave = (value: string) => {
@@ -128,7 +137,7 @@ export default function PickerBottomSheet({
 
   return <Portal>
     <Modalize
-      adjustToContentHeight={!isFullHeight}
+      adjustToContentHeight
       onClose={() => {
         setSearchQuery("");
         if (props.onClose) {
@@ -139,28 +148,25 @@ export default function PickerBottomSheet({
         [{
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
+          height: "100%",
         },
-          isFullHeight ? { flex: 1 } : {},
+          // isFullHeight ? { flex: 1 } : {},
         ]}
       handlePosition={"inside"}
       {...props}
       customRenderer={
-        <Animated.View style={{
-          height: isFullHeight
-            ? "100%"
-            : contentHeight ?? "100%",
-          flexDirection: "column",
-        }}>
-          <SafeAreaView style={{ flex: 1 }}>
+        <View
+          style={
+            isFullHeight && {
+              height: "100%",
+            }
+          }
+        >
+          <SafeAreaView style={{ flex: isFullHeight ? 1 : 0 }}>
             <View
-              style={isFullHeight && {
-                flex: 1,
-              }}
-              onLayout={(event) => {
-                const { height } = event.nativeEvent.layout;
-                if (!isFullHeight) {
-                  setContentHeight(height);
-                }
+              onLayout={setContentSize}
+              style={{
+                flex: isFullHeight ? 1 : 0,
               }}
             >
 
@@ -199,22 +205,14 @@ export default function PickerBottomSheet({
                     </View>
                   }
                 </View>
-                {/*{(props.search || props.onReset) &&*/}
-                {/*  <Divider*/}
-                {/*    variant={"dotted"}*/}
-                {/*    style={{*/}
-                {/*      marginTop: 8,*/}
-                {/*      marginBottom: 0,*/}
-                {/*    }} />*/}
-                {/*}*/}
               </View>
 
               <View
-                style={
-                  isFullHeight
-                    ? { flexGrow: 1, flex: 1, height: "100%" }
-                    : {}
-                }
+                style={{
+                  flex: isFullHeight ? 1 : 0,
+                  // flexGrow: 1,
+                  flexShrink: 1,
+                }}
               >
                 <RadioButtonGroup
                   onValueChange={(value) => {
@@ -264,9 +262,8 @@ export default function PickerBottomSheet({
 
             </View>
           </SafeAreaView>
-        </Animated.View>
+        </View>
       }
-      disableScrollIfPossible
       ref={modalizeRef}>
     </Modalize>
 

@@ -89,35 +89,36 @@ export default function PickerScreen() {
 
           {/*<PhoneField*/}
           {/*  error*/}
-      {/*  errorText={"Must filled"}*/}
-      {/*  search={true}*/}
-      {/*  initialPhoneCode={"62"}*/}
-      {/*  placeholder={"Phone"}*/}
-      {/*  label={"Phone"}*/}
-      {/*  mode={"flat"} />*/}
+          {/*  errorText={"Must filled"}*/}
+          {/*  search={true}*/}
+          {/*  initialPhoneCode={"62"}*/}
+          {/*  placeholder={"Phone"}*/}
+          {/*  label={"Phone"}*/}
+          {/*  mode={"flat"} />*/}
 
-      <Select
-        label={"Country"}
-        // search={true}
-        initial={"61"}
-        fullHeight={false}
-        options={
-          _countries.slice(0, 6).map((item) => {
-            const i: PickerItem = {
-              id: item.phone_code,
-              name: `+${item.phone_code} (${item.name})`,
-            };
-            return i;
-          })
-        }
-        pickerMode={"auto"}
-      />
+          <Select
+            label={"Country"}
+            // search={true}
+            initial={"61"}
+            mode={"contained"}
+            loading
+            options={
+              _countries.slice(0, 5).map((item) => {
+                const i: PickerItem = {
+                  id: item.phone_code,
+                  name: `+${item.phone_code} (${item.name})`,
+                };
+                return i;
+              })
+            }
+            // pickerMode={"auto"}
+          />
 
           <SelectModal
             label={"Modal Select"}
             searchPlaceholder={"Search Modal Select"}
             search={true}
-            initial={'62'}
+            initial={"62"}
             options={
               _countries.map((item) => {
                 const i: PickerItem = {

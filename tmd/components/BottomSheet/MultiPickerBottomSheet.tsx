@@ -3,15 +3,16 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
-import { Modalize } from "react-native-modalize";
 import { useTheme } from "../../core/theming";
 import { useTranslation } from "react-i18next";
-import { Animated, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
-import { Button, Checkbox, Divider } from "../../index";
+import { Dimensions, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
+import { Button, Checkbox, Divider, Modalize } from "../../index";
 import { Portal } from "react-native-portalize";
 import { PickerItem } from "../../model/PickerItem";
 import Typography from "../Typography/Typography";
 import TextField from "../TextInput/TextField";
+import useLayout from "../../utils/useLayout";
+import { useDeepEffect } from "../../../src/hooks/useDeepEffect";
 
 interface Props {
   open?: boolean;
@@ -22,12 +23,10 @@ interface Props {
   onSave?: (items?: PickerItem[]) => void;
   title?: string;
   search?: boolean;
-  fullHeight?: boolean;
 }
 
 
 export default function MultiPickerBottomSheet({
-                                                 fullHeight = true,
                                                  ...props
                                                }: Props & ComponentProps<typeof Modalize>) {
   const modalizeRef = useRef<Modalize>(null);
@@ -38,9 +37,14 @@ export default function MultiPickerBottomSheet({
   const { colors } = theme;
   const { t } = useTranslation();
 
-  const isFullHeight = fullHeight;
+  const [isFullHeight, setIsFullHeight] = useState((props?.data?.length ?? 0) > 8);
+  const [contentSize, setContentSize] = useLayout();
 
-  const [contentHeight, setContentHeight] = useState(null);
+  useDeepEffect(() => {
+    if (contentSize.height > (Dimensions.get("window").height / 1.5)) {
+      setIsFullHeight(true);
+    }
+  }, [contentSize]);
 
   useEffect(() => {
     if (props.open) {
@@ -120,12 +124,6 @@ export default function MultiPickerBottomSheet({
   return <Portal>
     <Modalize
       adjustToContentHeight={!isFullHeight}
-      onClose={() => {
-        setSearchQuery("");
-        if (props.onClose) {
-          props.onClose();
-        }
-      }}
       modalStyle={
         [{
           borderTopLeftRadius: 16,
@@ -135,29 +133,20 @@ export default function MultiPickerBottomSheet({
         ]}
       handlePosition={"inside"}
       customRenderer={
-        <Animated.View style={{
-          height: isFullHeight
-            ? "100%"
-            : contentHeight ?? "100%",
-          flexDirection: "column",
-        }}>
-          <SafeAreaView style={{
-            flex: 1,
-          }}>
+        <View
+          style={
+            isFullHeight && {
+              height: "100%",
+            }
+          }
+        >
+          <SafeAreaView style={{ flex: isFullHeight ? 1 : 0 }}>
             <View
-              style={isFullHeight && {
-                flex: 1,
-              }}
-              onLayout={(e) => {
-                const { height } = e.nativeEvent.layout;
-                if (!isFullHeight) {
-                  console.log(height);
-                  setContentHeight(height);
-                }
+              onLayout={setContentSize}
+              style={{
+                flex: isFullHeight ? 1 : 0,
               }}
             >
-
-
               <View
                 style={{ flexDirection: "column", paddingTop: 24, paddingBottom: 8 }}>
 
@@ -196,11 +185,11 @@ export default function MultiPickerBottomSheet({
               </View>
 
               <View
-                style={
-                  isFullHeight
-                    ? { flexGrow: 1, flex: 1, height: "100%" }
-                    : {}
-                }
+                style={{
+                  flex: isFullHeight ? 1 : 0,
+                  // flexGrow: 1,
+                  flexShrink: 1,
+                }}
               >
                 <FlatList
                   style={{
@@ -231,9 +220,15 @@ export default function MultiPickerBottomSheet({
             </View>
           </SafeAreaView>
 
-        </Animated.View>
+        </View>
       }
       {...props}
+      onClose={() => {
+        setSearchQuery("");
+        if (props.onClose) {
+          props.onClose();
+        }
+      }}
       ref={modalizeRef}>
     </Modalize>
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ComponentProps } from "react";
 import { Animated, LayoutChangeEvent, StyleProp, TextInput as NativeTextInput, TextStyle } from "react-native";
 import TextInputFlat from "./TextInputFlat";
 import TextInputIcon, { Props as TextInputIconProps } from "./Adornment/TextInputIcon";
@@ -8,6 +9,7 @@ import type { RenderProps } from "./types";
 import TextInputContained from "./TextInputContained";
 import TextInputFilled from "./TextInputFilled";
 import { IconProps } from "../Icon";
+import { CircularProgressBar } from "../../index";
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -133,6 +135,8 @@ export type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput>
   search?: boolean;
   onClear?: Function;
   shape?: TextInputShape;
+  loading?: boolean;
+  loadingProps?: ComponentProps<typeof CircularProgressBar>
   pickerType?: "phone" | "select" | "date" | "map"
 
   //phone

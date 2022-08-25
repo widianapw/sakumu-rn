@@ -224,11 +224,12 @@ const BottomSheetProvider = ({ children }: any) => {
   const renderComponent = () => {
     return <>
       <ConfirmationBottomSheet
-        {...confirmationProps}
         open={isOpenConfirmation}
         onClose={() => {
           hideConfirmationBS();
-        }} />
+        }}
+        {...confirmationProps}
+      />
 
       <AlertBottomSheet
         open={isOpenAlert}

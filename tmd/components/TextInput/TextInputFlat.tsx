@@ -14,7 +14,7 @@ import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
 import { useTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
-import { HelperText } from "../../index";
+import { CircularProgressBar, HelperText } from "../../index";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
@@ -280,6 +280,8 @@ const TextInputFlat = ({
                       Platform.OS === "web" && { outline: "none" },
                     ],
                   })}
+
+
                 </View>
 
               </View>

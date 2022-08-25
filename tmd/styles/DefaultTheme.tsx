@@ -7,7 +7,7 @@ const DefaultTheme: Theme = {
   roundness: 8,
   colors: colors,
   textInput: {
-    mode: "filled",
+    mode: "contained",
     shape: "rect",
   },
   button: {

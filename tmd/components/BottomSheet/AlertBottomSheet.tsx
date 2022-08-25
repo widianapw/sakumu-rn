@@ -3,12 +3,11 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useEffect, useRef } from "react";
-import { Modalize } from "react-native-modalize";
+import { Button, Modalize, Stack } from "../../index";
 import { Portal } from "react-native-portalize";
 import { SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { useTheme } from "../../core/theming";
-import { Button, Stack } from "../../index";
 import { useTranslation } from "react-i18next";
 
 export interface BSProps {
@@ -28,34 +27,47 @@ export interface BSProps {
 export default function AlertBottomSheet({ dismissible = true, ...props }: BSProps) {
   const modalizeRef = useRef<Modalize>(null);
   const { t } = useTranslation();
+
   useEffect(() => {
     if (props.open) {
-      modalizeRef?.current?.open();
+      handleOpen();
     } else {
-      modalizeRef.current?.close();
+      handleClose();
     }
   }, [props.open]);
 
+
   const handleClose = () => {
+    props.onClose();
     modalizeRef?.current?.close();
-    // props.onClose();
+  };
+
+
+  const handleOpen = () => {
+    modalizeRef?.current?.open();
   };
 
   const theme = useTheme();
   return (
     <Portal>
       <Modalize
-        closeOnOverlayTap={dismissible ? dismissible : true}
+        closeOnOverlayTap={dismissible}
         handlePosition={"inside"}
         withHandle={dismissible}
         adjustToContentHeight
+        onBackButtonPress={dismissible == false
+          ? () => {
+            return true;
+          }
+          : undefined}
         modalStyle={{
           padding: 16,
           borderTopRightRadius: 16,
           borderTopLeftRadius: 16,
         }}
-
-        onClose={dismissible ? props.onClose : undefined}
+        onClose={props.onClose}
+        tapGestureEnabled={dismissible}
+        panGestureEnabled={dismissible}
         ref={modalizeRef}
       >
         <SafeAreaView style={{ flex: 1 }}>

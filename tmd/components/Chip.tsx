@@ -8,9 +8,9 @@ import { TouchableRipple } from "../index";
 import PickerBottomSheet from "./BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../model/PickerItem";
 
-export type ChipShape = "rect" | "rounded"
-export type ChipVariant = "filled" | "outlined"
-export type ChipType = "filter" | "picker"
+export type ChipShape = "rect" | "rounded";
+export type ChipVariant = "filled" | "outlined";
+export type ChipType = "filter" | "picker";
 
 export type ChipProps = {
   shape?: ChipShape;
@@ -24,11 +24,13 @@ export type ChipProps = {
   onPress?: () => void;
   type?: "filter" | "picker";
   onPickerChanges?: (item?: PickerItem) => void;
-  initial?: string;
+  selectedPickerValue?: string | number | undefined;
   pickerList?: PickerItem[];
   pickerTitle?: string;
   onResetPicker?: () => void;
-}
+  saveButtonTitle?: string;
+  disabled?: boolean;
+};
 const ROUNDED_BORDER_RADIUS = 32;
 
 export default function Chip({
@@ -38,6 +40,10 @@ export default function Chip({
                                selected,
                                type = "filter",
                                suffixIcon,
+                               saveButtonTitle,
+                               disabled,
+                               onPickerChanges,
+                               selectedPickerValue,
                                ...rest
                              }: ChipProps) {
   const { colors, chip, roundness } = useTheme();
@@ -45,25 +51,43 @@ export default function Chip({
   const usedVariant = variant ?? chip.variant;
   const [isOpenPicker, setIsOpenPicker] = useState(false);
   const usedShape = shape ?? chip.shape;
+  const [selectedObj, setSelectedObj] = useState<PickerItem | undefined>();
+
+  // const isSelected = useMemo(() => {
+  //   return selectedObj != undefined;
+  // }, [selectedObj]);
+  const [isSelected, setIsSelected] = useState(false);
+
   const isSelectedFilled = usedVariant == "filled" && isSelected;
   const isUseBorder = usedVariant == "outlined" || isSelectedFilled;
-  const [selectedObj, setSelectedObj] = useState({});
 
-  const [isSelected, setIsSelected] = useState(false);
-  const [pickerInitial, setPickerInitial] = useState("");
-
-  useEffect(() => {
-    setIsSelected(selected ?? false);
-  }, [selected]);
+  const handleReset = () => {
+    setSelectedObj(undefined);
+    setIsOpenPicker(false);
+  };
 
   useEffect(() => {
-    const obj = rest?.pickerList?.find((item) => item.id == rest.initial);
-    if (obj) {
-      setIsSelected(true);
-      setSelectedObj(obj);
+    setIsSelected(selectedObj != undefined);
+    if (onPickerChanges) {
+      onPickerChanges(selectedObj);
     }
-    setPickerInitial(rest?.initial)
-  }, [rest.initial, rest.pickerList]);
+  }, [selectedObj]);
+
+  useEffect(() => {
+    if (selectedPickerValue) {
+      const obj = rest?.pickerList?.find(item => item.id == selectedPickerValue);
+      if (obj) {
+        setSelectedObj(obj);
+      } else {
+        setSelectedObj(undefined);
+      }
+    } else {
+      console.log("RESET PICKER");
+      setTimeout(() => {
+        setSelectedObj(undefined);
+      });
+    }
+  }, [selectedPickerValue]);
 
 
   switch (usedVariant) {
@@ -75,9 +99,14 @@ export default function Chip({
         txtColor = colors.neutral.neutral_10;
         borderColor = colors.primary.border;
       }
+      if (disabled) {
+        bgColor = colors.neutral.neutral_30;
+        borderColor = colors.neutral.neutral_50;
+        txtColor = colors.neutral.neutral_50;
+      }
       break;
     }
-    case "outlined": {
+    case 'outlined': {
       bgColor = colors.neutral.neutral_10;
       borderColor = colors.neutral.neutral_50;
       txtColor = colors.neutral.neutral_90;
@@ -86,16 +115,22 @@ export default function Chip({
         borderColor = colors.primary.main;
         txtColor = colors.primary.main;
       }
+      if (disabled) {
+        bgColor = colors.neutral.neutral_30;
+        borderColor = colors.neutral.neutral_50;
+        txtColor = colors.neutral.neutral_50;
+      }
+
       break;
     }
   }
 
   const borderRadius = {
-    borderRadius: usedShape == "rect" ? roundness : ROUNDED_BORDER_RADIUS,
+    borderRadius: usedShape == 'rect' ? roundness : ROUNDED_BORDER_RADIUS,
   };
 
   const handleOnPress = () => {
-    if (type == "picker") {
+    if (type == 'picker') {
       setIsOpenPicker(true);
     } else {
       if (rest.onPress) {
@@ -104,113 +139,102 @@ export default function Chip({
     }
   };
 
-  return <>
-    <View
-      style={[{
-        backgroundColor: bgColor,
-        borderWidth: isSelectedFilled ? 2 : isUseBorder ? 1 : 0,
-        borderColor: borderColor,
-        flexDirection: "row",
-        alignItems: "center",
-        alignSelf: "baseline",
-      }, borderRadius,
-
-        rest.style]}
-    >
-      <TouchableRipple
-        borderless
+  return (
+    <>
+      <View
         style={[
           {
-            paddingVertical: isSelectedFilled
-              ? 4
-              : 6,
-            paddingHorizontal: isSelectedFilled
-              ? 14 :
-              16,
-            flexDirection: "row",
-            alignItems: "center",
+            backgroundColor: bgColor,
+            borderWidth: isSelectedFilled ? 2 : isUseBorder ? 1 : 0,
+            borderColor: borderColor,
+            flexDirection: 'row',
+            alignItems: 'center',
+            alignSelf: 'baseline',
           },
           borderRadius,
-        ]}
-        onPress={handleOnPress}
-        delayPressIn={0}
-      >
-        <>
-          {
-            rest.icon &&
-            <Icon
-              style={{
-                marginRight: 4,
-              }}
-              size={rest.icon.size ?? 18}
-              color={rest.icon.color ?? txtColor}
-              {...rest.icon}
-            />
-          }
-          <Typography
-            style={[
-              { color: txtColor },
-              rest.textStyle,
-            ]}
-            type={"label1"}>
-            {selectedObj?.name ?? text}
-          </Typography>
-          {
-            suffixIcon &&
-            <Icon
-              style={{
-                marginLeft: 8,
-              }}
-              size={18}
-              color={txtColor}
-              {...suffixIcon}
-            />
-          }
+          rest.style,
+        ]}>
+        <TouchableRipple
+          borderless
+          style={[
+            {
+              paddingVertical: isSelectedFilled ? 4 : 6,
+              paddingHorizontal: isSelectedFilled ? 14 : 16,
+              flexDirection: 'row',
+              alignItems: 'center',
+            },
+            borderRadius,
+          ]}
+          onPress={disabled ? undefined : handleOnPress}
+          delayPressIn={0}>
+          <>
+            {rest.icon && (
+              <Icon
+                style={{
+                  marginRight: 4,
+                }}
+                size={rest.icon.size ?? 18}
+                color={rest.icon.color ?? txtColor}
+                {...rest.icon}
+              />
+            )}
+            <Typography
+              style={[{color: txtColor}, rest.textStyle]}
+              type={'label1'}>
+              {selectedObj?.name ?? text}
+            </Typography>
+            {suffixIcon && (
+              <Icon
+                style={{
+                  marginLeft: 8,
+                }}
+                size={18}
+                color={txtColor}
+                {...suffixIcon}
+              />
+            )}
 
-          {
-            type == "picker" &&
-            <Icon
-              style={{
-                marginLeft: 4,
-              }}
-              size={18}
-              color={txtColor}
-              icon={"chevron-down"} />
+            {type == 'picker' && (
+              <Icon
+                style={{
+                  marginLeft: 4,
+                }}
+                size={18}
+                color={txtColor}
+                icon={'chevron-down'}
+              />
+            )}
+          </>
+        </TouchableRipple>
+      </View>
+      {type == 'picker' && (
+        <PickerBottomSheet
+          saveButtonTitle={saveButtonTitle}
+          open={isOpenPicker}
+          title={rest.pickerTitle}
+          onReset={
+            rest.onResetPicker
+              ? () => {
+                if (rest.onResetPicker) {
+                  rest.onResetPicker();
+                  handleReset();
+                }
+              }
+              : undefined
           }
-        </>
-      </TouchableRipple>
-    </View>
-    {
-      type == "picker" &&
-      <PickerBottomSheet
-        open={isOpenPicker}
-        title={rest.pickerTitle}
-        onReset={rest.onResetPicker ? () => {
-          if (rest.onResetPicker) {
-            rest.onResetPicker();
-            setPickerInitial("")
-            setSelectedObj({});
-            setIsSelected(false);
+          onClose={() => {
             setIsOpenPicker(false);
-          }
-        } : undefined}
-        onClose={() => {
-          setIsOpenPicker(false);
-        }}
-        onSave={(item) => {
-          if (item) {
-            if (rest.onPickerChanges) {
-              rest.onPickerChanges(item);
+          }}
+          onSave={item => {
+            if (item?.id) {
+              setSelectedObj(item);
+              setIsOpenPicker(false);
             }
-            setPickerInitial(item.id)
-            setSelectedObj(item);
-            setIsSelected(true);
-            setIsOpenPicker(false);
-          }
-        }}
-        value={pickerInitial}
-        data={rest.pickerList}
-      />
-    }
-  </>;
+          }}
+          value={selectedObj?.id ?? undefined}
+          data={rest.pickerList}
+        />
+      )}
+    </>
+  );
 }

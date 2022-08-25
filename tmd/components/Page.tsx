@@ -3,29 +3,30 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View } from "react-native";
-import { useTheme } from "../core/theming";
+import {KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View} from "react-native";
+import {useTheme} from "../core/theming";
 import Color from "color";
 
 interface Props {
   children: React.ReactNode;
   statusBarColor?: string;
+  bgColor?: string;
 }
 
-export default function Page({ children, statusBarColor }: Props) {
-  const { colors } = useTheme();
+export default function Page({children, statusBarColor, bgColor}: Props) {
+  const {colors} = useTheme();
   const statusBarHeight = StatusBar.currentHeight;
   const statusBarBackgroundColor = statusBarColor ?? colors.primary.pressed;
   const isLight = Color(statusBarBackgroundColor).isLight();
 
 
-  const CStatusBar = ({ backgroundColor, ...props }: any) => (
+  const CStatusBar = ({backgroundColor, ...props}: any) => (
     <>{
       Platform.OS === "ios"
         ? (
           <View style={[{
             height: statusBarHeight,
-          }, { backgroundColor }]}>
+          }, {backgroundColor}]}>
             <SafeAreaView>
               <StatusBar translucent backgroundColor={backgroundColor}
                          barStyle={isLight ? "dark-content" : "light-content"} {...props} />
@@ -41,19 +42,22 @@ export default function Page({ children, statusBarColor }: Props) {
 
   return (
     <>
-        <CStatusBar
-          backgroundColor={statusBarColor ?? colors.primary.pressed}
-        />
+      <CStatusBar
+        backgroundColor={statusBarColor ?? colors.primary.pressed}
+      />
 
-        <SafeAreaView style={{flex:1}}>
+      <SafeAreaView style={[
+        {flex: 1},
+        bgColor ? {backgroundColor: bgColor} : {}
+      ]}>
 
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ flex: 1 }}>
+          style={{flex: 1}}>
           {children}
         </KeyboardAvoidingView>
 
-        </SafeAreaView>
+      </SafeAreaView>
     </>
   );
 }

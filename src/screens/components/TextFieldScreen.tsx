@@ -125,11 +125,29 @@ const TextFieldScreen = () => {
           />
 
           <TextField
+            loading
             mode={"filled"}
             label="Filled"
             shape={"rect"}
             placeholder={"Filled"}
           />
+
+          <TextField
+            loading
+            mode={"contained"}
+            label="Loading"
+            shape={"rect"}
+            placeholder={"Loading"}
+          />
+
+          <TextField
+            loading
+            mode={"flat"}
+            label="Loading"
+            shape={"rounded"}
+            placeholder={"Loading"}
+          />
+
 
           <PriceField prefixText={"Rp"} label={"Currency"} placeholder={"Currency"} />
         </Stack>
