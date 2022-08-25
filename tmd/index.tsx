@@ -58,3 +58,4 @@ export { default as Image } from "./components/Image/Image";
 export { default as Toolbar } from "./components/Toolbar/Toolbar";
 export { default as SignatureCanvas } from "./components/Signature/SignatureCanvas";
 export { Modalize } from "./components/Modalize";
+export { default as Chip } from "./components/Chip";

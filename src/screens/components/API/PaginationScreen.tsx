@@ -5,12 +5,13 @@
 import React from "react";
 import Typography from "../../../../tmd/components/Typography/Typography";
 import { CatalogItem } from "../../../models/catalog/Catalog";
-import { View } from "react-native";
 import useCatalogInfiniteQuery from "../../../services/catalog/useCatalogInfiniteQuery";
 import Page from "../../../../tmd/components/Page";
 import GridList from "../../../../tmd/components/FlatList/GridList";
-import { Surface } from "../../../../tmd";
+import { CircularProgressBar, Stack, Surface } from "../../../../tmd";
 import Toolbar from "../../../../tmd/components/Toolbar/Toolbar";
+import { ScrollView } from "react-native";
+import Chip from "../../../../tmd/components/Chip";
 
 export default function PaginationScreen() {
   const {
@@ -38,45 +39,83 @@ export default function PaginationScreen() {
     <Page>
       <Toolbar title={"PaginationScreen"} />
 
-      <View style={{
-        flex: 1,
-      }}>
+      <Stack
+        style={{ flex: 1 }}>
+        <Stack>
+          <ScrollView style={{
+            marginTop: 8,
+          }} horizontal showsHorizontalScrollIndicator={false}>
+            <Stack direction={"row"} spacing={8} pl={16}>
+              <Chip
+                shape={"rect"}
+                text={"Chip Sample"}
+                icon={{
+                  icon: "camera",
+                }} />
+              <Chip
+                shape={"rect"}
+                text={"Chip Sample"}
+                icon={{
+                  icon: "camera",
+                }} />
+              <Chip
+                shape={"rect"}
+                text={"Chip Sample"}
+                icon={{
+                  icon: "camera",
+                }} />
+              <Chip
+                shape={"rect"}
+                text={"Chip Sample"}
+                icon={{
+                  icon: "camera",
+                }} />
+              <Chip
+                shape={"rect"}
+                text={"Chip Sample"}
+                icon={{
+                  icon: "camera",
+                }} />
+
+            </Stack>
+          </ScrollView>
+        </Stack>
         {
-          isLoadingCatalog &&
-          <Typography>Loading...</Typography>
-        }
-        {
-          <View style={{ flexDirection: "column", flex: 1 }}>
-            <GridList
-              padding={16}
-              onRefresh={refresh}
-              refreshing={isRefreshing}
-              spacing={16}
-              cols={3}
-              style={{
-                flexGrow: 1,
-              }}
-              onEndReached={fetchNext}
-              data={catalogs}
-              keyExtractor={(item, number) => item?.id}
-              renderItem={({ item, index }) => renderItem(item, index)}
-              ListEmptyComponent={() => {
-                if (!isLoadingCatalog) {
-                  return <Typography>empty</Typography>;
-                } else {
-                  return <></>;
+          <GridList
+
+            padding={16}
+            onRefresh={refresh}
+            refreshing={isRefreshing}
+            spacing={16}
+            cols={1}
+            style={{
+              flexGrow: 1,
+            }}
+            showsVerticalScrollIndicator={false}
+            onEndReached={fetchNext}
+            data={catalogs}
+            keyExtractor={(item, number) => item?.id}
+            renderItem={({ item, index }) => renderItem(item, index)}
+            ListEmptyComponent={() => {
+              if (!isLoadingCatalog) {
+                return <Typography>empty</Typography>;
+              } else {
+                return <></>;
+              }
+            }}
+            ListFooterComponent={() => {
+              return <>
+                {
+                  isFetchingNextPage &&
+                  <Stack p={8}>
+                    <CircularProgressBar />
+                  </Stack>
                 }
-              }}
-            />
-            {
-              isFetchingNextPage &&
-              <Typography style={{
-                padding: 16,
-              }}>Fetching next page...</Typography>
-            }
-          </View>
+              </>;
+            }}
+          />
         }
-      </View>
+      </Stack>
     </Page>
   );
 }

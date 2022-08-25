@@ -3,7 +3,8 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useEffect, useRef } from "react";
-import { Button, Modalize, Stack } from "../../index";
+import { Button,  Stack } from "../../index";
+import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
 import { SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
