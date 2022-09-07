@@ -8,6 +8,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import authReducer from "../reducers/authReducer";
 import { combineReducers, createStore } from "redux";
 import { mapReducer } from "../reducers/mapReducer";
+import splashReducer from "../reducers/splashReducer";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   authReducer: persistReducer(persistConfig, authReducer),
   mapReducer: persistReducer(persistConfig, mapReducer),
+  splashReducer: splashReducer,
 });
 
 export const store = createStore(rootReducer);

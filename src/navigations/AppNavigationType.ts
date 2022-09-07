@@ -2,6 +2,8 @@ import { SelectedMap } from "../../tmd/components/picker/MapPicker";
 import { GalleryItem } from "../../tmd/types";
 
 type AppNavigationType = {
+  //integration
+  StripeScreen:undefined,
   //utils
   GalleryListScreen: {
     images: GalleryItem[],
@@ -12,6 +14,7 @@ type AppNavigationType = {
     initial?: SelectedMap
   },
   //end utils
+  SplashScreen: undefined,
   StepperScreen: undefined,
   ImageScreen: undefined,
   SignatureCanvasScreen: undefined,

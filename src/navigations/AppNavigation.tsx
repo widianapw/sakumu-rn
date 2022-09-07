@@ -23,7 +23,6 @@ import OTPScreen from "../screens/components/OTPScreen";
 import FormScreen from "../screens/components/FormScreen";
 import { navigationRef } from "./RootNavigation";
 import LoginScreen from "../screens/components/LoginScreen";
-import { useAuth } from "../providers/AuthProvider";
 import ImagePickerScreen from "../screens/components/ImagePickerScreen";
 import LayoutScreen from "../screens/components/LayoutScreen";
 import ModalScreen from "../screens/components/ModalScreen";
@@ -42,10 +41,15 @@ import SignatureCanvasScreen from "../screens/components/SignatureCanvasScreen";
 import ImageScreen from "../screens/components/ImageScreen";
 import GalleryListScreen from "../screens/utils/GalleryListScreen";
 import StepperScreen from "../screens/components/StepperScreen";
+import StripeScreen from "../screens/components/Stripe/StripeScreen";
+import SplashScreen from "../screens/SplashScreen";
+import { useSelector } from "react-redux";
+import { rootReducer } from "../redux/stores/store";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator<AppNavigationType>();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useSelector((state: ReturnType<typeof rootReducer>) => state.authReducer);
+  const { isLoading: isLoadingSplash } = useSelector((state: ReturnType<typeof rootReducer>) => state.splashReducer);
   const NavTheme = {
     ...DefaultTheme,
     colors: {
@@ -63,48 +67,55 @@ const AppNavigation = () => {
         }}
       >
         {
-          !isAuthenticated &&
-          <>
-            <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
-          </>
-        }
-        {
-          isAuthenticated && (
-            <>
-              <Stack.Screen name={"MainScreen"} component={MainScreen} />
-              <Stack.Screen name={"ImagePickerScreen"} component={ImagePickerScreen} />
-              <Stack.Screen name={"ButtonScreen"} component={ButtonScreen} />
-              <Stack.Screen name={"TypographyScreen"} component={TypographyScreen} />
-              <Stack.Screen name={"TextFieldScreen"} component={TextFieldScreen} />
-              <Stack.Screen name={"PickerScreen"} component={PickerScreen} />
-              <Stack.Screen name={"BottomSheetScreen"} component={BottomSheetScreen} />
-              <Stack.Screen name={"ModalScreen"} component={ModalScreen} />
-              <Stack.Screen name={"TagScreen"} component={TagScreen} />
-              <Stack.Screen name={"AlertScreen"} component={AlertScreen} />
-              <Stack.Screen name={"SelectorScreen"} component={SelectorScreen} />
-              <Stack.Screen name={"LanguageScreen"} component={LanguageScreen} />
-              <Stack.Screen name={"APIScreen"} component={APIScreen} />
-              <Stack.Screen name={"FetchDataScreen"} component={FetchDataScreen} />
-              <Stack.Screen name={"PaginationScreen"} component={PaginationScreen} />
-              <Stack.Screen name={"ChipScreen"} component={ChipScreen} />
-              <Stack.Screen name={"OTPScreen"} component={OTPScreen} />
-              <Stack.Screen name={"FormScreen"} component={FormScreen} />
-              <Stack.Screen name={"LayoutScreen"} component={LayoutScreen} />
-              <Stack.Screen name={"TabScreen"} component={TabScreen} />
-              <Stack.Screen name={"AvatarScreen"} component={AvatarScreen} />
-              <Stack.Screen name={"BadgeScreen"} component={BadgeScreen} />
-              <Stack.Screen name={"TooltipScreen"} component={TooltipScreen} />
-              <Stack.Screen name={"TooltipStepperScreen"} component={TooltipStepperScreen} />
-              <Stack.Screen name={"SkeletonScreen"} component={SkeletonScreen} />
-              <Stack.Screen name={"DividerScreen"} component={DividerScreen} />
-              <Stack.Screen name={"MapTrackingScreen"} component={MapTrackingScreen} />
-              <Stack.Screen name={"ProgressBarScreen"} component={ProgressBarScreen} />
-              <Stack.Screen name={"SignatureCanvasScreen"} component={SignatureCanvasScreen} />
-              <Stack.Screen name={"ImageScreen"} component={ImageScreen} />
-              <Stack.Screen name={"StepperScreen"} component={StepperScreen} />
+          isLoadingSplash
+            ? <>
+              <Stack.Screen name={"SplashScreen"} component={SplashScreen} />
             </>
-          )
+            : <>
+              {
+                !isAuthenticated
+                  ?
+                  <>
+                    <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
+                  </>
+                  : <>
+                    <Stack.Screen name={"MainScreen"} component={MainScreen} />
+                    <Stack.Screen name={"ImagePickerScreen"} component={ImagePickerScreen} />
+                    <Stack.Screen name={"ButtonScreen"} component={ButtonScreen} />
+                    <Stack.Screen name={"TypographyScreen"} component={TypographyScreen} />
+                    <Stack.Screen name={"TextFieldScreen"} component={TextFieldScreen} />
+                    <Stack.Screen name={"PickerScreen"} component={PickerScreen} />
+                    <Stack.Screen name={"BottomSheetScreen"} component={BottomSheetScreen} />
+                    <Stack.Screen name={"ModalScreen"} component={ModalScreen} />
+                    <Stack.Screen name={"TagScreen"} component={TagScreen} />
+                    <Stack.Screen name={"AlertScreen"} component={AlertScreen} />
+                    <Stack.Screen name={"SelectorScreen"} component={SelectorScreen} />
+                    <Stack.Screen name={"LanguageScreen"} component={LanguageScreen} />
+                    <Stack.Screen name={"APIScreen"} component={APIScreen} />
+                    <Stack.Screen name={"FetchDataScreen"} component={FetchDataScreen} />
+                    <Stack.Screen name={"PaginationScreen"} component={PaginationScreen} />
+                    <Stack.Screen name={"ChipScreen"} component={ChipScreen} />
+                    <Stack.Screen name={"OTPScreen"} component={OTPScreen} />
+                    <Stack.Screen name={"FormScreen"} component={FormScreen} />
+                    <Stack.Screen name={"LayoutScreen"} component={LayoutScreen} />
+                    <Stack.Screen name={"TabScreen"} component={TabScreen} />
+                    <Stack.Screen name={"AvatarScreen"} component={AvatarScreen} />
+                    <Stack.Screen name={"BadgeScreen"} component={BadgeScreen} />
+                    <Stack.Screen name={"TooltipScreen"} component={TooltipScreen} />
+                    <Stack.Screen name={"TooltipStepperScreen"} component={TooltipStepperScreen} />
+                    <Stack.Screen name={"SkeletonScreen"} component={SkeletonScreen} />
+                    <Stack.Screen name={"DividerScreen"} component={DividerScreen} />
+                    <Stack.Screen name={"MapTrackingScreen"} component={MapTrackingScreen} />
+                    <Stack.Screen name={"ProgressBarScreen"} component={ProgressBarScreen} />
+                    <Stack.Screen name={"SignatureCanvasScreen"} component={SignatureCanvasScreen} />
+                    <Stack.Screen name={"ImageScreen"} component={ImageScreen} />
+                    <Stack.Screen name={"StepperScreen"} component={StepperScreen} />
+                  </>
+
+              }
+            </>
         }
+
         <Stack.Screen name={"MapPickerScreen"} component={MapPickerScreen}
                       options={{
                         headerShown: false,
@@ -116,6 +127,8 @@ const AppNavigation = () => {
                       }}
 
         />
+
+        <Stack.Screen name={"StripeScreen"} component={StripeScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

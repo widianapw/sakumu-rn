@@ -1,23 +1,5 @@
-import * as React from 'react';
-import PortalConsumer from './PortalConsumer';
-import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
-import {
-  Provider as SettingsProvider,
-  Consumer as SettingsConsumer,
-} from '../../core/settings';
-import { ThemeProvider, withTheme } from '../../core/theming';
-
-type Props = {
-  /**
-   * Content of the `Portal`.
-   */
-  children: React.ReactNode;
-  /**
-   * @optional
-   */
-  theme: ReactNativePaper.Theme;
-};
-
+import React, { ComponentProps } from "react";
+import {Portal as Portalize} from "react-native-portalize"
 /**
  * Portal allows to render a component at a different place in the parent tree.
  * You can use it to render content which should appear above other elements, similar to `Modal`.
@@ -37,29 +19,8 @@ type Props = {
  * export default MyComponent;
  * ```
  */
-class Portal extends React.Component<Props> {
-  // @component ./PortalHost.tsx
-  static Host = PortalHost;
-
-  render() {
-    const { children, theme } = this.props;
-
-    return (
-      <SettingsConsumer>
-        {(settings) => (
-          <PortalContext.Consumer>
-            {(manager) => (
-              <PortalConsumer manager={manager as PortalMethods}>
-                <SettingsProvider value={settings}>
-                  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                </SettingsProvider>
-              </PortalConsumer>
-            )}
-          </PortalContext.Consumer>
-        )}
-      </SettingsConsumer>
-    );
-  }
+const Portal = (props: ComponentProps<typeof Portalize>) => {
+  return <Portalize {...props}/>
 }
 
-export default withTheme(Portal);
+export default Portal;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
-import { Portal } from "react-native-portalize";
+import Portal from "../Portal/Portal";
 import { Pressable, SafeAreaView, View } from "react-native";
 import { _dateFilters } from "../../data/_dateFilters";
 import RadioButton from "../RadioButton/RadioButton";

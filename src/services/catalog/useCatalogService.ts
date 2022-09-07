@@ -10,39 +10,26 @@ export default function useCatalogService() {
   const { getAPI } = useBaseService();
   const { showErrorBS } = useBottomSheet();
 
-  const getCatalogs = (page: number = 1) => {
-    return getAPI<CatalogListResponse>(`catalog`, {
+  const getCatalogInfinite = (page: number = 1, search: string) => {
+    return getAPI<CatalogListResponse>(`products`, {
       params: {
         page: page,
         store: 1,
+        search: search
       },
     });
   };
 
-  const getCatalogPagination = async  (page: number) => {
-    try {
-      return await getAPI<CatalogListResponse>(`catalog`, {
-        params: {
-          page: page,
-          store: 1,
-        },
-      });
-    } catch (e) {
-      showErrorBS(e);
-    }
-
-  }
-
   const getFeaturedCatalog = async () => {
     try {
-      return await getAPI<CatalogListResponse>("catalog/featured?store=1");
+      return await getAPI<CatalogListResponse>("products");
     } catch (e) {
       showErrorBS(e);
     }
   };
 
   return {
-    getCatalogs,
+    getCatalogs: getCatalogInfinite,
     getFeaturedCatalog,
   };
 }

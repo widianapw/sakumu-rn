@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useEffect, useRef, useState } from "react";
-import { Portal } from "react-native-portalize";
+import Portal from "../Portal/Portal";
 import { Modalize } from "react-native-modalize";
 import { Button, Stack } from "../../index";
 import { SafeAreaView, View, ViewProps } from "react-native";

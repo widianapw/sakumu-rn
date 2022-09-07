@@ -4,18 +4,18 @@
  */
 import React, { createContext, useContext } from "react";
 import { Permission } from "react-native-permissions/src/types";
-import { requestMultiple } from "react-native-permissions";
+import { checkMultiple, requestMultiple } from "react-native-permissions";
 import _permissionTypes, { PermissionOS } from "../data/_permissionTypes";
 import { PermissionType, useBottomSheet } from "./BottomSheetProvider";
 import { Platform } from "react-native";
 import { useModal } from "./ModalProvider";
 
 type PermissionContextType = {
-  requestPermissions: (permissions: PermissionOS[], onGranted?: () => void) => void;
+  requestPermissions: (permissions: PermissionOS[], onGranted: () => void) => void;
 }
 
 const initialState: PermissionContextType = {
-  requestPermissions: (permissions: PermissionOS[], onGranted?: () => void) => {
+  requestPermissions: (permissions: PermissionOS[], onGranted: () => void) => {
   },
 };
 
@@ -44,7 +44,28 @@ const PermissionProvider = ({ children }: any) => {
     }
   };
 
-  const requestPermissions = (permissions: PermissionOS[], onGranted?: () => void) => {
+  const checkPermissions = (permissions: PermissionOS[]) => {
+    return new Promise((resolve, reject) => {
+      const isAndroid = Platform.OS == "android";
+      let osPermissions: Permission[];
+      if (isAndroid) {
+        osPermissions = permissions.map(it => it.android).flat();
+      } else {
+        osPermissions = permissions.map(it => it.ios).flat();
+      }
+      checkMultiple(osPermissions).then((result) => {
+        const deniedPermissions = Object.keys(result).filter((it) => result[it] == "denied");
+        if (deniedPermissions.length > 0) {
+          reject(deniedPermissions);
+        } else {
+          resolve(() => {
+          });
+        }
+      });
+    });
+  };
+
+  const requestPermissions = (permissions: PermissionOS[], onGranted: () => void) => {
     const isAndroid = Platform.OS == "android";
     let osPermissions: Permission[];
     if (isAndroid) {
@@ -56,19 +77,16 @@ const PermissionProvider = ({ children }: any) => {
       .then((statuses) => {
         const results = osPermissions.map(it => statuses[it] == "granted");
         if (!results.includes(false)) {
-          if (onGranted) {
-            onGranted();
-          }
+          onGranted();
         } else {
           //get first that are not granted
           const notGranted = osPermissions.find(it => statuses[it] != "granted");
           const type = getPermissionType(notGranted);
-
           //select which one you want to use
           // showPermissionBS(type);
           showPermissionModal(type);
         }
-      });
+      })
   };
 
   return (

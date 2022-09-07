@@ -13,8 +13,8 @@ import color from "color";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
-import ImageViewerModal from "../Modal/ImageViewerModal";
 import RNFS from "react-native-fs";
+import ImageViewerModal from "../Modal/ImageViewerModal";
 
 interface Props {
   label?: string;
@@ -61,7 +61,6 @@ export default function ImagePicker({
       requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS], () => {
         setIsOpen(true);
       });
-      // setIsOpen(true)
     }
   };
 
@@ -170,7 +169,6 @@ export default function ImagePicker({
           </View>
         }
         <View style={{
-          flex: 1,
           alignItems: "center",
           justifyContent: "center",
           height: 160,
@@ -199,7 +197,6 @@ export default function ImagePicker({
           }
         </View>
         <View style={{
-          flex: 1,
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",

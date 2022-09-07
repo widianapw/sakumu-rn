@@ -9,10 +9,9 @@ import { useBottomSheet } from "../../tmd/providers/BottomSheetProvider";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import StorageKey from "../utils/StorageKey";
-import { getAPI } from "../services/baseService";
 
 export type AuthContextType = {
-  login: (credential: string, phone_code: string, password: string) => void;
+  login: (email: string, password: string) => void;
   logout: () => void;
   isLoadingLogin: boolean;
   isLoadingLogout: boolean;
@@ -31,17 +30,17 @@ const AuthProvider = ({ children }: any) => {
   const [isLoadingLogin, setIsLoadingLogin] = useState(false);
   const [isLoadingLogout, setIsLoadingLogout] = useState(false);
 
-  const login = async (credential: string, phone_code: string, password: string) => {
+  const login = async (email: string, password: string) => {
     try {
       setIsLoadingLogin(true);
-      const res = await postAPI<LoginResponse>("login", {
-        credential, phone_code, password,
+      const res = await postAPI<LoginResponse>("auth/login", {
+        email, password,
       });
-      await AsyncStorage.setItem(StorageKey.ACCESS_TOKEN, res.data.access_token);
+      await AsyncStorage.setItem(StorageKey.ACCESS_TOKEN, res.data.token);
       dispatch({
         type: "LOGIN",
         payload: {
-          user: res.data.user_data,
+          user: res.data.user,
         },
       });
       setIsLoadingLogin(false);
@@ -54,7 +53,6 @@ const AuthProvider = ({ children }: any) => {
   const logout = async () => {
     try {
       setIsLoadingLogout(true);
-      await getAPI("logout");
       await AsyncStorage.setItem(StorageKey.ACCESS_TOKEN, "");
       dispatch({
         type: "LOGOUT",

@@ -2,18 +2,19 @@
  * Created by Widiana Putra on 27/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React from "react";
+import React, { useState } from "react";
 import Typography from "../../../../tmd/components/Typography/Typography";
 import { CatalogItem } from "../../../models/catalog/Catalog";
 import useCatalogInfiniteQuery from "../../../services/catalog/useCatalogInfiniteQuery";
 import Page from "../../../../tmd/components/Page";
 import GridList from "../../../../tmd/components/FlatList/GridList";
 import { CircularProgressBar, Stack, Surface } from "../../../../tmd";
-import Toolbar from "../../../../tmd/components/Toolbar/Toolbar";
 import { ScrollView } from "react-native";
 import Chip from "../../../../tmd/components/Chip";
+import SearchToolbar from "../../../../tmd/components/Toolbar/SearchToolbar";
 
 export default function PaginationScreen() {
+  const [search, setSearch] = useState("");
   const {
     catalogs,
     isLoadingCatalog,
@@ -21,7 +22,7 @@ export default function PaginationScreen() {
     fetchNext,
     refresh,
     isRefreshing,
-  } = useCatalogInfiniteQuery();
+  } = useCatalogInfiniteQuery(search);
 
   const renderItem = (item: CatalogItem, index: number) => {
     return <Surface
@@ -37,7 +38,9 @@ export default function PaginationScreen() {
 
   return (
     <Page>
-      <Toolbar title={"PaginationScreen"} />
+      <SearchToolbar title={"PaginationScreen"} onPressSearch={(v) => {
+        setSearch(v);
+      }} />
 
       <Stack
         style={{ flex: 1 }}>

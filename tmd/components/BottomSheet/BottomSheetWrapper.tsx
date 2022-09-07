@@ -2,43 +2,57 @@
  * Created by Widiana Putra on 07/07/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { forwardRef } from "react";
-import { SafeAreaView } from "react-native";
-import { Modalize } from "react-native-modalize";
-import Portal from "../Portal/Portal";
+import React, { useEffect, useRef } from "react";
+import { Modalize } from "../Modalize";
+import { SafeAreaView, View } from "react-native";
 
 interface Props {
   dismissible?: boolean;
   onClose: () => void;
-  ref?: any;
-  children: React.ReactNode;
+  open: boolean;
+  children?: React.ReactNode;
 }
 
-const BottomSheetWrapper = forwardRef(({ ref, ...props }: Props) => {
-  return <>
-    <Portal>
-      <Modalize
-        closeOnOverlayTap={props.dismissible ? !props.dismissible : true}
-        handlePosition={"inside"}
-        withHandle={!!props?.dismissible}
-        adjustToContentHeight
-        modalStyle={{
-          padding: 16,
-          borderTopRightRadius: 16,
-          borderTopLeftRadius: 16,
-        }}
+const BottomSheetWrapper = ({ open, onClose, dismissible, ...props }: Props) => {
+  const ref = useRef<Modalize>(null);
+  useEffect(() => {
+    if (open) {
+      ref?.current?.open();
+    } else {
+      ref?.current?.close();
+    }
+  }, [open]);
 
-        onClose={props.onClose}
-        ref={ref}
-      >
-        <SafeAreaView style={{ flex: 1 }}>
-          {
-            props.children
-          }
+  return <>
+    <Modalize
+      ref={ref}
+      handlePosition={"inside"}
+      closeOnOverlayTap={dismissible}
+      withHandle={dismissible}
+      adjustToContentHeight
+      onBackButtonPress={dismissible == false
+        ? () => {
+          return true;
+        }
+        : undefined}
+      tapGestureEnabled={dismissible}
+      panGestureEnabled={dismissible}
+      modalStyle={{
+        borderTopRightRadius: 16,
+        borderTopLeftRadius: 16,
+      }}
+      onClose={onClose}
+      customRenderer={
+        <SafeAreaView>
+          <View>
+            {
+              props.children
+            }
+          </View>
         </SafeAreaView>
-      </Modalize>
-    </Portal>
+      }
+    />
   </>;
-});
+};
 
 export default BottomSheetWrapper;

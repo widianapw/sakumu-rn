@@ -86,8 +86,11 @@ export default function BottomSheetScreen() {
         <DatePickerBottomSheet open={isOpenDatePicker} onClose={() => {
           setIsOpenDatePicker(false);
         }} />
+
+
         <MultiPickerBottomSheet
           search
+          // open={false}
           open={isOpenMulti}
           onClose={() => setIsOpenMulti(false)}
           data={
@@ -120,7 +123,7 @@ export default function BottomSheetScreen() {
 
         <DateRangePickerBottomSheet
           minDays={7} maxDays={30}
-          maxDate={"2022-08-05"}
+          maxDate={"2022-12-05"}
           minDate={"2022-06-01"}
           selected={selectedDateRange}
           onSave={(data) => {
@@ -130,6 +133,9 @@ export default function BottomSheetScreen() {
           onClose={() => {
             setIsOpenRange(false);
           }} />
+        {/*<TestBS open={isOpenMulti} onClose={() => {*/}
+        {/*  setIsOpenMulti(false)*/}
+        {/*}}/>*/}
         <ScrollView>
           <Stack spacing={16} style={{
             padding: 16,

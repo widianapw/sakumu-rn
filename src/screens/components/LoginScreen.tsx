@@ -17,17 +17,13 @@ import Typography from "../../../tmd/components/Typography/Typography";
 export default function LoginScreen() {
   const { login, isLoadingLogin } = useAuth();
   const schema = yup.object({
-    phone_code: yup.string().required(),
-    phone: yup.string().required().min(6).max(13),
+    email: yup.string().email().required(),
     password: yup.string().required().min(8),
-    signature: yup.string().required(),
   }).required();
 
   const defaultValues = {
-    phone_code: "62",
-    phone: "82146456432",
+    email: "anikolaus@example.org",
     password: "password",
-    signature: "",
   };
 
   const method = useForm({
@@ -38,13 +34,8 @@ export default function LoginScreen() {
 
   const onSubmit = async (data) => {
     // console.log(JSON.stringify(data, null, 2));
-    await login(data?.phone, data?.phone_code, data?.password);
+    await login(data?.email, data?.password);
   };
-
-  const watchSignature = useWatch({
-    control: method.control,
-    name: "signature",
-  });
 
   const [scrollable, setScrollable] = useState(true);
   return (
@@ -59,12 +50,10 @@ export default function LoginScreen() {
             flex: 1,
           }}>
             <View>
-              <RHFPhoneField
-                mode={"filled"}
-                name={"phone"}
-                phoneCodeName={"phone_code"}
-                label={"Phone"}
-              />
+              <RHFTextField
+                name={"email"}
+                label={"Email"}
+                />
             </View>
 
             <View>
@@ -76,18 +65,6 @@ export default function LoginScreen() {
             </View>
 
 
-            <View>
-              <RHFSignatureCanvas
-                onProgress={(isOnProgress) => {
-                  setScrollable(!isOnProgress);
-                }}
-                name={"signature"}
-                label={"Signature"}
-                canvasStyle={{
-                  height: 200,
-                }}
-              />
-            </View>
 
 
             <Button
@@ -100,18 +77,6 @@ export default function LoginScreen() {
               }}
               fullWidth
             >Login</Button>
-
-            {
-              (watchSignature != "") &&
-              <>
-                <Image
-                  source={{ uri: watchSignature }}
-                  style={{
-                    width: 100, height: 100,
-                  }} />
-                <Typography>{watchSignature}</Typography>
-              </>
-            }
           </Stack>
         </FormProvider>
       </ScrollView>

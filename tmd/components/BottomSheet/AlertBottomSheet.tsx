@@ -5,7 +5,7 @@
 import React, { useEffect, useRef } from "react";
 import { Button,  Stack } from "../../index";
 import { Modalize } from "react-native-modalize";
-import { Portal } from "react-native-portalize";
+import Portal from "../Portal/Portal";
 import { SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { useTheme } from "../../core/theming";
@@ -52,8 +52,14 @@ export default function AlertBottomSheet({ dismissible = true, ...props }: BSPro
   return (
     <Portal>
       <Modalize
-        closeOnOverlayTap={dismissible}
         handlePosition={"inside"}
+        modalStyle={{
+          padding: 16,
+          borderTopRightRadius: 16,
+          borderTopLeftRadius: 16,
+        }}
+        onClose={props.onClose}
+        closeOnOverlayTap={dismissible}
         withHandle={dismissible}
         adjustToContentHeight
         onBackButtonPress={dismissible == false
@@ -61,12 +67,6 @@ export default function AlertBottomSheet({ dismissible = true, ...props }: BSPro
             return true;
           }
           : undefined}
-        modalStyle={{
-          padding: 16,
-          borderTopRightRadius: 16,
-          borderTopLeftRadius: 16,
-        }}
-        onClose={props.onClose}
         tapGestureEnabled={dismissible}
         panGestureEnabled={dismissible}
         ref={modalizeRef}

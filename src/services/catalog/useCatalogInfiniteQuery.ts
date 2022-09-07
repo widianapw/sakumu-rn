@@ -8,11 +8,10 @@ import { useEffect, useState } from "react";
  * Created by Widiana Putra on 27/06/2022
  * Copyright (c) 2022 - Made with love
  */
-export default function useCatalogInfiniteQuery() {
+export default function useCatalogInfiniteQuery(search: string) {
   const { getCatalogs } = useCatalogService();
   const { showErrorBS } = useBottomSheet();
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const client = useQueryClient();
   const {
     data,
     isLoading,
@@ -21,10 +20,10 @@ export default function useCatalogInfiniteQuery() {
     error,
     isError,
     ...rest
-  } = useInfiniteQuery<CatalogListResponse>(["catalogs"], (par) => {
-    return getCatalogs(par.pageParam);
+  } = useInfiniteQuery<CatalogListResponse>(["catalogs", search], (par) => {
+    return getCatalogs(par.pageParam, search);
   }, {
-    getNextPageParam: (lastPage) => lastPage.meta.current_page + 1,
+    getNextPageParam: (lastPage) => (lastPage.meta.current_page < lastPage.meta.total) ? lastPage.meta.current_page + 1 : undefined,
   });
 
   const mappedData = data?.pages?.map(it => it.data).flat();

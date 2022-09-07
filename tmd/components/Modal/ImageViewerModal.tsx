@@ -3,16 +3,15 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, FlatList,  Modal, Pressable, SafeAreaView, View, ViewToken } from "react-native";
+import { Animated, Dimensions, FlatList, Modal, Pressable, SafeAreaView, View, ViewToken } from "react-native";
 import { useTheme } from "../../core/theming";
-import { IconButton, Stack } from "../../index";
+import { IconButton, Image, Stack } from "../../index";
 import Portal from "../Portal/Portal";
 import { GalleryItem, ImageRatioType } from "../../types";
 import Typography from "../Typography/Typography";
 import { gestureHandlerRootHOC, PinchGestureHandler } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
 import ImageZoom from "../Image/ImageZoom";
-import { Image } from "../../index";
 
 interface Props {
   images?: GalleryItem[];

@@ -111,7 +111,7 @@ export default function PickerScreen() {
                 return i;
               })
             }
-            // pickerMode={"auto"}
+            pickerMode={"auto"}
           />
 
           <SelectModal

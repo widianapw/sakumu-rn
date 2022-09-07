@@ -10,6 +10,7 @@ import { navigate } from "../../../navigations/RootNavigation";
 import Page from "../../../../tmd/components/Page";
 import Stack from "../../../../tmd/components/Layout/Stack";
 import Toolbar from "../../../../tmd/components/Toolbar/Toolbar";
+import SearchToolbar from "../../../../tmd/components/Toolbar/SearchToolbar";
 
 export default function APIScreen() {
   const { checkCredential, isLoadingCheckCredential } = useCredentialService();
@@ -20,7 +21,7 @@ export default function APIScreen() {
 
   return (
     <Page>
-      <Toolbar title={"API Screen"} />
+      <SearchToolbar title={"API Screen"} />
 
       <ScrollView>
         <Stack p={16} spacing={16}>

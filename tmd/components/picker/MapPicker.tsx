@@ -28,8 +28,7 @@ export default function MapPicker({ onSelected, initial, ...rest }: React.Compon
   const [savedMap, setSavedMap] = useState<SelectedMap | null>(null);
   const { requestPermissions } = usePermission();
   const handleOpen = () => {
-    requestPermissions(
-      [LOCATION_PERMISSIONS], () => {
+    requestPermissions([LOCATION_PERMISSIONS], () => {
         navigate("MapPickerScreen", {
           onSelected: (selected: SelectedMap) => {
             setSavedMap(selected);

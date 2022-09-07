@@ -28,6 +28,7 @@ export default function ChipScreen() {
     handleGetCatalog();
   }, []);
 
+  const name = "Widi";
   return (
     <Page>
       <Toolbar title={"Chip Screen"} />
@@ -36,7 +37,7 @@ export default function ChipScreen() {
           <Stack direction={"row"} spacing={8}>
             <Chip
               text={"Widiana"}
-              selected
+              selected={false}
             />
             <Chip text={"Widiana"} />
             <Chip text={"Widiana"} />
@@ -70,7 +71,6 @@ export default function ChipScreen() {
               />
               <Chip
                 onResetPicker={() => {
-
                 }}
                 pickerList={
                   _countries.slice(0, 2).map(it => {

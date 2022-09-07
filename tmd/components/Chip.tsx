@@ -7,6 +7,7 @@ import { useTheme } from "../core/theming";
 import { TouchableRipple } from "../index";
 import PickerBottomSheet from "./BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../model/PickerItem";
+import { useDeepEffect } from "../../src/hooks/useDeepEffect";
 
 export type ChipShape = "rect" | "rounded";
 export type ChipVariant = "filled" | "outlined";
@@ -56,10 +57,15 @@ export default function Chip({
   // const isSelected = useMemo(() => {
   //   return selectedObj != undefined;
   // }, [selectedObj]);
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(selected ?? false);
 
   const isSelectedFilled = usedVariant == "filled" && isSelected;
   const isUseBorder = usedVariant == "outlined" || isSelectedFilled;
+
+  useDeepEffect(() => {
+    setIsSelected(selected ?? false);
+  }, [selected]);
+
 
   const handleReset = () => {
     setSelectedObj(undefined);
@@ -67,25 +73,28 @@ export default function Chip({
   };
 
   useEffect(() => {
-    setIsSelected(selectedObj != undefined);
-    if (onPickerChanges) {
-      onPickerChanges(selectedObj);
+    if (type == "picker") {
+      setIsSelected(selectedObj != undefined);
+      if (onPickerChanges) {
+        onPickerChanges(selectedObj);
+      }
     }
   }, [selectedObj]);
 
   useEffect(() => {
-    if (selectedPickerValue) {
-      const obj = rest?.pickerList?.find(item => item.id == selectedPickerValue);
-      if (obj) {
-        setSelectedObj(obj);
+    if (type == "picker") {
+      if (selectedPickerValue) {
+        const obj = rest?.pickerList?.find(item => item.id == selectedPickerValue);
+        if (obj) {
+          setSelectedObj(obj);
+        } else {
+          setSelectedObj(undefined);
+        }
       } else {
-        setSelectedObj(undefined);
+        setTimeout(() => {
+          setSelectedObj(undefined);
+        });
       }
-    } else {
-      console.log("RESET PICKER");
-      setTimeout(() => {
-        setSelectedObj(undefined);
-      });
     }
   }, [selectedPickerValue]);
 

@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useRef, useState } from "react";
-import { FlatList, KeyboardAvoidingView, Modal, Pressable, SafeAreaView, Text, View } from "react-native";
+import { FlatList, KeyboardAvoidingView, Modal, Pressable, SafeAreaView, View } from "react-native";
 import {
   GooglePlaceData,
   GooglePlaceDetail,
