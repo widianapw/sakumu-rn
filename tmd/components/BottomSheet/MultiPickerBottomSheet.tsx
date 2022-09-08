@@ -12,7 +12,7 @@ import { PickerItem } from "../../model/PickerItem";
 import Typography from "../Typography/Typography";
 import TextField from "../TextInput/TextField";
 import useLayout from "../../utils/useLayout";
-import { useDeepEffect } from "../../../src/hooks/useDeepEffect";
+import { useDeepEffect } from "../../hooks/useDeepEffect";
 
 interface Props {
   open?: boolean;

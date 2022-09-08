@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import RadioButtonGroup from "../RadioButton/RadioButtonGroup";
 import Typography from "../Typography/Typography";
 import useLayout from "../../utils/useLayout";
-import { useDeepEffect } from "../../../src/hooks/useDeepEffect";
+import { useDeepEffect } from "../../hooks/useDeepEffect";
 
 interface Props {
   open?: boolean;

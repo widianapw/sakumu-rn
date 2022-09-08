@@ -7,7 +7,7 @@ import { useTheme } from "../core/theming";
 import { TouchableRipple } from "../index";
 import PickerBottomSheet from "./BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../model/PickerItem";
-import { useDeepEffect } from "../../src/hooks/useDeepEffect";
+import { useDeepEffect } from "../hooks/useDeepEffect";
 
 export type ChipShape = "rect" | "rounded";
 export type ChipVariant = "filled" | "outlined";

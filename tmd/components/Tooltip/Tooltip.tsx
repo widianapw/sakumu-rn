@@ -5,7 +5,7 @@ import Color from "color";
 import { useTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
 import { IconButton, Stack } from "../../index";
-import { useDeepEffect } from "../../../src/hooks/useDeepEffect";
+import { useDeepEffect } from "../../hooks/useDeepEffect";
 import { isEqual } from "lodash";
 import TextButton from "../Button/TextButton";
 import { useLocale } from "../../../src/providers/LocaleProvider";
