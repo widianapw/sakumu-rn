@@ -3,23 +3,27 @@
  * Copyright (c) 2022 - Made with love
  */
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { persistReducer, persistStore } from "redux-persist";
+import { persistCombineReducers, persistStore } from "redux-persist";
 
 import authReducer from "../reducers/authReducer";
-import { combineReducers, createStore } from "redux";
+import { createStore } from "redux";
 import { mapReducer } from "../reducers/mapReducer";
 import splashReducer from "../reducers/splashReducer";
+import { PersistConfig } from "redux-persist/es/types";
 
-const persistConfig = {
+const persistConfig: PersistConfig<unknown> = {
   key: "root",
   storage: AsyncStorage,
+  blacklist: ["splashReducer"],
 };
 
-export const rootReducer = combineReducers({
-  authReducer: persistReducer(persistConfig, authReducer),
-  mapReducer: persistReducer(persistConfig, mapReducer),
-  splashReducer: splashReducer,
-});
+export const rootReducer = {
+  authReducer,
+  mapReducer,
+  splashReducer,
+};
 
-export const store = createStore(rootReducer);
+const combinePersist = persistCombineReducers(persistConfig, rootReducer);
+
+export const store = createStore(combinePersist);
 export const persistor = persistStore(store);

@@ -1,8 +1,8 @@
 import useCatalogService from "./useCatalogService";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
-import { useInfiniteQuery, useQueryClient } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { CatalogListResponse } from "../../models/catalog/Catalog";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 /**
  * Created by Widiana Putra on 27/06/2022
@@ -26,7 +26,9 @@ export default function useCatalogInfiniteQuery(search: string) {
     getNextPageParam: (lastPage) => (lastPage.meta.current_page < lastPage.meta.total) ? lastPage.meta.current_page + 1 : undefined,
   });
 
-  const mappedData = data?.pages?.map(it => it.data).flat();
+  const mappedData = useMemo(() => {
+    return data?.pages?.map(it => it.data).flat();
+  }, [data]);
 
   useEffect(() => {
     if (error) {

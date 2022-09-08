@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 export default function SplashScreen() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     setTimeout(() => {
       dispatch({

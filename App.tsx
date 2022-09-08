@@ -27,6 +27,7 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./src/redux/stores/store";
 import { PersistGate } from "redux-persist/integration/react";
 import ModalProvider from "./tmd/providers/ModalProvider";
+import { RootSiblingParent } from "react-native-root-siblings";
 // Create a client
 const queryClient = new QueryClient();
 const App = () => {
@@ -36,19 +37,21 @@ const App = () => {
         <GestureHandlerRootView style={{ flex: 1 }}>{/* content */}
           <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={DefaultTheme}>
-              <LocaleProvider>
-                <Host>
-                  <PermissionProvider>
-                    <BottomSheetProvider>
-                      <ModalProvider>
-                        <AuthProvider>
-                          <AppNavigation />
-                        </AuthProvider>
-                      </ModalProvider>
-                    </BottomSheetProvider>
-                  </PermissionProvider>
-                </Host>
-              </LocaleProvider>
+              <RootSiblingParent>
+                <LocaleProvider>
+                  <Host>
+                    <PermissionProvider>
+                      <BottomSheetProvider>
+                        <ModalProvider>
+                          <AuthProvider>
+                            <AppNavigation />
+                          </AuthProvider>
+                        </ModalProvider>
+                      </BottomSheetProvider>
+                    </PermissionProvider>
+                  </Host>
+                </LocaleProvider>
+              </RootSiblingParent>
             </ThemeProvider>
           </QueryClientProvider>
         </GestureHandlerRootView>
