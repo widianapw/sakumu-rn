@@ -43,8 +43,9 @@ export default function ChipScreen() {
             <Chip text={"Widiana"} />
           </Stack>
           <Stack direction={"row"} spacing={8}>
-            <Chip text={"Widiana"} selected variant={"outlined"} />
-            <Chip text={"Widiana"} variant={"outlined"} />
+            <Chip
+              text={"Widiana"} selected variant={"outlined"} />
+            <Chip text={"Widiana"} variant={"filled"} colorVariant={"secondary"} selected />
             <Chip text={"Widiana"} variant={"outlined"} />
           </Stack>
 

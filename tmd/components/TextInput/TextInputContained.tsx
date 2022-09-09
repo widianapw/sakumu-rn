@@ -68,14 +68,16 @@ const TextInputContained = ({
                               password,
                               shape,
                               initialPhoneCode,
+                              colorVariant,
                               ...rest
                             }: ChildTextInputProps) => {
   const theme = useTheme();
   const [isShowPassword, setIsShowPassword] = useState(!password);
   const [isShowSearch, setIsShowSearch] = useState(false);
-  const { colors, fonts } = theme;
+  const { colors, fonts, textInput } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
+  const usedColorVariant = colorVariant ?? textInput?.colorVariant;
 
   const {
     fontSize: fontSizeStyle,
@@ -99,7 +101,7 @@ const TextInputContained = ({
     outlineColor = isTransparent ? customOutlineColor : colors.neutral.neutral_40;
   } else {
     inputTextColor = colors.text;
-    activeColor = error ? colors.danger.main : activeOutlineColor || colors.primary.main;
+    activeColor = error ? colors.danger.main : activeOutlineColor || colors[usedColorVariant].main;
     placeholderColor = colors.neutral.neutral_70;
     outlineColor = colors.neutral.neutral_40;
   }
@@ -227,7 +229,7 @@ const TextInputContained = ({
               placeholder: rest.placeholder,
               placeholderTextColor: placeholderTextColor || placeholderColor,
               editable: !disabled && editable,
-              selectionColor: colors.primary.main,
+              selectionColor: colors[usedColorVariant].main,
               onFocus,
               onBlur,
               underlineColorAndroid: "transparent",
@@ -299,7 +301,7 @@ const TextInputContained = ({
                 }}
                 variant={'tertiary'}
                 color={
-                  isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_70
+                  isShowPassword ? theme.colors[usedColorVariant].main : theme.colors.neutral.neutral_70
                 }
                 onPress={() => {
                   disabled ? null

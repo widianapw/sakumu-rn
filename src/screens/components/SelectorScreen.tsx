@@ -22,6 +22,7 @@ export default function SelectorScreen() {
       }}>
         <Stack p={16} style={{ flex: 1 }} spacing={16}>
           <Checkbox
+            colorVariant={"tertiary"}
             text={"Checkable"}
             checked={isChecked}
             onPress={() => {
@@ -49,6 +50,7 @@ export default function SelectorScreen() {
 
 
           <Switch
+            colorVariant={"tertiary"}
             onChange={() => {
               setIsChecked(!isChecked);
             }} value={isChecked} text={"Damn"} />

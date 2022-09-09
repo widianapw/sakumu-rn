@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { Image, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { Button, Stack } from "../../tmd";
 import Typography from "../../tmd/components/Typography/Typography";
 import { useAuth } from "../providers/AuthProvider";
@@ -15,12 +15,12 @@ import Toolbar from "../../tmd/components/Toolbar/Toolbar";
 
 const MainScreen = ({ navigation }: any) => {
   const { user, logout, isLoadingLogout } = useAuth();
-  const { momentLocale } = useLocale();
+  const { momentLocale, t } = useLocale();
 
   const showToast = () => {
     Toast.show("Damn! You are logged in!", {
       //add options here
-      // variant: "success",
+      // colorVariant: "tertiary",
       // shape: "rounded",
     });
   };
@@ -41,16 +41,19 @@ const MainScreen = ({ navigation }: any) => {
             justifyContent: "center",
           }}
         >
-          <Typography>Welcome, {user?.name}</Typography>
+          <Typography>{t("welcome_to_rnstarterkit")}</Typography>
+          <Typography type={"label1"} style={{ textAlign: "center", marginTop: -16 }}>{user?.name}</Typography>
           <Typography type={"body3"}>{momentLocale().format("DD MMMM YYYY")}</Typography>
 
           <Button onPress={showToast}>
             Show Toast
           </Button>
 
-          <Button onPress={() => {
-            navigate("StripeScreen");
-          }}>
+          <Button
+            colorVariant={"secondary"}
+            onPress={() => {
+              navigate("StripeScreen");
+            }}>
             Stripe Integration
           </Button>
 

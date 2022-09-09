@@ -8,6 +8,7 @@ import { TouchableRipple } from "../index";
 import PickerBottomSheet from "./BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../model/PickerItem";
 import { useDeepEffect } from "../hooks/useDeepEffect";
+import { ColorVariantType } from "../types";
 
 export type ChipShape = "rect" | "rounded";
 export type ChipVariant = "filled" | "outlined";
@@ -31,6 +32,7 @@ export type ChipProps = {
   onResetPicker?: () => void;
   saveButtonTitle?: string;
   disabled?: boolean;
+  colorVariant?: ColorVariantType;
 };
 const ROUNDED_BORDER_RADIUS = 32;
 
@@ -45,6 +47,7 @@ export default function Chip({
                                disabled,
                                onPickerChanges,
                                selectedPickerValue,
+                               colorVariant,
                                ...rest
                              }: ChipProps) {
   const { colors, chip, roundness } = useTheme();
@@ -53,7 +56,7 @@ export default function Chip({
   const [isOpenPicker, setIsOpenPicker] = useState(false);
   const usedShape = shape ?? chip.shape;
   const [selectedObj, setSelectedObj] = useState<PickerItem | undefined>();
-
+  const usedColorVariant = colorVariant ?? chip.colorVariant;
   // const isSelected = useMemo(() => {
   //   return selectedObj != undefined;
   // }, [selectedObj]);
@@ -104,9 +107,9 @@ export default function Chip({
       bgColor = colors.neutral.neutral_20;
       txtColor = colors.neutral.neutral_90;
       if (isSelected) {
-        bgColor = colors.primary.main;
+        bgColor = colors[usedColorVariant].main;
         txtColor = colors.neutral.neutral_10;
-        borderColor = colors.primary.border;
+        borderColor = colors[usedColorVariant].border;
       }
       if (disabled) {
         bgColor = colors.neutral.neutral_30;
@@ -120,9 +123,9 @@ export default function Chip({
       borderColor = colors.neutral.neutral_50;
       txtColor = colors.neutral.neutral_90;
       if (isSelected) {
-        bgColor = colors.primary.surface;
-        borderColor = colors.primary.main;
-        txtColor = colors.primary.main;
+        bgColor = colors[usedColorVariant].surface;
+        borderColor = colors[usedColorVariant].main;
+        txtColor = colors[usedColorVariant].main;
       }
       if (disabled) {
         bgColor = colors.neutral.neutral_30;

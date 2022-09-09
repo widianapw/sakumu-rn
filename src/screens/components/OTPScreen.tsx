@@ -22,6 +22,7 @@ export default function OTPScreen() {
             padding: 16,
           }}>
           <OTPInput
+            mode={"filled"}
             onCodeFilled={(code) => {
               Toast.show(code);
             }}

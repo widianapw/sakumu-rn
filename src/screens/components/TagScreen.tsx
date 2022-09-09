@@ -24,38 +24,38 @@ export default function TagScreen() {
           <Tag
             style={{ marginTop: 8 }}
             text={"Tag Primary"}
-            variant={"primary"}
+            colorVariant={"primary"}
           />
           <Tag
             style={{ marginTop: 8 }}
-            text={"Tag Success"} variant={"success"} shape={"rect"} />
+            text={"Tag Success"} colorVariant={"success"} shape={"rect"} />
           <Tag
             style={{ marginTop: 8 }}
-            text={"Tag Warning"} variant={"warning"} />
+            text={"Tag Warning"} colorVariant={"warning"} />
           <Tag
             style={{ marginTop: 8 }}
-            text={"Tag Danger"} variant={"danger"} />
+            text={"Tag Danger"} colorVariant={"danger"} />
           <Tag
             style={{ marginTop: 8 }}
-            text={"Tag Info"} variant={"info"}
+            text={"Tag Info"} colorVariant={"info"}
           />
 
           <Tag
             style={{ marginTop: 8 }}
             size={"lg"}
-            text={"Tag LG"} variant={"info"}
+            text={"Tag LG"} colorVariant={"info"}
           />
 
           <Tag
             style={{ marginTop: 8 }}
             size={"md"}
-            text={"Tag MD"} variant={"info"}
+            text={"Tag MD"} colorVariant={"info"}
           />
 
           <Tag
             style={{ marginTop: 8 }}
             size={"sm"}
-            text={"Tag SM"} variant={"info"}
+            text={"Tag SM"} colorVariant={"info"}
           />
 
         </View>

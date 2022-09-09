@@ -7,15 +7,15 @@ import { useTheme } from "../../core/theming";
 import { StyleProp, View, ViewStyle } from "react-native";
 import Typography, { TypographyType } from "../Typography/Typography";
 import Icon, { IconProps } from "../Icon";
+import { ColorVariantType } from "../../types";
 
 
-export type TagVariant = "success" | "warning" | "primary" | "danger" | "info"
 export type TagSize = "sm" | "md" | "lg"
 export type TagShape = "rect" | "rounded"
 const ROUNDED_SHAPE = 32;
 
 interface Props {
-  variant?: TagVariant;
+  colorVariant?: ColorVariantType;
   size?: TagSize;
   text?: string;
   shape?: TagShape;
@@ -25,7 +25,7 @@ interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
-export default function Tag({ size, variant, text, shape, ...rest }: Props) {
+export default function Tag({ size, colorVariant, text, shape, ...rest }: Props) {
   const theme = useTheme();
   const { colors, roundness, tag } = theme;
 
@@ -52,7 +52,7 @@ export default function Tag({ size, variant, text, shape, ...rest }: Props) {
     borderRadius = ROUNDED_SHAPE;
   }
 
-  const usedVariant = variant ?? tag?.variant;
+  const usedVariant = colorVariant ?? tag?.colorVariant;
   let bgColor = colors[usedVariant]["surface"];
   let textColor = colors[usedVariant]["main"];
 

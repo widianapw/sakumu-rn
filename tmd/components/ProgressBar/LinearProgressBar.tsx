@@ -10,6 +10,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useTheme } from "../../core/theming";
+import { ColorVariantType } from "../../types";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -31,6 +32,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   visible?: boolean;
   style?: StyleProp<ViewStyle>;
   shape?: "rounded" | "rect";
+  colorVariant?: ColorVariantType;
   /**
    * @optional
    */
@@ -67,12 +69,15 @@ const LinearProgressBar = ({
                              visible = true,
                              trackColor,
                              shape = "rounded",
+                             colorVariant,
                              ...rest
                            }: Props) => {
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0),
   );
   const theme = useTheme();
+  const { progressBar } = theme;
+  const usedColorVariant = colorVariant ?? progressBar.colorVariant;
   const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(0));
   const [width, setWidth] = React.useState<number>(0);
   const [prevWidth, setPrevWidth] = React.useState<number>(0);
@@ -82,7 +87,7 @@ const LinearProgressBar = ({
 
   const { colors } = theme;
   const { scale } = theme.animation;
-  const color = indicatorColor ?? colors.primary.main;
+  const color = indicatorColor ?? colors[usedColorVariant].main;
 
   const startAnimation = React.useCallback(() => {
     // Show progress bar
@@ -150,8 +155,8 @@ const LinearProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color ?? theme.colors.primary.main;
-  const trackTintColor = trackColor ?? theme.colors.primary.border;
+  const tintColor = color ?? theme.colors[usedColorVariant].main;
+  const trackTintColor = trackColor ?? theme.colors[usedColorVariant].border;
 
   return (
     <>

@@ -28,7 +28,8 @@ export default function ImagePickerScreen() {
           />
 
           <MultiImagePicker
-            style={{marginTop: 16}}
+            colorVariant={"tertiary"}
+            style={{ marginTop: 16 }}
             label={"Multiple Image"}
             description={"Pick an image from your camera roll"}
             buttonProps={{

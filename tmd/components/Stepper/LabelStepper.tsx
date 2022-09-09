@@ -5,19 +5,22 @@ import { Divider, Stack, useTheme } from "../../index";
 import Typography from "../Typography/Typography";
 import { StepperItem } from "../../model/StepperItem";
 import Icon from "../Icon";
+import { ColorVariantType } from "../../types";
 
 export type LabelStepperOrientationType = "horizontal" | "vertical";
 
 interface Props {
   orientation?: LabelStepperOrientationType;
+  colorVariant?: ColorVariantType;
 }
 
-export default function LabelStepper({ orientation = "vertical" }: Props) {
+export default function LabelStepper({ orientation = "vertical", colorVariant }: Props) {
   const { steppers, currentItem, currentPosition } = useStepper();
   const flatListRef = useRef<FlatList>(null);
-  const { colors } = useTheme();
+  const { colors, stepper} = useTheme();
   const [viewToken, setViewToken] = useState<ViewToken[] | null>(null);
   const isVertical = orientation == "vertical";
+  const usedColorVariant = colorVariant ?? stepper.colorVariant;
   useEffect(() => {
     if (viewToken) {
       if (!viewToken?.map(it => it.index).includes(currentPosition)) {
@@ -47,7 +50,7 @@ export default function LabelStepper({ orientation = "vertical" }: Props) {
     const isLast = index === steppers.length - 1;
     const isCurrent = item.id === currentItem?.id;
     const isPassed = steppers.indexOf(item) < currentPosition;
-    const bgColor = isCurrent || isPassed ? colors.primary.main : colors.neutral.neutral_60;
+    const bgColor = isCurrent || isPassed ? colors[usedColorVariant].main : colors.neutral.neutral_60;
     const txtColor = isCurrent || isPassed ? colors.neutral.neutral_90 : colors.neutral.neutral_60;
     return (
       <>

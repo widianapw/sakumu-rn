@@ -4,7 +4,7 @@ import { Animated, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "rea
 import color from "color";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
 import { useTheme } from "../../core/theming";
-import type { $RemoveChildren } from "../../types";
+import type { $RemoveChildren, ColorVariantType } from "../../types";
 import Icon from "../Icon";
 import Typography from "../Typography/Typography";
 
@@ -40,7 +40,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   textStyle?: StyleProp<TextStyle>;
   onCheckedChange?: (checked: boolean) => void;
   value?: string | number;
-
+  colorVariant?: ColorVariantType;
 };
 
 // From https://material.io/design/motion/speed.html#duration
@@ -69,6 +69,7 @@ const Checkbox = ({
                     indeterminate,
                     testID,
                     value,
+                    colorVariant,
                     ...rest
                   }: Props) => {
   const { current: scaleAnim } = React.useRef<Animated.Value>(
@@ -80,6 +81,7 @@ const Checkbox = ({
     animation: { scale },
     colors,
     roundness,
+    checkbox,
   } = theme;
 
   React.useEffect(() => {
@@ -113,7 +115,7 @@ const Checkbox = ({
 
 
   const unchecked = !checked && !indeterminate;
-  const checkedColor = rest.color || colors.neutral.neutral_10;
+  const checkedColor = rest.color ?? colors.neutral.neutral_10;
   const uncheckedColor =
     rest.uncheckedColor ||
     color(colors.neutral.neutral_80)
@@ -125,6 +127,8 @@ const Checkbox = ({
   bgColor = colors.neutral.neutral_10;
   borderColor = colors.neutral.neutral_50;
 
+  const usedColorVariant = colorVariant ?? checkbox.colorVariant;
+
   if (disabled) {
     rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
     checkboxColor = theme.colors.neutral.neutral_10;
@@ -132,15 +136,15 @@ const Checkbox = ({
   } else {
     rippleColor = color(checkedColor).fade(0.32).rgb().string();
     if (unchecked) {
-      checkboxColor = theme.colors.primary.main;
+      checkboxColor = theme.colors[usedColorVariant].main;
     }
     if (checked) {
-      bgColor = theme.colors.primary.main;
+      bgColor = theme.colors[usedColorVariant].main;
       checkboxColor = checkedColor;
     }
     if (indeterminate) {
       bgColor = colors.neutral.neutral_10;
-      checkboxColor = colors.primary.main;
+      checkboxColor = colors[usedColorVariant].main;
     }
   }
 

@@ -32,24 +32,23 @@ export default function AlertScreen() {
           description={"Put your alert text here "} />
 
         <Alert
-          variant={"success"}
           title={"Alert Title Here"}
           description={"Put your alert text here "} />
         <Alert
-          variant={"danger"}
+          colorVariant={"danger"}
           description={"Put your alert text here "} />
         <Alert
-          variant={"warning"}
+          colorVariant={"warning"}
           title={"Alert Title Here"}
           description={"Put your alert text here "} />
 
         <Alert
-          variant={"warning"}
+          colorVariant={"warning"}
           type={"outlined"}
           title={"Alert Title Here"}
           description={"Put your alert text here"} />
         <Alert
-          variant={"warning"}
+          colorVariant={"warning"}
           type={"outlined"}
           dismissible
           description={"Put your alert text here"} />

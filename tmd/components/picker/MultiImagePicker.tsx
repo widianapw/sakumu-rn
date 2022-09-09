@@ -14,6 +14,7 @@ import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
 import ImageViewerModal from "../Modal/ImageViewerModal";
 import Grid from "../Layout/Grid";
+import { ColorVariantType } from "../../types";
 
 interface Props {
   label?: string;
@@ -28,6 +29,7 @@ interface Props {
   errorText?: string;
   style?: ViewStyle;
   onChangeSelectedUrls?: (selectedUrls: string[]) => void;
+  colorVariant?: ColorVariantType;
 }
 
 export default function MultiImagePicker({
@@ -40,12 +42,14 @@ export default function MultiImagePicker({
                                            error,
                                            errorText,
                                            style,
+                                           colorVariant,
                                            ...rest
                                          }: Props & ImagePickerBSProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isShowViewer, setIsShowViewer] = useState(false);
   const [viewerIndex, setViewerIndex] = useState(0);
-  const { colors, roundness } = useTheme();
+  const { colors, roundness, imagePicker } = useTheme();
+  const usedColorVariant = colorVariant ?? imagePicker.colorVariant;
   const { t } = useLocale();
   const { requestPermissions } = usePermission();
   const [selectedImageUrls, setSelectedImageUrls] = useState<string[]>([]);
@@ -86,9 +90,9 @@ export default function MultiImagePicker({
         justifyContent: "center",
         borderRadius: size / 2,
         alignItems: "center",
-        backgroundColor: colors.primary.border,
+        backgroundColor: colors[usedColorVariant].border,
       }}>
-        <Icon icon={"image"} color={colors.primary.main} size={size / 2 + 10} />
+        <Icon icon={"image"} color={colors[usedColorVariant].main} size={size / 2 + 10} />
       </View>
     );
   };
@@ -102,7 +106,7 @@ export default function MultiImagePicker({
         justifyContent: "center",
         borderRadius: size / 2,
         alignItems: "center",
-        backgroundColor: color(colors.primary.focus).alpha(0.2).rgb().string(),
+        backgroundColor: color(colors[usedColorVariant].focus).alpha(0.2).rgb().string(),
       }}>
         <IconButton
           shape={"rounded"}
@@ -179,7 +183,7 @@ export default function MultiImagePicker({
               height: imageSize,
               width: imageSize,
               borderRadius: roundness,
-              backgroundColor: colors.primary.surface,
+              backgroundColor: colors[usedColorVariant].surface,
               position: "relative",
             }}>
               {
@@ -210,7 +214,7 @@ export default function MultiImagePicker({
                           alignItems: "center",
                           justifyContent: "center",
                           borderRadius: roundness,
-                          backgroundColor: colors.primary.surface,
+                          backgroundColor: colors[usedColorVariant].surface,
                           position: "relative",
                           height: size - (colSpacing * 2),
                         }}
@@ -288,6 +292,7 @@ export default function MultiImagePicker({
           {
             editable &&
             <Button
+              colorVariant={buttonProps?.colorVariant ?? usedColorVariant}
               size={buttonProps?.size ?? "sm"}
               style={{
                 marginTop: 8,

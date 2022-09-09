@@ -4,6 +4,7 @@ import RadioButtonAndroid from "./RadioButtonAndroid";
 import { useTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
 import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
+import { ColorVariantType } from "../../types";
 
 export type Props = {
   /**
@@ -33,6 +34,7 @@ export type Props = {
   text?: string;
   textStyle?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  colorVariant?: ColorVariantType;
   /**
    * @optional
    */
@@ -89,9 +91,10 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const RadioButton = ({ onPress, value, ...props }: Props) => {
+const RadioButton = ({ onPress, value, colorVariant, ...props }: Props) => {
   const theme = useTheme();
   const Button = RadioButtonAndroid;
+  const usedColorVariant = colorVariant ?? theme.radioButton.colorVariant;
 
   const parentComponentStyle: StyleProp<ViewStyle> = [{
     flexDirection: "row",
@@ -103,7 +106,7 @@ const RadioButton = ({ onPress, value, ...props }: Props) => {
       {(context?: RadioButtonContextType) => {
         return (
           <View style={parentComponentStyle}>
-            <Button color={props.color ?? theme.colors.primary.main} {...props} value={value} />
+            <Button color={props.color ?? theme.colors[usedColorVariant].main} {...props} value={value} />
             {
               props.text &&
               <Typography

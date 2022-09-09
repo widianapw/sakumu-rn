@@ -8,24 +8,27 @@ import { useTheme } from "../../core/theming";
 import { View } from "react-native";
 import HelperText from "../HelperText";
 import { TextInputMode } from "../TextInput/TextField";
+import { ColorVariantType } from "../../types";
 
 interface Props {
   helperText?: string;
   errorText?: string;
   error?: boolean;
   mode?: TextInputMode;
-
+  colorVariant?: ColorVariantType;
 }
 
 export default function OTPInput({
-                                   error, errorText, helperText, mode, ...rest
+                                   error, errorText, helperText, mode, colorVariant, ...rest
                                  }: Props & ComponentProps<typeof OTPInputView>) {
-  const { colors, textInput, fonts } = useTheme();
+  const { colors, textInput, fonts, otpInput } = useTheme();
+  const usedColorVariant = colorVariant ?? otpInput.colorVariant;
+  const usedMode = mode ?? otpInput.mode;
   const [isError, setIsError] = useState(false);
   const borderColor = isError ? colors.danger.main : colors.neutral.neutral_60;
-  const selectedBorderColor = isError ? colors.danger.main : colors.primary.main;
-  const filledBGColor = isError ? colors.danger.surface : colors.primary.surface;
-  const selectedFilledBGColor = isError ? colors.danger.surface : colors.primary.surface;
+  const selectedBorderColor = isError ? colors.danger.main : colors[usedColorVariant].main;
+  const filledBGColor = isError ? colors.danger.surface : colors[usedColorVariant].surface;
+  const selectedFilledBGColor = isError ? colors.danger.surface : colors[usedColorVariant].surface;
   useEffect(() => {
     setIsError(error);
   }, [error, errorText]);
@@ -39,12 +42,11 @@ export default function OTPInput({
     }
   };
 
-  const usedMode = mode ?? textInput.mode;
   const Filled = () => {
     return (
       <OTPInputView
         onCodeChanged={handleChanges}
-        selectionColor={colors.primary.main}
+        selectionColor={colors[usedColorVariant].main}
         codeInputFieldStyle={
           [
             {
@@ -62,7 +64,7 @@ export default function OTPInput({
 
         codeInputHighlightStyle={{
           backgroundColor: selectedFilledBGColor,
-          borderColor: colors.primary.border,
+          borderColor: colors[usedColorVariant].border,
           borderWidth: isError ? 0 : 2,
         }}
 
@@ -78,7 +80,7 @@ export default function OTPInput({
     return (
       <OTPInputView
         onCodeChanged={handleChanges}
-        selectionColor={colors.primary.main}
+        selectionColor={colors[usedColorVariant].main}
         codeInputFieldStyle={
           [
             {
@@ -108,7 +110,7 @@ export default function OTPInput({
     return (
       <OTPInputView
         onCodeChanged={handleChanges}
-        selectionColor={colors.primary.main}
+        selectionColor={colors[usedColorVariant].main}
         codeInputFieldStyle={
           [
             {

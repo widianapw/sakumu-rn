@@ -54,6 +54,7 @@ const TextFieldScreen = () => {
 
 
           <TextField
+            colorVariant={"tertiary"}
             helperText={"Helper Text"}
             requiredLabel
             mode={"flat"}
@@ -82,6 +83,7 @@ const TextFieldScreen = () => {
 
 
           <TextField
+            colorVariant={"danger"}
             maxLength={8}
             counter
             label="Counter"
@@ -119,6 +121,7 @@ const TextFieldScreen = () => {
 
           <TextField
             search
+            colorVariant={"tertiary"}
             mode={"filled"}
             shape={"rounded"}
             placeholder={"Filled"}

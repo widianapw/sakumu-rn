@@ -2,6 +2,7 @@ import * as React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import { useTheme } from "../../core/theming";
 import * as Progress from "react-native-progress";
+import { ColorVariantType } from "../../types";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -21,6 +22,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   hidesWhenStopped?: boolean;
   style?: StyleProp<ViewStyle>;
+  colorVariant?: ColorVariantType;
   /**
    * @optional
    */
@@ -49,16 +51,19 @@ const DURATION = 2400;
  * ```
  */
 const CircularProgressBar = ({
-                             animating = true,
-                             color: indicatorColor,
-                             hidesWhenStopped = true,
-                             size: indicatorSize = "sm",
-                             style,
-                             ...rest
-                           }: Props) => {
+                               animating = true,
+                               color: indicatorColor,
+                               hidesWhenStopped = true,
+                               size: indicatorSize = "sm",
+                               style,
+                               colorVariant,
+                               ...rest
+                             }: Props) => {
   const theme = useTheme();
+  const { progressBar } = theme;
+  const usedColorVariant = colorVariant ?? progressBar.colorVariant;
 
-  const color = indicatorColor ?? theme.colors.primary.main;
+  const color = indicatorColor ?? theme.colors[usedColorVariant].main;
 
   let size = 24;
   if (typeof indicatorSize === "string") {

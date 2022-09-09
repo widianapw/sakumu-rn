@@ -15,6 +15,7 @@ import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
 import RNFS from "react-native-fs";
 import ImageViewerModal from "../Modal/ImageViewerModal";
+import { ColorVariantType } from "../../types";
 
 interface Props {
   label?: string;
@@ -30,6 +31,7 @@ interface Props {
   style?: ViewStyle;
   onChangeImageUrl?: (imageUrl: string) => void;
   onChangeImageBase64?: (imageBase64: string) => void;
+  colorVariant?: ColorVariantType;
 }
 
 export default function ImagePicker({
@@ -44,13 +46,15 @@ export default function ImagePicker({
                                       style,
                                       onChangeImageUrl,
                                       onChangeImageBase64,
+                                      colorVariant,
                                       ...rest
                                     }: Props & ImagePickerBSProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isShowViewer, setIsShowViewer] = useState(false);
-  const { colors, roundness } = useTheme();
+  const { colors, roundness, imagePicker } = useTheme();
   const { t } = useLocale();
   const { requestPermissions } = usePermission();
+  const usedColorVariant = colorVariant ?? imagePicker.colorVariant;
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | undefined>(undefined);
   const handleOpenImagePicker = () => {
     if (Platform.OS == "android") {
@@ -101,9 +105,9 @@ export default function ImagePicker({
         justifyContent: "center",
         borderRadius: size / 2,
         alignItems: "center",
-        backgroundColor: colors.primary.border,
+        backgroundColor: colors[usedColorVariant].border,
       }}>
-        <Icon icon={"image"} color={colors.primary.main} size={size / 2 + 10} />
+        <Icon icon={"image"} color={colors[usedColorVariant].main} size={size / 2 + 10} />
       </View>
     );
   };
@@ -117,7 +121,7 @@ export default function ImagePicker({
         justifyContent: "center",
         borderRadius: size / 2,
         alignItems: "center",
-        backgroundColor: color(colors.primary.focus).alpha(0.2).rgb().string(),
+        backgroundColor: color(colors[usedColorVariant].focus).alpha(0.2).rgb().string(),
       }}>
         <IconButton
           shape={"rounded"}
@@ -174,7 +178,7 @@ export default function ImagePicker({
           height: 160,
           width: "100%",
           borderRadius: roundness,
-          backgroundColor: colors.primary.surface,
+          backgroundColor: colors[usedColorVariant].surface,
           position: "relative",
         }}>
           {
@@ -232,6 +236,7 @@ export default function ImagePicker({
               style={{
                 marginTop: 8,
               }}
+              colorVariant={buttonProps?.colorVariant ?? usedColorVariant}
               variant={buttonProps?.variant ?? "secondary"}
               onPress={handleOpenImagePicker}
               {...buttonProps}

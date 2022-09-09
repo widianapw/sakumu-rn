@@ -2,26 +2,27 @@
  * Created by Widiana Putra on 23/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useRef, useState } from "react";
+import React, { ComponentProps, useRef, useState } from "react";
 import { Animated, StyleProp, View, ViewStyle } from "react-native";
 import { useTheme } from "../../core/theming";
 import Icon from "../Icon";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
+import { ColorVariantType } from "../../types";
 
-export type AlertVariant = "success" | "warning" | "danger" | "info"
 export type AlertType = "basic" | "outlined" | "filled"
 
 interface Props {
   style?: StyleProp<ViewStyle>;
-  variant?: AlertVariant;
+  colorVariant?: ColorVariantType;
   type?: AlertType;
   title?: string;
   description: string;
   dismissible?: boolean;
+  iconProps?: ComponentProps<typeof Icon>;
 }
 
-export default function Alert({ title, description, dismissible, type, variant, ...rest }: Props) {
+export default function Alert({ title, description, dismissible, type, colorVariant, iconProps, ...rest }: Props) {
   const { colors, roundness, alert } = useTheme();
   const [isShown, setIsShown] = useState(true);
   const opacityAnimation = useRef(new Animated.Value(1)).current;
@@ -29,30 +30,24 @@ export default function Alert({ title, description, dismissible, type, variant, 
   let iconName = "information-circle";
   let textColor = colors.neutral.neutral_100;
   let iconColor = colors.info.main;
-  const usedVariant = variant ?? alert.variant;
+  const usedVariant = colorVariant ?? alert.colorVariant;
   const usedType = type ?? alert.type;
+  iconColor = colors[usedVariant].main;
+  backgroundColor = colors[usedVariant].surface;
   switch (usedVariant) {
     case "success": {
-      iconColor = colors.success.main;
-      backgroundColor = colors.success.surface;
       iconName = "checkmark-circle";
       break;
     }
     case "warning": {
-      iconColor = colors.warning.main;
-      backgroundColor = colors.warning.surface;
       iconName = "warning";
       break;
     }
     case "danger": {
-      iconColor = colors.danger.main;
-      backgroundColor = colors.danger.surface;
       iconName = "alert-circle";
       break;
     }
     case "info": {
-      iconColor = colors.info.main;
-      backgroundColor = colors.info.surface;
       iconName = "information-circle";
       break;
     }
@@ -101,9 +96,9 @@ export default function Alert({ title, description, dismissible, type, variant, 
             }}>
             <View style={{ marginRight: 6 }}>
               <Icon
-                icon={iconName}
-                color={iconColor}
-                size={18}
+                icon={iconProps?.icon ?? iconName}
+                color={iconProps?.color ?? iconColor}
+                size={iconProps?.size ?? 18}
               />
             </View>
             <View

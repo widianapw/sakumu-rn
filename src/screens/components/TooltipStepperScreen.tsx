@@ -68,7 +68,7 @@ export default function TooltipStepperScreen() {
                 description={"Lorem ipsum dolor sit"}
               >
                 <Stack spacing={8}>
-                  <Tag text={"Third Tooltip"} size={"lg"} variant={"success"} />
+                  <Tag text={"Third Tooltip"} size={"lg"} colorVariant={"success"} />
                 </Stack>
               </TooltipStepper>
             </View>

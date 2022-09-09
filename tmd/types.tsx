@@ -1,14 +1,16 @@
 import type * as React from "react";
-import { TagShape, TagSize, TagVariant } from "./components/Tag/Tag";
+import { TagShape, TagSize } from "./components/Tag/Tag";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./components/Button/Button";
 import { TextInputMode, TextInputShape } from "./components/TextInput/TextField";
-import { AlertType, AlertVariant } from "./components/Alert/Alert";
+import { AlertType } from "./components/Alert/Alert";
 import { ChipShape, ChipVariant } from "./components/Chip";
-import { ToastShape, ToastVariant } from "./components/Toast";
+import { ToastColorVariantType, ToastShape } from "./components/Toast";
 import { SkeletonAnimation } from "./components/Skeleton/Skeleton";
 import { ToolbarSize } from "./components/Toolbar/Toolbar";
 import { BadgeShape, BadgeSize, BadgeVariant } from "./components/Badge/Badge";
 import { AvatarSize, AvatarVariant } from "./components/Avatar/Avatar";
+
+export type ColorVariantType = "success" | "warning" | "primary" | "danger" | "info" | "secondary" | "tertiary"
 
 export type Font = {
   fontFamily: string;
@@ -53,26 +55,66 @@ export type Theme = {
   toolbar: ToolbarTheme;
   avatar: AvatarTheme;
   badge: BadgeTheme;
+  otpInput: OTPInputTheme;
+  checkbox: CheckBoxTheme;
+  radioButton: RadioButtonTheme;
+  switch: SwitchTheme;
+  imagePicker: ImagePickerTheme;
+  progressBar: ProgressBarTheme;
+  tab: TabTheme;
+  stepper: StepperTheme;
   animation: {
     scale: number;
   };
 };
 
-interface BadgeTheme{
-  size: BadgeSize
-  shape: BadgeShape
-  variant: BadgeVariant
+interface StepperTheme {
+  colorVariant: ColorVariantType;
 }
 
-interface AvatarTheme{
-  size: AvatarSize
-  variant: AvatarVariant
+interface TabTheme {
+  colorVariant: ColorVariantType;
+}
+
+interface ProgressBarTheme {
+  colorVariant: ColorVariantType;
+}
+
+interface ImagePickerTheme {
+  colorVariant: ColorVariantType;
+}
+
+interface SwitchTheme {
+  colorVariant: ColorVariantType;
+}
+
+interface CheckBoxTheme {
+  colorVariant: ColorVariantType;
+}
+
+interface RadioButtonTheme {
+  colorVariant: ColorVariantType;
+}
+
+interface OTPInputTheme {
+  colorVariant: ColorVariantType;
+  mode: TextInputMode;
+}
+
+interface BadgeTheme {
+  size: BadgeSize;
+  shape: BadgeShape;
+  colorVariant: BadgeVariant;
+}
+
+interface AvatarTheme {
+  size: AvatarSize;
+  variant: AvatarVariant;
 }
 
 interface ToolbarTheme {
   elevation: number;
   size: ToolbarSize;
-
 }
 
 interface SkeletonTheme {
@@ -81,35 +123,38 @@ interface SkeletonTheme {
 }
 
 interface ToastTheme {
-  variant: ToastVariant;
+  colorVariant: ToastColorVariantType;
   shape: ToastShape;
 }
 
 interface ChipTheme {
   variant: ChipVariant;
   shape: ChipShape;
+  colorVariant: ColorVariantType;
 }
 
 interface AlertTheme {
-  variant: AlertVariant;
+  colorVariant: ColorVariantType;
   type: AlertType;
 }
 
 interface TagTheme {
   shape: TagShape;
-  variant: TagVariant;
+  colorVariant: ColorVariantType;
   size: TagSize;
 }
 
 interface TextInputTheme {
   shape: TextInputShape;
   mode: TextInputMode;
+  colorVariant: ColorVariantType;
 }
 
 interface ButtonTheme {
   variant: ButtonVariant;
   shape: ButtonShape;
   size: ButtonSize;
+  colorVariant: ColorVariantType;
 }
 
 interface BaseColorProps {
@@ -132,17 +177,20 @@ export interface TertiaryColorProps extends BaseColorProps {
   focus?: string;
 }
 
-
 export interface DangerColorProps extends BaseColorProps {
+  focus?: string;
 }
 
 export interface WarningColorProps extends BaseColorProps {
+  focus?: string;
 }
 
 export interface SuccessColorProps extends BaseColorProps {
+  focus?: string;
 }
 
 export interface InfoColorProps extends BaseColorProps {
+  focus?: string;
 }
 
 export interface NeutralColorProps {

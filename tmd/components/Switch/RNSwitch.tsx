@@ -8,6 +8,7 @@ import { Pressable, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import Animated, { interpolateColors, spring } from "react-native-reanimated";
 import { useTheme } from "../../core/theming";
 import color from "color";
+import { ColorVariantType } from "../../types";
 
 interface Props {
   value: boolean;
@@ -18,6 +19,7 @@ interface Props {
   handleOnPress?: (value: boolean) => void;
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
+  colorVariant?: ColorVariantType;
 }
 
 const RNSwitch = ({
@@ -28,20 +30,24 @@ const RNSwitch = ({
                     value,
                     disabled,
                     style,
+                    colorVariant,
                     ...rest
                   }: Props) => {
 
   const { colors } = useTheme();
+
+  const { switch: switchTheme } = useTheme();
+  const usedColorVariant = colorVariant ?? switchTheme.colorVariant;
   let usedThumbColor, usedActiveTrackColor, usedInactiveTrackColor, inactiveThumbColor;
   if (!disabled) {
     usedThumbColor = colors.neutral.neutral_10;
     inactiveThumbColor = colors.neutral.neutral_10;
-    usedActiveTrackColor = colors.primary.main;
+    usedActiveTrackColor = colors[usedColorVariant].main;
     usedInactiveTrackColor = colors.neutral.neutral_40;
   } else {
     usedThumbColor = color(colors.neutral.neutral_10).alpha(1).rgb().string();
     inactiveThumbColor = color(colors.neutral.neutral_50).alpha(1).rgb().string();
-    usedActiveTrackColor = color(colors.primary.main).alpha(0.4).rgb().string();
+    usedActiveTrackColor = color(colors[usedColorVariant].main).alpha(0.4).rgb().string();
     usedInactiveTrackColor = colors.neutral.neutral_40;
   }
   const [switchTranslate] = useState(new Animated.Value(0));

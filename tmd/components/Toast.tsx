@@ -8,17 +8,19 @@ import { default as ExToast, ToastOptions } from "react-native-root-toast";
 import configureFonts from "../styles/fonts";
 import { colors } from "../styles/colors";
 import { DefaultTheme } from "../index";
+import { ColorVariantType } from "../types";
 
-export type ToastVariant = "neutral" | "success" | "error" | "warning" | "info" | "primary";
 export type ToastShape = "rounded" | "rect";
+export type ToastColorVariantType = ColorVariantType | "default";
 interface ToastOption extends ToastOptions {
-  variant?: ToastVariant;
+  colorVariant?: ToastColorVariantType;
   shape?: ToastShape;
 }
+
 export default class Toast extends ExToast {
   static show(message: string, options?: ToastOption) {
     const theme = DefaultTheme.toast;
-    const usedVariant = options?.variant ?? theme.variant;
+    const usedVariant = options?.colorVariant ?? theme.colorVariant;
     const usedShape = options?.shape ?? theme.shape;
     let borderRadius, backgroundColor, textColor = colors.neutral.neutral_10;
     if (usedShape === "rounded") {
@@ -26,31 +28,10 @@ export default class Toast extends ExToast {
     } else {
       borderRadius = 8;
     }
-    switch (usedVariant) {
-      case "neutral": {
-        backgroundColor = colors.neutral.neutral_90;
-        break;
-      }
-      case "primary": {
-        backgroundColor = colors.primary.main;
-        break;
-      }
-      case "success": {
-        backgroundColor = colors.success.main;
-        break;
-      }
-      case "error": {
-        backgroundColor = colors.danger.main;
-        break;
-      }
-      case "info": {
-        backgroundColor = colors.info.main;
-        break;
-      }
-      case "warning": {
-        backgroundColor = colors.warning.main;
-        break;
-      }
+    if (usedVariant === "default") {
+      backgroundColor = colors.neutral.neutral_100;
+    } else {
+      backgroundColor = colors[usedVariant].main;
     }
     ExToast.show(message, {
       ...options,

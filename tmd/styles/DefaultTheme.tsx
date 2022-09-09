@@ -9,27 +9,30 @@ const DefaultTheme: Theme = {
   textInput: {
     mode: "contained",
     shape: "rect",
+    colorVariant: "secondary",
   },
   button: {
     variant: "primary",
     shape: "rounded",
     size: "md",
+    colorVariant: "primary",
   },
   tag: {
-    variant: "primary",
+    colorVariant: "primary",
     size: "md",
     shape: "rounded",
   },
   alert: {
-    variant: "info",
+    colorVariant: "info",
     type: "basic",
   },
   chip: {
     variant: "filled",
     shape: "rounded",
+    colorVariant: "primary",
   },
   toast: {
-    variant: "neutral",
+    colorVariant: "default",
     shape: "rect",
   },
   skeleton: {
@@ -43,11 +46,36 @@ const DefaultTheme: Theme = {
   badge: {
     size: "md",
     shape: "rounded",
-    variant: "danger",
+    colorVariant: "danger",
   },
   toolbar: {
     elevation: 4,
     size: "sm",
+  },
+  otpInput: {
+    colorVariant: "primary",
+    mode: "contained",
+  },
+  checkbox: {
+    colorVariant: "primary",
+  },
+  radioButton: {
+    colorVariant: "primary",
+  },
+  switch: {
+    colorVariant: "primary",
+  },
+  imagePicker: {
+    colorVariant: "primary",
+  },
+  progressBar: {
+    colorVariant: "primary",
+  },
+  tab: {
+    colorVariant: "primary",
+  },
+  stepper: {
+    colorVariant: "primary",
   },
   fonts: configureFonts(),
   animation: {

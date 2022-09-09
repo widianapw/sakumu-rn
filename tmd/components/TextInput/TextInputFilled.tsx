@@ -67,15 +67,16 @@ const TextInputFilled = ({
                            password,
                            shape,
                            initialPhoneCode,
+                           colorVariant,
                            ...rest
                          }: ChildTextInputProps) => {
   const theme = useTheme();
   const [isShowPassword, setIsShowPassword] = useState(!password);
   const [isShowSearch, setIsShowSearch] = useState(false);
-  const { colors, fonts } = theme;
+  const { colors, fonts, textInput } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
-
+  const usedColorVariant = colorVariant ?? textInput.colorVariant;
   const {
     fontSize: fontSizeStyle,
     fontWeight,
@@ -98,7 +99,7 @@ const TextInputFilled = ({
   } else {
     inputTextColor = colors.text;
     placeholderColor = colors.neutral.neutral_70;
-    backgroundColors = error ? colors.danger.surface : parentState.focused ? colors.primary.surface : colors.neutral.neutral_20;
+    backgroundColors = error ? colors.danger.surface : parentState.focused ? colors[usedColorVariant].surface : colors.neutral.neutral_20;
   }
 
 
@@ -223,7 +224,7 @@ const TextInputFilled = ({
               placeholder: rest.placeholder,
               placeholderTextColor: placeholderTextColor || placeholderColor,
               editable: !disabled && editable,
-              selectionColor: colors.primary.main,
+              selectionColor: colors[usedColorVariant].main,
               onFocus,
               onBlur,
               underlineColorAndroid: "transparent",
@@ -295,7 +296,7 @@ const TextInputFilled = ({
                 }}
                 variant={'tertiary'}
                 color={
-                  isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_70
+                  isShowPassword ? theme.colors[usedColorVariant].main : theme.colors.neutral.neutral_70
                 }
                 onPress={() => {
                   disabled ? null
@@ -345,7 +346,7 @@ const TextInputFilled = ({
 
 
         <Outline
-          outlineColor={parentState.focused && !error ? colors.primary.focus : "transparent"}
+          outlineColor={parentState.focused && !error ? colors[usedColorVariant].focus : "transparent"}
           backgroundColor={backgroundColors}
           shape={shape ?? theme?.textInput?.shape}
         />

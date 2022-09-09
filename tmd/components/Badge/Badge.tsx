@@ -2,8 +2,8 @@ import React from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import { useTheme } from "../../core/theming";
 import Typography, { TypographyType } from "../Typography/Typography";
+import { ColorVariantType } from "../../types";
 
-export type BadgeVariant = "success" | "warning" | "primary" | "danger" | "info"
 export type BadgeSize = "sm" | "md" | "lg";
 export type BadgeShape = "rect" | "rounded"
 export type BadgeType = "alert" | "label"
@@ -11,7 +11,7 @@ export type BadgeType = "alert" | "label"
 interface Props {
   label?: string;
   size?: BadgeSize;
-  variant?: BadgeVariant;
+  colorVariant?: ColorVariantType;
   shape?: BadgeShape;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
@@ -20,7 +20,7 @@ interface Props {
 
 const ROUNDED_SHAPE = 32;
 
-export default function Badge({ label, size, variant, shape, style, textStyle, type = "label" }: Props) {
+export default function Badge({ label, size, colorVariant, shape, style, textStyle, type = "label" }: Props) {
   const theme = useTheme();
   const { colors, roundness, badge } = theme;
   const usedSize = size ?? badge?.size;
@@ -52,7 +52,7 @@ export default function Badge({ label, size, variant, shape, style, textStyle, t
     borderRadius = ROUNDED_SHAPE;
   }
 
-  const usedVariant = variant ?? badge?.variant;
+  const usedVariant = colorVariant ?? badge?.variant;
   let bgColor = colors[usedVariant]["main"];
   let textColor = colors.neutral.neutral_10;
 

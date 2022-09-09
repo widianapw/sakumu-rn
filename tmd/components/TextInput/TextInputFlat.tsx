@@ -14,7 +14,7 @@ import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
 import { useTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
-import { CircularProgressBar, HelperText } from "../../index";
+import { HelperText } from "../../index";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
@@ -60,16 +60,17 @@ const TextInputFlat = ({
                          counter,
                          maxLength,
                          value,
+                         colorVariant,
                          ...rest
                        }: ChildTextInputProps) => {
   const theme = useTheme();
   const isAndroid = Platform.OS === "android";
-  const { colors, fonts } = theme;
+  const { colors, fonts, textInput } = theme;
   const font = fonts.regular;
   const hasActiveOutline = parentState.focused || error;
   const [isShowPassword, setIsShowPassword] = useState(!password);
   const [isShowSearch, setIsShowSearch] = useState(false);
-
+  const usedColorVariant = colorVariant ?? textInput.colorVariant;
   const {
     fontSize: fontSizeStyle,
     fontWeight,
@@ -94,7 +95,7 @@ const TextInputFlat = ({
     underlineColorCustom = colors.neutral.neutral_60;
   } else {
     inputTextColor = colors.neutral.neutral_100;
-    activeColor = error ? colors.danger.main : activeUnderlineColor || colors.primary.main;
+    activeColor = error ? colors.danger.main : activeUnderlineColor || colors[usedColorVariant].main;
     placeholderColor = colors.neutral.neutral_70;
     errorColor = colors.danger.main;
     underlineColorCustom = underlineColor || colors.neutral.neutral_60;
@@ -254,14 +255,14 @@ const TextInputFlat = ({
                     placeholder: rest.placeholder,
                     placeholderTextColor: placeholderTextColor ?? placeholderColor,
                     editable: !disabled && editable,
-                    selectionColor: theme.colors.primary.main,
+                    selectionColor: theme.colors[usedColorVariant].main,
                     onFocus,
                     onBlur,
                     underlineColorAndroid: "transparent",
                     multiline,
                     style: [
                       styles.input,
-                      !multiline || (multiline && height) ? { height: height ?? MIN_HEIGHT} : {},
+                      !multiline || (multiline && height) ? { height: height ?? MIN_HEIGHT } : {},
                       // paddingFlat,
                       {
                         ...font,
@@ -339,7 +340,7 @@ const TextInputFlat = ({
                     fitIcon
                     variant={'tertiary'}
                     color={
-                      isShowPassword ? theme.colors.primary.main : theme.colors.neutral.neutral_70
+                      isShowPassword ? theme.colors[usedColorVariant].main : theme.colors.neutral.neutral_70
                     }
                     onPress={() => {
                       setIsShowPassword(!isShowPassword);

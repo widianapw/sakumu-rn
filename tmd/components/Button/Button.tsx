@@ -10,6 +10,7 @@ import { black, white } from "../../styles/colors";
 import { useTheme } from "../../core/theming";
 import Icon, { IconProps } from "../Icon";
 import Typography, { TypographyType } from "../Typography/Typography";
+import { ColorVariantType } from "../../types";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonShape = "rect" | "rounded"
@@ -96,6 +97,7 @@ interface Props {
    */
   testID?: string;
   suffixIcon?: IconProps;
+  colorVariant?: ColorVariantType;
 }
 
 const Button = ({
@@ -122,11 +124,13 @@ const Button = ({
                   accessible,
                   suffixIcon,
                   iconNode,
+                  colorVariant,
                   ...rest
                 }: Props & React.ComponentProps<typeof Surface>) => {
   const theme = useTheme();
   const usedShape = shape ?? theme.button.shape;
   let marginSize = 8;
+  const usedColorVariant = colorVariant ?? theme.button.colorVariant
 
   const usedSize = size ?? theme.button.size;
   let defIconSize= 18
@@ -165,14 +169,14 @@ const Button = ({
     } else if (buttonColor) {
       backgroundColor = buttonColor;
     } else {
-      backgroundColor = colors.primary?.main;
+      backgroundColor = colors[usedColorVariant]?.main;
     }
   } else {
     backgroundColor = "transparent";
   }
 
   if (usedVariant === "secondary") {
-    borderColor = colors.primary?.main;
+    borderColor = colors[usedColorVariant]?.main;
     borderWidth = 1;
   } else {
     borderColor = "transparent";
@@ -202,10 +206,10 @@ const Button = ({
   } else if (buttonColor) {
     textColor = buttonColor;
   } else {
-    textColor = colors.primary.main;
+    textColor = colors[usedColorVariant].main;
   }
 
-  const rippleColor = color(colors.primary.pressed).alpha(0.32).rgb().string();
+  const rippleColor = color(colors[usedColorVariant].pressed).alpha(0.32).rgb().string();
   const buttonStyle = {
     backgroundColor,
     borderColor,
@@ -373,7 +377,7 @@ const Button = ({
                   height: 1,
                   marginBottom: 2,
                   marginHorizontal: 2,
-                  backgroundColor: textColor ?? colors.primary.main,
+                  backgroundColor: textColor ?? colors[usedColorVariant].main,
                 },
                   rest.underlineStyle,
                 ]

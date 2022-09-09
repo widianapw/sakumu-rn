@@ -2,14 +2,16 @@ import React, { ComponentProps } from "react";
 import { TabBar, TabBarIndicator, TabView } from "react-native-tab-view";
 import { Icon, Stack, useTheme } from "../../index";
 import Typography from "../Typography/Typography";
+import { ColorVariantType } from "../../types";
 
 interface Props {
   scrollable?: boolean;
-
+  colorVariant?: ColorVariantType;
 }
 
-export default function Tab({ scrollable, ...rest }: Props & ComponentProps<typeof TabView>) {
-  const { colors } = useTheme();
+export default function Tab({ scrollable, colorVariant,...rest }: Props & ComponentProps<typeof TabView>) {
+  const { colors , tab} = useTheme();
+  const usedColorVariant = colorVariant ?? tab.colorVariant;
   return (
     <>
       <TabView
@@ -21,7 +23,7 @@ export default function Tab({ scrollable, ...rest }: Props & ComponentProps<type
           scrollEnabled={scrollable}
           renderLabel={(lbl) => {
             const isSelected = lbl.focused;
-            const labelColor = isSelected ? colors.primary.main : colors.neutral.neutral_70;
+            const labelColor = isSelected ? colors[usedColorVariant].main : colors.neutral.neutral_70;
             // @ts-ignore
             const iconProp = lbl.route?.iconProp;
             return <Stack direction={"row"} items={"center"} spacing={4}>
@@ -37,7 +39,7 @@ export default function Tab({ scrollable, ...rest }: Props & ComponentProps<type
             </Stack>;
           }}
           labelStyle={{
-            color: colors.primary.main,
+            color: colors[usedColorVariant].main,
           }}
           renderIndicator={(ind) => {
             const indicatorMargin = 4;
@@ -47,7 +49,7 @@ export default function Tab({ scrollable, ...rest }: Props & ComponentProps<type
               width={ind.getTabWidth(idx) - indicatorMargin * 2}
               style={
                 [{
-                  backgroundColor: colors.primary.main,
+                  backgroundColor: colors[usedColorVariant].main,
                   height: 4,
                   marginStart: indicatorMargin,
                 },

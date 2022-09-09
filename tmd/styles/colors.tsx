@@ -303,7 +303,7 @@ const colors: ThemeColors = {
     border: "#F4CFA2",
     hover: "#FFAC41",
     pressed: "#CE7E15",
-    focus: "#4C4DDC33",
+    focus: "#FC991833",
   },
   neutral: {
     neutral_10: "#FFFFFF",
@@ -323,6 +323,7 @@ const colors: ThemeColors = {
     border: "#EEB4B0",
     hover: "#BD251C",
     surface: "#FFF4F2",
+    focus: "#CB3A3133",
   },
   warning: {
     main: "#CD7B2E",
@@ -330,6 +331,8 @@ const colors: ThemeColors = {
     border: "#EECEB0",
     hover: "#BF6919",
     surface: "#FFF9F2",
+    focus: "#CD7B2E33",
+
   },
   success: {
     main: "#43936C",
@@ -337,6 +340,7 @@ const colors: ThemeColors = {
     border: "#B7DBC9",
     hover: "#357A59",
     surface: "#F6F6F6",
+    focus: "#43936C33",
   },
   info: {
     main: "#3267E3",
@@ -344,6 +348,7 @@ const colors: ThemeColors = {
     border: "#B1C4F6",
     hover: "#114CD6",
     surface: "#F0F3FF",
+    focus: "#3267E333",
   },
 
   //not used
