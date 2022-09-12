@@ -23,7 +23,7 @@ interface Props {
 
 export default function ImageViewerModal({ images, index = 0, onClose, open, ratio = "16:9" }: Props) {
   const { colors } = useTheme();
-  const imageWidth = Dimensions.get("screen").width;
+  const imageWidth = Dimensions.get("window").width;
   const previewWidth = imageWidth / 3.5;
 
   const usedRatio = ratio.split(":");

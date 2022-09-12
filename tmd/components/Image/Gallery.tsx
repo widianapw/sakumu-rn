@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Dimensions, FlatList,  ImageBackground, Pressable, View, ViewToken } from "react-native";
+import { Dimensions, FlatList, ImageBackground, Pressable, View, ViewToken } from "react-native";
 import { GalleryItem, ImageRatioType } from "../../types";
 import { useTheme } from "../../core/theming";
-import { IconButton, Stack } from "../../index";
+import { IconButton, Image, Stack } from "../../index";
 import ImageViewerModal from "../Modal/ImageViewerModal";
 import Color from "color";
 import Typography from "../Typography/Typography";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import { goBack, navigate } from "../../../src/navigations/RootNavigation";
 import elevation from "../../styles/elevation";
-import { Image } from "../../index";
 
 interface Props {
   images: GalleryItem[];
@@ -20,7 +19,7 @@ interface Props {
 export default function Gallery({ images, ratio = "16:9", backAble }: Props) {
   const ref = useRef<FlatList>(null);
   const { t } = useLocale();
-  const width = Dimensions.get("screen").width;
+  const width = Dimensions.get("window").width;
 
   const usedRatio = ratio.split(":");
 

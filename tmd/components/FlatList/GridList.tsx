@@ -70,7 +70,7 @@ export default function GridList({
           return <>
             {
               listSize.measured &&
-              <RenderItemWrapper index={index}>
+              <View style={[{ width: childWidth }, marginStyle(index)]}>
                 {
                   renderItem &&
                   <>
@@ -79,7 +79,7 @@ export default function GridList({
                     }
                   </>
                 }
-              </RenderItemWrapper>
+              </View>
             }
           </>;
         }}

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Dimensions, FlatList,  Pressable, View, ViewToken } from "react-native";
+import { Dimensions, FlatList, Pressable, View, ViewToken } from "react-native";
 import { GalleryItem, ImageRatioType } from "../../types";
 
 import { useTheme } from "../../core/theming";
@@ -18,7 +18,7 @@ interface Props {
 export default function GallerySlider({ images, ratio = "16:9", backAble = false }: Props) {
   const ref = useRef<FlatList>(null);
 
-  const width = Dimensions.get("screen").width;
+  const width = Dimensions.get("window").width;
 
   const usedRatio = ratio.split(":");
 
@@ -93,7 +93,7 @@ export default function GallerySlider({ images, ratio = "16:9", backAble = false
           viewabilityConfig={viewConfigRef.current}
           onViewableItemsChanged={onViewRef.current}
           style={{
-            width: Dimensions.get("screen").width,
+            width,
             height: height,
           }}
           renderItem={({ item }) => {
@@ -106,7 +106,7 @@ export default function GallerySlider({ images, ratio = "16:9", backAble = false
                 source={{ uri: item?.image }}
                 style={{
                   height: height,
-                  width: Dimensions.get("screen").width,
+                  width,
                 }} />
             </Pressable>;
           }} />
