@@ -9,7 +9,7 @@ import MultiPickerBottomSheet from "../BottomSheet/MultiPickerBottomSheet";
 import { Button, HelperText, useTheme } from "../../index";
 import LabelInput from "../TextInput/Label/LabelInput";
 import { View } from "react-native";
-import Chip from "../Chip";
+import Chip from "../Chip/Chip";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 
 interface Props {

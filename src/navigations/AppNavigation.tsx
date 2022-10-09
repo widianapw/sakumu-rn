@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 27/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import React from "react";
+import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import ButtonScreen from "../screens/components/ButtonScreen";
@@ -57,6 +57,8 @@ const AppNavigation = () => {
       background: "white",
     },
   };
+
+
   return (
     <NavigationContainer
       ref={navigationRef}
@@ -73,8 +75,7 @@ const AppNavigation = () => {
             </>
             : <>
               {
-                !isAuthenticated
-                  ?
+                !isAuthenticated ?
                   <>
                     <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
                   </>
@@ -125,7 +126,6 @@ const AppNavigation = () => {
                       options={{
                         headerShown: false,
                       }}
-
         />
 
         <Stack.Screen name={"StripeScreen"} component={StripeScreen} options={{ headerShown: false }} />

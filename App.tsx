@@ -40,15 +40,15 @@ const App = () => {
               <RootSiblingParent>
                 <LocaleProvider>
                   <Host>
-                    <PermissionProvider>
                       <BottomSheetProvider>
                         <ModalProvider>
-                          <AuthProvider>
-                            <AppNavigation />
-                          </AuthProvider>
+                          <PermissionProvider>
+                            <AuthProvider>
+                              <AppNavigation />
+                            </AuthProvider>
+                          </PermissionProvider>
                         </ModalProvider>
                       </BottomSheetProvider>
-                    </PermissionProvider>
                   </Host>
                 </LocaleProvider>
               </RootSiblingParent>

@@ -7,7 +7,7 @@ import useCatalogService from "./useCatalogService";
 
 export default function useFeaturedCatalogQuery() {
   const { getFeaturedCatalog } = useCatalogService();
-  const { data, isLoading, ...rest } = useQuery("featured-catalog", getFeaturedCatalog);
+  const { data, isLoading, ...rest } = useQuery(["featured-catalog"], getFeaturedCatalog);
 
   return {
     catalogs: data,

@@ -10,7 +10,7 @@ import Page from "../../../../tmd/components/Page";
 import GridList from "../../../../tmd/components/FlatList/GridList";
 import { CircularProgressBar, Stack, Surface } from "../../../../tmd";
 import { ScrollView } from "react-native";
-import Chip from "../../../../tmd/components/Chip";
+import Chip from "../../../../tmd/components/Chip/Chip";
 import SearchToolbar from "../../../../tmd/components/Toolbar/SearchToolbar";
 
 export default function PaginationScreen() {

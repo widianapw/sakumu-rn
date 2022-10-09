@@ -4,7 +4,16 @@
  */
 
 import React, { useEffect, useRef, useState } from "react";
-import { FlatList, KeyboardAvoidingView, Modal, Pressable, SafeAreaView, View } from "react-native";
+import {
+  BackHandler,
+  FlatList,
+  Keyboard,
+  KeyboardAvoidingView,
+  Modal,
+  Pressable,
+  SafeAreaView,
+  View,
+} from "react-native";
 import {
   GooglePlaceData,
   GooglePlaceDetail,
@@ -242,6 +251,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
 
               <GooglePlacesAutocomplete
                 ref={ref}
+                listViewDisplayed={"auto"}
                 fetchDetails={true}
                 styles={{
                   container: {
@@ -300,6 +310,10 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                   style: {
                     width: "100%",
                     backgroundColor: "white",
+                  },
+                  blurOnSubmit:false,
+                  returnKeyType: "search",
+                  onSubmitEditing: () => {
                   },
                   onClear: () => {
                     ref?.current?.clear();

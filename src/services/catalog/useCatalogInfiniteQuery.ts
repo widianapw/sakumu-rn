@@ -23,7 +23,7 @@ export default function useCatalogInfiniteQuery(search: string) {
   } = useInfiniteQuery<CatalogListResponse>(["catalogs", search], (par) => {
     return getCatalogs(par.pageParam, search);
   }, {
-    getNextPageParam: (lastPage) => (lastPage.meta.current_page < lastPage.meta.total) ? lastPage.meta.current_page + 1 : undefined,
+    getNextPageParam: (lastPage) => (lastPage.meta.current_page < lastPage.meta.last_page) ? lastPage.meta.current_page + 1 : undefined,
   });
 
   const mappedData = useMemo(() => {

@@ -22,7 +22,8 @@ export default function useCatalogService() {
 
   const getFeaturedCatalog = async () => {
     try {
-      return await getAPI<CatalogListResponse>("products");
+      const res = await getAPI<CatalogListResponse>("products");
+      return res;
     } catch (e) {
       showErrorBS(e);
     }

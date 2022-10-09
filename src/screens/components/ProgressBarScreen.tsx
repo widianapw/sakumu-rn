@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, CircularProgressBar, LinearProgressBar, Page, Stack } from "../../../tmd";
 import { ScrollView } from "react-native";
 import { useModal } from "../../../tmd/providers/ModalProvider";
@@ -6,8 +6,9 @@ import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
 
 export default function ProgressBarScreen() {
-  const { showLoadingModal, hideLoadingModal } = useModal();
   const { showLoadingBS, hideLoadingBS } = useBottomSheet();
+  const { showLoadingModal, hideLoadingModal } = useModal();
+
   return (
     <Page>
       <Toolbar title={"ProgressBar"} />

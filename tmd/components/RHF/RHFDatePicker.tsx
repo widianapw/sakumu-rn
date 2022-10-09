@@ -26,6 +26,7 @@ export default function RHFDatePicker({ name, ...rest }: Props & ComponentProps<
           errorText={fieldState.error?.message}
           onChange={onChange}
           onBlur={onBlur}
+          date={value}
           {...rest}
         />;
       }}

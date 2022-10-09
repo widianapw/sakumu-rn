@@ -83,8 +83,8 @@ const PermissionProvider = ({ children }: any) => {
           const notGranted = osPermissions.find(it => statuses[it] != "granted");
           const type = getPermissionType(notGranted);
           //select which one you want to use
-          // showPermissionBS(type);
-          showPermissionModal(type);
+          showPermissionBS(type);
+          // showPermissionModal(type);
         }
       })
   };

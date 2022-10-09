@@ -8,7 +8,7 @@ import { usePermission } from "../../../tmd/providers/PermissionProvider";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
 export default function ModalScreen() {
-  const { showAlertModal, showConfirmationModal, hideConfirmationModal } = useModal();
+  const { showAlertModal, showConfirmationModal, hideConfirmationModal, showLoadingModal, hideLoadingModal } = useModal();
   const { requestPermissions } = usePermission();
   const handleShowConfirmation = () => {
     showConfirmationModal({

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { SceneMap } from "react-native-tab-view";
 import { useWindowDimensions, View } from "react-native";
 import { Page } from "../../../tmd";
 import Typography from "../../../tmd/components/Typography/Typography";
 import Tab from "../../../tmd/components/Tab/Tab";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 
-const FirstRoute = () => (
+interface FirstProp {
+  passed: string;
+}
+
+const FirstRoute = (props: FirstProp) => (
   <View style={{ flex: 1, backgroundColor: "white" }}>
-    <Typography>First</Typography>
+    <Typography>First {props.passed}</Typography>
   </View>
 );
 
@@ -30,12 +33,18 @@ const ForthRoute = () => (
 );
 
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-  third: ThirdRoute,
-  forth: ForthRoute,
-});
+const renderScene = ({ route }) => {
+  switch (route.key) {
+    case "first":
+      return <FirstRoute passed={"Widiana"} />;
+    case "second":
+      return <SecondRoute />;
+    case "tird":
+      return <ThirdRoute />;
+    default:
+      return <ForthRoute />;
+  }
+};
 
 export default function TabScreen() {
   const layout = useWindowDimensions();

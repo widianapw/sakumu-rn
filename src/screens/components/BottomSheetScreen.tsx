@@ -68,7 +68,7 @@ export default function BottomSheetScreen() {
 
   const [isOpenMulti, setIsOpenMulti] = useState(false);
 
-
+  const [multiBSValues, setMultiBSValues] = useState([]);
   return (
     <>
       <Page>
@@ -91,8 +91,13 @@ export default function BottomSheetScreen() {
         <MultiPickerBottomSheet
           search
           // open={false}
+          onReset={() => {
+            setMultiBSValues([])
+            setIsOpenMulti(false)
+          }}
           open={isOpenMulti}
           onClose={() => setIsOpenMulti(false)}
+          value={multiBSValues}
           data={
             _countries.map((item) => {
               const i: PickerItem = {
@@ -104,7 +109,9 @@ export default function BottomSheetScreen() {
             })
           }
           onSave={(data) => {
-            console.log(JSON.stringify(data, null, 2));
+            const values = data?.map((item) => item.id);
+            console.log(values);
+            setMultiBSValues(values);
           }}
         />
         <DateFilterBottomSheet
@@ -186,9 +193,10 @@ export default function BottomSheetScreen() {
               <Typography>{`Start date = ${selectedDateRange?.startDate}, End date = ${selectedDateRange?.endDate}`}</Typography>
             }
 
-            <Button onPress={() => {
-              setIsOpenMulti(true);
-            }}>MultiPicker</Button>
+            <Button
+              onPress={() => {
+                setIsOpenMulti(true);
+              }}>MultiPicker</Button>
 
             <Button onPress={() => {
               setIsOpenDatePicker(true);

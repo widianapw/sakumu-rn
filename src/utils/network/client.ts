@@ -54,7 +54,7 @@ client.interceptors.request.use(
       null,
       2,
     )} \nData: ${JSON.stringify(config.data, null, 2)}`;
-    console.log(printable);
+    // console.log(printable);
     return config;
   },
   (error) => Promise.reject(error),
@@ -67,7 +67,7 @@ client.interceptors.response.use(
       null,
       2,
     )}`;
-    console.log(printable);
+    // console.log(printable);
     return response.data;
   },
   (error) => {

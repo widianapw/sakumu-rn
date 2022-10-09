@@ -23,6 +23,7 @@ export default function RHFPriceField({ name, ...rest }: Props & ComponentProps<
             onChangePriceValue={(val) => {
               onChange(val);
             }}
+            initial={value}
             error={fieldState?.error != undefined}
             errorText={fieldState?.error?.message}
             {...rest}

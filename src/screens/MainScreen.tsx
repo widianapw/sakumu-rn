@@ -154,7 +154,9 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
-            navigate("ChipScreen");
+            navigate("ChipScreen", {
+              selected: 1
+            });
           }}>
             Chip Screen
           </Button>

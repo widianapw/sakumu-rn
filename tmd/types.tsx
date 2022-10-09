@@ -3,7 +3,7 @@ import { TagShape, TagSize } from "./components/Tag/Tag";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./components/Button/Button";
 import { TextInputMode, TextInputShape } from "./components/TextInput/TextField";
 import { AlertType } from "./components/Alert/Alert";
-import { ChipShape, ChipVariant } from "./components/Chip";
+import { ChipShape, ChipVariant } from "./components/Chip/Chip";
 import { ToastColorVariantType, ToastShape } from "./components/Toast";
 import { SkeletonAnimation } from "./components/Skeleton/Skeleton";
 import { ToolbarSize } from "./components/Toolbar/Toolbar";

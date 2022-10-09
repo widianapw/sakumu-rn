@@ -17,8 +17,8 @@ import { useDeepEffect } from "../../hooks/useDeepEffect";
 interface Props {
   open?: boolean;
   onClose: () => void;
-  value?: string[] | number[];
   data?: PickerItem[];
+  value?: string[] | number[];
   onReset?: () => void;
   onSave?: (items?: PickerItem[]) => void;
   title?: string;
@@ -37,6 +37,12 @@ export default function MultiPickerBottomSheet({
   const { colors } = theme;
   const { t } = useTranslation();
 
+  useEffect(() => {
+    if (props.data) {
+      setList(props.data);
+    }
+  }, [props.data]);
+
   const [isFullHeight, setIsFullHeight] = useState((props?.data?.length ?? 0) > 8);
   const [contentSize, setContentSize] = useLayout();
 
@@ -48,12 +54,12 @@ export default function MultiPickerBottomSheet({
 
   useEffect(() => {
     if (props.open) {
-      if (props?.value) {
-        setSelected(props?.value);
-      }
+      console.log(props.value);
+      setSelected(props?.value ?? []);
       setSearchQuery("");
       modalizeRef?.current?.open();
     } else {
+
       modalizeRef?.current?.close();
     }
   }, [props.open]);
@@ -77,6 +83,10 @@ export default function MultiPickerBottomSheet({
       arr.push(id);
     }
     setSelected(arr);
+  };
+
+  const handleSave = () => {
+
   };
 
   const renderItem = ({ item }) => {
@@ -164,7 +174,12 @@ export default function MultiPickerBottomSheet({
                       <Button
                         size={"sm"}
                         variant={"secondary"}
-                        onPress={props?.onReset}
+                        onPress={() => {
+                          setSelected([]);
+                          if (props.onReset) {
+                            props.onReset();
+                          }
+                        }}
                       >
                         {t("reset")}
                       </Button>

@@ -2,14 +2,13 @@
  * Created by Widiana Putra on 29/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView } from "react-native";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, RHFDatePicker, RHFPhoneField, RHFTimePicker, Stack } from "../../../tmd";
 import RHFTextField from "../../../tmd/components/RHF/RHFTextField";
-import RHFSelect from "../../../tmd/components/RHF/RHFSelect";
 import _countries from "../../../tmd/data/_countries";
 import { PickerItem } from "../../../tmd/model/PickerItem";
 import Page from "../../../tmd/components/Page";
@@ -45,12 +44,12 @@ export default function FormScreen() {
 
   const method = useForm({
     defaultValues: {
-      firstName: "Widiana",
+      firstName: "Widiana Putra",
       lastName: "",
       countryID: "",
       phoneCode: "62",
       phone: "",
-      date: "",
+      date: "2022-09-05",
       time: "",
       multiSelect: undefined,
       image: "",
@@ -58,7 +57,7 @@ export default function FormScreen() {
       multiImage: undefined,
       dateRange: undefined,
       map: undefined,
-      price: "1000000",
+      price: 100000,
       //  map initial value
       // map: {
       //   location: {

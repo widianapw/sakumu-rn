@@ -8,6 +8,7 @@ import Select from "../Select/Select";
 
 interface Props {
   name: string;
+
 }
 
 export default function RHFSelect(
