@@ -155,7 +155,7 @@ const MainScreen = ({ navigation }: any) => {
 
           <Button onPress={() => {
             navigate("ChipScreen", {
-              selected: 1
+              selected: 1,
             });
           }}>
             Chip Screen
@@ -180,7 +180,9 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
-            navigate("TabScreen");
+            navigate("TabScreen", {
+              initialIndex: 2,
+            });
           }}>
             Tab Screen
           </Button>
@@ -222,6 +224,12 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button onPress={() => {
+            navigate("CarouselScreen");
+          }}>
+            Carousel Screen
+          </Button>
+
+          <Button onPress={() => {
             navigate("StepperScreen");
           }}>
             Stepper Screen
@@ -253,7 +261,7 @@ const MainScreen = ({ navigation }: any) => {
 
       </ScrollView>
     </Page>
-  )
+  );
 };
 
 export default MainScreen;

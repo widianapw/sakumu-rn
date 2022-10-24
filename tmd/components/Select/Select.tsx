@@ -2,11 +2,11 @@
  * Created by Widiana Putra on 10/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import TextField, { TextInputProps } from "../TextInput/TextField";
-import React, { ComponentProps, useEffect, useMemo, useState } from "react";
+import TextField, {TextInputProps} from "../TextInput/TextField";
+import React, {ComponentProps, useEffect, useMemo, useState} from "react";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
-import { PickerItem } from "../../model/PickerItem";
-import { useTheme } from "../../core/theming";
+import {PickerItem} from "../../model/PickerItem";
+import {useTheme} from "../../core/theming";
 
 interface Props {
   initial?: string | number;
@@ -25,12 +25,12 @@ const Select = (
     Props & TextInputProps & ComponentProps<typeof PickerBottomSheet>
 ) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<string | number>(initial);
+  const [selected, setSelected] = useState<string | number | undefined>(initial);
   const theme = useTheme();
 
   const selectedObj = useMemo(() => {
-    return options.find((it) => it.id == selected);
-  }, [selected]);
+    return options.find((it) => it.id == selected)
+  }, [selected, initial, options]);
 
   const handleClose = () => {
     setIsOpen(false);
@@ -54,7 +54,7 @@ const Select = (
       onOpenPicker={() => {
         setIsOpen(true);
       }}
-      value={selectedObj?.name}
+      value={selectedObj?.name ?? ""}
       pickerType={"select"}
       editable={false}
       mode={rest.mode ?? theme?.textInput?.mode}

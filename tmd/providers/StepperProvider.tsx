@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { StepperItem } from "../model/StepperItem";
 
 type StepperType = {
@@ -37,11 +37,20 @@ export const useStepper = () => {
 interface Props {
   children: React.ReactNode;
   initialPosition?: number;
+  controlledPosition?: number;
   steppers: StepperItem[];
 }
 
-export default function StepperProvider({ children, initialPosition = 0, steppers }: Props) {
+export default function StepperProvider({ children, initialPosition = 0, steppers, controlledPosition }: Props) {
   const [currPosition, setCurrPosition] = useState(initialPosition);
+
+  useEffect(() => {
+    if (controlledPosition != undefined) {
+      setCurrPosition(controlledPosition);
+    }
+  }, [controlledPosition]);
+
+
   const next = () => {
     setCurrPosition(currPosition + 1);
   };

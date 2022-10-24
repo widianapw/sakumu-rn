@@ -12,10 +12,13 @@ import { ColorVariantType } from "../../types";
 
 export type TagSize = "sm" | "md" | "lg"
 export type TagShape = "rect" | "rounded"
+export type TagVariant = "default" | "outlined" | "filled"
 const ROUNDED_SHAPE = 32;
+const RECT_SHAPE = 4;
 
 interface Props {
   colorVariant?: ColorVariantType;
+  variant?: TagVariant;
   size?: TagSize;
   text?: string;
   shape?: TagShape;
@@ -25,7 +28,7 @@ interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
-export default function Tag({ size, colorVariant, text, shape, ...rest }: Props) {
+export default function Tag({ size, colorVariant, text, shape, variant, ...rest }: Props) {
   const theme = useTheme();
   const { colors, roundness, tag } = theme;
 
@@ -45,6 +48,7 @@ export default function Tag({ size, colorVariant, text, shape, ...rest }: Props)
       break;
     }
   }
+
   let borderRadius = roundness;
   if ((shape && shape == "rounded")) {
     borderRadius = ROUNDED_SHAPE;
@@ -52,9 +56,34 @@ export default function Tag({ size, colorVariant, text, shape, ...rest }: Props)
     borderRadius = ROUNDED_SHAPE;
   }
 
-  const usedVariant = colorVariant ?? tag?.colorVariant;
-  let bgColor = colors[usedVariant]["surface"];
-  let textColor = colors[usedVariant]["main"];
+  const usedColorVariant = colorVariant ?? tag?.colorVariant;
+  let bgColor = colors[usedColorVariant]["surface"];
+  let textColor = colors[usedColorVariant]["main"];
+  let borderColor = colors[usedColorVariant]["surface"];
+
+  const usedVariant = variant ?? tag.variant;
+
+  switch (usedVariant) {
+    case "default": {
+      bgColor = colors[usedColorVariant]["surface"];
+      textColor = colors[usedColorVariant]["main"];
+      borderColor = colors[usedColorVariant]["surface"];
+      break;
+    }
+    case "outlined": {
+      bgColor = colors[usedColorVariant]["surface"];
+      textColor = colors[usedColorVariant]["main"];
+      borderColor = colors[usedColorVariant]["main"];
+      break;
+    }
+    case "filled": {
+      bgColor = colors[usedColorVariant]["main"];
+      textColor = colors.neutral.neutral_10;
+      borderColor = colors[usedColorVariant]["main"];
+      break;
+    }
+  }
+
 
   return (
     <View style={
@@ -68,6 +97,8 @@ export default function Tag({ size, colorVariant, text, shape, ...rest }: Props)
           paddingVertical: 4,
           paddingHorizontal: 8,
           alignSelf: "baseline",
+          borderColor: borderColor,
+          borderWidth: 1,
         },
         rest.style,
       ]}>

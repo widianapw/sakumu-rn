@@ -103,6 +103,7 @@ export default function FormScreen() {
             />
 
             <RHFTextField
+              mode={"contained"}
               label={t("labels.last_name")}
                 name={"lastName"}
                 placeholder={t("labels.last_name")}

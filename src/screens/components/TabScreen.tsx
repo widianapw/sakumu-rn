@@ -4,6 +4,8 @@ import { Page } from "../../../tmd";
 import Typography from "../../../tmd/components/Typography/Typography";
 import Tab from "../../../tmd/components/Tab/Tab";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import AppNavigationType from "../../navigations/AppNavigationType";
 
 interface FirstProp {
   passed: string;
@@ -39,21 +41,22 @@ const renderScene = ({ route }) => {
       return <FirstRoute passed={"Widiana"} />;
     case "second":
       return <SecondRoute />;
-    case "tird":
+    case "third":
       return <ThirdRoute />;
     default:
       return <ForthRoute />;
   }
 };
 
-export default function TabScreen() {
+export default function TabScreen({ navigation, route }: NativeStackScreenProps<AppNavigationType, "TabScreen">) {
+  const initialIndex = route.params.initialIndex ?? 0;
   const layout = useWindowDimensions();
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(initialIndex);
   const [routes] = useState([
     {
       key: "first",
-      title: "On Progress",
+      title: "New",
       iconProp: {
         icon: "location",
       },
@@ -66,12 +69,13 @@ export default function TabScreen() {
   return (
     <>
       <Page>
-        <Toolbar title={"widi"} elevation={0} />
+        <Toolbar title={"TabScreen"} elevation={0} />
         <Tab
-          // lazy={true}
+          lazy={true}
+          // swipeEnabled={false}
           // tabBarPosition={"bottom"}
           tabBarPosition={"top"}
-          scrollable={true}
+          scrollable={false}
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={setIndex}

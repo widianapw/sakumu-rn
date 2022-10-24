@@ -22,11 +22,21 @@ export default function TagScreen() {
             flexDirection: "column",
           }}>
           <Tag
+            variant={"outlined"}
+            prefixIcon={{
+              icon: "ellipse",
+              size: 12,
+            }}
+            suffixIcon={{
+              icon: "arrow-forward-circle",
+              size: 12,
+            }}
             style={{ marginTop: 8 }}
             text={"Tag Primary"}
-            colorVariant={"primary"}
+            colorVariant={"info"}
           />
           <Tag
+            variant={"filled"}
             style={{ marginTop: 8 }}
             text={"Tag Success"} colorVariant={"success"} shape={"rect"} />
           <Tag
@@ -57,7 +67,6 @@ export default function TagScreen() {
             size={"sm"}
             text={"Tag SM"} colorVariant={"info"}
           />
-
         </View>
       </ScrollView>
     </Page>

@@ -32,6 +32,7 @@ interface Props {
   onChangeImageUrl?: (imageUrl: string) => void;
   onChangeImageBase64?: (imageBase64: string) => void;
   colorVariant?: ColorVariantType;
+  onDeleteImage?: () => void;
 }
 
 export default function ImagePicker({
@@ -47,6 +48,7 @@ export default function ImagePicker({
                                       onChangeImageUrl,
                                       onChangeImageBase64,
                                       colorVariant,
+                                      onDeleteImage,
                                       ...rest
                                     }: Props & ImagePickerBSProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -145,6 +147,9 @@ export default function ImagePicker({
       <ImagePickerBottomSheet
         selectedImage={selectedImageUrl}
         onDelete={() => {
+          if(onDeleteImage){
+            onDeleteImage();
+          }
           setSelectedImageUrl("");
         }}
         camera={rest.camera}

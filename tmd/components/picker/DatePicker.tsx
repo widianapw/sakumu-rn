@@ -16,6 +16,7 @@ interface Props {
   onDateChangesFormatted?: (date: string) => void;
   onDateChangeSendFormatted?: (date: string) => void;
   title?: string;
+  maximumDate?: Date;
 }
 
 
@@ -57,6 +58,7 @@ export default function DatePicker({
         title={rest.title}
         theme={"light"}
         initDate={selected}
+        maximumDate={rest?.maximumDate}
         onSave={(date) => {
           setSelected(date);
           if (onDateChanges) {

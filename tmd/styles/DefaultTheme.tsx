@@ -21,6 +21,7 @@ const DefaultTheme: Theme = {
     colorVariant: "primary",
     size: "md",
     shape: "rounded",
+    variant: "default"
   },
   alert: {
     colorVariant: "info",

@@ -97,20 +97,6 @@ export default function Gallery({ images, ratio = "16:9", backAble }: Props) {
         style={{
           position: "relative",
         }}>
-        {/*<FlatList*/}
-        {/*  ref={ref}*/}
-        {/*  showsHorizontalScrollIndicator={false}*/}
-        {/*  pagingEnabled={true}*/}
-        {/*  horizontal={true}*/}
-        {/*  data={images}*/}
-        {/*  viewabilityConfig={viewConfigRef.current}*/}
-        {/*  onViewableItemsChanged={onViewRef.current}*/}
-        {/*  style={{*/}
-        {/*    width: Dimensions.get("screen").width,*/}
-        {/*    height: height,*/}
-        {/*  }}*/}
-        {/*  renderItem={({ item }) => {*/}
-
         <Pressable
           onPress={handleIntentGallery}
           style={{ flex: 1 }}>

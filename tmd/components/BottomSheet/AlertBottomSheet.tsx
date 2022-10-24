@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useEffect, useRef } from "react";
-import { Button,  Stack } from "../../index";
+import { Button, Stack } from "../../index";
 import { Modalize } from "react-native-modalize";
 import Portal from "../Portal/Portal";
 import { SafeAreaView, View } from "react-native";
@@ -134,9 +134,7 @@ export default function AlertBottomSheet({ dismissible = true, ...props }: BSPro
                   }
                 }}
               >{props.buttonPrimaryTitle ?? t("back")}</Button>
-
             </Stack>
-
           </View>
         </SafeAreaView>
 

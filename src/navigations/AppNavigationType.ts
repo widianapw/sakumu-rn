@@ -40,12 +40,15 @@ type AppNavigationType = {
   OTPScreen: undefined,
   FormScreen: undefined,
   LayoutScreen: undefined,
-  TabScreen: undefined,
+  TabScreen: {
+    initialIndex?: number
+  },
   AvatarScreen: undefined,
   BadgeScreen: undefined,
   TooltipScreen: undefined,
   TooltipStepperScreen: undefined,
   SkeletonScreen: undefined,
   DividerScreen: undefined,
+  CarouselScreen: undefined,
 };
 export default AppNavigationType;

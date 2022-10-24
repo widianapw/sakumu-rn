@@ -14,7 +14,7 @@ import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
 import { useTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
-import { HelperText } from "../../index";
+import { HelperText, Stack } from "../../index";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import _countries from "../../data/_countries";
@@ -79,7 +79,7 @@ const TextInputFlat = ({
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
-  const fontSize = fontSizeStyle
+  const fontSize = fontSizeStyle;
 
   let inputTextColor,
     activeColor,
@@ -172,7 +172,7 @@ const TextInputFlat = ({
             />
             <View
               style={[
-                multiline ? {} : { height: height ?? MIN_HEIGHT, alignItems: 'center', justifyContent: 'center' },
+                multiline ? {} : { height: height ?? MIN_HEIGHT, alignItems: "center", justifyContent: "center" },
                 {
                   flexDirection: "row",
                   alignItems: "center",
@@ -250,7 +250,6 @@ const TextInputFlat = ({
                       if (onChangeText) {
                         onChangeText(val);
                       }
-
                     },
                     placeholder: rest.placeholder,
                     placeholderTextColor: placeholderTextColor ?? placeholderColor,
@@ -271,7 +270,7 @@ const TextInputFlat = ({
                         color: inputTextColor,
                         display: "flex",
                         paddingVertical: 4,
-                        textAlignVertical: "center",
+                        textAlignVertical: (multiline && ((rest.numberOfLines ?? 1) > 1)) ? "top" : "center",
                         textAlign: textAlign
                           ? textAlign
                           : I18nManager.isRTL
@@ -302,16 +301,16 @@ const TextInputFlat = ({
                     style={{
                       backgroundColor: "transparent",
                     }}
-                    variant={'tertiary'}
+                    variant={"tertiary"}
                     fitIcon
                     color={
                       colors.neutral.neutral_70
                     }
                     onPress={() => {
-                      if(rest.onClear){
+                      if (rest.onClear) {
                         rest?.onClear();
                       }
-                      if(rest.onInvokeTextChanged){
+                      if (rest.onInvokeTextChanged) {
                         rest?.onInvokeTextChanged("");
                       }
                       setIsShowSearch(false);
@@ -338,7 +337,7 @@ const TextInputFlat = ({
                       backgroundColor: "transparent",
                     }}
                     fitIcon
-                    variant={'tertiary'}
+                    variant={"tertiary"}
                     color={
                       isShowPassword ? theme.colors[usedColorVariant].main : theme.colors.neutral.neutral_70
                     }
@@ -380,7 +379,7 @@ const TextInputFlat = ({
                       color={colors.neutral.neutral_70}
                       size={18}
                       {...suffixIcon}
-                      />
+                    />
                   }
                 </View>
               }
@@ -389,11 +388,22 @@ const TextInputFlat = ({
           </View>
         </Pressable>
         {
-          (errorText || helperText || maxLength) &&
+          (errorText?.length || helperText?.length || maxLength != undefined) &&
           <View style={{ display: "flex", flexDirection: "row", marginTop: 4 }}>
-            <HelperText type={error ? "error" : "info"} style={{ flexGrow: 1, flex: 1 }}>
-              {error ? errorText : helperText}
-            </HelperText>
+            <Stack>
+              {
+                (error && errorText?.length) &&
+                <HelperText type={"error"} style={{ flexGrow: 1, flex: 1 }}>
+                  {errorText}
+                </HelperText>
+              }
+              {
+                ((helperText?.length ?? 0) > 0) &&
+                <HelperText type={"info"} style={{ flexGrow: 1, flex: 1 }}>
+                  {helperText}
+                </HelperText>
+              }
+            </Stack>
 
             {
               (counter && maxLength) &&

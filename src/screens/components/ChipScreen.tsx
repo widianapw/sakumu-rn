@@ -40,8 +40,9 @@ export default function ChipScreen(props) {
         <Stack p={16} spacing={8}>
           <Stack direction={"row"} spacing={8}>
             <Chip
+              shape={"rect"}
               text={"Widiana"}
-              selected={false}
+              selected={true}
             />
             <Chip text={"Widiana"} />
             <Chip text={"Widiana"} />
@@ -110,7 +111,11 @@ export default function ChipScreen(props) {
               onPickerChanges={(value) => {
                 console.log(value);
               }}
-              initialPickerValue={['61', "62"]}
+              // initialPickerValue={['61', "62"]}
+              title={"Select Country"}
+              onReset={() => {
+
+              }}
               data={
                 _countries.map((item) => {
                   const i: PickerItem = {

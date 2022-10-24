@@ -18,7 +18,7 @@ import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
 import { useTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
-import { CircularProgressBar, HelperText } from "../../index";
+import { CircularProgressBar, HelperText, Stack } from "../../index";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
 import Icon from "../Icon";
@@ -147,7 +147,7 @@ const TextInputContained = ({
               justifyContent: "center",
               alignItems: "center",
               display: "flex",
-              marginRight:Platform.OS == "ios" ? 8 : 0
+              marginRight: Platform.OS == "ios" ? 8 : 0,
             }}>
               <Icon icon={"search"} size={20} color={colors.neutral.neutral_70} />
             </View>
@@ -162,7 +162,7 @@ const TextInputContained = ({
               justifyContent: "center",
               alignItems: "center",
               display: "flex",
-              marginRight:Platform.OS == "ios" ? 8 : 0
+              marginRight: Platform.OS == "ios" ? 8 : 0,
             }}>
               {
                 prefixIcon &&
@@ -242,8 +242,10 @@ const TextInputContained = ({
                   ...font,
                   fontSize,
                   fontWeight,
+                  paddingTop:0,
+                  paddingBottom:0,
                   color: inputTextColor,
-                  textAlignVertical: "center",
+                  textAlignVertical: (multiline && ((rest.numberOfLines ?? 1) > 1)) ? "top" : "center",
                   textAlign: textAlign
                     ? textAlign
                     : "auto",
@@ -266,7 +268,7 @@ const TextInputContained = ({
                 style={{
                   backgroundColor: "transparent",
                 }}
-                variant={'tertiary'}
+                variant={"tertiary"}
                 color={
                   colors.neutral.neutral_70
                 }
@@ -299,7 +301,7 @@ const TextInputContained = ({
                 style={{
                   backgroundColor: "transparent",
                 }}
-                variant={'tertiary'}
+                variant={"tertiary"}
                 color={
                   isShowPassword ? theme.colors[usedColorVariant].main : theme.colors.neutral.neutral_70
                 }
@@ -380,11 +382,22 @@ const TextInputContained = ({
       </View>
 
       {
-        (errorText || helperText || maxLength) &&
+        (errorText?.length || helperText?.length || maxLength != undefined) &&
         <View style={{ display: "flex", flexDirection: "row", marginTop: 4 }}>
-          <HelperText type={error ? "error" : "info"} style={{ flexGrow: 1, flex: 1 }}>
-            {error ? errorText : helperText}
-          </HelperText>
+          <Stack>
+            {
+              (error && errorText?.length) &&
+              <HelperText type={"error"} style={{ flexGrow: 1, flex: 1 }}>
+                {errorText}
+              </HelperText>
+            }
+            {
+              ((helperText?.length ?? 0) > 0) &&
+              <HelperText type={"info"} style={{ flexGrow: 1, flex: 1 }}>
+                {helperText}
+              </HelperText>
+            }
+          </Stack>
 
           {
             (counter && maxLength) &&

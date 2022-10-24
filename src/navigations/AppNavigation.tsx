@@ -45,6 +45,7 @@ import StripeScreen from "../screens/components/Stripe/StripeScreen";
 import SplashScreen from "../screens/SplashScreen";
 import { useSelector } from "react-redux";
 import { rootReducer } from "../redux/stores/store";
+import CarouselScreen from "../screens/components/CarouselScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator<AppNavigationType>();
@@ -127,6 +128,8 @@ const AppNavigation = () => {
                         headerShown: false,
                       }}
         />
+
+        <Stack.Screen name={"CarouselScreen"} component={CarouselScreen} options={{ headerShown: false }} />
 
         <Stack.Screen name={"StripeScreen"} component={StripeScreen} options={{ headerShown: false }} />
       </Stack.Navigator>

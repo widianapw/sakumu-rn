@@ -1,5 +1,5 @@
 import type * as React from "react";
-import { TagShape, TagSize } from "./components/Tag/Tag";
+import { TagShape, TagSize, TagVariant } from "./components/Tag/Tag";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./components/Button/Button";
 import { TextInputMode, TextInputShape } from "./components/TextInput/TextField";
 import { AlertType } from "./components/Alert/Alert";
@@ -142,6 +142,7 @@ interface TagTheme {
   shape: TagShape;
   colorVariant: ColorVariantType;
   size: TagSize;
+  variant: TagVariant;
 }
 
 interface TextInputTheme {

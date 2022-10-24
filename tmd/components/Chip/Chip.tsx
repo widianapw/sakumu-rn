@@ -1,3 +1,8 @@
+/**
+ * Created by Widiana Putra on 23/06/2022
+ * Copyright (c) 2022 - Made with love
+ */
+
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
@@ -28,7 +33,7 @@ export type ChipProps = {
   disabled?: boolean;
   colorVariant?: ColorVariantType;
 
-  type?: "filter" | "picker";
+  type?: ChipType;
   onPickerChanges?: (item?: PickerItem) => void;
   selectedPickerValue?: string | number | undefined;
   pickerList?: PickerItem[];
@@ -113,7 +118,7 @@ export default function Chip({
       }
       break;
     }
-    case 'outlined': {
+    case "outlined": {
       bgColor = colors.neutral.neutral_10;
       borderColor = colors.neutral.neutral_50;
       txtColor = colors.neutral.neutral_90;
@@ -133,11 +138,11 @@ export default function Chip({
   }
 
   const borderRadius = {
-    borderRadius: usedShape == 'rect' ? roundness : ROUNDED_BORDER_RADIUS,
+    borderRadius: usedShape == "rect" ? roundness : ROUNDED_BORDER_RADIUS,
   };
 
   const handleOnPress = () => {
-    if (type == 'picker') {
+    if (type == "picker") {
       setIsOpenPicker(true);
     } else {
       if (rest.onPress) {
@@ -154,9 +159,9 @@ export default function Chip({
             backgroundColor: bgColor,
             borderWidth: isSelectedFilled ? 2 : isUseBorder ? 1 : 0,
             borderColor: borderColor,
-            flexDirection: 'row',
-            alignItems: 'center',
-            alignSelf: 'baseline',
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "baseline",
           },
           borderRadius,
           rest.style,
@@ -167,8 +172,8 @@ export default function Chip({
             {
               paddingVertical: isSelectedFilled ? 4 : 6,
               paddingHorizontal: isSelectedFilled ? 14 : 16,
-              flexDirection: 'row',
-              alignItems: 'center',
+              flexDirection: "row",
+              alignItems: "center",
             },
             borderRadius,
           ]}
@@ -186,8 +191,8 @@ export default function Chip({
               />
             )}
             <Typography
-              style={[{color: txtColor}, rest.textStyle]}
-              type={'label1'}>
+              style={[{ color: txtColor }, rest.textStyle]}
+              type={"label1"}>
               {selectedObj?.name ?? text}
             </Typography>
             {suffixIcon && (
@@ -201,7 +206,7 @@ export default function Chip({
               />
             )}
 
-            {type == 'picker' && (
+            {type == "picker" && (
               <Icon
                 style={{
                   marginLeft: 4,

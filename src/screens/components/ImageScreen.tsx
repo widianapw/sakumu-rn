@@ -44,17 +44,6 @@ export default function ImageScreen() {
     <Page>
       <Toolbar title={"Image Screen"} />
       <ScrollView>
-        <Stack>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={_images}
-            renderItem={({ item }) => {
-              return <Image source={{ uri: item.image }}
-                            style={{ width: Dimensions.get("window").width - 100, height: 120 }} />;
-            }} />
-        </Stack>
-
         <GallerySlider
           backAble
           ratio={"16:10"}

@@ -332,7 +332,6 @@ const colors: ThemeColors = {
     hover: "#BF6919",
     surface: "#FFF9F2",
     focus: "#CD7B2E33",
-
   },
   success: {
     main: "#43936C",

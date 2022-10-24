@@ -93,6 +93,7 @@ const CircularProgressBar = ({
       <Progress.CircleSnail
         color={color}
         strokeCap={"round"}
+        direction={"clockwise"}
         indeterminate={true}
         spinDuration={1500}
         size={size}

@@ -3,8 +3,8 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import {KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View} from "react-native";
-import {useTheme} from "../core/theming";
+import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View } from "react-native";
+import { useTheme } from "../core/theming";
 import Color from "color";
 
 interface Props {
@@ -13,29 +13,17 @@ interface Props {
   bgColor?: string;
 }
 
-export default function Page({children, statusBarColor, bgColor}: Props) {
-  const {colors} = useTheme();
+export default function Page({ children, statusBarColor, bgColor }: Props) {
+  const { colors } = useTheme();
   const statusBarHeight = StatusBar.currentHeight;
   const statusBarBackgroundColor = statusBarColor ?? colors.primary.pressed;
   const isLight = Color(statusBarBackgroundColor).isLight();
 
 
-  const CStatusBar = ({backgroundColor, ...props}: any) => (
+  const CStatusBar = ({ backgroundColor, ...props }: any) => (
     <>{
-      Platform.OS === "ios"
-        ? (
-          <View style={[{
-            height: statusBarHeight,
-          }, {backgroundColor}]}>
-            <SafeAreaView>
-              <StatusBar translucent backgroundColor={backgroundColor}
-                         barStyle={isLight ? "dark-content" : "light-content"} {...props} />
-            </SafeAreaView>
-          </View>
-        ) : (
-          <StatusBar backgroundColor={backgroundColor}
-                     barStyle={isLight ? "dark-content" : "light-content"} {...props} />
-        )
+      <StatusBar backgroundColor={backgroundColor}
+                 barStyle={isLight ? "dark-content" : "light-content"} {...props} />
     }
     </>
   );
@@ -47,15 +35,21 @@ export default function Page({children, statusBarColor, bgColor}: Props) {
       />
 
       <SafeAreaView style={[
-        {flex: 1},
-        bgColor ? {backgroundColor: bgColor} : {}
+        { flex: 1 },
+        bgColor ? { backgroundColor: bgColor } : {},
       ]}>
 
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{flex: 1}}>
-          {children}
-        </KeyboardAvoidingView>
+        {
+          Platform.OS === "ios" ?
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              style={{ flex: 1 }}>
+              {children}
+            </KeyboardAvoidingView>
+            : <>
+              {children}
+            </>
+        }
 
       </SafeAreaView>
     </>

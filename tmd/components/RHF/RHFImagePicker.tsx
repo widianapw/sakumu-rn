@@ -24,6 +24,9 @@ export default function RHFImagePicker({
           return <ImagePicker
             error={fieldState.error != undefined}
             errorText={fieldState.error?.message}
+            onDeleteImage={() => {
+              setValue(name, undefined);
+            }}
             // onChangeImageBase64={(imageBase64) => {
             //   setValue(name, imageBase64);
             //   clearErrors(name);
