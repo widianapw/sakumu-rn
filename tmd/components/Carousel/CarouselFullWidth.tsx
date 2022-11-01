@@ -17,6 +17,8 @@ export default function CarouselFullWidth({
                                             loop,
                                             autoPlayInterval = 3500,
                                             autoPlay,
+                                            indicator = true,
+                                            indicatorPosition = "flex-start",
                                           }: ComponentProps<typeof Carousel>) {
   const ref = useRef<FlatList>(null);
 
@@ -120,22 +122,42 @@ export default function CarouselFullWidth({
           }} />
 
 
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            start: 0,
-            margin: 16,
-            width: width / 5,
-          }}
-        >
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            ref={indRef}
-            horizontal={true}
-            data={data}
-            renderItem={renderIndicator} />
-        </View>
+        {
+          indicator &&
+          <View
+            style={
+              [{
+                position: "absolute",
+                margin: 16,
+              },
+                indicatorPosition === "flex-start" && {
+                  bottom: 0,
+                  left: 0,
+                },
+                indicatorPosition === "flex-end" && {
+                  bottom: 0,
+                  right: 0,
+                },
+                indicatorPosition === "center" && {
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  justifyContent: "center", alignItems: "center",
+                },
+              ]}
+          >
+            <View style={{
+              width: width/5
+            }}>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                ref={indRef}
+                horizontal={true}
+                data={data}
+                renderItem={renderIndicator} />
+            </View>
+          </View>
+        }
 
       </View>
 

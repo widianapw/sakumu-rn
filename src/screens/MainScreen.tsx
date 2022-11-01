@@ -50,20 +50,6 @@ const MainScreen = ({ navigation }: any) => {
           </Button>
 
           <Button
-            colorVariant={"secondary"}
-            onPress={() => {
-              navigate("StripeScreen");
-            }}>
-            Stripe Integration
-          </Button>
-
-          <Button onPress={() => {
-            navigate("MapTrackingScreen");
-          }}>
-            Map Tracking
-          </Button>
-
-          <Button
             onPress={() => {
               navigate("ButtonScreen");
             }}

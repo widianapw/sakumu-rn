@@ -17,6 +17,8 @@ interface Props {
   loop?: boolean;
   autoPlay?: boolean;
   autoPlayInterval?: number;
+  indicatorPosition?: "flex-start" | "flex-end" | "center";
+  indicator?: boolean;
 }
 
 export default function Carousel({
@@ -26,6 +28,8 @@ export default function Carousel({
                                    loop,
                                    autoPlayInterval = 3500,
                                    autoPlay,
+                                   indicatorPosition = "flex-start",
+                                   indicator = true,
                                  }: Props) {
   const ref = useRef<FlatList>(null);
 
@@ -150,7 +154,7 @@ export default function Carousel({
                   justifyContent: "center",
                   alignItems: "center",
                   marginLeft: 16,
-                  marginRight :isLast ? 16 : 0,
+                  marginRight: isLast ? 16 : 0,
                 }}>
                 <Image
                   source={{ uri: item?.image_url }}
@@ -163,19 +167,22 @@ export default function Carousel({
             }} />
 
 
-          <View
-            style={{
-              marginHorizontal: 16,
-              width: width / 5,
-            }}
-          >
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              // ref={indRef}
-              horizontal={true}
-              data={data}
-              renderItem={renderIndicator} />
-          </View>
+          {
+            indicator &&
+            <View
+              style={{
+                marginHorizontal: 16,
+                width: width / 5,
+                alignSelf: indicatorPosition,
+              }}
+            >
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
+                data={data}
+                renderItem={renderIndicator} />
+            </View>
+          }
 
         </View>
       </Stack>

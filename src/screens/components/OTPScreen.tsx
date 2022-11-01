@@ -36,6 +36,7 @@ export default function OTPScreen() {
             pinCount={5} />
 
           <OTPInput
+            autoFocusOnLoad
             onCodeFilled={(code) => {
               Toast.show(code);
             }}

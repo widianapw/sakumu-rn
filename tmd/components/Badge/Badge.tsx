@@ -52,7 +52,7 @@ export default function Badge({ label, size, colorVariant, shape, style, textSty
     borderRadius = ROUNDED_SHAPE;
   }
 
-  const usedVariant = colorVariant ?? badge?.variant;
+  const usedVariant = colorVariant ?? badge?.colorVariant;
   let bgColor = colors[usedVariant]["main"];
   let textColor = colors.neutral.neutral_10;
 

@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 28/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { ComponentProps, useEffect, useState } from "react";
+import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 import { useTheme } from "../../core/theming";
 import { View } from "react-native";
@@ -18,9 +18,14 @@ interface Props {
   colorVariant?: ColorVariantType;
 }
 
-export default function OTPInput({
-                                   error, errorText, helperText, mode, colorVariant, ...rest
-                                 }: Props & ComponentProps<typeof OTPInputView>) {
+const OTPInput: React.RefForwardingComponent<{}, Props & ComponentProps<typeof OTPInputView>> = ({
+                                                                                                   error,
+                                                                                                   errorText,
+                                                                                                   helperText,
+                                                                                                   mode,
+                                                                                                   colorVariant,
+                                                                                                   ...rest
+                                                                                                 }: Props & ComponentProps<typeof OTPInputView>, ref) => {
   const { colors, textInput, fonts, otpInput } = useTheme();
   const usedColorVariant = colorVariant ?? otpInput.colorVariant;
   const usedMode = mode ?? otpInput.mode;
@@ -29,6 +34,8 @@ export default function OTPInput({
   const selectedBorderColor = isError ? colors.danger.main : colors[usedColorVariant].main;
   const filledBGColor = isError ? colors.danger.surface : colors[usedColorVariant].surface;
   const selectedFilledBGColor = isError ? colors.danger.surface : colors[usedColorVariant].surface;
+  const localRef = useRef(null);
+  const usedRef = ref ?? localRef;
   useEffect(() => {
     setIsError(error);
   }, [error, errorText]);
@@ -42,9 +49,19 @@ export default function OTPInput({
     }
   };
 
-  const Filled = () => {
+  useEffect(() => {
+    if (rest.autoFocusOnLoad) {
+      setTimeout(() => {
+        usedRef?.current?.focusField(0);
+      }, 300);
+    }
+  }, []);
+
+
+  const renderFilled = () => {
     return (
       <OTPInputView
+        ref={usedRef}
         onCodeChanged={handleChanges}
         selectionColor={colors[usedColorVariant].main}
         codeInputFieldStyle={
@@ -70,15 +87,17 @@ export default function OTPInput({
 
 
         {...rest}
+        autoFocusOnLoad={false}
         style={[{
           width: "100%",
         }, rest.style]}
       />
     );
   };
-  const Flat = () => {
+  const renderFlat = () => {
     return (
       <OTPInputView
+        ref={usedRef}
         onCodeChanged={handleChanges}
         selectionColor={colors[usedColorVariant].main}
         codeInputFieldStyle={
@@ -100,15 +119,17 @@ export default function OTPInput({
           borderBottomWidth: 2,
         }}
         {...rest}
+        autoFocusOnLoad={false}
         style={[{
           width: "100%",
         }, rest.style]}
       />
     );
   };
-  const Contained = () => {
+  const renderContained = () => {
     return (
       <OTPInputView
+        ref={usedRef}
         onCodeChanged={handleChanges}
         selectionColor={colors[usedColorVariant].main}
         codeInputFieldStyle={
@@ -129,13 +150,25 @@ export default function OTPInput({
           borderWidth: 2,
         }}
         {...rest}
-
+        autoFocusOnLoad={false}
         style={[{
           width: "100%",
         }, rest.style]}
       />
     );
   };
+
+  const renderOtp = () => {
+    switch (usedMode) {
+      case "contained":
+        return renderContained();
+      case "flat":
+        return renderFlat();
+      default:
+        return renderFilled();
+    }
+  };
+
   return (
     <View style={{
       flexDirection: "column",
@@ -149,21 +182,7 @@ export default function OTPInput({
           position: "relative",
         }, rest.style]
       }>
-        {
-          usedMode == "contained" &&
-          <Contained />
-        }
-
-        {
-          usedMode == "flat" &&
-          <Flat />
-        }
-
-        {
-          usedMode == "filled" &&
-          <Filled />
-        }
-
+        {renderOtp()}
       </View>
       {
         isError &&
@@ -173,4 +192,6 @@ export default function OTPInput({
       }
     </View>
   );
-}
+};
+
+export default React.forwardRef(OTPInput);

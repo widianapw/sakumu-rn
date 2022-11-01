@@ -30,7 +30,11 @@ export default function CarouselScreen() {
 
   return <Page>
     <Toolbar title={"CarouselScreen"} />
-    <CarouselFullWidth data={_mockData} autoPlay loop={true} autoPlayInterval={5000} />
+    <CarouselFullWidth
+      indicatorPosition={"center"}
+      data={_mockData} autoPlay loop={true} autoPlayInterval={5000} />
+
+
     <Carousel
       data={_mockData}
       onPressItem={(item) => {
