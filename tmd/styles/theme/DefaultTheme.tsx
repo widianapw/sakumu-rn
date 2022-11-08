@@ -1,11 +1,12 @@
-import configureFonts from "./fonts";
-import type { Theme } from "../types";
-import { colors } from "./colors";
+import configureFonts from "../fonts";
+import type { Theme } from "../../types";
+import { defaultThemeColors } from "../defaultThemeColors";
 
 const DefaultTheme: Theme = {
-  dark: false,
+  name: "light",
   roundness: 8,
-  colors: colors,
+  colors: defaultThemeColors,
+  dark: false,
   textInput: {
     mode: "contained",
     shape: "rect",

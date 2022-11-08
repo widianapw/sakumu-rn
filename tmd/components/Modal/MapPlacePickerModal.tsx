@@ -23,7 +23,7 @@ import {
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import Config from "react-native-config";
 import TextField from "../TextInput/TextField";
-import { Button, Divider, Icon, IconButton, Stack, useTheme } from "../../index";
+import { Button, Divider, Icon, IconButton, Stack, appTheme } from "../../index";
 import Typography from "../Typography/Typography";
 import IllustNoLocation from "../../../src/assets/illusts/location_not_found.svg";
 import Portal from "../Portal/Portal";
@@ -42,7 +42,7 @@ interface Props {
 export default function MapPlacePickerModal({ open, onClose, onSelected, onCurrentLocation }: Props) {
   const { t, currentLanguage } = useLocale();
   const ref = useRef<GooglePlacesAutocompleteRef>(null);
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const histories = useSelector((state: ReturnType<typeof rootReducer>) => state.mapReducer.searchHistories);
   const dispatch = useDispatch();
   const [isOpenHistory, setIsOpenHistory] = useState(true);

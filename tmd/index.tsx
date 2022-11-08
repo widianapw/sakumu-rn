@@ -1,8 +1,8 @@
-import * as Colors from "./styles/colors";
+import * as Colors from "./styles/defaultThemeColors";
 
 export { Colors };
 
-export { useTheme, withTheme, ThemeProvider } from "./core/theming";
+export { appTheme, withTheme, ThemeProvider } from "./core/theming";
 //provider
 export { default as Provider } from "./core/Provider";
 export { default as BottomSheetProvider } from "./providers/BottomSheetProvider";
@@ -10,7 +10,7 @@ export { default as ModalProvider } from "./providers/ModalProvider";
 export { default as PermissionProvider } from "./providers/PermissionProvider";
 export { default as TooltipStepperProvider } from "./providers/TooltipStepperProvider";
 
-export { default as DefaultTheme } from "./styles/DefaultTheme";
+export { default as DefaultTheme } from "./styles/theme/DefaultTheme";
 export { default as shadow } from "./styles/shadow";
 export { default as overlay } from "./styles/overlay";
 export { default as configureFonts } from "./styles/fonts";

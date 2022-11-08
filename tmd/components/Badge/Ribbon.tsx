@@ -1,7 +1,7 @@
 import React from "react";
 import Typography, { TypographyType } from "../Typography/Typography";
 import LinearGradient from "react-native-linear-gradient";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { View } from "react-native";
 import { Icon, Stack } from "../../index";
 import { IconProps } from "../Icon";
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default function Ribbon({ label, icon, variant, footColor, customGradient, size, mirror }: Props) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const usedVariant = variant ?? "danger";
   const usedSize = size ?? "md";
   let gradientColors = [colors[usedVariant]["main"], colors[usedVariant]["hover"]];

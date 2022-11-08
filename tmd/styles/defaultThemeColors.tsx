@@ -280,7 +280,7 @@ export const grey900 = "#212121";
 export const black = "#000000";
 export const white = "#ffffff";
 
-const colors: ThemeColors = {
+const defaultThemeColors: ThemeColors = {
   primary: {
     main: "#4C4DDC",
     surface: "#F5F5FF",
@@ -288,6 +288,7 @@ const colors: ThemeColors = {
     hover: "#3234CC",
     pressed: "#21217A",
     focus: "#4C4DDC33",
+    content: "#FFFFFF",
   },
   secondary: {
     main: "#009499",
@@ -296,6 +297,7 @@ const colors: ThemeColors = {
     hover: "#0EB9BF",
     pressed: "#0D6B6F",
     focus: "#00949933",
+    content: "#FFFFFF",
   },
   tertiary: {
     main: "#FC9918",
@@ -304,6 +306,8 @@ const colors: ThemeColors = {
     hover: "#FFAC41",
     pressed: "#CE7E15",
     focus: "#FC991833",
+    content: "#FFFFFF",
+
   },
   neutral: {
     neutral_10: "#FFFFFF",
@@ -324,6 +328,8 @@ const colors: ThemeColors = {
     hover: "#BD251C",
     surface: "#FFF4F2",
     focus: "#CB3A3133",
+    content: "#FFFFFF",
+
   },
   warning: {
     main: "#CD7B2E",
@@ -332,6 +338,7 @@ const colors: ThemeColors = {
     hover: "#BF6919",
     surface: "#FFF9F2",
     focus: "#CD7B2E33",
+    content: "#FFFFFF",
   },
   success: {
     main: "#43936C",
@@ -340,6 +347,7 @@ const colors: ThemeColors = {
     hover: "#357A59",
     surface: "#F6F6F6",
     focus: "#43936C33",
+    content: "#FFFFFF",
   },
   info: {
     main: "#3267E3",
@@ -348,11 +356,11 @@ const colors: ThemeColors = {
     hover: "#114CD6",
     surface: "#F0F3FF",
     focus: "#3267E333",
+    content: "#FFFFFF",
   },
 
   //not used
   accent: "#4C4DDC",
-  background: "#f6f6f6",
   surface: white,
   error: "#B00020",
   text: black,
@@ -362,4 +370,4 @@ const colors: ThemeColors = {
   backdrop: color(black).alpha(0.5).rgb().string(),
   notification: pinkA400,
 };
-export { colors };
+export { defaultThemeColors };

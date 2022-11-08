@@ -4,7 +4,7 @@
  */
 import { StyleProp, StyleSheet, TextStyle } from "react-native";
 import * as React from "react";
-import { useTheme } from "../../index";
+import { appTheme } from "../../index";
 import Text from "./Text";
 import { normalizeSize } from "../../utils/normalizeSize";
 
@@ -32,7 +32,7 @@ interface Props {
 }
 
 const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeof Text>) => {
-  const theme = useTheme();
+  const theme = appTheme();
 
   let fontSize = 14;
   let lineHeight = 20;

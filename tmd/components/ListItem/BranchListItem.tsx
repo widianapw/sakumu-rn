@@ -5,12 +5,12 @@
 import React from "react";
 import { CustomRenderItemType } from "../../model/PickerItem";
 import { Pressable, View } from "react-native";
-import { Icon, Stack, useTheme } from "../../index";
+import { Icon, Stack, appTheme } from "../../index";
 import Typography from "../Typography/Typography";
 import RadioButton from "../RadioButton";
 
 export default function BranchListItem({ item, onSelect, isSelected }: CustomRenderItemType) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   return <>
     <Pressable
       style={{

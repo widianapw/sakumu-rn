@@ -4,7 +4,7 @@ import { Animated, LayoutChangeEvent, StyleProp, TextInput as NativeTextInput, T
 import TextInputFlat from "./TextInputFlat";
 import TextInputIcon, { Props as TextInputIconProps } from "./Adornment/TextInputIcon";
 import TextInputAffix, { Props as TextInputAffixProps } from "./Adornment/TextInputAffix";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import type { RenderProps } from "./types";
 import TextInputContained from "./TextInputContained";
 import TextInputFilled from "./TextInputFilled";
@@ -226,7 +226,7 @@ const TextField = React.forwardRef<TextInputHandles, TextInputProps>(
     }: TextInputProps,
     ref,
   ) => {
-    const theme = useTheme();
+    const theme = appTheme();
 
     const usedMode = mode ?? theme.textInput?.mode ?? "flat";
 

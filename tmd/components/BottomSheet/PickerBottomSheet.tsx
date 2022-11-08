@@ -6,7 +6,7 @@ import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import { Portal } from "react-native-portalize";
 import { Modalize } from "../Modalize";
 import { Dimensions, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
-import { Button, Divider, TextField, useTheme } from "../../index";
+import { Button, Divider, TextField, appTheme } from "../../index";
 import { PickerItem } from "../../model/PickerItem";
 import RadioButton from "../RadioButton/RadioButton";
 import { useTranslation } from "react-i18next";
@@ -36,7 +36,7 @@ export default function PickerBottomSheet({
   const [selected, setSelected] = useState();
   const [list, setList] = useState(props.data);
   const [searchQuery, setSearchQuery] = useState("");
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors } = theme;
   const { t } = useTranslation();
 

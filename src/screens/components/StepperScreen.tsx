@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Page, Stack, Toast, Toolbar, useTheme } from "../../../tmd";
+import { Button, Page, Stack, Toast, Toolbar, appTheme } from "../../../tmd";
 import StepperProvider, { StepperContext } from "../../../tmd/providers/StepperProvider";
 import { StepperItem } from "../../../tmd/model/StepperItem";
 import { View } from "react-native";
@@ -9,7 +9,7 @@ import ProgressStepper from "../../../tmd/components/Stepper/ProgressStepper";
 import LabelStepper from "../../../tmd/components/Stepper/LabelStepper";
 
 export default function StepperScreen() {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const _mockStepper: StepperItem[] = [
     {
       id: 1,

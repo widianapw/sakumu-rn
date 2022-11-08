@@ -11,9 +11,10 @@ import Typography from "../Typography/Typography";
 import Divider from "../Divider";
 import Icon from "../Icon";
 import ImagePicker, { ImageOrVideo } from "react-native-image-crop-picker";
-import { Stack } from "../../index";
+import { appTheme, Stack } from "../../index";
 
 export type ImageRatioCrop = "1:1" | "4:3" | "16:9" | "16:10" | "21:9";
+
 export interface ImagePickerBSProps {
   open?: boolean;
   title?: string;
@@ -25,13 +26,19 @@ export interface ImagePickerBSProps {
   crop?: boolean;
   camera?: boolean;
   gallery?: boolean;
-  selectedImage?: string
+  selectedImage?: string;
 }
 
 
-export default function ImagePickerBottomSheet({ selectedImage,camera = true, gallery = true, ...props }: ImagePickerBSProps) {
+export default function ImagePickerBottomSheet({
+                                                 selectedImage,
+                                                 camera = true,
+                                                 gallery = true,
+                                                 ...props
+                                               }: ImagePickerBSProps) {
   const modalizeRef = useRef<Modalize>(null);
   const { t } = useTranslation();
+  const { colors } = appTheme();
   const [currentImage, setCurrentImage] = useState(selectedImage);
   const imageSize = 800;
   useEffect(() => {
@@ -110,6 +117,8 @@ export default function ImagePickerBottomSheet({ selectedImage,camera = true, ga
           padding: 16,
           borderTopRightRadius: 16,
           borderTopLeftRadius: 16,
+          backgroundColor: colors.neutral.neutral_10,
+          shadowColor: colors.neutral.neutral_100,
         }}
 
         onClose={props.onClose}

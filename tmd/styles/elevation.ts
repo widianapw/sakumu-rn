@@ -1,4 +1,4 @@
-import { colors } from "./colors";
+import { defaultThemeColors } from "./defaultThemeColors";
 
 export default function elevation({
                                     elevation, color,
@@ -6,7 +6,7 @@ export default function elevation({
 
   const SHADOW_OPACITY = 0.24;
 
-  const usedColor = color ?? colors.neutral.neutral_100;
+  const usedColor = color ?? defaultThemeColors.neutral.neutral_100;
   let height, radius;
   switch (elevation) {
     case 1:

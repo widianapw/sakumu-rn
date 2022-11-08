@@ -6,7 +6,7 @@ import React, { ComponentProps, useEffect, useMemo, useState } from "react";
 import { PickerItem } from "../../model/PickerItem";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
 import MultiPickerBottomSheet from "../BottomSheet/MultiPickerBottomSheet";
-import { Button, HelperText, useTheme } from "../../index";
+import { Button, HelperText, appTheme } from "../../index";
 import LabelInput from "../TextInput/Label/LabelInput";
 import { View } from "react-native";
 import Chip from "../Chip/Chip";
@@ -46,7 +46,7 @@ export default function MultiSelect({
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string[] | number[]>(initial ?? []);
   const { t } = useLocale();
-  const {colors} = useTheme()
+  const {colors} = appTheme()
 
   const selectedObjs = useMemo(() => {
     return options.filter((it) => selected.includes(it?.id));

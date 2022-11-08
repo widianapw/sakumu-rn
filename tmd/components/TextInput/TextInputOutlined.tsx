@@ -37,7 +37,7 @@ import {
   calculateOutlinedIconAndAffixTopPosition,
 } from './helpers';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 
 const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
 const LABEL_PADDING_TOP = 8;
@@ -72,7 +72,7 @@ const TextInputOutlined = ({
   placeholderTextColor,
   ...rest
 }: ChildTextInputProps) => {
-  const theme = useTheme()
+  const theme = appTheme()
   const adornmentConfig = getAdornmentConfig({ left, right });
 
   const { colors, fonts } = theme;

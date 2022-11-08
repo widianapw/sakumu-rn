@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from "react";
 import { Pressable, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import Animated, { interpolateColors, spring } from "react-native-reanimated";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import color from "color";
 import { ColorVariantType } from "../../types";
 
@@ -34,9 +34,9 @@ const RNSwitch = ({
                     ...rest
                   }: Props) => {
 
-  const { colors } = useTheme();
+  const { colors } = appTheme();
 
-  const { switch: switchTheme } = useTheme();
+  const { switch: switchTheme } = appTheme();
   const usedColorVariant = colorVariant ?? switchTheme.colorVariant;
   let usedThumbColor, usedActiveTrackColor, usedInactiveTrackColor, inactiveThumbColor;
   if (!disabled) {

@@ -95,6 +95,7 @@ export default function FormScreen() {
               flex: 1,
             }}>
 
+
             <RHFTextField
               requiredLabel
               label={t("labels.first_name")}
@@ -188,8 +189,8 @@ export default function FormScreen() {
             />
 
             <RHFAvatarImagePicker
+              size={"3xl"}
               name={"avatar"}
-
             />
 
             <RHFMapPicker

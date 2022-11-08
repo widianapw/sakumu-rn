@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
 import { HelperText, Stack } from "../../index";
 import Typography from "../Typography/Typography";
@@ -63,7 +63,7 @@ const TextInputFlat = ({
                          colorVariant,
                          ...rest
                        }: ChildTextInputProps) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const isAndroid = Platform.OS === "android";
   const { colors, fonts, textInput } = theme;
   const font = fonts.regular;
@@ -428,7 +428,7 @@ type PhonePickerProps = {
 
 const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
   const country = _countries.find((it) => it.phone_code == initial);
-  const theme = useTheme();
+  const theme = appTheme();
   return <View
     style={{
       display: "flex",

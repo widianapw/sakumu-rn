@@ -4,7 +4,7 @@
  */
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, FlatList, Modal, Pressable, SafeAreaView, View, ViewToken } from "react-native";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { IconButton, Image, Stack } from "../../index";
 import Portal from "../Portal/Portal";
 import { GalleryItem, ImageRatioType } from "../../types";
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export default function ImageViewerModal({ images, index = 0, onClose, open, ratio = "16:9" }: Props) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const imageWidth = Dimensions.get("window").width;
   const previewWidth = imageWidth / 3.5;
 

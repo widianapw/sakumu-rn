@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocale } from "../../providers/LocaleProvider";
 import { SelectedMap } from "../../../tmd/components/picker/MapPicker";
 import MapView from "react-native-maps";
-import { Button, Page, Skeleton, useTheme } from "../../../tmd";
+import { Button, Page, Skeleton, appTheme } from "../../../tmd";
 import Geocoder from "@timwangdev/react-native-geocoder";
 import Config from "react-native-config";
 import Geolocation from "react-native-geolocation-service";
@@ -24,7 +24,7 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [isLoadingGeocode, setIsLoadingGeocode] = useState(false);
   const mapRef = useRef<MapView>(null);
-  const theme = useTheme();
+  const theme = appTheme();
 
   const onClose = () => {
     goBack();

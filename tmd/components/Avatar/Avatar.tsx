@@ -1,7 +1,7 @@
 import React from "react";
 import { Animated, Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import { Icon, Image } from "../../index";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import Typography, { TypographyType } from "../Typography/Typography";
 import Color from "color";
 
@@ -43,7 +43,7 @@ export default function Avatar({
                                  containerStyle,
                                  showOnlineStatus, isOnline,
                                }: Props) {
-  const { colors, avatar } = useTheme();
+  const { colors, avatar } = appTheme();
   let viewSize = 40, typographyType: TypographyType = "title1";
   const animation = new Animated.Value(0);
   const usedVariant = variant ?? avatar.variant;

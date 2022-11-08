@@ -5,7 +5,7 @@
 import React, { ComponentProps, useState } from "react";
 import TextField from "../TextInput/TextField";
 import moment from "moment";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import DatePickerBottomSheet from "../BottomSheet/DatePickerBottomSheet";
 import TmdConstants from "../../utils/TmdConstants";
@@ -33,7 +33,7 @@ export default function DatePicker({
   const handleOpen = () => {
     setIsOpenPicker(true);
   };
-  const theme = useTheme();
+  const theme = appTheme();
 
   // @ts-ignore
   return (

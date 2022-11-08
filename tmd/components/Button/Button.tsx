@@ -6,8 +6,8 @@ import color from "color";
 import CircularProgressBar from "../ProgressBar/CircularProgressBar";
 import Surface from "../Surface";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
-import { black, white } from "../../styles/colors";
-import { useTheme } from "../../core/theming";
+import { black, white } from "../../styles/defaultThemeColors";
+import { appTheme } from "../../core/theming";
 import Icon, { IconProps } from "../Icon";
 import Typography, { TypographyType } from "../Typography/Typography";
 import { ColorVariantType } from "../../types";
@@ -127,21 +127,21 @@ const Button = ({
                   colorVariant,
                   ...rest
                 }: Props & React.ComponentProps<typeof Surface>) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const usedShape = shape ?? theme.button.shape;
   let marginSize = 8;
-  const usedColorVariant = colorVariant ?? theme.button.colorVariant
+  const usedColorVariant = colorVariant ?? theme.button.colorVariant;
 
   const usedSize = size ?? theme.button.size;
-  let defIconSize= 18
+  let defIconSize = 18;
   switch (usedSize) {
     case "xs":
       marginSize = 4;
-      defIconSize = 14
+      defIconSize = 14;
       break;
     case "sm":
       marginSize = 8;
-      defIconSize = 14
+      defIconSize = 14;
       break;
     case "md":
       marginSize = 10;
@@ -159,54 +159,48 @@ const Button = ({
     textColor: string,
     borderWidth: number;
 
-
-  if (usedVariant === "primary") {
-    if (disabled) {
-      backgroundColor = color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
-    } else if (buttonColor) {
-      backgroundColor = buttonColor;
-    } else {
-      backgroundColor = colors[usedColorVariant]?.main;
-    }
-  } else {
-    backgroundColor = "transparent";
-  }
-
-  if (usedVariant === "secondary") {
-    borderColor = colors[usedColorVariant]?.main;
-    borderWidth = 1;
-  } else {
-    borderColor = "transparent";
-    borderWidth = 0;
-  }
-
   if (disabled) {
+    backgroundColor = color(theme.dark ? white : black)
+      .alpha(0.12)
+      .rgb()
+      .string();
     textColor = color(theme.dark ? white : black)
       .alpha(0.32)
       .rgb()
       .string();
     borderColor = colors.neutral.neutral_50;
 
-  } else if (usedVariant === "primary") {
-    let isDark;
-
-    if (typeof dark === "boolean") {
-      isDark = dark;
-    } else {
-      isDark =
-        backgroundColor === "transparent"
-          ? false
-          : !color(backgroundColor).isLight();
+    if (usedVariant == "tertiary") {
+      borderColor = "transparent";
+      backgroundColor = "transparent";
+      textColor = color(theme.dark ? white : black)
+        .alpha(0.5)
+        .rgb()
+        .string();
     }
-
-    textColor = isDark ? white : black;
-  } else if (buttonColor) {
-    textColor = buttonColor;
   } else {
-    textColor = colors[usedColorVariant].main;
+    switch (usedVariant) {
+      case "primary": {
+        backgroundColor = buttonColor ?? colors[usedColorVariant]?.main;
+        borderColor = "transparent";
+        borderWidth = 0;
+        textColor = colors[usedColorVariant].content;
+        break;
+      }
+      case "secondary": {
+        borderColor = colors[usedColorVariant]?.main;
+        borderWidth = 1;
+        backgroundColor = colors.neutral.neutral_10;
+        textColor = colors[usedColorVariant].main;
+        break;
+      }
+      case "tertiary": {
+        borderColor = "transparent";
+        borderWidth = 0;
+        textColor = colors[usedColorVariant].main;
+        break;
+      }
+    }
   }
 
   const rippleColor = color(colors[usedColorVariant].pressed).alpha(0.32).rgb().string();
@@ -346,27 +340,27 @@ const Button = ({
                     numberOfLines={1}
                     style={[
                       styles.label,
-                        uppercase && styles.uppercaseLabel,
-                        textStyle,
-                        labelStyle,
-                        {},
-                      ]}
-                    >
-                      {children}
-                    </Typography>
-                  }
+                      uppercase && styles.uppercaseLabel,
+                      textStyle,
+                      labelStyle,
+                      {},
+                    ]}
+                  >
+                    {children}
+                  </Typography>
+                }
 
-                  {
-                    suffixIcon &&
-                    <View style={{ marginLeft: 8 }}>
-                      <Icon
-                        size={suffixIcon?.size ?? defIconSize}
-                        color={suffixIcon?.color ?? textColor}
-                        {...suffixIcon}
-                      />
-                    </View>
-                  }
-                </>
+                {
+                  suffixIcon &&
+                  <View style={{ marginLeft: 8 }}>
+                    <Icon
+                      size={suffixIcon?.size ?? defIconSize}
+                      color={suffixIcon?.color ?? textColor}
+                      {...suffixIcon}
+                    />
+                  </View>
+                }
+              </>
 
 
             </View>

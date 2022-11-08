@@ -4,9 +4,9 @@ import { GestureResponderEvent, StyleProp, StyleSheet, TouchableWithoutFeedback,
 import color from "color";
 
 import TouchableRipple from "./TouchableRipple/TouchableRipple";
-import { useTheme } from "../core/theming";
+import { appTheme } from "../core/theming";
 
-import type { $RemoveChildren } from "../types";
+import type { $RemoveChildren, ColorVariantType } from "../types";
 import Icon from "./Icon";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./Button/Button";
 
@@ -31,6 +31,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   color?: string;
   themeSize?: ButtonSize;
   iconNode?: ReactNode
+  colorVariant?: ColorVariantType;
   /**
    * @optional
    */
@@ -82,14 +83,16 @@ const IconButton = ({
                       shape,
                       themeSize,
                       iconNode,
+  colorVariant,
                       ...rest
                     }: Props & React.ComponentProps<typeof Icon>) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors, roundness, button } = theme;
 
   const usedVariant = variant ?? button.variant;
   const usedShape = shape ?? button.shape;
   const usedSize = themeSize ?? button.size;
+  const usedColorVariant = colorVariant ?? button.colorVariant;
 
 
   let backgroundColor: string,
@@ -103,7 +106,7 @@ const IconButton = ({
     case "xs" : {
       usedIconSize = 10;
       calculateButtonSize = 2.4;
-      break
+      break;
     }
     case "sm" : {
       usedIconSize = 12;
@@ -130,8 +133,8 @@ const IconButton = ({
         backgroundColor = colors.neutral.neutral_60;
         textColor = colors.neutral.neutral_10;
       } else {
-        backgroundColor = colors.primary?.main;
-        textColor = colors.neutral.neutral_10;
+        backgroundColor = colors[usedColorVariant]?.main;
+        textColor = colors[usedColorVariant]?.content;
       }
       break;
     }
@@ -141,7 +144,7 @@ const IconButton = ({
         textColor = colors.neutral.neutral_50;
       } else {
         backgroundColor = colors.neutral.neutral_10;
-        textColor = colors.primary.main;
+        textColor = colors[usedColorVariant].main;
       }
       break;
     }
@@ -151,7 +154,7 @@ const IconButton = ({
         textColor = colors.neutral.neutral_50;
       } else {
         backgroundColor = colors.neutral.neutral_10;
-        textColor = colors.primary.main;
+        textColor = colors[usedColorVariant].main;
       }
       break;
     }

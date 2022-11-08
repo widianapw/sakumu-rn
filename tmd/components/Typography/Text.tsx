@@ -5,7 +5,7 @@ import {
     StyleProp,
     StyleSheet,
 } from 'react-native';
-import {useTheme, withTheme} from '../../core/theming';
+import {appTheme, withTheme} from '../../core/theming';
 
 type Props = React.ComponentProps<typeof NativeText> & {
     style?: StyleProp<TextStyle>;
@@ -26,7 +26,7 @@ const Text: React.RefForwardingComponent<{}, Props> = (
     ref
 ) => {
     const root = React.useRef<NativeText | null>(null);
-    const theme = useTheme()
+    const theme = appTheme()
 
     React.useImperativeHandle(ref, () => ({
         setNativeProps: (args: Object) => root.current?.setNativeProps(args),

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconButton, Stack, Surface, useTheme } from "../../index";
+import { IconButton, Stack, Surface, appTheme } from "../../index";
 import Color from "color";
 import { goBack, navigationRef } from "../../../src/navigations/RootNavigation";
 import { View } from "react-native";
@@ -28,7 +28,7 @@ export default function SearchToolbar(
     onPressSearch, onTextChange, searchPlaceholder,
   }: Props,
 ) {
-  const { colors, toolbar } = useTheme();
+  const { colors, toolbar } = appTheme();
   const { t } = useLocale();
   const usedBg = backgroundColor || colors.neutral.neutral_10;
   const isLight = Color(usedBg).isLight();

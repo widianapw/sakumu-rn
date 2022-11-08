@@ -1,6 +1,6 @@
 import React, { ComponentProps } from "react";
 import { TabBar, TabBarIndicator, TabView } from "react-native-tab-view";
-import { Icon, Stack, useTheme } from "../../index";
+import { Icon, Stack, appTheme } from "../../index";
 import Typography from "../Typography/Typography";
 import { ColorVariantType } from "../../types";
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Tab({ scrollable, colorVariant,...rest }: Props & ComponentProps<typeof TabView>) {
-  const { colors , tab} = useTheme();
+  const { colors , tab} = appTheme();
   const usedColorVariant = colorVariant ?? tab.colorVariant;
   return (
     <>

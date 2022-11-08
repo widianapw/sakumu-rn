@@ -4,7 +4,7 @@
  */
 import React, { ComponentProps, useRef, useState } from "react";
 import { Animated, StyleProp, View, ViewStyle } from "react-native";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import Icon from "../Icon";
 import Typography from "../Typography/Typography";
 import IconButton from "../IconButton";
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function Alert({ title, description, dismissible, type, colorVariant, iconProps, ...rest }: Props) {
-  const { colors, roundness, alert } = useTheme();
+  const { colors, roundness, alert } = appTheme();
   const [isShown, setIsShown] = useState(true);
   const opacityAnimation = useRef(new Animated.Value(1)).current;
   let backgroundColor = colors.info.surface;

@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { ComponentProps, useEffect, useState } from "react";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { usePermission } from "../../providers/PermissionProvider";
 import { CAMERA_PERMISSIONS, STORAGE_PERMISSIONS } from "../../data/_permissionTypes";
 import { ImageBackground, Platform, View, ViewStyle } from "react-native";
@@ -53,7 +53,7 @@ export default function ImagePicker({
                                     }: Props & ImagePickerBSProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isShowViewer, setIsShowViewer] = useState(false);
-  const { colors, roundness, imagePicker } = useTheme();
+  const { colors, roundness, imagePicker } = appTheme();
   const { t } = useLocale();
   const { requestPermissions } = usePermission();
   const usedColorVariant = colorVariant ?? imagePicker.colorVariant;

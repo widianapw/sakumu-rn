@@ -6,7 +6,7 @@
 import React from "react";
 import { default as ExToast, ToastOptions } from "react-native-root-toast";
 import configureFonts from "../styles/fonts";
-import { colors } from "../styles/colors";
+import { defaultThemeColors } from "../styles/defaultThemeColors";
 import { DefaultTheme } from "../index";
 import { ColorVariantType } from "../types";
 
@@ -22,16 +22,16 @@ export default class Toast extends ExToast {
     const theme = DefaultTheme.toast;
     const usedVariant = options?.colorVariant ?? theme.colorVariant;
     const usedShape = options?.shape ?? theme.shape;
-    let borderRadius, backgroundColor, textColor = colors.neutral.neutral_10;
+    let borderRadius, backgroundColor, textColor = defaultThemeColors.neutral.neutral_10;
     if (usedShape === "rounded") {
       borderRadius = 24;
     } else {
       borderRadius = 8;
     }
     if (usedVariant === "default") {
-      backgroundColor = colors.neutral.neutral_100;
+      backgroundColor = defaultThemeColors.neutral.neutral_100;
     } else {
-      backgroundColor = colors[usedVariant].main;
+      backgroundColor = defaultThemeColors[usedVariant].main;
     }
     ExToast.show(message, {
       ...options,

@@ -15,7 +15,7 @@ export default function ModalScreen() {
       title: "Takin ingin Tanda Tangan Kontrak?",
       imageNode: <IllustNoConnection />,
       description: "Selesaikan kontrak dengan melakukan tanda tangan digital pada aplikasi",
-      buttonOrientation: "horizontal",
+      buttonOrientation: "vertical",
       buttonPrimaryAction: () => {
         hideConfirmationModal();
       },

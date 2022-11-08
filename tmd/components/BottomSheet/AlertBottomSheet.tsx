@@ -8,7 +8,7 @@ import { Modalize } from "react-native-modalize";
 import Portal from "../Portal/Portal";
 import { SafeAreaView, View } from "react-native";
 import Typography from "../Typography/Typography";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { useTranslation } from "react-i18next";
 
 export interface BSProps {
@@ -28,6 +28,7 @@ export interface BSProps {
 export default function AlertBottomSheet({ dismissible = true, ...props }: BSProps) {
   const modalizeRef = useRef<Modalize>(null);
   const { t } = useTranslation();
+  const { colors } = appTheme();
 
   useEffect(() => {
     if (props.open) {
@@ -48,7 +49,7 @@ export default function AlertBottomSheet({ dismissible = true, ...props }: BSPro
     modalizeRef?.current?.open();
   };
 
-  const theme = useTheme();
+  const theme = appTheme();
   return (
     <Portal>
       <Modalize
@@ -56,6 +57,7 @@ export default function AlertBottomSheet({ dismissible = true, ...props }: BSPro
         modalStyle={{
           padding: 16,
           borderTopRightRadius: 16,
+          backgroundColor: colors.neutral.neutral_10,
           borderTopLeftRadius: 16,
         }}
         onClose={props.onClose}

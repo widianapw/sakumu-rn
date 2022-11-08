@@ -1,7 +1,7 @@
 import React, { ComponentProps, useEffect, useMemo, useRef, useState } from "react";
 import useLayout from "../../utils/useLayout";
 import { Animated, Image as ImageFactory, View } from "react-native";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import Icon from "../Icon";
 
 interface Props {
@@ -14,7 +14,7 @@ export default function Image({ ...rest }: Props & ComponentProps<typeof ImageFa
   const [isError, setIsError] = useState(false);
   const opacityErrorAnimation = useRef(new Animated.Value(0)).current;
   const opacityLoadingAnimation = useRef(new Animated.Value(1)).current;
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const errorPadding = 16;
   const errorSize = useMemo(() => {
     if (size.width > 64 + errorPadding && size.height > 64 + errorPadding) {

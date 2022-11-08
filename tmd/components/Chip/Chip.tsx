@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import Typography from "../Typography/Typography";
 import Icon, { IconProps } from "../Icon";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { TouchableRipple } from "../../index";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../../model/PickerItem";
@@ -57,7 +57,7 @@ export default function Chip({
                                colorVariant,
                                ...rest
                              }: ChipProps) {
-  const { colors, chip, roundness } = useTheme();
+  const { colors, chip, roundness } = appTheme();
   let bgColor, txtColor, borderColor;
   const usedVariant = variant ?? chip.variant;
   const [isOpenPicker, setIsOpenPicker] = useState(false);

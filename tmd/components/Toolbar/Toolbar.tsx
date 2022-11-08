@@ -1,6 +1,6 @@
-import React, { ReactNode, useState } from "react";
+import React, { ComponentProps, ReactNode, useState } from "react";
 import Typography from "../Typography/Typography";
-import { IconButton, Stack, Surface, useTheme } from "../../index";
+import { IconButton, Stack, Surface, appTheme } from "../../index";
 import Color from "color";
 import { View } from "react-native";
 import { goBack, navigationRef } from "../../../src/navigations/RootNavigation";
@@ -10,6 +10,8 @@ export type ToolbarSize = "sm" | "md" | "lg";
 interface Props {
   title?: string;
   description?: string;
+  titleProps?: ComponentProps<typeof Typography>,
+  descriptionProps?: ComponentProps<typeof Typography>,
   backgroundColor?: string;
   center?: boolean;
   backable?: boolean;
@@ -31,12 +33,13 @@ export default function Toolbar({
                                   size,
                                   actionButton,
                                   elevation,
+                                  titleProps, descriptionProps,
                                 }: Props) {
-  const { colors, toolbar } = useTheme();
+  const { colors, toolbar } = appTheme();
   const usedBg = backgroundColor || colors.neutral.neutral_10;
   const isLight = Color(usedBg).isLight();
-  const usedTitleColor = isLight ? colors.neutral.neutral_100 : colors.neutral.neutral_10;
-  const usedDescColor = isLight ? colors.neutral.neutral_80 : colors.neutral.neutral_10;
+  const usedTitleColor = colors.neutral.neutral_100;
+  const usedDescColor = colors.neutral.neutral_80;
   const isShowBack = backable && navigationRef.canGoBack();
   const [iconViewWidth, setIconViewWidth] = useState(0);
   const [actionButtonWidth, setActionButtonWidth] = useState(0);
@@ -96,6 +99,7 @@ export default function Toolbar({
                 ]
               }>
               <Typography
+                {...titleProps}
                 numberOfLines={1}
                 ellipsizeMode={"tail"}
                 type={"title2"}
@@ -103,6 +107,7 @@ export default function Toolbar({
               {
                 description &&
                 <Typography
+                  {...descriptionProps}
                   numberOfLines={1}
                   ellipsizeMode={"tail"}
                   type={"body3"} style={{ color: usedDescColor }}>{description} </Typography>
@@ -172,6 +177,7 @@ export default function Toolbar({
           paddingBottom: 8,
         }} direction={"column"} spacing={2}>
           <Typography
+            {...titleProps}
             numberOfLines={1}
             ellipsizeMode={"tail"}
             type={"title1"}
@@ -179,6 +185,7 @@ export default function Toolbar({
           {
             description &&
             <Typography
+              {...descriptionProps}
               numberOfLines={1}
               ellipsizeMode={"tail"}
               type={"body3"} style={{ color: usedDescColor }}>{description} </Typography>
@@ -234,6 +241,7 @@ export default function Toolbar({
           paddingBottom: 8,
         }} direction={"column"} spacing={2}>
           <Typography
+            {...titleProps}
             numberOfLines={1}
             ellipsizeMode={"tail"}
             type={"h2"}
@@ -241,6 +249,7 @@ export default function Toolbar({
           {
             description &&
             <Typography
+              {...descriptionProps}
               numberOfLines={1}
               ellipsizeMode={"tail"}
               type={"body3"} style={{ color: usedDescColor }}>{description} </Typography>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Dimensions, FlatList, Pressable, View, ViewToken } from "react-native";
 import { GalleryItem, ImageRatioType } from "../../types";
 
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { IconButton } from "../../index";
 import ImageViewerModal from "../Modal/ImageViewerModal";
 import elevation from "../../styles/elevation";
@@ -27,7 +27,7 @@ export default function GallerySlider({ images, ratio = "16:9", backAble = false
 
   const indicatorSize = 8;
 
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const renderIndicator = ({ item, index }) => {
     const isCurr = currIndex === index;
     return <Pressable

@@ -1,5 +1,5 @@
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
-import { Button, HelperText, Stack, useTheme } from "../../index";
+import { Button, HelperText, Stack, appTheme } from "../../index";
 import LabelInput from "../TextInput/Label/LabelInput";
 import { StyleProp, View, ViewStyle } from "react-native";
 import SignatureScreen, { SignatureViewRef } from "react-native-signature-canvas";
@@ -33,7 +33,7 @@ export default function SignatureCanvas({
                                         }: Props & ComponentProps<typeof SignatureScreen>) {
   const ref = useRef<SignatureViewRef>(null);
   const [signature, setSignature] = useState("");
-  const { colors } = useTheme();
+  const { colors } = appTheme();
 
   useEffect(() => {
     if (onChangedBase64) {

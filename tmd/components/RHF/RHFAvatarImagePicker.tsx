@@ -1,6 +1,6 @@
-import React, { ComponentProps } from "react";
+import React, {ComponentProps} from "react";
 import AvatarImagePicker from "../picker/AvatarImagePicker";
-import { Controller, useFormContext } from "react-hook-form";
+import {Controller, useFormContext} from "react-hook-form";
 
 interface Props {
   name: string;
@@ -16,8 +16,7 @@ export default function RHFAvatarImagePicker({ name, ...rest }: Props & Componen
         render={({ field: { onChange, onBlur, value }, fieldState }) => {
           return (
             <AvatarImagePicker
-              initialImageUrl={value}
-              onImageChange={(val) => {
+              onChangeImageBase64={(val) => {
                 setValue(name, val);
                 clearErrors(name);
               }}

@@ -1,6 +1,6 @@
 import React, { ComponentProps } from "react";
 import { Modal, Pressable, SafeAreaView } from "react-native";
-import { CircularProgressBar, Stack, useTheme } from "../../index";
+import { CircularProgressBar, Stack, appTheme } from "../../index";
 import Color from "color";
 import Portal from "../Portal/Portal";
 import Typography from "../Typography/Typography";
@@ -22,10 +22,11 @@ export default function ProgressModal({
                                         title,
                                         circularProgressProps,
                                       }: ProgressModalProps) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   return (
     <Portal>
-      <Modal visible={open} transparent={true} animationType={"fade"}
+      <Modal visible={open}
+             transparent={true} animationType={"fade"}
              onRequestClose={dismissible ? onClose : undefined}>
         <SafeAreaView style={{
           flex: 1,
@@ -53,7 +54,7 @@ export default function ProgressModal({
             items={"center"}
             content={"center"}
             style={{
-              backgroundColor: "white",
+              backgroundColor: colors.neutral.neutral_10,
               borderRadius: 8,
             }}>
             <CircularProgressBar size={"lg"} style={{

@@ -7,7 +7,7 @@ import { ChipShape, ChipVariant } from "./components/Chip/Chip";
 import { ToastColorVariantType, ToastShape } from "./components/Toast";
 import { SkeletonAnimation } from "./components/Skeleton/Skeleton";
 import { ToolbarSize } from "./components/Toolbar/Toolbar";
-import { BadgeShape, BadgeSize, BadgeVariant } from "./components/Badge/Badge";
+import { BadgeShape, BadgeSize } from "./components/Badge/Badge";
 import { AvatarSize, AvatarVariant } from "./components/Avatar/Avatar";
 
 export type ColorVariantType = "success" | "warning" | "primary" | "danger" | "info" | "secondary" | "tertiary"
@@ -40,7 +40,11 @@ export type Fonts = {
 type Mode = "adaptive" | "exact";
 
 export type Theme = {
+  name: string;
+
+  //required for app navigation type
   dark: boolean;
+
   mode?: Mode;
   roundness: number;
   colors: ThemeColors;
@@ -164,6 +168,7 @@ interface BaseColorProps {
   border?: string;
   hover?: string;
   pressed?: string;
+  content?: string;
 }
 
 export interface PrimaryColorProps extends BaseColorProps {
@@ -217,7 +222,8 @@ export interface ThemeColors {
   warning: WarningColorProps,
   success: SuccessColorProps,
   info: InfoColorProps,
-  background: string;
+
+
   surface: string;
   accent: string;
   error: string;

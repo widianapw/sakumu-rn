@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View } from "react-native";
-import { useTheme } from "../core/theming";
+import { appTheme } from "../core/theming";
 
 interface Props {
   variant?: "solid" | "dotted";
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function Divider({ variant, size = "xs", ...props }: Props & React.ComponentProps<typeof View>) {
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors } = theme;
   let borderWidth = 1;
   switch (size) {

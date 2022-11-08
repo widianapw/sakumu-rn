@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { useTranslation } from "react-i18next";
 import { Dimensions, FlatList, Image, Pressable, SafeAreaView, View } from "react-native";
 import { Button, Checkbox, Divider, Modalize } from "../../index";
@@ -33,7 +33,7 @@ export default function MultiPickerBottomSheet({
   const [selected, setSelected] = useState<string[] | number[]>([]);
   const [list, setList] = useState(props.data);
   const [searchQuery, setSearchQuery] = useState("");
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors } = theme;
   const { t } = useTranslation();
 

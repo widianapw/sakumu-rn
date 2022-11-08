@@ -5,6 +5,7 @@
 import React, { useEffect, useRef } from "react";
 import { Modalize } from "../Modalize";
 import { SafeAreaView, View } from "react-native";
+import { appTheme } from "../../core/theming";
 
 interface Props {
   dismissible?: boolean;
@@ -15,6 +16,7 @@ interface Props {
 
 const BottomSheetWrapper = ({ open, onClose, dismissible, ...props }: Props) => {
   const ref = useRef<Modalize>(null);
+  const {colors} = appTheme()
   useEffect(() => {
     if (open) {
       ref?.current?.open();
@@ -40,6 +42,7 @@ const BottomSheetWrapper = ({ open, onClose, dismissible, ...props }: Props) => 
       modalStyle={{
         borderTopRightRadius: 16,
         borderTopLeftRadius: 16,
+        backgroundColor: colors.neutral.neutral_10
       }}
       onClose={onClose}
       customRenderer={

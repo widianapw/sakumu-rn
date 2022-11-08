@@ -4,7 +4,7 @@
  */
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { View } from "react-native";
 import HelperText from "../HelperText";
 import { TextInputMode } from "../TextInput/TextField";
@@ -26,7 +26,7 @@ const OTPInput: React.RefForwardingComponent<{}, Props & ComponentProps<typeof O
                                                                                                    colorVariant,
                                                                                                    ...rest
                                                                                                  }: Props & ComponentProps<typeof OTPInputView>, ref) => {
-  const { colors, textInput, fonts, otpInput } = useTheme();
+  const { colors, textInput, fonts, otpInput } = appTheme();
   const usedColorVariant = colorVariant ?? otpInput.colorVariant;
   const usedMode = mode ?? otpInput.mode;
   const [isError, setIsError] = useState(false);

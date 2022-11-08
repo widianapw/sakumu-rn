@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { LayoutRectangle, Modal, Pressable, StyleProp, View, ViewStyle } from "react-native";
 import Portal from "../Portal/Portal";
 import Color from "color";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
 import { IconButton, Stack } from "../../index";
 import { useDeepEffect } from "../../hooks/useDeepEffect";
@@ -58,7 +58,7 @@ export default function Tooltip({
   const [popoverSize, setPopoverSize] = useLayout();
   const arrowSize = 12;
   const modalPadding = 16;
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const { t } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
 

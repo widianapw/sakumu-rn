@@ -6,11 +6,14 @@ import { HelperText, Stack } from "../../index";
 import ImageViewerModal from "../Modal/ImageViewerModal";
 import { StyleProp, View, ViewStyle } from "react-native";
 import { useLocale } from "../../../src/providers/LocaleProvider";
+import RNFS from "react-native-fs";
 
 interface Props {
   initialImageUrl?: string;
   emptyVariant?: AvatarVariant;
   onImageChange?: (imageUrl: string) => void;
+  onChangeImageBase64?: (imageBase64: string) => void;
+
   bsProps?: ComponentProps<typeof ImagePickerBottomSheet>;
   buttonStyle?: StyleProp<ViewStyle>;
   avatarStyle?: StyleProp<ViewStyle>;
@@ -25,7 +28,7 @@ interface Props {
 export default function AvatarImagePicker({
                                             initialImageUrl,
                                             emptyVariant = "icon",
-                                            onImageChange,
+                                            onImageChange, onChangeImageBase64,
                                             bsProps,
                                             buttonStyle,
                                             avatarStyle, style, buttonTitle,
@@ -38,10 +41,28 @@ export default function AvatarImagePicker({
   const { t } = useLocale();
 
   useEffect(() => {
-    if (onImageChange) {
-      onImageChange(selectedImage ?? "");
+    if (selectedImage) {
+      console.log("initialImageUrl", initialImageUrl);
+      console.log("selected image", selectedImage);
+      if (selectedImage != initialImageUrl) {
+        if (onImageChange) {
+          onImageChange(selectedImage ?? "");
+        }
+        if (onChangeImageBase64) {
+          convertToBase64(selectedImage, (data) => {
+            onChangeImageBase64(data);
+          });
+        }
+      }
     }
   }, [selectedImage]);
+
+  const convertToBase64 = async (uri: string, onSuccess: (base64: string) => void) => {
+    await RNFS.readFile(uri, "base64").then((data) => {
+      onSuccess("data:image/png;base64," + data);
+    });
+  };
+
 
   return (
     <>

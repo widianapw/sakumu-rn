@@ -1,13 +1,13 @@
-import * as Colors from './colors';
-import { Animated } from 'react-native';
+import * as Colors from "./defaultThemeColors";
+import { Animated } from "react-native";
+import { useTheme } from "../providers/ThemeProvider";
 
-const SHADOW_COLOR = Colors.black;
 const SHADOW_OPACITY = 0.24;
 
 export default function shadow(elevation: number | Animated.Value = 0) {
+  const SHADOW_COLOR = useTheme().theme.colors.neutral.neutral_100;
   if (elevation instanceof Animated.Value) {
     const inputRange = [0, 1, 2, 3, 8, 24];
-
     return {
       shadowColor: SHADOW_COLOR,
       shadowOffset: {
@@ -20,7 +20,7 @@ export default function shadow(elevation: number | Animated.Value = 0) {
       shadowOpacity: elevation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, SHADOW_OPACITY],
-        extrapolate: 'clamp',
+        extrapolate: "clamp",
       }),
       shadowRadius: elevation.interpolate({
         inputRange,

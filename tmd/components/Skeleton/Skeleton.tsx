@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, Platform, StyleProp, StyleSheet, View, ViewProps, ViewStyle } from "react-native";
 import Color from "color";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 
 export type SkeletonAnimation = "none" | "pulse" | "wave";
 
@@ -66,7 +66,7 @@ export default function Skeleton({
                                    borderRadius,
                                    ...rest
                                  }: SkeletonProps) {
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors, skeleton } = theme;
   const usedAnimation = animation ?? skeleton.animation;
   const usedBorderRadios = borderRadius ?? skeleton.borderRadius;

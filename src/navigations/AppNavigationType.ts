@@ -3,7 +3,7 @@ import { GalleryItem } from "../../tmd/types";
 
 type AppNavigationType = {
   //integration
-  StripeScreen:undefined,
+  StripeScreen: undefined,
   //utils
   GalleryListScreen: {
     images: GalleryItem[],
@@ -50,5 +50,7 @@ type AppNavigationType = {
   SkeletonScreen: undefined,
   DividerScreen: undefined,
   CarouselScreen: undefined,
+  PrinterTDSScreen: undefined,
+  ThemeTDSScreen: undefined,
 };
 export default AppNavigationType;

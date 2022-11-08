@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, Stack, useTheme } from "../../index";
+import { Image, Stack, appTheme } from "../../index";
 import { ImageRatioType } from "../../types";
 import { Dimensions, FlatList, Pressable, View, ViewToken } from "react-native";
 
@@ -41,7 +41,7 @@ export default function Carousel({
 
   const indicatorSize = 8;
 
-  const { colors } = useTheme();
+  const { colors } = appTheme();
 
 //you need to preview n items.
   const previewCount = 1;

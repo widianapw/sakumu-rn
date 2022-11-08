@@ -4,7 +4,7 @@
  */
 import React from "react";
 import { ScrollView } from "react-native";
-import { IconButton, useTheme } from "../../../tmd";
+import { IconButton, appTheme } from "../../../tmd";
 import TextField from "../../../tmd/components/TextInput/TextField";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
@@ -12,7 +12,7 @@ import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
 import PriceField from "../../../tmd/components/TextInput/PriceField";
 
 const TextFieldScreen = () => {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   return (
     <Page>
       <Toolbar

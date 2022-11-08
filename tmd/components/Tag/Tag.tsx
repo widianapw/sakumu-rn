@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { StyleProp, View, ViewStyle } from "react-native";
 import Typography, { TypographyType } from "../Typography/Typography";
 import Icon, { IconProps } from "../Icon";
@@ -29,7 +29,7 @@ interface Props {
 }
 
 export default function Tag({ size, colorVariant, text, shape, variant, ...rest }: Props) {
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors, roundness, tag } = theme;
 
   const usedSize = size ?? tag?.size;

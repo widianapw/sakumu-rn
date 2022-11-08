@@ -14,7 +14,7 @@
  */
 
 import React from "react";
-import { DefaultTheme, Provider as ThemeProvider } from "./tmd";
+import { DefaultTheme } from "./tmd";
 import AppNavigation from "./src/navigations/AppNavigation";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheetProvider from "./tmd/providers/BottomSheetProvider";
@@ -28,6 +28,7 @@ import { persistor, store } from "./src/redux/stores/store";
 import { PersistGate } from "redux-persist/integration/react";
 import ModalProvider from "./tmd/providers/ModalProvider";
 import { RootSiblingParent } from "react-native-root-siblings";
+import ThemeProvider from "./tmd/providers/ThemeProvider";
 // Create a client
 const queryClient = new QueryClient();
 const App = () => {
@@ -36,19 +37,19 @@ const App = () => {
       <PersistGate persistor={persistor}>
         <GestureHandlerRootView style={{ flex: 1 }}>{/* content */}
           <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={DefaultTheme}>
+            <ThemeProvider initialTheme={DefaultTheme}>
               <RootSiblingParent>
                 <LocaleProvider>
                   <Host>
-                      <BottomSheetProvider>
-                        <ModalProvider>
-                          <PermissionProvider>
-                            <AuthProvider>
-                              <AppNavigation />
-                            </AuthProvider>
-                          </PermissionProvider>
-                        </ModalProvider>
-                      </BottomSheetProvider>
+                    <BottomSheetProvider>
+                      <ModalProvider>
+                        <PermissionProvider>
+                          <AuthProvider>
+                            <AppNavigation />
+                          </AuthProvider>
+                        </PermissionProvider>
+                      </ModalProvider>
+                    </BottomSheetProvider>
                   </Host>
                 </LocaleProvider>
               </RootSiblingParent>

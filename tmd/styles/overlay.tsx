@@ -1,7 +1,7 @@
 // @ts-ignore
 import color from 'color';
 import { Animated } from 'react-native';
-import DarkTheme from './DarkTheme';
+import DarkTheme from './theme/DarkTheme';
 
 const isAnimatedValue = (
   it: number | Animated.AnimatedInterpolation

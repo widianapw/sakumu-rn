@@ -6,7 +6,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { PickerItem } from "../../model/PickerItem";
 import TextField, { TextInputProps } from "../TextInput/TextField";
 import PickerModal, { PickerModalProps } from "../Modal/PickerModal";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 
 interface Props {
   initial?: string | number;
@@ -26,7 +26,7 @@ export default function SelectModal(
 ) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string | number>(initial);
-  const theme = useTheme();
+  const theme = appTheme();
 
   const selectedObj = useMemo(() => {
     return options.find((it) => it.id == selected);

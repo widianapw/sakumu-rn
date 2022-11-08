@@ -5,7 +5,7 @@
 import Typography from "../../Typography/Typography";
 import * as React from "react";
 import { Text as NativeText, View } from "react-native";
-import { useTheme } from "../../../core/theming";
+import { appTheme } from "../../../core/theming";
 
 interface Props {
   label?: string;
@@ -19,7 +19,7 @@ export default function LabelInput({
                                      required,
                                      ...props
                                    }: Props & React.ComponentProps<typeof Typography>) {
-  const theme = useTheme();
+  const theme = appTheme();
   return <View style={{ flexDirection: "row" }}>
     <Typography
       type={"label1"}

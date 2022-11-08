@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import RadioButtonAndroid from "./RadioButtonAndroid";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
 import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
 import { ColorVariantType } from "../../types";
@@ -92,7 +92,7 @@ export type Props = {
  * ```
  */
 const RadioButton = ({ onPress, value, colorVariant, ...props }: Props) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const Button = RadioButtonAndroid;
   const usedColorVariant = colorVariant ?? theme.radioButton.colorVariant;
 

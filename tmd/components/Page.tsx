@@ -4,7 +4,7 @@
  */
 import React from "react";
 import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View } from "react-native";
-import { useTheme } from "../core/theming";
+import { appTheme } from "../core/theming";
 import Color from "color";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function Page({ children, statusBarColor, bgColor }: Props) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const statusBarHeight = StatusBar.currentHeight;
   const statusBarBackgroundColor = statusBarColor ?? colors.primary.pressed;
   const isLight = Color(statusBarBackgroundColor).isLight();

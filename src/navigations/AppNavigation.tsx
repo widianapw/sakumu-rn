@@ -46,20 +46,23 @@ import SplashScreen from "../screens/SplashScreen";
 import { useSelector } from "react-redux";
 import { rootReducer } from "../redux/stores/store";
 import CarouselScreen from "../screens/components/CarouselScreen";
+import PrinterTDSScreen from "../screens/components/PrinterTDSScreen";
+import ThemeTDSScreen from "../screens/components/ThemeTDSScreen";
+import { useTheme } from "../../tmd/providers/ThemeProvider";
+import DarkTheme from "../../tmd/styles/theme/DarkTheme";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator<AppNavigationType>();
   const { isAuthenticated } = useSelector((state: ReturnType<typeof rootReducer>) => state.authReducer);
   const { isLoading: isLoadingSplash } = useSelector((state: ReturnType<typeof rootReducer>) => state.splashReducer);
+  const { theme } = useTheme();
   const NavTheme = {
-    ...DefaultTheme,
+    ...theme,
     colors: {
-      ...DefaultTheme.colors,
-      background: "white",
+      ...theme.colors,
+      background: theme.colors.neutral.neutral_10,
     },
   };
-
-
   return (
     <NavigationContainer
       ref={navigationRef}
@@ -112,6 +115,8 @@ const AppNavigation = () => {
                     <Stack.Screen name={"SignatureCanvasScreen"} component={SignatureCanvasScreen} />
                     <Stack.Screen name={"ImageScreen"} component={ImageScreen} />
                     <Stack.Screen name={"StepperScreen"} component={StepperScreen} />
+                    <Stack.Screen name={"PrinterTDSScreen"} component={PrinterTDSScreen} />
+                    <Stack.Screen name={"ThemeTDSScreen"} component={ThemeTDSScreen} />
                   </>
 
               }

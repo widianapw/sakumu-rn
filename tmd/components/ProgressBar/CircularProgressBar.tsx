@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import * as Progress from "react-native-progress";
 import { ColorVariantType } from "../../types";
 
@@ -59,7 +59,7 @@ const CircularProgressBar = ({
                                colorVariant,
                                ...rest
                              }: Props) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const { progressBar } = theme;
   const usedColorVariant = colorVariant ?? progressBar.colorVariant;
 

@@ -8,7 +8,7 @@ import { Animated, View } from "react-native";
 import { Portal } from "react-native-portalize";
 import { DateData } from "react-native-calendars";
 import moment from "moment";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { Button } from "../../index";
 import Typography from "../Typography/Typography";
 import { CalendarList } from "react-native-calendars/src";
@@ -43,7 +43,7 @@ const DateRangePickerBottomSheet = ({
                                       ...rest
                                     }: Props & ComponentProps<typeof CalendarList> & DateRangeValidationType) => {
   const modalizeRef = React.useRef<Modalize>(null);
-  const { colors, roundness } = useTheme();
+  const { colors, roundness } = appTheme();
   const [datePeriod, setDatePeriod] = useState([]);
   const [dateRange, setDateRange] = useState<DateRange | undefined>({});
 

@@ -1,5 +1,5 @@
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
-import { IconButton, Image, Stack, useTheme } from "../../index";
+import { IconButton, Image, Stack, appTheme } from "../../index";
 import { ImageRatioType } from "../../types";
 import { Dimensions, FlatList, ImageBackground, Pressable, View, ViewToken } from "react-native";
 import { useLocale } from "../../../src/providers/LocaleProvider";
@@ -31,7 +31,7 @@ export default function CarouselFullWidth({
 
   const indicatorSize = 8;
 
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const renderIndicator = ({ item, index }) => {
     const isCurr = currIndex === index;
     return <Pressable

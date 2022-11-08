@@ -235,6 +235,18 @@ const MainScreen = ({ navigation }: any) => {
             Language Screen
           </Button>
 
+          <Button onPress={() => {
+            navigate("PrinterTDSScreen");
+          }}>
+            Printer Screen
+          </Button>
+
+          <Button onPress={() => {
+            navigate("ThemeTDSScreen");
+          }}>
+            Theme Screen
+          </Button>
+
           <Button
             color={"red"}
             loading={isLoadingLogout}

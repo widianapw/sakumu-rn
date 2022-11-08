@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Animated, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import shadow from "../styles/shadow";
-import { useTheme } from "../core/theming";
+import { appTheme } from "../core/theming";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -60,7 +60,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 const Surface = ({ style, ...rest }: Props) => {
   const { elevation = rest.elevation ?? 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors } = theme;
   return (
     <Animated.View

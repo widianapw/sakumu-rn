@@ -4,7 +4,7 @@
  */
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
-import { Stack, useTheme } from "../../../tmd";
+import { Stack, appTheme } from "../../../tmd";
 import PhoneField from "../../../tmd/components/picker/PhoneField";
 import _countries from "../../../tmd/data/_countries";
 import Select from "../../../tmd/components/Select/Select";
@@ -20,7 +20,7 @@ import BranchListItem from "../../../tmd/components/ListItem/BranchListItem";
 import SearchToolbar from "../../../tmd/components/Toolbar/SearchToolbar";
 
 export default function PickerScreen() {
-  const theme = useTheme();
+  const theme = appTheme();
   const [selected, setSelected] = useState("62");
   const [date, setDate] = useState(new Date());
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);

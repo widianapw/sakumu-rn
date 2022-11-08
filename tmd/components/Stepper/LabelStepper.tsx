@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FlatList, View, ViewToken } from "react-native";
 import { useStepper } from "../../providers/StepperProvider";
-import { Divider, Stack, useTheme } from "../../index";
+import { Divider, Stack, appTheme } from "../../index";
 import Typography from "../Typography/Typography";
 import { StepperItem } from "../../model/StepperItem";
 import Icon from "../Icon";
@@ -17,7 +17,7 @@ interface Props {
 export default function LabelStepper({ orientation = "vertical", colorVariant }: Props) {
   const { steppers, currentItem, currentPosition } = useStepper();
   const flatListRef = useRef<FlatList>(null);
-  const { colors, stepper} = useTheme();
+  const { colors, stepper} = appTheme();
   const [viewToken, setViewToken] = useState<ViewToken[] | null>(null);
   const isVertical = orientation == "vertical";
   const usedColorVariant = colorVariant ?? stepper.colorVariant;

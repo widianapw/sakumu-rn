@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useEffect, useState } from "react";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { FlatList, Image, Modal, Pressable, SafeAreaView, View } from "react-native";
 import { CustomRenderItemType, PickerItem } from "../../model/PickerItem";
 import { Button, Divider, IconButton, Stack } from "../../index";
@@ -42,7 +42,7 @@ export default function PickerModal({
                                       searchPlaceholder,
                                       renderCustomItem,
                                     }: PickerModalProps & RequiredProps) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const [selected, setSelected] = useState();
   const [list, setList] = useState(data);
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Portal } from "react-native-portalize";
 import { Modal, Pressable, View } from "react-native";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { useTranslation } from "react-i18next";
 import color from "color";
 import { Button, Stack } from "../../index";
@@ -23,7 +23,7 @@ export interface ModalProps {
 }
 
 export default function AlertModal({ dismissible = true, buttonOrientation = "horizontal", ...props }: ModalProps) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   const { t } = useTranslation();
   useEffect(() => {
     if (props.open) {
@@ -37,7 +37,7 @@ export default function AlertModal({ dismissible = true, buttonOrientation = "ho
 
   const isHorizontal = buttonOrientation == "horizontal";
 
-  const theme = useTheme();
+  const theme = appTheme();
   return (
     <Portal>
       <Modal
@@ -116,7 +116,7 @@ export default function AlertModal({ dismissible = true, buttonOrientation = "ho
                 props.buttonSecondary &&
                 <Button
                   fullWidth={isHorizontal}
-                  style={
+                  buttonStyle={
                     !isHorizontal && {
                       width: "100%",
                     }
@@ -134,7 +134,7 @@ export default function AlertModal({ dismissible = true, buttonOrientation = "ho
 
               <Button
                 fullWidth={isHorizontal}
-                style={
+                buttonStyle={
                   !isHorizontal && {
                     width: "100%",
                   }

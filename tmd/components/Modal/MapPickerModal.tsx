@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Image, Modal, SafeAreaView, View } from "react-native";
 import MapView from "react-native-maps";
 import Typography from "../Typography/Typography";
-import { Button, useTheme } from "../../index";
+import { Button, appTheme } from "../../index";
 import Icon from "../Icon";
 import IconButton from "../IconButton";
 import Geocoder from "@timwangdev/react-native-geocoder";
@@ -29,7 +29,7 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
   const [mapRegion, setMapRegion] = useState({});
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const mapRef = useRef<MapView>(null);
-  const theme = useTheme();
+  const theme = appTheme();
 
   const handleAddressChange = (lat: number, lng: number) => {
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import color from "color";
 import { Animated, LayoutChangeEvent, StyleProp, StyleSheet, TextStyle } from "react-native";
 import AnimatedText from "./Typography/AnimatedText";
-import { useTheme } from "../core/theming";
+import { appTheme } from "../core/theming";
 import type { $Omit } from "../types";
 import Typography from "./Typography/Typography";
 
@@ -74,7 +74,7 @@ const HelperText = ({
                       padding = "normal",
                       ...rest
                     }: Props) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const { current: shown } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0),
   );

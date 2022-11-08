@@ -4,9 +4,10 @@ import { ThemeProvider } from "./theming";
 import { Provider as SettingsProvider, Settings } from "./settings";
 import MaterialCommunityIcon from "../components/MaterialCommunityIcon";
 import PortalHost from "../components/Portal/PortalHost";
-import DefaultTheme from "../styles/DefaultTheme";
+import DefaultTheme from "../styles/theme/DefaultTheme";
 import { addEventListener } from "../utils/addEventListener";
 import { Theme } from "../types";
+import DarkTheme from "../styles/theme/DarkTheme";
 
 type Props = {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ type Props = {
 
 const Provider = ({ ...props }: Props) => {
   const colorSchemeName =
-    (!props.theme && Appearance?.getColorScheme()) || 'light';
+    (!props.theme && Appearance?.getColorScheme()) || "light";
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -24,7 +25,7 @@ const Provider = ({ ...props }: Props) => {
     React.useState<ColorSchemeName>(colorSchemeName);
 
   const handleAppearanceChange = (
-    preferences: Appearance.AppearancePreferences
+    preferences: Appearance.AppearancePreferences,
   ) => {
     const { colorScheme } = preferences;
     setColorScheme(colorScheme);
@@ -36,8 +37,8 @@ const Provider = ({ ...props }: Props) => {
     if (!props.theme) {
       subscription = addEventListener(
         AccessibilityInfo,
-        'reduceMotionChanged',
-        setReduceMotionEnabled
+        "reduceMotionChanged",
+        setReduceMotionEnabled,
       );
     }
     return () => {
@@ -51,7 +52,7 @@ const Provider = ({ ...props }: Props) => {
     let appearanceSubscription: NativeEventSubscription | undefined;
     if (!props.theme) {
       appearanceSubscription = Appearance?.addChangeListener(
-        handleAppearanceChange
+        handleAppearanceChange,
       ) as NativeEventSubscription | undefined;
     }
     return () => {
@@ -73,7 +74,7 @@ const Provider = ({ ...props }: Props) => {
     } else {
       const theme = (
         DefaultTheme
-      ) as ReactNativePaper.Theme;
+      ) as Theme;
 
       return {
         ...theme,
@@ -89,7 +90,7 @@ const Provider = ({ ...props }: Props) => {
   return (
     <PortalHost>
       <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
-        <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+        <ThemeProvider theme={DarkTheme}>{children}</ThemeProvider>
       </SettingsProvider>
     </PortalHost>
   );

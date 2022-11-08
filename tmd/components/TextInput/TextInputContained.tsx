@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import color from "color";
 import type { ChildTextInputProps, RenderProps } from "./types";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import LabelInput from "./Label/LabelInput";
 import { CircularProgressBar, HelperText, Stack } from "../../index";
 import Typography from "../Typography/Typography";
@@ -71,7 +71,7 @@ const TextInputContained = ({
                               colorVariant,
                               ...rest
                             }: ChildTextInputProps) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const [isShowPassword, setIsShowPassword] = useState(!password);
   const [isShowSearch, setIsShowSearch] = useState(false);
   const { colors, fonts, textInput } = theme;
@@ -431,7 +431,7 @@ type PhonePickerProps = {
 
 const PhonePicker = ({ initial, onChange }: PhonePickerProps) => {
   const country = _countries.find((it) => it.phone_code == initial);
-  const theme = useTheme();
+  const theme = appTheme();
   return <View
     style={{
       display: "flex",
@@ -474,7 +474,7 @@ const Outline = ({
                    backgroundColor,
                    shape,
                  }: OutlineProps) => {
-  const theme = useTheme();
+  const theme = appTheme();
   return <View
     testID="text-input-outline"
     pointerEvents="none"

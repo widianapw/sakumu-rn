@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Animated, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import color from "color";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import type { $RemoveChildren, ColorVariantType } from "../../types";
 import Icon from "../Icon";
 import Typography from "../Typography/Typography";
@@ -76,7 +76,7 @@ const Checkbox = ({
     new Animated.Value(1),
   );
   const isFirstRendering = React.useRef<boolean>(true);
-  const theme = useTheme();
+  const theme = appTheme();
   const {
     animation: { scale },
     colors,

@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { ComponentProps, useEffect, useState } from "react";
-import { Button, HelperText, Icon, IconButton, useTheme } from "../../index";
+import { Button, HelperText, Icon, IconButton, appTheme } from "../../index";
 import { Dimensions, ImageBackground, View, ViewStyle } from "react-native";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import { usePermission } from "../../providers/PermissionProvider";
@@ -48,7 +48,7 @@ export default function MultiImagePicker({
   const [isOpen, setIsOpen] = useState(false);
   const [isShowViewer, setIsShowViewer] = useState(false);
   const [viewerIndex, setViewerIndex] = useState(0);
-  const { colors, roundness, imagePicker } = useTheme();
+  const { colors, roundness, imagePicker } = appTheme();
   const usedColorVariant = colorVariant ?? imagePicker.colorVariant;
   const { t } = useLocale();
   const { requestPermissions } = usePermission();

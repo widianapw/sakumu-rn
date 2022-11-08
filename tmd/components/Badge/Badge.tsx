@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import Typography, { TypographyType } from "../Typography/Typography";
 import { ColorVariantType } from "../../types";
 
@@ -21,7 +21,7 @@ interface Props {
 const ROUNDED_SHAPE = 32;
 
 export default function Badge({ label, size, colorVariant, shape, style, textStyle, type = "label" }: Props) {
-  const theme = useTheme();
+  const theme = appTheme();
   const { colors, roundness, badge } = theme;
   const usedSize = size ?? badge?.size;
   let typoType: TypographyType;

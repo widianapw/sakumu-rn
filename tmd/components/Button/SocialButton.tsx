@@ -1,5 +1,5 @@
 import React, { ComponentProps } from "react";
-import { Button, Icon, IconButton, useTheme } from "../../index";
+import { Button, Icon, IconButton, appTheme } from "../../index";
 import IcMail from "../../../src/assets/icons/ic_mail.svg";
 import IcTwitter from "../../../src/assets/icons/ic_twitter.svg";
 import IcFacebook from "../../../src/assets/icons/ic_fb.svg";
@@ -20,7 +20,7 @@ export default function SocialButton({
                                        socialVariant = "text",
                                        ...rest
                                      }: Props & ComponentProps<typeof Button>) {
-  const { colors } = useTheme();
+  const { colors } = appTheme();
   let IconLocal = IcGoogle;
   let logoName = "logo-google";
   switch (social) {

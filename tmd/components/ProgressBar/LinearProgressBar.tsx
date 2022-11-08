@@ -9,7 +9,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { useTheme } from "../../core/theming";
+import { appTheme } from "../../core/theming";
 import { ColorVariantType } from "../../types";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -75,7 +75,7 @@ const LinearProgressBar = ({
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0),
   );
-  const theme = useTheme();
+  const theme = appTheme();
   const { progressBar } = theme;
   const usedColorVariant = colorVariant ?? progressBar.colorVariant;
   const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(0));

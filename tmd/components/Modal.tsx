@@ -15,7 +15,7 @@ import {
   getBottomSpace,
 } from 'react-native-iphone-x-helper';
 import Surface from './Surface';
-import { useTheme } from '../core/theming';
+import { appTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
 
@@ -109,7 +109,7 @@ export default function Modal({
     visibleRef.current = visible;
   });
 
-  const { colors, animation } = useTheme();
+  const { colors, animation } = appTheme();
 
   const opacity = useAnimatedValue(visible ? 1 : 0);
 

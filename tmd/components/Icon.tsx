@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React from "react";
-import { useTheme } from "../core/theming";
+import { appTheme } from "../core/theming";
 import { default as Ionicons } from "react-native-vector-icons/Ionicons";
 import { StyleProp, TextStyle, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -21,7 +21,7 @@ export interface IconProps {
 const Icon = ({
                 source = "ionicons", icon, size = 22, color, style,
               }: IconProps) => {
-  const theme = useTheme();
+  const theme = appTheme();
   const defaultColor = theme.colors.neutral.neutral_90;
   return <View>
     {
