@@ -10,7 +10,7 @@ const DefaultTheme: Theme = {
   textInput: {
     mode: "contained",
     shape: "rect",
-    colorVariant: "secondary",
+    colorVariant: "primary",
   },
   button: {
     variant: "primary",

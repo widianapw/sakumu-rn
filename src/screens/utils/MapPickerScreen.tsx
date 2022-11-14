@@ -25,6 +25,7 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
   const [isLoadingGeocode, setIsLoadingGeocode] = useState(false);
   const mapRef = useRef<MapView>(null);
   const theme = appTheme();
+  const colors = theme.colors;
 
   const onClose = () => {
     goBack();
@@ -158,7 +159,7 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
                 right: 0,
                 padding: 16,
                 zIndex: 50,
-                backgroundColor: "white",
+                backgroundColor: colors.neutral.neutral_10,
                 borderTopStartRadius: 16,
                 borderTopEndRadius: 16,
               }}>

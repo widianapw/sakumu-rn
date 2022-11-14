@@ -7,4 +7,4 @@ import { ThemeContext } from "../providers/ThemeProvider";
 export const { ThemeProvider, withTheme } =
   createTheming<Theme>(DefaultTheme as Theme);
 
-export const appTheme = () => useContext(ThemeContext).theme;
+export const appTheme = () => useContext(ThemeContext).theme ?? DefaultTheme;

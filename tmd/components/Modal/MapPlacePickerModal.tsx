@@ -141,6 +141,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
         key={index}
         style={{
           width: "100%",
+          backgroundColor: colors.neutral.neutral_10
         }}
       >
         <Stack direction={"row"} spacing={8} style={{
@@ -168,6 +169,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
         <Modal visible={open} onRequestClose={onClose} animationType={"fade"}>
           <SafeAreaView style={{
             flex: 1,
+            backgroundColor: colors.neutral.neutral_10,
           }}>
             {/*<ScrollView style={{*/}
             {/*  flex: 1,*/}
@@ -233,7 +235,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                   alignItems: "center",
                   paddingHorizontal: 16,
                   paddingVertical: 12,
-                  backgroundColor: "white",
+                  backgroundColor: colors.neutral.neutral_10,
                 }}>
                 <IconButton
                   shape={"rounded"}
@@ -257,6 +259,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                   container: {
                     flex: 1,
                     height: "100%",
+                    backgroundColor: colors.neutral.neutral_10,
                   },
                   textInputContainer: {
                     margin: 0,
@@ -265,7 +268,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                     marginTop: 8,
                     paddingStart: 8,
                     paddingEnd: 16,
-                    backgroundColor: "white",
+                    backgroundColor: colors.neutral.neutral_10,
                   },
                   separator: {
                     marginStart: 42,
@@ -286,7 +289,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                       justifyContent: "center",
                       alignItems: "center",
                       paddingTop: 32,
-                      backgroundColor: "white",
+                      backgroundColor: colors.neutral.neutral_10,
                     }}>
                     <IllustNoLocation />
                     <Typography style={{ textAlign: "center", marginTop: 8 }}
@@ -311,7 +314,7 @@ export default function MapPlacePickerModal({ open, onClose, onSelected, onCurre
                     width: "100%",
                     backgroundColor: "white",
                   },
-                  blurOnSubmit:false,
+                  blurOnSubmit: false,
                   returnKeyType: "search",
                   onSubmitEditing: () => {
                   },

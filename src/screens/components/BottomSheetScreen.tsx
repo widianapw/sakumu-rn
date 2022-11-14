@@ -202,12 +202,6 @@ export default function BottomSheetScreen() {
               setIsOpenDatePicker(true);
             }}>DatePicker</Button>
 
-            <Button onPress={() => {
-              setIsOpenMonthPicker(true);
-            }}>
-              MonthPicker
-            </Button>
-
           </Stack>
         </ScrollView>
       </Page>

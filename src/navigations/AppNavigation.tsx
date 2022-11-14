@@ -59,8 +59,8 @@ const AppNavigation = () => {
   const NavTheme = {
     ...theme,
     colors: {
-      ...theme.colors,
-      background: theme.colors.neutral.neutral_10,
+      ...theme?.colors,
+      background: theme?.colors.neutral.neutral_10,
     },
   };
   return (

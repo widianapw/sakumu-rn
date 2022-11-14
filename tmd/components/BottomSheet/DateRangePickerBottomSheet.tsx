@@ -170,6 +170,7 @@ const DateRangePickerBottomSheet = ({
         modalStyle={{
           borderTopRightRadius: 16,
           borderTopLeftRadius: 16,
+          backgroundColor: colors.neutral.neutral_10,
           flex: 1,
         }}
 
@@ -196,6 +197,10 @@ const DateRangePickerBottomSheet = ({
                   textMonthFontFamily: "Inter-Regular",
                   textMonthFontWeight: "800",
                   textDayHeaderFontFamily: "Inter-Regular",
+                  backgroundColor: colors.neutral.neutral_10,
+                  dayTextColor: colors.neutral.neutral_100,
+                  monthTextColor: colors.neutral.neutral_100,
+                  calendarBackground: colors.neutral.neutral_10,
                 }}
                 current={selected?.startDate}
                 onDayPress={handleDatePress}
@@ -209,7 +214,8 @@ const DateRangePickerBottomSheet = ({
             <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}
             >
               <Button
-                disabled={!dateRange?.startDate || !dateRange?.endDate}
+                disabled
+                // disabled={!dateRange?.startDate || !dateRange?.endDate}
                 onPress={handleSubmit}
                 size={"lg"}
                 buttonStyle={{

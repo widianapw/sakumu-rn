@@ -32,7 +32,7 @@ export default function SearchToolbar(
   const { t } = useLocale();
   const usedBg = backgroundColor || colors.neutral.neutral_10;
   const isLight = Color(usedBg).isLight();
-  const usedTitleColor = isLight ? colors.neutral.neutral_100 : colors.neutral.neutral_10;
+  const usedTitleColor = colors.neutral.neutral_100;
   const isShowBack = backable && navigationRef.canGoBack();
   const [iconViewWidth, setIconViewWidth] = useState(0);
   const [actionButtonWidth, setActionButtonWidth] = useState(0);

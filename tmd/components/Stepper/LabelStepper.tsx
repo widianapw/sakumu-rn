@@ -54,7 +54,11 @@ export default function LabelStepper({ orientation = "vertical", colorVariant }:
     const txtColor = isCurrent || isPassed ? colors.neutral.neutral_90 : colors.neutral.neutral_60;
     return (
       <>
-        <Stack direction={"row"} items={"center"} spacing={4}>
+        <Stack
+          style={{
+            backgroundColor: colors.neutral.neutral_10
+          }}
+          direction={"row"} items={"center"} spacing={4}>
           {
             isFirst &&
             <View style={{ width: 16 }} />

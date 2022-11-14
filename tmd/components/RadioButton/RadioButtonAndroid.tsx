@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
-import color from 'color';
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import * as React from "react";
+import { Animated, View, StyleSheet } from "react-native";
+import color from "color";
+import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
+import { handlePress, isChecked } from "./utils";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import { appTheme, withTheme } from "../../core/theming";
+import type { $RemoveChildren } from "../../types";
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -15,7 +15,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of radio button.
    */
-  status?: 'checked' | 'unchecked';
+  status?: "checked" | "unchecked";
   /**
    * Whether radio is disabled.
    */
@@ -35,7 +35,6 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
   /**
    * testID to be used on tests.
    */
@@ -61,20 +60,20 @@ const BORDER_WIDTH = 2;
  * </div>
  */
 const RadioButtonAndroid = ({
-  disabled,
-  onPress,
-  theme,
-  value,
-  status,
-  testID,
-  ...rest
-}: Props) => {
+                              disabled,
+                              onPress,
+                              value,
+                              status,
+                              testID,
+                              ...rest
+                            }: Props) => {
   const { current: borderAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(BORDER_WIDTH)
+    new Animated.Value(BORDER_WIDTH),
   );
+  const theme = appTheme();
 
   const { current: radioAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(1)
+    new Animated.Value(1),
   );
 
   const isFirstRendering = React.useRef<boolean>(true);
@@ -88,7 +87,7 @@ const RadioButtonAndroid = ({
       return;
     }
 
-    if (status === 'checked') {
+    if (status === "checked") {
       radioAnim.setValue(1.2);
 
       Animated.timing(radioAnim, {
@@ -108,10 +107,9 @@ const RadioButtonAndroid = ({
   }, [status, borderAnim, radioAnim, scale]);
 
   const checkedColor = rest.color || theme.colors.accent;
-  const uncheckedColor =
-    rest.uncheckedColor ||
-    color(theme.colors.text)
-      .alpha(theme.dark ? 0.7 : 0.54)
+  const uncheckedColor = rest.uncheckedColor ||
+    color(theme.colors.neutral.neutral_100)
+      .alpha(0.54)
       .rgb()
       .string();
 
@@ -125,7 +123,7 @@ const RadioButtonAndroid = ({
             contextValue: context?.value,
             status,
             value,
-          }) === 'checked';
+          }) === "checked";
 
         if (disabled) {
           rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
@@ -144,17 +142,17 @@ const RadioButtonAndroid = ({
               disabled
                 ? undefined
                 : () => {
-                    handlePress({
-                      onPress,
-                      onValueChange: context?.onValueChange,
-                      value,
-                    });
-                  }
+                  handlePress({
+                    onPress,
+                    onValueChange: context?.onValueChange,
+                    value,
+                  });
+                }
             }
             // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-            accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+            accessibilityTraits={disabled ? ["button", "disabled"] : "button"}
             accessibilityComponentType={
-              checked ? 'radiobutton_checked' : 'radiobutton_unchecked'
+              checked ? "radiobutton_checked" : "radiobutton_unchecked"
             }
             accessibilityRole="radio"
             accessibilityState={{ disabled, checked }}
@@ -192,15 +190,15 @@ const RadioButtonAndroid = ({
   );
 };
 
-RadioButtonAndroid.displayName = 'RadioButton.Android';
+RadioButtonAndroid.displayName = "RadioButton.Android";
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
   },
   radioContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   radio: {
     height: 20,

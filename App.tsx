@@ -29,6 +29,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import ModalProvider from "./tmd/providers/ModalProvider";
 import { RootSiblingParent } from "react-native-root-siblings";
 import ThemeProvider from "./tmd/providers/ThemeProvider";
+import { OrientationLocker, PORTRAIT } from "react-native-orientation-locker";
 // Create a client
 const queryClient = new QueryClient();
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
                       <ModalProvider>
                         <PermissionProvider>
                           <AuthProvider>
+                            <OrientationLocker orientation={PORTRAIT}/>
                             <AppNavigation />
                           </AuthProvider>
                         </PermissionProvider>

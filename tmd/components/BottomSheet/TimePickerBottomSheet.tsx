@@ -11,6 +11,7 @@ import { Portal } from "react-native-portalize";
 import { Button, Stack } from "../../index";
 import Typography from "../Typography/Typography";
 import DatePicker from "react-native-date-picker";
+import { useTheme } from "../../providers/ThemeProvider";
 
 interface Props {
   open: boolean;
@@ -54,6 +55,7 @@ export default function TimePickerBottomSheet({
                                               }: Props & DatePickerProps) {
   const modalizeRef = useRef<Modalize>(null);
   const { t, momentLocale, currentLanguage } = useLocale();
+  const colors = useTheme().theme.colors
   const [date, setDate] = useState(initTime ? momentLocale(initTime).toDate() : momentLocale().toDate());
   const [parentWidth, setParentWidth] = useState(0);
   useEffect(() => {
@@ -96,6 +98,7 @@ export default function TimePickerBottomSheet({
           padding: 16,
           borderTopRightRadius: 16,
           borderTopLeftRadius: 16,
+          backgroundColor: colors.neutral.neutral_10
         }}
         onClose={onClose}
       >
@@ -123,6 +126,8 @@ export default function TimePickerBottomSheet({
                 }}
                 mode={"time"}
                 date={date}
+                textColor={colors.neutral.neutral_100}
+                fadeToColor={colors.neutral.neutral_10}
                 onDateChange={(date) => {
                   setDate(date);
                 }}

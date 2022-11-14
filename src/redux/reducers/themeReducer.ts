@@ -7,7 +7,7 @@ export type ThemeState = {
 };
 
 const initialState: ThemeState = {
-  theme: undefined,
+  theme: DefaultTheme,
 };
 
 const themeReducer = (state: ThemeState = initialState, action: any) => {

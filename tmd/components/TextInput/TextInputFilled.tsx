@@ -97,9 +97,10 @@ const TextInputFilled = ({
     placeholderColor = colors.neutral.neutral_70;
     backgroundColors = colors.neutral.neutral_30;
   } else {
-    inputTextColor = colors.text;
+    inputTextColor = colors.neutral.neutral_100;
     placeholderColor = colors.neutral.neutral_70;
-    backgroundColors = error ? colors.danger.surface : parentState.focused ? colors[usedColorVariant].surface : colors.neutral.neutral_20;
+    backgroundColors =
+      error ? colors.danger.surface : parentState.focused ? colors[usedColorVariant].surface : colors.neutral.neutral_20;
   }
 
 

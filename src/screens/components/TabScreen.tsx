@@ -12,24 +12,24 @@ interface FirstProp {
 }
 
 const FirstRoute = (props: FirstProp) => (
-  <View style={{ flex: 1, backgroundColor: "white" }}>
+  <View style={{ flex: 1 }}>
     <Typography>First {props.passed}</Typography>
   </View>
 );
 
 const SecondRoute = () => (
-  <View style={{ flex: 1, backgroundColor: "white" }}>
+  <View style={{ flex: 1 }}>
     <Typography>Second</Typography>
   </View>
 );
 
 const ThirdRoute = () => (
-  <View style={{ flex: 1, backgroundColor: "white" }}>
+  <View style={{ flex: 1 }}>
     <Typography>Third</Typography>
   </View>
 );
 const ForthRoute = () => (
-  <View style={{ flex: 1, backgroundColor: "white" }}>
+  <View style={{ flex: 1 }}>
     <Typography>Forth</Typography>
   </View>
 );
@@ -79,7 +79,9 @@ export default function TabScreen({ navigation, route }: NativeStackScreenProps<
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={setIndex}
-          initialLayout={{ width: layout.width }}
+          initialLayout={{
+            width: layout.width,
+          }}
         />
       </Page>
     </>

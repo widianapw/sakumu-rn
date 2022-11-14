@@ -149,6 +149,7 @@ export default function PickerBottomSheet({
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
           height: "100%",
+          backgroundColor: colors.neutral.neutral_10,
         },
           // isFullHeight ? { flex: 1 } : {},
         ]}

@@ -35,6 +35,7 @@ export default function SignatureCanvas({
   const [signature, setSignature] = useState("");
   const { colors } = appTheme();
 
+
   useEffect(() => {
     if (onChangedBase64) {
       onChangedBase64(signature);
@@ -99,6 +100,8 @@ export default function SignatureCanvas({
           onEmpty={() => {
             setSignature("");
           }}
+          penColor={colors.neutral.neutral_100}
+          backgroundColor={colors.neutral.neutral_10}
           scrollable={false}
           {...rest}
           style={[{
@@ -107,13 +110,14 @@ export default function SignatureCanvas({
             canvasStyle]}
           webviewContainerStyle={{
             height: "100%",
+            backgroundColor: colors.neutral.neutral_10
           }}
           webStyle={`
                   .m-signature-pad {box-shadow: none; border: none; border-radius:12px} 
                   .m-signature-pad--body {border:none; border-radius: 8px; }
                   .m-signature-pad--body
                    canvas {
-                    background-color: #fff;
+                    background-color: ${colors.neutral.neutral_10};
                     height:100vh;
                     border-radius: 8px;
                    }

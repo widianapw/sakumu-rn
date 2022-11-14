@@ -27,14 +27,15 @@ const ThemeProvider = ({ children, initialTheme }: Props & any) => {
   const theme = useAppSelector(state => state.themeReducer.theme);
 
   useEffect(() => {
-    if(theme == undefined){
+    if (!theme) {
       changeTheme(initialTheme);
     }
   }, []);
 
   const changeTheme = (theme: Theme) => {
     dispatch({
-      type: "CHANGE_THEME", payload: {
+      type: "CHANGE_THEME",
+      payload: {
         theme: theme,
       },
     });

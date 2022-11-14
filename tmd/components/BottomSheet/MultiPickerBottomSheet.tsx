@@ -138,6 +138,7 @@ export default function MultiPickerBottomSheet({
         [{
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
+          backgroundColor: colors.neutral.neutral_10
         },
           isFullHeight ? { flex: 1 } : {},
         ]}

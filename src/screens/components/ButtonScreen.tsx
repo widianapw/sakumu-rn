@@ -84,6 +84,7 @@ export default function ButtonScreen() {
         </TextButton>
 
             <Button
+              disabled
               variant={"primary"}
               onPress={() => {
               }}>
@@ -117,6 +118,7 @@ export default function ButtonScreen() {
               Primary
             </Button>
             <Button
+              disabled
               onPress={() => {
               }}
               variant={"secondary"}

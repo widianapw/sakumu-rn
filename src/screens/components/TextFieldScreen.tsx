@@ -121,9 +121,7 @@ const TextFieldScreen = () => {
 
           <TextField
             search
-            colorVariant={"tertiary"}
             mode={"filled"}
-            shape={"rounded"}
             placeholder={"Filled"}
           />
 

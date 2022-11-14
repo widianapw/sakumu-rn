@@ -10,6 +10,7 @@ import { SafeAreaView, View, ViewProps } from "react-native";
 import DatePicker from "react-native-date-picker";
 import Typography from "../Typography/Typography";
 import { useLocale } from "../../../src/providers/LocaleProvider";
+import { useTheme } from "../../providers/ThemeProvider";
 
 interface Props {
   open: boolean;
@@ -53,6 +54,7 @@ export default function DatePickerBottomSheet({
                                                 ...rest
                                               }: Props & DatePickerProps) {
   const modalizeRef = useRef<Modalize>(null);
+  const colors = useTheme().theme.colors
   const { t, momentLocale, currentLanguage } = useLocale();
   const [date, setDate] = useState(initDate ? momentLocale(initDate).toDate() : momentLocale().toDate());
   const [parentWidth, setParentWidth] = useState(0);
@@ -96,6 +98,7 @@ export default function DatePickerBottomSheet({
           padding: 16,
           borderTopRightRadius: 16,
           borderTopLeftRadius: 16,
+          backgroundColor: colors.neutral.neutral_10
         }}
         onClose={onClose}
       >
@@ -123,6 +126,8 @@ export default function DatePickerBottomSheet({
                   width: parentWidth,
                   // width: "100%",
                 }}
+                textColor={colors.neutral.neutral_100}
+                fadeToColor={colors.neutral.neutral_10}
                 mode={"date"}
                 date={date}
                 onDateChange={(date) => {

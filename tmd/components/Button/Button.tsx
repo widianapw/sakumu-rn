@@ -160,16 +160,17 @@ const Button = ({
     borderWidth: number;
 
   if (disabled) {
-    backgroundColor = color(theme.dark ? white : black)
-      .alpha(0.12)
-      .rgb()
-      .string();
-    textColor = color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
-    borderColor = colors.neutral.neutral_50;
+    backgroundColor = colors.neutral.neutral_40
+    textColor = colors.neutral.neutral_10
+    borderColor = colors.neutral.neutral_40;
+    borderWidth = 0
 
+    if(usedVariant == "secondary") {
+      backgroundColor = colors.neutral.neutral_10
+      textColor = colors.neutral.neutral_50
+      borderWidth = 1;
+      borderColor = colors.neutral.neutral_50;
+    }
     if (usedVariant == "tertiary") {
       borderColor = "transparent";
       backgroundColor = "transparent";
@@ -276,12 +277,12 @@ const Button = ({
           accessibilityLabel={accessibilityLabel}
           accessibilityHint={accessibilityHint}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits={disabled ? ["button", "disabled"] : "button"}
+          accessibilityTraits={(disabled || loading) ? ["button", "disabled"] : "button"}
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ disabled }}
           accessible={accessible}
-          disabled={disabled}
+          disabled={disabled || loading}
           rippleColor={rippleColor}
           style={[
             touchableStyle,

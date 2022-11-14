@@ -32,10 +32,14 @@ export default function CarouselScreen() {
     <Toolbar title={"CarouselScreen"} />
     <CarouselFullWidth
       indicatorPosition={"center"}
-      data={_mockData} autoPlay loop={true} autoPlayInterval={5000} />
-
+      data={_mockData}
+      autoPlay
+      loop={true}
+      autoPlayInterval={5000} />
 
     <Carousel
+      autoPlay
+      loop
       data={_mockData}
       onPressItem={(item) => {
         Toast.show("onPressItem: " + item.id);

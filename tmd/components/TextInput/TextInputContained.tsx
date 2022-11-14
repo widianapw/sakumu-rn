@@ -100,7 +100,7 @@ const TextInputContained = ({
     placeholderColor = colors.neutral.neutral_70;
     outlineColor = isTransparent ? customOutlineColor : colors.neutral.neutral_40;
   } else {
-    inputTextColor = colors.text;
+    inputTextColor = colors.neutral.neutral_100;
     activeColor = error ? colors.danger.main : activeOutlineColor || colors[usedColorVariant].main;
     placeholderColor = colors.neutral.neutral_70;
     outlineColor = colors.neutral.neutral_40;
