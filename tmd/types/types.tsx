@@ -1,14 +1,14 @@
 import type * as React from "react";
-import { TagShape, TagSize, TagVariant } from "./components/Tag/Tag";
-import { ButtonShape, ButtonSize, ButtonVariant } from "./components/Button/Button";
-import { TextInputMode, TextInputShape } from "./components/TextInput/TextField";
-import { AlertType } from "./components/Alert/Alert";
-import { ChipShape, ChipVariant } from "./components/Chip/Chip";
-import { ToastColorVariantType, ToastShape } from "./components/Toast";
-import { SkeletonAnimation } from "./components/Skeleton/Skeleton";
-import { ToolbarSize } from "./components/Toolbar/Toolbar";
-import { BadgeShape, BadgeSize } from "./components/Badge/Badge";
-import { AvatarSize, AvatarVariant } from "./components/Avatar/Avatar";
+import { TagShape, TagSize, TagVariant } from "../components/Tag/Tag";
+import { ButtonShape, ButtonSize, ButtonVariant } from "../components/Button/Button";
+import { TextInputMode, TextInputShape } from "../components/TextInput/TextField";
+import { AlertType } from "../components/Alert/Alert";
+import { ChipShape, ChipVariant } from "../components/Chip/Chip";
+import { ToastColorVariantType, ToastShape } from "../components/Toast";
+import { SkeletonAnimation } from "../components/Skeleton/Skeleton";
+import { ToolbarSize } from "../components/Toolbar/Toolbar";
+import { BadgeShape, BadgeSize } from "../components/Badge/Badge";
+import { AvatarSize, AvatarVariant } from "../components/Avatar/Avatar";
 
 export type ColorVariantType = "success" | "warning" | "primary" | "danger" | "info" | "secondary" | "tertiary"
 
@@ -67,10 +67,19 @@ export type Theme = {
   progressBar: ProgressBarTheme;
   tab: TabTheme;
   stepper: StepperTheme;
+  slider: SliderTheme;
   animation: {
     scale: number;
   };
 };
+
+export type ThumbValuePosition = "bottom" | "right"
+export type ThumbType = "filled" | "outlined"
+interface SliderTheme {
+  colorVariant: ColorVariantType;
+  thumbValuePosition: ThumbValuePosition;
+  thumbType: ThumbType;
+}
 
 interface StepperTheme {
   colorVariant: ColorVariantType;

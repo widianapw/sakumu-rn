@@ -10,7 +10,7 @@ import TextInputContained from "./TextInputContained";
 import TextInputFilled from "./TextInputFilled";
 import { IconProps } from "../Icon";
 import { CircularProgressBar } from "../../index";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;

@@ -8,7 +8,7 @@ import { appTheme } from "../../core/theming";
 import { View } from "react-native";
 import HelperText from "../HelperText";
 import { TextInputMode } from "../TextInput/TextField";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 interface Props {
   helperText?: string;

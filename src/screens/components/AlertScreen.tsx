@@ -4,7 +4,7 @@
  */
 import React from "react";
 import { ScrollView } from "react-native";
-import { Alert } from "../../../tmd";
+import { Alert, Toast } from "../../../tmd";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
 import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
@@ -17,7 +17,11 @@ export default function AlertScreen() {
     <ScrollView style={{ flex: 1 }}>
       <Stack p={16} spacing={16}>
         <Alert
-          dismissible={true}
+          showActionButton
+          actionButtonTitle={"Action"}
+          onPressActionButton={() => {
+            Toast.show("Action button pressed");
+          }}
           title={"Alert Title Here"}
           description={"Put your alert text here "} />
 

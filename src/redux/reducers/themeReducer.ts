@@ -1,5 +1,5 @@
 import { User } from "../../models/auth/Auth";
-import { Theme } from "../../../tmd/types";
+import { Theme } from "../../../tmd/types/types";
 import { DefaultTheme } from "../../../tmd";
 
 export type ThemeState = {

@@ -8,7 +8,7 @@ import { Pressable, StyleProp, StyleSheet, ViewStyle } from "react-native";
 import Animated, { interpolateColors, spring } from "react-native-reanimated";
 import { appTheme } from "../../core/theming";
 import color from "color";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 interface Props {
   value: boolean;

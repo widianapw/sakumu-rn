@@ -57,7 +57,6 @@ export default function PickerScreen() {
 
           <DateRangePicker
             minDate={"2022-06-01"}
-            maxDate={"2022-08-05"}
             minDays={7}
             maxDays={30}
             label={"Date Range Picker"}

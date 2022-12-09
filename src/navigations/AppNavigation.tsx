@@ -2,9 +2,9 @@
  * Created by Widiana Putra on 27/05/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useEffect } from "react";
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import ButtonScreen from "../screens/components/ButtonScreen";
 import TypographyScreen from "../screens/components/TypographyScreen";
 import MainScreen from "../screens/MainScreen";
@@ -49,7 +49,9 @@ import CarouselScreen from "../screens/components/CarouselScreen";
 import PrinterTDSScreen from "../screens/components/PrinterTDSScreen";
 import ThemeTDSScreen from "../screens/components/ThemeTDSScreen";
 import { useTheme } from "../../tmd/providers/ThemeProvider";
-import DarkTheme from "../../tmd/styles/theme/DarkTheme";
+import BottomNavTDSScreen from "../screens/components/BottomNavTDSScreen";
+import SliderTDSScreen from "../screens/components/SliderTDSScreen";
+import AccordionTDSScreen from "../screens/components/AccordionTDSScreen";
 
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator<AppNavigationType>();
@@ -117,6 +119,9 @@ const AppNavigation = () => {
                     <Stack.Screen name={"StepperScreen"} component={StepperScreen} />
                     <Stack.Screen name={"PrinterTDSScreen"} component={PrinterTDSScreen} />
                     <Stack.Screen name={"ThemeTDSScreen"} component={ThemeTDSScreen} />
+                    <Stack.Screen name={"BottomNavTDSScreen"} component={BottomNavTDSScreen} />
+                    <Stack.Screen name={"SliderTDSScreen"} component={SliderTDSScreen} />
+                    <Stack.Screen name={"AccordionTDSScreen"} component={AccordionTDSScreen} />
                   </>
 
               }

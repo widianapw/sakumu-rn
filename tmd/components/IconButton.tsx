@@ -6,7 +6,7 @@ import color from "color";
 import TouchableRipple from "./TouchableRipple/TouchableRipple";
 import { appTheme } from "../core/theming";
 
-import type { $RemoveChildren, ColorVariantType } from "../types";
+import type { $RemoveChildren, ColorVariantType } from "../types/types";
 import Icon from "./Icon";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./Button/Button";
 

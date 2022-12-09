@@ -50,40 +50,41 @@ export default function ButtonScreen() {
             />
             <IconButton
               icon={"arrow-back"}
-          themeSize={"lg"}
-          onPress={() => {
-          }}
-        />
-        <IconButton
+              themeSize={"lg"}
+              onPress={() => {
+              }}
+            />
+            <IconButton
 
-          themeSize={"md"}
-          icon={"arrow-back"} onPress={() => {
-        }}
-        />
-        <IconButton
-          themeSize={"sm"}
-          icon={"arrow-back"} onPress={() => {
-        }}
-        />
-        <TextButton
-          size={'md'}
-          onPress={() => {
-          }}
-        >
-          TextButton
-        </TextButton>
-        <TextButton
-          icon={{
-            icon: "camera",
-          }}
-          underline
-          onPress={() => {
-          }}
-        >
-          TextButton
-        </TextButton>
+              themeSize={"md"}
+              icon={"arrow-back"} onPress={() => {
+            }}
+            />
+            <IconButton
+              themeSize={"sm"}
+              icon={"arrow-back"} onPress={() => {
+            }}
+            />
+            <TextButton
+              size={"md"}
+              onPress={() => {
+              }}
+            >
+              TextButton
+            </TextButton>
+            <TextButton
+              icon={{
+                icon: "camera",
+              }}
+              underline
+              onPress={() => {
+              }}
+            >
+              TextButton
+            </TextButton>
 
             <Button
+              shape={"rect"}
               disabled
               variant={"primary"}
               onPress={() => {
@@ -133,36 +134,47 @@ export default function ButtonScreen() {
               variant={"secondary"}
               fullWidth
             >
-          Secondary
-        </Button>
+              Secondary
+            </Button>
 
-        <Button
-          icon={{
-            icon: "camera",
-          }}
-          onPress={() => {
-          }}
-          variant={"secondary"}
-        >
-          Secondary
-        </Button>
-        <Button
-          onPress={() => {
-          }}
-          variant={"tertiary"}
-        >
-          Tertiary
-        </Button>
-        <Button
-          icon={{
-            icon: "camera",
-          }}
-          onPress={() => {
-          }}
-          variant={"tertiary"}
-        >
-          Tertiary
-        </Button>
+            <Button
+              icon={{
+                icon: "camera",
+              }}
+              onPress={() => {
+              }}
+              variant={"secondary"}
+            >
+              Secondary
+            </Button>
+            <Button
+              onPress={() => {
+              }}
+              variant={"alternate"}
+            >
+              Alternate
+            </Button>
+
+            <Button
+              icon={{
+                icon: "water",
+              }}
+              onPress={() => {
+              }}
+              variant={"alternate"}>
+              Alternate
+            </Button>
+
+            <Button
+              icon={{
+                icon: "camera",
+              }}
+              onPress={() => {
+              }}
+              variant={"tertiary"}
+            >
+              Tertiary
+            </Button>
             <Button
 
               onPress={() => {
@@ -259,5 +271,5 @@ export default function ButtonScreen() {
         </View>
       </ScrollView>
     </Page>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Image, Stack, appTheme } from "../../index";
-import { ImageRatioType } from "../../types";
+import { ImageRatioType } from "../../types/types";
 import { Dimensions, FlatList, Pressable, View, ViewToken } from "react-native";
 
 export interface CarouselItem {

@@ -15,7 +15,7 @@ import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
 import RNFS from "react-native-fs";
 import ImageViewerModal from "../Modal/ImageViewerModal";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 interface Props {
   label?: string;

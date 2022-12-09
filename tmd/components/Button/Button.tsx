@@ -10,9 +10,9 @@ import { black, white } from "../../styles/defaultThemeColors";
 import { appTheme } from "../../core/theming";
 import Icon, { IconProps } from "../Icon";
 import Typography, { TypographyType } from "../Typography/Typography";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
-export type ButtonVariant = "primary" | "secondary" | "tertiary";
+export type ButtonVariant = "primary" | "secondary" | "tertiary" | "alternate";
 export type ButtonShape = "rect" | "rounded"
 export type ButtonSize = "xs" | "sm" | "md" | "lg"
 
@@ -160,14 +160,14 @@ const Button = ({
     borderWidth: number;
 
   if (disabled) {
-    backgroundColor = colors.neutral.neutral_40
-    textColor = colors.neutral.neutral_10
+    backgroundColor = colors.neutral.neutral_40;
+    textColor = colors.neutral.neutral_10;
     borderColor = colors.neutral.neutral_40;
-    borderWidth = 0
+    borderWidth = 0;
 
-    if(usedVariant == "secondary") {
-      backgroundColor = colors.neutral.neutral_10
-      textColor = colors.neutral.neutral_50
+    if (usedVariant == "secondary") {
+      backgroundColor = colors.neutral.neutral_10;
+      textColor = colors.neutral.neutral_50;
       borderWidth = 1;
       borderColor = colors.neutral.neutral_50;
     }
@@ -200,6 +200,12 @@ const Button = ({
         borderWidth = 0;
         textColor = colors[usedColorVariant].main;
         break;
+      }
+      case "alternate": {
+        backgroundColor = buttonColor ?? colors[usedColorVariant]?.surface;
+        borderColor = "transparent";
+        borderWidth = 0;
+        textColor = colors[usedColorVariant].main;
       }
     }
   }

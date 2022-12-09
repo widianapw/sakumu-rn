@@ -104,12 +104,15 @@ export default function AvatarImagePicker({
           }
         </Stack>
       </Stack>
-      <ImageViewerModal onClose={() => {
-        setOpenImagePreview(false);
-      }} open={openImagePreview}
-                        images={[{
-                          image: selectedImage ?? "",
-                        }]} />
+      <ImageViewerModal
+        onClose={() => {
+          setOpenImagePreview(false);
+        }}
+        open={openImagePreview}
+        images={[{
+          image: selectedImage ?? "",
+        }]} />
+
       <ImagePickerBottomSheet
         {...bsProps}
         selectedImage={selectedImage}

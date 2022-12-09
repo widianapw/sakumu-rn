@@ -1,4 +1,4 @@
-import { Theme } from "../../types";
+import { Theme } from "../../types/types";
 import { DefaultTheme } from "../../index";
 import DarkTheme from "./DarkTheme";
 import BumbleTheme from "./BumbleTheme";

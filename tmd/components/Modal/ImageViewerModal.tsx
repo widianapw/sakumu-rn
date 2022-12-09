@@ -7,7 +7,7 @@ import { Animated, Dimensions, FlatList, Modal, Pressable, SafeAreaView, View, V
 import { appTheme } from "../../core/theming";
 import { IconButton, Image, Stack } from "../../index";
 import Portal from "../Portal/Portal";
-import { GalleryItem, ImageRatioType } from "../../types";
+import { GalleryItem, ImageRatioType } from "../../types/types";
 import Typography from "../Typography/Typography";
 import { gestureHandlerRootHOC, PinchGestureHandler } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";

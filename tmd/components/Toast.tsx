@@ -8,7 +8,7 @@ import { default as ExToast, ToastOptions } from "react-native-root-toast";
 import configureFonts from "../styles/fonts";
 import { defaultThemeColors } from "../styles/defaultThemeColors";
 import { DefaultTheme } from "../index";
-import { ColorVariantType } from "../types";
+import { ColorVariantType } from "../types/types";
 
 export type ToastShape = "rounded" | "rect";
 export type ToastColorVariantType = ColorVariantType | "default";

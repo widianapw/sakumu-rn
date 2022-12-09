@@ -3,7 +3,7 @@ import color from "color";
 import { Animated, LayoutChangeEvent, StyleProp, StyleSheet, TextStyle } from "react-native";
 import AnimatedText from "./Typography/AnimatedText";
 import { appTheme } from "../core/theming";
-import type { $Omit } from "../types";
+import type { $Omit } from "../types/types";
 import Typography from "./Typography/Typography";
 
 type Props = $Omit<$Omit<React.ComponentPropsWithRef<typeof AnimatedText>, "padding">,

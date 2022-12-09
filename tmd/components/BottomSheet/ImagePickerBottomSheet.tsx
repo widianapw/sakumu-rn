@@ -2,7 +2,7 @@
  * Created by Widiana Putra on 01/07/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
 import { useTranslation } from "react-i18next";
 import { Portal } from "react-native-portalize";
@@ -41,9 +41,33 @@ export default function ImagePickerBottomSheet({
   const { colors } = appTheme();
   const [currentImage, setCurrentImage] = useState(selectedImage);
   const imageSize = 800;
+
+
+  const showDeleteImage = useMemo(() => {
+    return (currentImage != undefined) && props.onDelete != undefined;
+  }, [currentImage, props.onDelete]);
+
+  const isAutoOpenCamera = useMemo(() => {
+    return camera && !gallery && !showDeleteImage;
+  }, [camera, gallery, showDeleteImage]);
+
+  const isAutoOpenGallery = useMemo(() => {
+    return !camera && gallery && !showDeleteImage;
+  }, [camera, gallery, showDeleteImage]);
+
+
   useEffect(() => {
     if (props.open) {
       handleOpen();
+      if (isAutoOpenCamera) {
+        handleOpenCamera();
+        handleClose();
+      }
+
+      if (isAutoOpenGallery) {
+        handleOpenGallery();
+        handleClose();
+      }
     } else {
       handleClose();
     }
@@ -64,7 +88,6 @@ export default function ImagePickerBottomSheet({
     const ratio = props.ratio.split(":");
     imageCropSize = { width: imageSize, height: (imageSize / parseInt(ratio[0]) * parseInt(ratio[1])) };
   }
-
 
   const handleOpenCamera = () => {
     ImagePicker.openCamera({

@@ -6,7 +6,8 @@
 import React from "react";
 import { FlexAlignType, StyleProp, View, ViewStyle } from "react-native";
 
-export type StackDirection ="row" | "column" | "row-reverse" | "column-reverse"
+export type StackDirection = "row" | "column" | "row-reverse" | "column-reverse"
+
 interface Props {
   children: React.ReactNode[] | React.ReactNode;
   spacing?: number;
@@ -17,12 +18,16 @@ interface Props {
   pb?: number;
   pl?: number;
   pr?: number;
+  px?: number;
+  py?: number;
 
   m?: number;
   mt?: number;
   mb?: number;
   ml?: number;
   mr?: number;
+  mx?: number;
+  my?: number;
   items?: FlexAlignType;
   /**
    * Shorthand for the `alignSelf` style property.
@@ -42,8 +47,8 @@ export default function Stack({
                                 items,
                                 content, self,
                                 p = 0,
-                                pt, pb, pl, pr,
-                                m, mt, mb, ml, mr,
+                                pt, pb, pl, pr, px, py,
+                                m, mt, mb, ml, mr, mx, my,
                               }: Props) {
   const activeChildren = (children instanceof Array) ? children?.filter(it => it != undefined) : children;
   const itemCount = (activeChildren instanceof Array) ? activeChildren.length : 1;
@@ -69,15 +74,15 @@ export default function Stack({
   return <View style={[{
     flexDirection: direction ?? "column",
     padding: p,
-    paddingTop: pt,
-    paddingBottom: pb,
-    paddingLeft: pl,
-    paddingRight: pr,
+    paddingTop: py ?? pt,
+    paddingBottom: py ?? pb,
+    paddingLeft: px ?? pl,
+    paddingRight: px ?? pr,
     margin: m,
-    marginTop: mt,
-    marginBottom: mb,
-    marginLeft: ml,
-    marginRight: mr,
+    marginTop: my ?? mt,
+    marginBottom: my ?? mb,
+    marginLeft: mx ?? ml,
+    marginRight: mx ?? mr,
     alignItems: items,
     justifyContent: content,
     alignSelf: self,

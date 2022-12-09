@@ -14,7 +14,7 @@ import LabelInput from "../TextInput/Label/LabelInput";
 import Typography from "../Typography/Typography";
 import ImageViewerModal from "../Modal/ImageViewerModal";
 import Grid from "../Layout/Grid";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 interface Props {
   label?: string;

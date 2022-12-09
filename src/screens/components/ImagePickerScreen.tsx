@@ -20,6 +20,7 @@ export default function ImagePickerScreen() {
           <ImagePicker
             label={"Select Image"}
             description={"Pick an image from your camera roll"}
+            gallery={false}
             buttonProps={{
               icon: {
                 icon: "camera",

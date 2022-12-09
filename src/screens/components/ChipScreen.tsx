@@ -18,7 +18,7 @@ import Typography from "../../../tmd/components/Typography/Typography";
 import ChipMultiPicker from "../../../tmd/components/Chip/ChipMultiPicker";
 
 export default function ChipScreen(props) {
-  const { selected } = props.route.params;
+  const selected = props?.route?.params?.selected
   const { getFeaturedCatalog } = useCatalogService();
   const { catalogs } = useFeaturedCatalogQuery();
   const [selectedCountry, setSelectedCountry] = useState<undefined | number>(selected);

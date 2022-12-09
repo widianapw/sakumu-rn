@@ -1,9 +1,13 @@
 import DefaultTheme from "./DefaultTheme";
-import type { Theme } from "../../types";
+import type { Theme } from "../../types/types";
 
 const BumbleTheme: Theme = {
   ...DefaultTheme,
   name: "bumble",
+  button: {
+    ...DefaultTheme.button,
+    shape: "rect",
+  },
   colors: {
     ...DefaultTheme.colors,
     primary: {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dimensions, FlatList, ImageBackground, Pressable, View, ViewToken } from "react-native";
-import { GalleryItem, ImageRatioType } from "../../types";
+import { GalleryItem, ImageRatioType } from "../../types/types";
 import { appTheme } from "../../core/theming";
 import { IconButton, Image, Stack } from "../../index";
 import ImageViewerModal from "../Modal/ImageViewerModal";

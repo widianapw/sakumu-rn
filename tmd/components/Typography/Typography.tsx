@@ -29,9 +29,10 @@ export type TypographyType =
 interface Props {
   style?: StyleProp<TextStyle>;
   type?: TypographyType;
+  color?: string;
 }
 
-const Typography = ({ style, type, ...rest }: Props & React.ComponentProps<typeof Text>) => {
+const Typography = ({ style, type, color, ...rest }: Props & React.ComponentProps<typeof Text>) => {
   const theme = appTheme();
 
   let fontSize = 14;

@@ -59,3 +59,6 @@ export { default as Toolbar } from "./components/Toolbar/Toolbar";
 export { default as SignatureCanvas } from "./components/Signature/SignatureCanvas";
 export { Modalize } from "./components/Modalize";
 export { default as Chip } from "./components/Chip/Chip";
+export { default as Slider } from "./components/Slider/Slider";
+export { default as RangeSlider } from "./components/Slider/RangeSlider";
+export { default as Accordion } from "./components/Accordion/Accordion";

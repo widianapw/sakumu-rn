@@ -4,7 +4,7 @@ import { Animated, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "rea
 import color from "color";
 import TouchableRipple from "../TouchableRipple/TouchableRipple";
 import { appTheme } from "../../core/theming";
-import type { $RemoveChildren, ColorVariantType } from "../../types";
+import type { $RemoveChildren, ColorVariantType } from "../../types/types";
 import Icon from "../Icon";
 import Typography from "../Typography/Typography";
 

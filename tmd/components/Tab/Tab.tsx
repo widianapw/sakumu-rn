@@ -2,7 +2,7 @@ import React, { ComponentProps } from "react";
 import { TabBar, TabBarIndicator, TabView } from "react-native-tab-view";
 import { Icon, Stack, appTheme } from "../../index";
 import Typography from "../Typography/Typography";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 interface Props {
   scrollable?: boolean;

@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import { appTheme } from "../../core/theming";
 import * as Progress from "react-native-progress";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

@@ -2,7 +2,7 @@ import * as React from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import Typography from "../Typography/Typography";
 import RNSwitch from "./RNSwitch";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 import { appTheme } from "../../core/theming";
 
 type Props = React.ComponentPropsWithRef<typeof RNSwitch> & {

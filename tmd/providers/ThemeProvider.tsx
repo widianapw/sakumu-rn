@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Theme } from "../types";
+import { Theme } from "../types/types";
 import { dispatch, useAppSelector } from "../../src/redux/stores/store";
 import { DefaultTheme } from "../index";
+import { AppThemes } from "../styles/theme/AppThemes";
 
 
 export type ThemeContextType = {
@@ -29,6 +30,9 @@ const ThemeProvider = ({ children, initialTheme }: Props & any) => {
   useEffect(() => {
     if (!theme) {
       changeTheme(initialTheme);
+    }else{
+      const selectedNewTheme = AppThemes.find((item) => item.name === theme.name);
+      changeTheme(selectedNewTheme ?? DefaultTheme);
     }
   }, []);
 

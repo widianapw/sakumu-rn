@@ -84,6 +84,7 @@ const PermissionProvider = ({ children }: any) => {
           const type = getPermissionType(notGranted);
           //select which one you want to use
           showPermissionBS(type);
+          
           // showPermissionModal(type);
         }
       })

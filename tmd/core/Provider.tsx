@@ -6,7 +6,7 @@ import MaterialCommunityIcon from "../components/MaterialCommunityIcon";
 import PortalHost from "../components/Portal/PortalHost";
 import DefaultTheme from "../styles/theme/DefaultTheme";
 import { addEventListener } from "../utils/addEventListener";
-import { Theme } from "../types";
+import { Theme } from "../types/types";
 import DarkTheme from "../styles/theme/DarkTheme";
 
 type Props = {

@@ -2,7 +2,7 @@ import React, { ComponentProps, useEffect, useMemo, useState } from "react";
 import Chip, { ChipShape, ChipVariant } from "./Chip";
 import { StyleProp, TextStyle, ViewStyle } from "react-native";
 import { IconProps } from "../Icon";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 import MultiPickerBottomSheet from "../BottomSheet/MultiPickerBottomSheet";
 import { PickerItem } from "../../model/PickerItem";
 

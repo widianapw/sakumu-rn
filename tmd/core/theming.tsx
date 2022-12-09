@@ -1,6 +1,6 @@
 import { createTheming } from "@callstack/react-theme-provider";
 import DefaultTheme from "../styles/theme/DefaultTheme";
-import { Theme } from "../types";
+import { Theme } from "../types/types";
 import { useContext } from "react";
 import { ThemeContext } from "../providers/ThemeProvider";
 

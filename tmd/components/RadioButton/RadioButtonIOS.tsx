@@ -6,7 +6,7 @@ import { handlePress, isChecked } from './utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren } from '../../types/types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

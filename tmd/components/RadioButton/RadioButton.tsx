@@ -4,7 +4,7 @@ import RadioButtonAndroid from "./RadioButtonAndroid";
 import { appTheme } from "../../core/theming";
 import Typography from "../Typography/Typography";
 import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 export type Props = {
   /**

@@ -1,5 +1,5 @@
 import configureFonts from "../fonts";
-import type { Theme } from "../../types";
+import type { Theme } from "../../types/types";
 import { defaultThemeColors } from "../defaultThemeColors";
 
 const DefaultTheme: Theme = {
@@ -77,6 +77,11 @@ const DefaultTheme: Theme = {
     colorVariant: "primary",
   },
   stepper: {
+    colorVariant: "primary",
+  },
+  slider :{
+    thumbType: "filled",
+    thumbValuePosition: "bottom",
     colorVariant: "primary",
   },
   fonts: configureFonts(),

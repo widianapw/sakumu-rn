@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import StorageKey from "../StorageKey";
 import Config from "react-native-config";
 
+
 const getLocale = async () => {
   try {
     const locale = await AsyncStorage.getItem(StorageKey.LOCALE);

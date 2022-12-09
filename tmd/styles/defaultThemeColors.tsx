@@ -1,6 +1,6 @@
 // @ts-ignore
 import color from "color";
-import { ThemeColors } from "../types";
+import { ThemeColors } from "../types/types";
 
 export const transparent = "rgba(255, 255, 255, 0)";
 

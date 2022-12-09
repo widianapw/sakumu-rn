@@ -1,6 +1,6 @@
 import type { Animated, ColorValue, LayoutChangeEvent, TextInput as NativeTextInput, TextStyle } from "react-native";
 import type { TextInputProps } from "./TextField";
-import type { $Omit } from "../../types";
+import type { $Omit } from "../../types/types";
 
 export type TextInputLabelProp = string | React.ReactElement;
 

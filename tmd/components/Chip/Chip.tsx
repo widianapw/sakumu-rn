@@ -13,7 +13,7 @@ import { TouchableRipple } from "../../index";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../../model/PickerItem";
 import { useDeepEffect } from "../../hooks/useDeepEffect";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 import { useSecondEffect } from "../../hooks/useSecondEffect";
 
 export type ChipShape = "rect" | "rounded";

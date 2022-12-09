@@ -49,7 +49,7 @@ const renderScene = ({ route }) => {
 };
 
 export default function TabScreen({ navigation, route }: NativeStackScreenProps<AppNavigationType, "TabScreen">) {
-  const initialIndex = route.params.initialIndex ?? 0;
+  const initialIndex = route.params?.initialIndex ?? 0;
   const layout = useWindowDimensions();
 
   const [index, setIndex] = useState(initialIndex);

@@ -1,4 +1,4 @@
-import type { Fonts } from "../types";
+import type { Fonts } from "../types/types";
 
 const fonts: Fonts = {
     thin: {

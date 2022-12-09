@@ -7,7 +7,7 @@ import { appTheme } from "../../core/theming";
 import { StyleProp, View, ViewStyle } from "react-native";
 import Typography, { TypographyType } from "../Typography/Typography";
 import Icon, { IconProps } from "../Icon";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 
 export type TagSize = "sm" | "md" | "lg"

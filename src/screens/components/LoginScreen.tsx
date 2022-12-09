@@ -13,9 +13,13 @@ import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
 import RHFSignatureCanvas from "../../../tmd/components/RHF/RHFSignatureCanvas";
 import Typography from "../../../tmd/components/Typography/Typography";
+import useBaseService from "../../services/useBaseService";
+import { useModal } from "../../../tmd/providers/ModalProvider";
 
 export default function LoginScreen() {
   const { login, isLoadingLogin } = useAuth();
+  const { showErrorModal } = useModal();
+  const { getAPI } = useBaseService();
   const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().required().min(8),
@@ -53,7 +57,7 @@ export default function LoginScreen() {
               <RHFTextField
                 name={"email"}
                 label={"Email"}
-                />
+              />
             </View>
 
             <View>
@@ -63,8 +67,6 @@ export default function LoginScreen() {
                 password
               />
             </View>
-
-
 
 
             <Button
@@ -77,6 +79,7 @@ export default function LoginScreen() {
               }}
               fullWidth
             >Login</Button>
+
           </Stack>
         </FormProvider>
       </ScrollView>

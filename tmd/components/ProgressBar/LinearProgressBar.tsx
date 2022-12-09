@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { appTheme } from "../../core/theming";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

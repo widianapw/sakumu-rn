@@ -1,5 +1,13 @@
 import { SelectedMap } from "../../tmd/components/picker/MapPicker";
-import { GalleryItem } from "../../tmd/types";
+import { GalleryItem } from "../../tmd/types/types";
+
+export type BottomTabNavigationType = {
+  ButtonScreen: undefined,
+  AlertScreen: undefined,
+  TagScreen: undefined,
+  ImageScreen: undefined,
+}
+
 
 type AppNavigationType = {
   //integration
@@ -52,5 +60,8 @@ type AppNavigationType = {
   CarouselScreen: undefined,
   PrinterTDSScreen: undefined,
   ThemeTDSScreen: undefined,
+  SliderTDSScreen: undefined,
+  BottomNavTDSScreen: undefined,
+  AccordionTDSScreen: undefined,
 };
 export default AppNavigationType;

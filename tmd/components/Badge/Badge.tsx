@@ -2,7 +2,7 @@ import React from "react";
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import { appTheme } from "../../core/theming";
 import Typography, { TypographyType } from "../Typography/Typography";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 export type BadgeSize = "sm" | "md" | "lg";
 export type BadgeShape = "rect" | "rounded"

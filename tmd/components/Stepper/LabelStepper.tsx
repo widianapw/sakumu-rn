@@ -5,7 +5,7 @@ import { Divider, Stack, appTheme } from "../../index";
 import Typography from "../Typography/Typography";
 import { StepperItem } from "../../model/StepperItem";
 import Icon from "../Icon";
-import { ColorVariantType } from "../../types";
+import { ColorVariantType } from "../../types/types";
 
 export type LabelStepperOrientationType = "horizontal" | "vertical";
 

@@ -1,6 +1,6 @@
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
 import { IconButton, Image, Stack, appTheme } from "../../index";
-import { ImageRatioType } from "../../types";
+import { ImageRatioType } from "../../types/types";
 import { Dimensions, FlatList, ImageBackground, Pressable, View, ViewToken } from "react-native";
 import { useLocale } from "../../../src/providers/LocaleProvider";
 import { goBack, navigate } from "../../../src/navigations/RootNavigation";
