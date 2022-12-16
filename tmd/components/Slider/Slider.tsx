@@ -5,13 +5,13 @@
 
 import React, { ComponentProps, useCallback, useState } from "react";
 import { appTheme } from "../../core/theming";
-import { default as ERangeSlider } from "rn-range-slider";
-import { View, ViewProps, ViewStyle } from "react-native";
+import { View, ViewStyle } from "react-native";
 import Typography from "../Typography/Typography";
 import { HelperText, Stack } from "../../index";
 import { BaseFormType } from "../../types/BaseFormType";
 import { ColorVariantType, ThumbType, ThumbValuePosition } from "../../types/types";
 import LabelInput from "../TextInput/Label/LabelInput";
+import RnRangeSlider from "./RnRangeSlider";
 
 
 export type BaseSliderType = {
@@ -28,7 +28,7 @@ export interface SliderRangeValue {
   fromUser?: boolean;
 }
 
-type SlideProps = Omit<ComponentProps<typeof ERangeSlider>, "min" | "max" | "renderThumb" | "renderRail" | "renderRailSelected" | "step" | "onValueChanged" | "style">
+type SlideProps = Omit<ComponentProps<typeof RnRangeSlider>, "min" | "max" | "renderThumb" | "renderRail" | "renderRailSelected" | "step" | "onValueChanged" | "style">
 type Props = {
   initialValue?: number;
 
@@ -98,7 +98,7 @@ export default function Slider(
         </Typography>
       }
     </Stack>
-    <ERangeSlider
+    <RnRangeSlider
       min={min}
       max={max}
       step={step}

@@ -9,7 +9,7 @@ import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import Typography from "../Typography/Typography";
 import Icon, { IconProps } from "../Icon";
 import { appTheme } from "../../core/theming";
-import { TouchableRipple } from "../../index";
+import { Stack, TouchableRipple } from "../../index";
 import PickerBottomSheet from "../BottomSheet/PickerBottomSheet";
 import { PickerItem } from "../../model/PickerItem";
 import { useDeepEffect } from "../../hooks/useDeepEffect";
@@ -32,7 +32,6 @@ export type ChipProps = {
   onPress?: () => void;
   disabled?: boolean;
   colorVariant?: ColorVariantType;
-
   type?: ChipType;
   onPickerChanges?: (item?: PickerItem) => void;
   selectedPickerValue?: string | number | undefined;
@@ -153,72 +152,64 @@ export default function Chip({
 
   return (
     <>
-      <View
+      <TouchableRipple
+        borderless
         style={[
           {
             backgroundColor: bgColor,
             borderWidth: isSelectedFilled ? 2 : isUseBorder ? 1 : 0,
             borderColor: borderColor,
+            paddingVertical: isSelectedFilled ? 4 : 6,
+            paddingHorizontal: isSelectedFilled ? 14 : 16,
             flexDirection: "row",
             alignItems: "center",
+            justifyContent: "center",
             alignSelf: "baseline",
           },
           borderRadius,
           rest.style,
-        ]}>
-        <TouchableRipple
-          borderless
-          style={[
-            {
-              paddingVertical: isSelectedFilled ? 4 : 6,
-              paddingHorizontal: isSelectedFilled ? 14 : 16,
-              flexDirection: "row",
-              alignItems: "center",
-            },
-            borderRadius,
-          ]}
-          onPress={disabled ? undefined : handleOnPress}
-          delayPressIn={0}>
-          <>
-            {rest.icon && (
-              <Icon
-                style={{
-                  marginRight: 4,
-                }}
-                size={rest.icon.size ?? 18}
-                color={rest.icon.color ?? txtColor}
-                {...rest.icon}
-              />
-            )}
-            <Typography
-              style={[{ color: txtColor }, rest.textStyle]}
-              type={"label1"}>
-              {selectedObj?.name ?? text}
-            </Typography>
-            {suffixIcon && (
-              <Icon
-                style={{
-                  marginLeft: 8,
-                }}
-                size={18}
-                color={txtColor}
-                {...suffixIcon}
-              />
-            )}
+        ]}
+        onPress={disabled ? undefined : handleOnPress}
+        delayPressIn={0}>
+        <>
+          {rest.icon && (
+            <Icon
+              style={{
+                marginRight: 4,
+              }}
+              size={rest.icon.size ?? 18}
+              color={rest.icon.color ?? txtColor}
+              {...rest.icon}
+            />
+          )}
+          <Typography
+            style={[{ color: txtColor }, rest.textStyle]}
+            type={"label1"}>
+            {selectedObj?.name ?? text}
+          </Typography>
+          {suffixIcon && (
+            <Icon
+              style={{
+                marginLeft: 8,
+              }}
+              size={18}
+              color={txtColor}
+              {...suffixIcon}
+            />
+          )}
 
-            {type == "picker" && (
-              <Icon
-                style={{
-                  marginLeft: 4,
-                }}
-                size={18}
-                color={txtColor}
-                icon={"chevron-down"}
-              />
-            )}
-          </>
-        </TouchableRipple>
-      </View>
+          {type == "picker" && (
+            <Icon
+              style={{
+                marginLeft: 4,
+              }}
+              size={18}
+              color={txtColor}
+              icon={"chevron-down"}
+            />
+          )}
+        </>
+      </TouchableRipple>
       {
         type == "picker"
         && (

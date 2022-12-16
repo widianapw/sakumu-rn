@@ -18,7 +18,7 @@ import Typography from "../../../tmd/components/Typography/Typography";
 import ChipMultiPicker from "../../../tmd/components/Chip/ChipMultiPicker";
 
 export default function ChipScreen(props) {
-  const selected = props?.route?.params?.selected
+  const selected = props?.route?.params?.selected;
   const { getFeaturedCatalog } = useCatalogService();
   const { catalogs } = useFeaturedCatalogQuery();
   const [selectedCountry, setSelectedCountry] = useState<undefined | number>(selected);
@@ -55,7 +55,7 @@ export default function ChipScreen(props) {
           </Stack>
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <Stack direction={'row'} spacing={8}>
+            <Stack direction={"row"} spacing={8}>
               <Chip
                 shape={"rect"}
                 text={"Catalog"}
@@ -99,12 +99,17 @@ export default function ChipScreen(props) {
 
           </ScrollView>
 
+          <Stack>
+            <Chip
+              text={"WIDI"}
+              textStyle={{
+                textAlign: "center",
+              }}
+              style={{ width: "100%" }} />
+          </Stack>
+
 
           <Stack spacing={8} mt={16}>
-            <Button onPress={() => {
-              setSelectedCountry(1);
-            }}>Set selected</Button>
-
             <Typography type={"title3"}>Chip MultiPicker</Typography>
             <ChipMultiPicker
               text={"initialy"}
@@ -131,5 +136,5 @@ export default function ChipScreen(props) {
         </Stack>
       </ScrollView>
     </Page>
-  )
+  );
 }

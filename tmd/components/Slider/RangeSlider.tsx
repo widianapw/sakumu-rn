@@ -4,16 +4,16 @@
  */
 
 import React, { ComponentProps, useCallback, useMemo, useState } from "react";
-import { default as ERangeSlider } from "rn-range-slider";
 import { BaseSliderType, SliderRangeValue } from "./Slider";
 import { appTheme } from "../../core/theming";
-import { View, ViewProps, ViewStyle } from "react-native";
+import { View, ViewStyle } from "react-native";
 import Typography from "../Typography/Typography";
 import { HelperText, Stack } from "../../index";
 import { BaseFormType } from "../../types/BaseFormType";
 import LabelInput from "../TextInput/Label/LabelInput";
+import RnRangeSlider from "./RnRangeSlider";
 
-type SlideProps = Omit<ComponentProps<typeof ERangeSlider>, "min" | "max" | "renderThumb" | "renderRail" | "renderRailSelected" | "step" | "onValueChanged" | "style">
+type SlideProps = Omit<ComponentProps<typeof RnRangeSlider>, "min" | "max" | "renderThumb" | "renderRail" | "renderRailSelected" | "step" | "onValueChanged" | "style">
 type Props = {
   initialValue?: SliderRangeValue;
 
@@ -47,7 +47,7 @@ export default function RangeSlider(
     ...props
   }: SlideProps & Props & BaseFormType & BaseSliderType,
 ) {
-  const { colors , slider} = appTheme();
+  const { colors, slider } = appTheme();
   const usedInitial = initialValue ?? value;
   const [rangeValue, setRangeValue] = useState<SliderRangeValue | undefined>(
     usedInitial ? {
@@ -58,7 +58,6 @@ export default function RangeSlider(
   const handleValueChange = useCallback((low, high, fromUser) => {
     setRangeValue({ low, high, fromUser });
     if (onValueChanged) {
-      console.log("onValueChanged", low, high, fromUser);
       onValueChanged({
         low,
         high,
@@ -71,7 +70,6 @@ export default function RangeSlider(
   const usedThumbType = thumbType ?? slider.thumbType;
   const usedColorVariant = colorVariant ?? slider.colorVariant;
   const thumbColor = colors[usedColorVariant].main;
-
   const isControlled = value !== undefined;
 
   const displayValue = useMemo(() => {
@@ -99,7 +97,7 @@ export default function RangeSlider(
       }
     </Stack>
 
-    <ERangeSlider
+    <RnRangeSlider
       min={min}
       max={max}
       step={step}
@@ -109,6 +107,8 @@ export default function RangeSlider(
       style={{
         paddingBottom: 20,
       }}
+
+
       renderThumb={(name) => {
         return <View style={{ position: "relative" }}>
           <View style={{
