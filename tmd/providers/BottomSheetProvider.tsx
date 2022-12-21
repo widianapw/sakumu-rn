@@ -13,6 +13,8 @@ import { Linking } from "react-native";
 import { useLocale } from "../../src/providers/LocaleProvider";
 import { LinearProgressBar } from "../index";
 import ProgressBottomSheet from "../components/BottomSheet/ProgressBottomSheet";
+import { dispatch, useAppSelector } from "../../src/redux/stores/store";
+import { isNetworkError } from "../../src/utils/network/networkHelper";
 
 export type PermissionType =
   "camera" | "storage" | "location" | "bluetooth" | "another";
@@ -77,6 +79,8 @@ export const BSContext = createContext(initialState);
 export const useBottomSheet = () => useContext(BSContext);
 const BottomSheetProvider = ({ children }: any) => {
   const { t } = useLocale();
+  const { isAuthenticated } = useAppSelector(state => state?.authReducer);
+
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
   const [confirmationProps, setConfirmationProps] = useState<ConfirmationBSContext>({});
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -94,13 +98,29 @@ const BottomSheetProvider = ({ children }: any) => {
 
   const showErrorBS = (error: any, props?: ConfirmationBSContext) => {
     let data: ConfirmationBSContext;
-    if (error?.error?.errors) {
+    if ((error?.error?.code == 401) && isAuthenticated == true) {
       data = {
-        title: props?.title ?? error?.error?.errors[0]?.title,
-        description: props?.description ?? error?.error?.errors[0]?.message,
+        title: "Unauthorized",
+        description: "Please try to re-login or ask the administrator to give you access",
+        buttonPrimaryTitle: "Logout",
+        buttonPrimaryAction: () => {
+          hideErrorBS();
+          dispatch({
+            type: "LOGOUT",
+          });
+        },
+        buttonSecondary: true,
+        buttonSecondaryTitle: "Cancel",
+        dismissible: false,
         ...props,
       };
-    } else if (error?.message == "Network Error") {
+    } else if (error?.error?.errors) {
+      data = {
+        title: props?.title ?? error?.error?.title ?? error?.error?.errors[0]?.title,
+        description: props?.description ?? error?.error?.description ?? error?.error?.errors[0]?.message,
+        ...props,
+      };
+    } else if (isNetworkError(error)) {
       data = {
         imageNode: <IllustNoConnection />,
         title: t("errors.no_connection_title"),
@@ -124,8 +144,8 @@ const BottomSheetProvider = ({ children }: any) => {
   };
 
   const openSetting = () => {
-    Linking.openSettings()
-  }
+    Linking.openSettings();
+  };
 
   const showPermissionBS = (type: PermissionType, props?: ConfirmationBSContext) => {
     if (type != "another") {

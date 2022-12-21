@@ -3,23 +3,17 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { Image, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import * as yup from "yup";
-import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { Button, RHFPhoneField, RHFTextField } from "../../../tmd";
+import { FormProvider, useForm } from "react-hook-form";
+import { Button, RHFTextField } from "../../../tmd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../providers/AuthProvider";
 import Page from "../../../tmd/components/Page";
 import Stack from "../../../tmd/components/Layout/Stack";
-import RHFSignatureCanvas from "../../../tmd/components/RHF/RHFSignatureCanvas";
-import Typography from "../../../tmd/components/Typography/Typography";
-import useBaseService from "../../services/useBaseService";
-import { useModal } from "../../../tmd/providers/ModalProvider";
 
 export default function LoginScreen() {
   const { login, isLoadingLogin } = useAuth();
-  const { showErrorModal } = useModal();
-  const { getAPI } = useBaseService();
   const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().required().min(8),

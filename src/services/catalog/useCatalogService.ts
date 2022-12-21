@@ -15,7 +15,7 @@ export default function useCatalogService() {
       params: {
         page: page,
         store: 1,
-        search: search
+        search: search,
       },
     });
   };

@@ -55,6 +55,7 @@ export default function SliderTDSScreen() {
           style={{
             marginTop: 6,
           }}
+
           thumbValuePosition={"bottom"}
           minRange={10}
         />

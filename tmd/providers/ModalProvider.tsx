@@ -11,6 +11,8 @@ import AlertModal from "../components/Modal/AlertModal";
 import ProgressModal from "../components/Modal/ProgressModal";
 import { CircularProgressBar } from "../index";
 import { StackDirection } from "../components/Layout/Stack";
+import { dispatch, useAppSelector } from "../../src/redux/stores/store";
+import { isNetworkError } from "../../src/utils/network/networkHelper";
 
 type ConfirmationModalContext = {
   imageNode?: React.ReactNode;
@@ -74,6 +76,7 @@ export const ModalContext = createContext(initialState);
 export const useModal = () => useContext(ModalContext);
 const ModalProvider = ({ children }: any) => {
   const { t } = useLocale();
+  const { isAuthenticated } = useAppSelector(state => state?.authReducer);
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
   const [confirmationProps, setConfirmationProps] = useState<ConfirmationModalContext>({});
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -91,13 +94,29 @@ const ModalProvider = ({ children }: any) => {
 
   const showErrorModal = (error: any, props?: ConfirmationModalContext) => {
     let data: ConfirmationModalContext;
-    if (error?.error?.errors) {
+    if ((error?.error?.code == 401) && isAuthenticated == true) {
       data = {
-        title: props?.title ?? error?.error?.errors[0]?.title,
-        description: props?.description ?? error?.error?.errors[0]?.message,
+        title: "Unauthorized",
+        description: "Please try to re-login or ask the administrator to give you access",
+        buttonPrimaryTitle: "Logout",
+        buttonPrimaryAction: () => {
+          hideErrorModal();
+          dispatch({
+            type: "LOGOUT",
+          });
+        },
+        buttonSecondary: true,
+        buttonSecondaryTitle: "Cancel",
+        dismissible: false,
         ...props,
       };
-    } else if (error?.message == "Network Error") {
+    } else if (error?.error?.errors) {
+      data = {
+        title: props?.title ?? error?.error?.title ?? error?.error?.errors[0]?.title,
+        description: props?.description ?? error?.error?.description ?? error?.error?.errors[0]?.message,
+        ...props,
+      };
+    } else if (isNetworkError(error)) {
       data = {
         imageNode: <IllustNoConnection />,
         title: t("errors.no_connection_title"),
@@ -221,17 +240,17 @@ const ModalProvider = ({ children }: any) => {
 
   const renderComponent = () => {
     return <>
+      <AlertModal
+        open={isOpenAlert}
+        onClose={hideAlertModal}
+        {...alertProps} />
+
       <ConfirmationModal
         {...confirmationProps}
         open={isOpenConfirmation}
         onClose={() => {
           hideConfirmationModal();
         }} />
-
-      <AlertModal
-        open={isOpenAlert}
-        onClose={hideAlertModal}
-        {...alertProps} />
 
       <AlertModal
         open={isOpenError}

@@ -4,11 +4,11 @@
  */
 import React, { createContext, useContext, useState } from "react";
 import { LoginResponse, User } from "../models/auth/Auth";
-import useBaseService from "../services/useBaseService";
 import { useBottomSheet } from "../../tmd/providers/BottomSheetProvider";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import StorageKey from "../utils/StorageKey";
+import useBaseService from "../services/useBaseService";
 
 export type AuthContextType = {
   login: (email: string, password: string) => void;
@@ -25,7 +25,7 @@ const AuthProvider = ({ children }: any) => {
   const user = useSelector(state => state.authReducer.user);
 
   const dispatch = useDispatch();
-  const { postAPI } = useBaseService();
+  const { patchAPI, postAPI } = useBaseService();
   const { showErrorBS } = useBottomSheet();
   const [isLoadingLogin, setIsLoadingLogin] = useState(false);
   const [isLoadingLogout, setIsLoadingLogout] = useState(false);

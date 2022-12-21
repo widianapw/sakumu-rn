@@ -13,7 +13,7 @@ export default function useBaseService() {
       throw e;
     }
   };
-  
+
   const patchAPI = async <E>(route: string, body?: any, config?: AxiosRequestConfig) => {
     try {
       return await client.patch(route, body, config) as E;

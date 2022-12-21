@@ -3,7 +3,7 @@
  * Copyright (c) 2022 - Made with love
  */
 import React, { useState } from "react";
-import { Alert, ScrollView } from "react-native";
+import { Alert, Modal, ScrollView } from "react-native";
 import { Button, Stack } from "../../../tmd";
 import IllustNoConnection from "../../assets/illusts/no_internet_connection.svg";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
@@ -20,6 +20,8 @@ import { PickerItem } from "../../../tmd/model/PickerItem";
 import DatePickerBottomSheet from "../../../tmd/components/BottomSheet/DatePickerBottomSheet";
 import MonthPickerBottomSheet from "../../../tmd/components/BottomSheet/MonthPickerBottomSheet";
 import SearchToolbar from "../../../tmd/components/Toolbar/SearchToolbar";
+import { Portal } from "react-native-portalize";
+import { useModal } from "../../../tmd/providers/ModalProvider";
 
 export default function BottomSheetScreen() {
   const { getBank } = useBankService();
@@ -27,15 +29,18 @@ export default function BottomSheetScreen() {
     showConfirmationBS,
     hideConfirmationBS,
     showAlertBS,
+    showErrorBS,
   } = useBottomSheet();
   const { requestPermissions } = usePermission();
+  const { showAlertModal, hideAlertModal } = useModal();
   const handleShowConfirmation = () => {
     showConfirmationBS({
       title: "Takin ingin Tanda Tangan Kontrak?",
       imageNode: <IllustNoConnection />,
       description: "Selesaikan kontrak dengan melakukan tanda tangan digital pada aplikasi",
       buttonPrimaryAction: () => {
-        hideConfirmationBS();
+        handleShowAlert();
+        // hideConfirmationBS();
       },
     });
   };
@@ -71,6 +76,37 @@ export default function BottomSheetScreen() {
   const [multiBSValues, setMultiBSValues] = useState([]);
   return (
     <>
+      <Modal visible={false} style={{
+        backgroundColor: "transparent",
+      }}>
+        <Stack
+          spacing={16}
+          p={16}
+          style={{
+            backgroundColor: "transparent",
+          }}>
+          <Button
+            buttonStyle={{
+              width: "100%",
+            }}
+            onPress={() => {
+              handleShowConfirmation();
+            }}>
+            Show BS
+          </Button>
+
+          <Button
+            buttonStyle={{
+              width: "100%",
+            }}
+            onPress={() => {
+              hideConfirmationBS();
+            }}>
+            Hide BS
+          </Button>
+        </Stack>
+      </Modal>
+
       <Page>
         <SearchToolbar
           searchPlaceholder={"Search BS"}
@@ -92,8 +128,8 @@ export default function BottomSheetScreen() {
           search
           // open={false}
           onReset={() => {
-            setMultiBSValues([])
-            setIsOpenMulti(false)
+            setMultiBSValues([]);
+            setIsOpenMulti(false);
           }}
           open={isOpenMulti}
           onClose={() => setIsOpenMulti(false)}
@@ -171,7 +207,7 @@ export default function BottomSheetScreen() {
 
             <Button
               onPress={() => {
-                getBank()
+                getBank();
               }}
             >
               GET DATA WITH ERROR
@@ -205,6 +241,8 @@ export default function BottomSheetScreen() {
           </Stack>
         </ScrollView>
       </Page>
+
+
     </>
   );
 }

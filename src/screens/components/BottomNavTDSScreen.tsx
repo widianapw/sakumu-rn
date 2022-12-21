@@ -32,14 +32,16 @@ export default function BottomNavTDSScreen() {
           icon: "home",
           inactiveIcon: "home-outline",
         }}
-        name="ButtonScreen" component={ButtonScreen} />
+        name="ButtonScreen"
+        component={ButtonScreen} />
 
       <Tab.Screen
         options={{
           tabBarLabel: "Alert",
           icon: "warning",
         }}
-        name="AlertScreen" component={AlertScreen} />
+        name="AlertScreen"
+        component={AlertScreen} />
 
       <Tab.Screen
         options={{

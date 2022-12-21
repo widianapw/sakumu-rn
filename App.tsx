@@ -46,7 +46,7 @@ const App = () => {
                       <ModalProvider>
                         <PermissionProvider>
                           <AuthProvider>
-                            <OrientationLocker orientation={PORTRAIT}/>
+                            <OrientationLocker orientation={PORTRAIT} />
                             <AppNavigation />
                           </AuthProvider>
                         </PermissionProvider>
