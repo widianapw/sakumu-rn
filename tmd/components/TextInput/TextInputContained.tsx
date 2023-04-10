@@ -256,6 +256,7 @@ const TextInputContained = ({
               ],
             } as RenderProps)}
           </View>
+
           {
             isShowSearch &&
             <View style={{
@@ -384,33 +385,34 @@ const TextInputContained = ({
       </View>
 
 
-      <Stack direction={"row"} mt={4}>
-        <Stack style={{ flex: 1 }}>
-          {
-            errorText
-              ? <HelperText type={"error"}>
+      {
+        // (errorText?.length || helperText?.length || maxLength != undefined) &&
+        <View
+          style={{ flexDirection: "row", marginTop: 4 }}>
+          <Stack style={{ flex: 1 }}>
+            {
+              (error && errorText?.length) &&
+              <HelperText type={"error"}>
                 {errorText}
               </HelperText>
-              : <></>
-          }
-
-          {
-            helperText
-              ? <HelperText type={"info"}>
+            }
+            {
+              ((helperText?.length ?? 0) > 0) &&
+              <HelperText type={"info"}>
                 {helperText}
               </HelperText>
-              : <></>
-          }
-        </Stack>
+            }
+          </Stack>
 
-        {
-          (counter && maxLength) &&
-          <Typography style={{ flexShrink: 1, paddingLeft: 3, color: theme.colors.neutral.neutral_90 }}
-                      type={"body3"}>
-            {value?.length ?? 0} / {maxLength}
-          </Typography>
-        }
-      </Stack>
+          {
+            (counter && maxLength) &&
+            <Typography style={{ paddingLeft: 3, color: theme.colors.neutral.neutral_90 }}
+                        type={"body3"}>
+              {value?.length ?? 0} / {maxLength}
+            </Typography>
+          }
+        </View>
+      }
 
 
     </View>

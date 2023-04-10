@@ -245,4 +245,11 @@ export const _componentGalleries = [
       navigate("AccordionTDSScreen");
     },
   },
+  {
+    id: 34,
+    title: "Chat GPT",
+    action: () => {
+      navigate("ChatGPTScreen");
+    },
+  },
 ];

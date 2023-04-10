@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from "react";
 import { Button, Stack } from "../../index";
 import { Modalize } from "react-native-modalize";
 import Portal from "../Portal/Portal";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, TextStyle, View } from "react-native";
 import Typography from "../Typography/Typography";
 import { appTheme } from "../../core/theming";
 import { useTranslation } from "react-i18next";

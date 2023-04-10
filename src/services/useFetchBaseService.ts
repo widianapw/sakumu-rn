@@ -68,7 +68,7 @@ export default function useFetchBaseService() {
       const response = await fetchClient(getUrl(route), {
         method: "PUT",
         headers: await getHeaders(),
-        body: body ? JSON.stringify(body) : undefined,
+        body: body ? JSON.stringify(body, null, 2) : undefined,
       });
       return response as E;
     } catch (e) {

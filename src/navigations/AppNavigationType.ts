@@ -63,5 +63,8 @@ type AppNavigationType = {
   SliderTDSScreen: undefined,
   BottomNavTDSScreen: undefined,
   AccordionTDSScreen: undefined,
+
+
+  ChatGPTScreen: undefined,
 };
 export default AppNavigationType;
