@@ -17,7 +17,7 @@ import { dispatch, useAppSelector } from "../../src/redux/stores/store";
 import { isNetworkError } from "../../src/utils/network/networkHelper";
 
 export type PermissionType =
-  "camera" | "storage" | "location" | "bluetooth" | "another";
+  "camera" | "storage" | "location" | "bluetooth" | "contact" | "another";
 
 type ConfirmationBSContext = {
   imageNode?: React.ReactNode;

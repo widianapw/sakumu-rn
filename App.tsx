@@ -21,7 +21,7 @@ import BottomSheetProvider from "./tmd/providers/BottomSheetProvider";
 import { Host } from "react-native-portalize";
 import PermissionProvider from "./tmd/providers/PermissionProvider";
 import LocaleProvider from "./src/providers/LocaleProvider";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthProvider from "./src/providers/AuthProvider";
 import { Provider } from "react-redux";
 import { persistor, store } from "./src/redux/stores/store";

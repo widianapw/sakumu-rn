@@ -54,7 +54,7 @@ export default function MultiImagePicker({
   const { requestPermissions } = usePermission();
   const [selectedImageUrls, setSelectedImageUrls] = useState<string[]>([]);
   const handleOpenImagePicker = () => {
-    requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS], () => {
+    requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS()], () => {
       setIsOpen(true);
     });
   };

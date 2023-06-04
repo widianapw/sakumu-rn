@@ -3,7 +3,7 @@ import { useLocale } from "../../providers/LocaleProvider";
 import { SelectedMap } from "../../../tmd/components/picker/MapPicker";
 import MapView from "react-native-maps";
 import { Button, Page, Skeleton, appTheme } from "../../../tmd";
-import Geocoder from "@timwangdev/react-native-geocoder";
+// import Geocoder from "@timwangdev/react-native-geocoder";
 import Config from "react-native-config";
 import Geolocation from "react-native-geolocation-service";
 import { Image, SafeAreaView, View } from "react-native";
@@ -33,26 +33,26 @@ export default function MapPickerScreen({ route }: NativeStackScreenProps<AppNav
 
   const handleAddressChange = (lat: number, lng: number) => {
     setIsLoadingGeocode(true);
-    Geocoder.geocodePositionGoogle({
-      lat: lat,
-      lng: lng,
-    }, {
-      apiKey: Config.GOOGLE_MAPS_API_KEY,
-    }).then((res) => {
-      const a = res[0];
-      const location = {
-        latitude: a.position.lat,
-        longitude: a.position.lng,
-      };
-      setIsLoadingGeocode(false);
-      setAddressObj({
-        fullAddress: a.formattedAddress,
-        location: location,
-        nameAddress: a.feature ?? a.streetName ?? a.subAdminArea,
-      });
-    }).catch((e) => {
-      setIsLoadingGeocode(false);
-    });
+    // Geocoder.geocodePositionGoogle({
+    //   lat: lat,
+    //   lng: lng,
+    // }, {
+    //   apiKey: Config.GOOGLE_MAPS_API_KEY,
+    // }).then((res) => {
+    //   const a = res[0];
+    //   const location = {
+    //     latitude: a.position.lat,
+    //     longitude: a.position.lng,
+    //   };
+    //   setIsLoadingGeocode(false);
+    //   setAddressObj({
+    //     fullAddress: a.formattedAddress,
+    //     location: location,
+    //     nameAddress: a.feature ?? a.streetName ?? a.subAdminArea,
+    //   });
+    // }).catch((e) => {
+    //   setIsLoadingGeocode(false);
+    // });
   };
 
   const openSearchModal = () => {

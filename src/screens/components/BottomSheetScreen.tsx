@@ -10,7 +10,6 @@ import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
 import DateFilterBottomSheet, { DateFilterPayload } from "../../../tmd/components/BottomSheet/DateFilterBottomSheet";
 import Typography from "../../../tmd/components/Typography/Typography";
 import { usePermission } from "../../../tmd/providers/PermissionProvider";
-import { CAMERA_PERMISSIONS, LOCATION_PERMISSIONS, STORAGE_PERMISSIONS } from "../../../tmd/data/_permissionTypes";
 import useBankService from "../../services/bank/useBankService";
 import Page from "../../../tmd/components/Page";
 import DateRangePickerBottomSheet, { DateRange } from "../../../tmd/components/BottomSheet/DateRangePickerBottomSheet";
@@ -20,7 +19,6 @@ import { PickerItem } from "../../../tmd/model/PickerItem";
 import DatePickerBottomSheet from "../../../tmd/components/BottomSheet/DatePickerBottomSheet";
 import MonthPickerBottomSheet from "../../../tmd/components/BottomSheet/MonthPickerBottomSheet";
 import SearchToolbar from "../../../tmd/components/Toolbar/SearchToolbar";
-import { Portal } from "react-native-portalize";
 import { useModal } from "../../../tmd/providers/ModalProvider";
 
 export default function BottomSheetScreen() {
@@ -31,7 +29,7 @@ export default function BottomSheetScreen() {
     showAlertBS,
     showErrorBS,
   } = useBottomSheet();
-  const { requestPermissions } = usePermission();
+  const { requestPermissions , requestStoragePermission} = usePermission();
   const { showAlertModal, hideAlertModal } = useModal();
   const handleShowConfirmation = () => {
     showConfirmationBS({
@@ -56,7 +54,7 @@ export default function BottomSheetScreen() {
 
 
   const requestPermission = () => {
-    requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS, LOCATION_PERMISSIONS],
+    requestStoragePermission(
       () => {
         Alert.alert("GRANTED ");
       });

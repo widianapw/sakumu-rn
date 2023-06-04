@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useCatalogService from "./useCatalogService";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 export default function useCatalogPaginationQuery(page: number) {
   const { getCatalogs } = useCatalogService();

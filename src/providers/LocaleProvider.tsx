@@ -44,7 +44,7 @@ const LocaleChildProvider = ({ children }: any) => {
   };
 
   const changeLanguageAsync = async () => {
-    const lang = await AsyncStorage.getItem(StorageKey.LOCALE) ?? currentLanguage;
+    const lang = (await AsyncStorage.getItem(StorageKey.LOCALE)) ?? currentLanguage;
     changeLanguage(lang);
   };
 

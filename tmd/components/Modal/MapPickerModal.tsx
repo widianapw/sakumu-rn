@@ -9,7 +9,7 @@ import Typography from "../Typography/Typography";
 import { Button, appTheme } from "../../index";
 import Icon from "../Icon";
 import IconButton from "../IconButton";
-import Geocoder from "@timwangdev/react-native-geocoder";
+// import Geocoder from "@timwangdev/react-native-geocoder";
 import Config from "react-native-config";
 import Geolocation from "react-native-geolocation-service";
 import { SelectedMap } from "../picker/MapPicker";
@@ -33,23 +33,23 @@ export default function MapPickerModal({ open, initial, onSelected, onClose, ...
 
   const handleAddressChange = (lat: number, lng: number) => {
 
-    Geocoder.geocodePositionGoogle({
-      lat: lat,
-      lng: lng,
-    }, {
-      apiKey: Config.GOOGLE_MAPS_API_KEY,
-    }).then((res) => {
-      const a = res[0];
-      const location = {
-        latitude: a.position.lat,
-        longitude: a.position.lng,
-      };
-      setAddressObj({
-        fullAddress: a.formattedAddress,
-        location: location,
-        nameAddress: a.feature ?? a.streetName ?? a.subAdminArea,
-      });
-    });
+    // Geocoder.geocodePositionGoogle({
+    //   lat: lat,
+    //   lng: lng,
+    // }, {
+    //   apiKey: Config.GOOGLE_MAPS_API_KEY,
+    // }).then((res) => {
+    //   const a = res[0];
+    //   const location = {
+    //     latitude: a.position.lat,
+    //     longitude: a.position.lng,
+    //   };
+    //   setAddressObj({
+    //     fullAddress: a.formattedAddress,
+    //     location: location,
+    //     nameAddress: a.feature ?? a.streetName ?? a.subAdminArea,
+    //   });
+    // });
   };
 
   const openSearchModal = () => {

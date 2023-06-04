@@ -1,6 +1,6 @@
 import useCatalogService from "./useCatalogService";
 import { useBottomSheet } from "../../../tmd/providers/BottomSheetProvider";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { CatalogListResponse } from "../../models/catalog/Catalog";
 import { useEffect, useMemo, useState } from "react";
 

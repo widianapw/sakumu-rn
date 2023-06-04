@@ -31,7 +31,7 @@ export default function ModalScreen() {
   };
 
   const requestPermission = () => {
-    requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS, LOCATION_PERMISSIONS],
+    requestPermissions([CAMERA_PERMISSIONS, STORAGE_PERMISSIONS(), LOCATION_PERMISSIONS],
       () => {
         Alert.alert("GRANTED ");
       });

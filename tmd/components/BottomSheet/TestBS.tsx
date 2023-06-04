@@ -3,7 +3,6 @@ import BottomSheetWrapper from "./BottomSheetWrapper";
 import { Button, Stack } from "../../index";
 import ImagePicker from "../picker/ImagePicker";
 import { usePermission } from "../../providers/PermissionProvider";
-import { CAMERA_PERMISSIONS, STORAGE_PERMISSIONS } from "../../data/_permissionTypes";
 
 interface Props {
   open: boolean;

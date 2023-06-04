@@ -32,7 +32,6 @@ export const store = configureStore({
   reducer: persistReducer(persistConfig, rootReducer),
 });
 
-
 export type RootState = ReturnType<typeof rootReducer>;
 export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
