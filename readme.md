@@ -24,6 +24,14 @@ core dependencies, and boilerplate to jumpstart development.
 - `pod install` (Mac User)
 - `react-native link`
 
+### Manual Update `node_modules`
+
+- node_modules/react-native-document-scanner-plugin/android/build.gradle
+
+- node_modules/react-native-image-to-pdf/android/build.gradle
+
+`min compileSdkVersion > 30`
+
 ## Base dependencies
 
 - [axios](https://github.com/axios/axios) for networking.
