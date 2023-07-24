@@ -1,56 +1,86 @@
-/**
- * Created by Widiana Putra on 01/07/2022
- * Copyright (c) 2022 - Made with love
- */
-import React from "react";
-import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, View } from "react-native";
-import { appTheme } from "../core/theming";
-import Color from "color";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleProp,
+  View,
+  ViewStyle,
+} from 'react-native';
+
+import Color from 'color';
+import React from 'react';
+import {appTheme} from '../core/theming';
+import {useIsFocused} from '@react-navigation/native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface Props {
   children: React.ReactNode;
   statusBarColor?: string;
   bgColor?: string;
+  styles?: StyleProp<ViewStyle>;
 }
 
-export default function Page({ children, statusBarColor, bgColor }: Props) {
-  const { colors } = appTheme();
-  const statusBarHeight = StatusBar.currentHeight;
-  const statusBarBackgroundColor = statusBarColor ?? colors.primary.pressed;
+export default function Page({
+  children,
+  statusBarColor,
+  bgColor,
+  styles,
+}: Props) {
+  const {colors} = appTheme();
+  const statusBarBackgroundColor = statusBarColor ?? colors.primary.main;
   const isLight = Color(statusBarBackgroundColor).isLight();
+  const isFocused = useIsFocused();
+  const isIos = Platform.OS === 'ios';
 
-
-  const CStatusBar = ({ backgroundColor, ...props }: any) => (
-    <>{
-      <StatusBar backgroundColor={backgroundColor}
-                 barStyle={isLight ? "dark-content" : "light-content"} {...props} />
-    }
+  const CStatusBar = ({backgroundColor, ...props}: any) => (
+    <>
+      {isIos ? (
+        <View
+          style={[
+            {
+              height: useSafeAreaInsets().top,
+            },
+            {backgroundColor},
+          ]}>
+          <SafeAreaView style={[{flex: 1}]}>
+            <StatusBar
+              translucent
+              backgroundColor={backgroundColor}
+              barStyle={isLight ? 'dark-content' : 'light-content'}
+              {...props}
+            />
+          </SafeAreaView>
+        </View>
+      ) : (
+        <>
+          {isFocused && (
+            <StatusBar
+              backgroundColor={statusBarBackgroundColor}
+              barStyle={isLight ? 'dark-content' : 'light-content'}
+              {...props}
+            />
+          )}
+        </>
+      )}
     </>
   );
 
   return (
     <>
-      <CStatusBar
-        backgroundColor={statusBarColor ?? colors.primary.pressed}
-      />
-
-      <SafeAreaView style={[
-        { flex: 1 },
-        bgColor ? { backgroundColor: bgColor } : {},
-      ]}>
-
-        {
-          Platform.OS === "ios" ?
-            <KeyboardAvoidingView
-              behavior={Platform.OS === "ios" ? "padding" : "height"}
-              style={{ flex: 1 }}>
-              {children}
-            </KeyboardAvoidingView>
-            : <>
-              {children}
-            </>
-        }
-
+      <CStatusBar backgroundColor={statusBarBackgroundColor} />
+      <SafeAreaView
+        style={[{flex: 1}, bgColor ? {backgroundColor: bgColor} : {}, styles]}>
+        {isIos ? (
+          <KeyboardAvoidingView
+            behavior={isIos ? 'padding' : 'height'}
+            keyboardVerticalOffset={isIos ? useSafeAreaInsets().top : 0}
+            style={{flex: 1}}>
+            {children}
+          </KeyboardAvoidingView>
+        ) : (
+          <>{children}</>
+        )}
       </SafeAreaView>
     </>
   );

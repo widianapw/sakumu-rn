@@ -3,28 +3,27 @@
  * Copyright (c) 2022 - Made with love
  */
 
-import React, { useEffect, useRef, useState } from "react";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { Animated, TouchableOpacity, View } from "react-native";
-import { appTheme } from "../../core/theming";
-import { Icon, Stack } from "../../index";
-import Typography from "../Typography/Typography";
-import LinearGradient from "react-native-linear-gradient";
-import color from "color";
+import React, {useEffect, useRef, useState} from 'react';
+import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import {Animated, Platform, TouchableOpacity, View} from 'react-native';
+import {appTheme} from '../../core/theming';
+import {Icon, Stack} from '../../index';
+import Typography from '../Typography/Typography';
+import LinearGradient from 'react-native-linear-gradient';
+import color from 'color';
 
-export type BottomNavVariantType = "default" | "highlight" | "indicator";
+export type BottomNavVariantType = 'default' | 'highlight' | 'indicator';
 
 interface Props {
   variant?: BottomNavVariantType;
 }
 
-
-const ScaleViewAnimation = ({ isVisible, children }: any) => {
+const ScaleViewAnimation = ({isVisible, children}: any) => {
   const [view, setView] = useState(children);
   const animation = new Animated.Value(0);
   const inputRange = [0, 0.8, 1];
   const outputRange = [0.8, 1.1, 1];
-  const scale = animation.interpolate({ inputRange, outputRange });
+  const scale = animation.interpolate({inputRange, outputRange});
 
   useEffect(() => {
     if (isVisible) {
@@ -44,20 +43,19 @@ const ScaleViewAnimation = ({ isVisible, children }: any) => {
     }
   }, [isVisible]);
 
-  return (
-    <Animated.View style={[{ transform: [{ scale }] }]}>
-      {view}
-    </Animated.View>
-  );
+  return <Animated.View style={[{transform: [{scale}]}]}>{view}</Animated.View>;
 };
 
-
 function TabBarIcon({
-                      options,
-                      isFocused,
-                      variant = "default",
-                    }: { options: any, isFocused: boolean, variant?: BottomNavVariantType }) {
-  const { colors } = appTheme();
+  options,
+  isFocused,
+  variant = 'default',
+}: {
+  options: any;
+  isFocused: boolean;
+  variant?: BottomNavVariantType;
+}) {
+  const {colors} = appTheme();
   const usedColor = isFocused ? colors.primary.main : colors.neutral.neutral_60;
 
   const widthAnimation = useRef(new Animated.Value(0)).current;
@@ -68,7 +66,7 @@ function TabBarIcon({
   // })
 
   useEffect(() => {
-    if (variant == "highlight") {
+    if (variant == 'highlight') {
       if (isFocused) {
         Animated.timing(widthAnimation, {
           useNativeDriver: true,
@@ -85,113 +83,113 @@ function TabBarIcon({
     }
   }, [isFocused, variant]);
 
-
   return (
-    <Stack style={{ width: "100%", justifyContent: "center", alignItems: "center", position: "relative" }}>
+    <Stack
+      style={{
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+      }}>
       {
         <>
-          {
-            variant == "highlight" &&
-            <Animated.View style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-              <Animated.View style={{
-                height: "100%",
-                width: "60%",
-                backgroundColor: colors.primary.surface,
-                transform: [{ scaleX: widthAnimation }],
-                borderRadius: 32,
-
+          {variant == 'highlight' && (
+            <Animated.View
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
-
-              </Animated.View>
-
+              <Animated.View
+                style={{
+                  height: '100%',
+                  width: '60%',
+                  backgroundColor: colors.primary.surface,
+                  transform: [{scaleX: widthAnimation}],
+                  borderRadius: 32,
+                }}></Animated.View>
             </Animated.View>
-          }
+          )}
 
           <View
             style={{
-              alignItems: "center",
+              alignItems: 'center',
               paddingVertical: 2,
-              width: "60%",
-            }}
-          >
-            {
-              isFocused ?
-                // <ScaleViewAnimation isVisible={isFocused}>
-                <Icon icon={options.icon} color={usedColor} size={24} />
-                // </ScaleViewAnimation>
-                : <Icon icon={options.inactiveIcon ?? options.icon} color={usedColor} size={24} />
-
-            }
+              width: '60%',
+            }}>
+            {isFocused ? (
+              // <ScaleViewAnimation isVisible={isFocused}>
+              <Icon icon={options.icon} color={usedColor} size={24} />
+            ) : (
+              // </ScaleViewAnimation>
+              <Icon
+                icon={options.inactiveIcon ?? options.icon}
+                color={usedColor}
+                size={24}
+              />
+            )}
           </View>
-
-
         </>
-
       }
     </Stack>
   );
 }
 
-
 export default function BottomNavbar({
-                                       variant = "default",
-                                       state,
-                                       descriptors,
-                                       navigation,
-                                     }: Props & BottomTabBarProps) {
-  const { colors } = appTheme();
+  variant = 'default',
+  state,
+  descriptors,
+  navigation,
+}: Props & BottomTabBarProps) {
+  const {colors} = appTheme();
   return (
     <View
       style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         shadowRadius: 8,
         backgroundColor: colors.neutral.neutral_10,
         shadowOffset: {
           width: 0,
           height: -8,
         },
-        shadowColor: "#000000",
+        shadowColor: '#000000',
         elevation: 8,
       }}>
       {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
+        const {options} = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-              ? options.title
-              : route.name;
+            ? options.title
+            : route.name;
 
         const isFocused = state.index === index;
 
         const onPress = () => {
           const event = navigation.emit({
-            type: "tabPress",
+            type: 'tabPress',
             target: route.key,
             canPreventDefault: true,
           });
 
           if (!isFocused && !event.defaultPrevented) {
             // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
+            navigation.navigate({name: route.name, merge: true});
           }
         };
 
         const onLongPress = () => {
           navigation.emit({
-            type: "tabLongPress",
+            type: 'tabLongPress',
             target: route.key,
           });
         };
@@ -200,66 +198,83 @@ export default function BottomNavbar({
           <TouchableOpacity
             activeOpacity={0.8}
             accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1, alignItems: "center", position: "relative" }}
-          >
-            {
-              variant == "indicator" &&
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              position: 'relative',
+              paddingBottom: Platform.OS == 'ios' ? 12 : 0,
+            }}>
+            {variant == 'indicator' && (
               <>
-                {
-                  isFocused &&
-                  <View style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    alignItems: "center",
-                    flex: 1,
-                  }}>
+                {isFocused && (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      alignItems: 'center',
+                      flex: 1,
+                    }}>
                     <LinearGradient
-                      colors={[color(colors.primary.main).alpha(0.1).rgb().string(), colors.neutral.neutral_10]}
+                      colors={[
+                        color(colors.primary.main).alpha(0.1).rgb().string(),
+                        colors.neutral.neutral_10,
+                      ]}
                       style={{
-                        width: "90%",
+                        width: '90%',
                         flex: 1,
                         height: 40,
-                      }} />
+                      }}
+                    />
                   </View>
-                }
+                )}
 
                 <View
                   style={{
-                    position: "absolute",
+                    position: 'absolute',
                     top: 0,
                     left: 0,
                     right: 0,
-                    alignItems: "center",
-                  }}
-                >
-                  <View style={{
-                    width: "80%",
-                    height: 4,
-                    borderBottomStartRadius: 16,
-                    borderBottomEndRadius: 16,
-                    backgroundColor: isFocused ? colors.primary.main : "transparent",
-                  }} />
+                    alignItems: 'center',
+                  }}>
+                  <View
+                    style={{
+                      width: '80%',
+                      height: 4,
+                      borderBottomStartRadius: 16,
+                      borderBottomEndRadius: 16,
+                      backgroundColor: isFocused
+                        ? colors.primary.main
+                        : 'transparent',
+                    }}
+                  />
                 </View>
               </>
-            }
+            )}
 
-            <View style={{
-              paddingVertical: 10,
-              alignItems: "center",
-              width: "100%",
-            }}>
-              <TabBarIcon options={options} isFocused={isFocused} variant={variant} />
+            <View
+              style={{
+                paddingVertical: 10,
+                alignItems: 'center',
+                width: '100%',
+              }}>
+              <TabBarIcon
+                options={options}
+                isFocused={isFocused}
+                variant={variant}
+              />
               <Typography
-                type={"label2"}
+                type={'label2'}
                 style={{
-                  color: isFocused ? colors.primary.main : colors.neutral.neutral_60,
+                  color: isFocused
+                    ? colors.primary.main
+                    : colors.neutral.neutral_60,
                   marginTop: 2,
                 }}>
                 {label}
