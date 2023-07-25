@@ -135,7 +135,6 @@ export default function PickerScreen() {
           <MultiSelect
             label={'Multi Select'}
             search={true}
-            resetable
             fullHeight={false}
             options={_countries.slice(0, 5).map(item => {
               const i: PickerItem = {

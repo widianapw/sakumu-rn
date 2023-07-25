@@ -2,58 +2,64 @@
  * Created by Widiana Putra on 29/06/2022
  * Copyright (c) 2022 - Made with love
  */
-import React, { useEffect } from "react";
-import { ScrollView } from "react-native";
-import * as yup from "yup";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, RHFDatePicker, RHFPhoneField, RHFTimePicker, Stack } from "../../../tmd";
-import RHFTextField from "../../../tmd/components/RHF/RHFTextField";
-import _countries from "../../../tmd/data/_countries";
-import { PickerItem } from "../../../tmd/model/PickerItem";
-import Page from "../../../tmd/components/Page";
-import RHFImagePicker from "../../../tmd/components/RHF/RHFImagePicker";
-import { useLocale } from "../../providers/LocaleProvider";
-import RHFMultiImagePicker from "../../../tmd/components/RHF/RHFMultiImagePicker";
-import RHFDateRangePicker from "../../../tmd/components/RHF/RHFDateRangePicker";
-import RHFMapPicker from "../../../tmd/components/RHF/RHFMapPicker";
-import RHFMultiSelect from "../../../tmd/components/RHF/RHFMultiSelect";
-import Toolbar from "../../../tmd/components/Toolbar/Toolbar";
-import RHFAvatarImagePicker from "../../../tmd/components/RHF/RHFAvatarImagePicker";
-import RHFPriceField from "../../../tmd/components/RHF/RHFPriceField";
-import RHFSelectModal from "../../../tmd/components/RHF/RHFSelectModal";
+import React, {useEffect} from 'react';
+import {ScrollView} from 'react-native';
+import * as yup from 'yup';
+import {FormProvider, useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {
+  Button,
+  RHFDatePicker,
+  RHFPhoneField,
+  RHFTimePicker,
+  Stack,
+} from '../../../tmd';
+import RHFTextField from '../../../tmd/components/RHF/RHFTextField';
+import _countries from '../../../tmd/data/_countries';
+import {PickerItem} from '../../../tmd/model/PickerItem';
+import Page from '../../../tmd/components/Page';
+import RHFImagePicker from '../../../tmd/components/RHF/RHFImagePicker';
+import {useLocale} from '../../providers/LocaleProvider';
+import RHFMultiImagePicker from '../../../tmd/components/RHF/RHFMultiImagePicker';
+import RHFDateRangePicker from '../../../tmd/components/RHF/RHFDateRangePicker';
+import RHFMapPicker from '../../../tmd/components/RHF/RHFMapPicker';
+import RHFMultiSelect from '../../../tmd/components/RHF/RHFMultiSelect';
+import Toolbar from '../../../tmd/components/Toolbar/Toolbar';
+import RHFAvatarImagePicker from '../../../tmd/components/RHF/RHFAvatarImagePicker';
+import RHFPriceField from '../../../tmd/components/RHF/RHFPriceField';
+import RHFSelectModal from '../../../tmd/components/RHF/RHFSelectModal';
 
 export default function FormScreen() {
-  const { t } = useLocale();
+  const {t} = useLocale();
   const schema = yup.object({
-    firstName: yup.string().required().label(t("labels.first_name")),
-    lastName: yup.string().required().label(t("labels.last_name")),
-    countryID: yup.string().label(t("labels.country")),
-    phoneCode: yup.string().required().label(t("labels.phone_code")),
-    phone: yup.string().required().min(6).max(12).label(t("labels.phone")),
-    date: yup.string().required().label(t("labels.date")),
-    dateRange: yup.mixed().required().label(t("labels.date_range")),
-    time: yup.string().required().label(t("labels.time")),
-    image: yup.string().required().label(t("labels.image")),
+    firstName: yup.string().required().label(t('labels.first_name')),
+    lastName: yup.string().required().label(t('labels.last_name')),
+    countryID: yup.string().label(t('labels.country')),
+    phoneCode: yup.string().required().label(t('labels.phone_code')),
+    phone: yup.string().required().min(6).max(12).label(t('labels.phone')),
+    date: yup.string().required().label(t('labels.date')),
+    dateRange: yup.mixed().required().label(t('labels.date_range')),
+    time: yup.string().required().label(t('labels.time')),
+    image: yup.string().required().label(t('labels.image')),
     avatar: yup.string().required(),
     multiImage: yup.array().min(2).required(),
     map: yup.mixed().required(),
     multiSelect: yup.array().min(2).required(),
     price: yup.number().min(1000000).required(),
-  })
+  });
 
   const method = useForm({
     defaultValues: {
-      firstName: "Widiana Putra",
-      lastName: "",
-      countryID: "",
-      phoneCode: "62",
-      phone: "",
-      date: "2022-09-05",
-      time: "",
+      firstName: 'Widiana Putra',
+      lastName: '',
+      countryID: '',
+      phoneCode: '62',
+      phone: '',
+      date: '2022-09-05',
+      time: '',
       multiSelect: undefined,
-      image: "",
-      avatar: "",
+      image: '',
+      avatar: '',
       multiImage: undefined,
       dateRange: undefined,
       map: undefined,
@@ -69,7 +75,7 @@ export default function FormScreen() {
     },
     resolver: yupResolver(schema),
   });
-  const { handleSubmit } = method;
+  const {handleSubmit} = method;
 
   const onSubmit = data => {
     console.log(JSON.stringify(data, null, 2));
@@ -81,12 +87,12 @@ export default function FormScreen() {
 
   return (
     <Page>
-      <Toolbar title={"Form Screen"} />
+      <Toolbar title={'Form Screen'} />
 
-      <ScrollView style={{
-        flex: 1,
-      }}>
-
+      <ScrollView
+        style={{
+          flex: 1,
+        }}>
         <FormProvider {...method}>
           <Stack
             p={16}
@@ -94,40 +100,37 @@ export default function FormScreen() {
             style={{
               flex: 1,
             }}>
-
-
             <RHFTextField
               requiredLabel
-              label={t("labels.first_name")}
-              name={"firstName"}
-              placeholder={t("labels.first_name")}
+              label={t('labels.first_name')}
+              name={'firstName'}
+              placeholder={t('labels.first_name')}
             />
 
             <RHFTextField
-              mode={"contained"}
-              label={t("labels.last_name")}
-                name={"lastName"}
-                placeholder={t("labels.last_name")}
-
-              />
-              <RHFSelectModal
-                label={t("labels.country")}
-                name={"countryID"}
-                placeholder={t("labels.country")}
-                options={_countries.map(it => {
-                  const i: PickerItem = {
-                    id: it.code,
-                    name: it.name,
-                  };
-                  return i;
-                })}
-              />
+              mode={'contained'}
+              label={t('labels.last_name')}
+              name={'lastName'}
+              placeholder={t('labels.last_name')}
+            />
+            <RHFSelectModal
+              label={t('labels.country')}
+              name={'countryID'}
+              placeholder={t('labels.country')}
+              options={_countries.map(it => {
+                const i: PickerItem = {
+                  id: it.code,
+                  name: it.name,
+                };
+                return i;
+              })}
+            />
 
             <RHFMultiSelect
               search
               requiredLabel
-              name={"multiSelect"}
-              label={"Multi Select"}
+              name={'multiSelect'}
+              label={'Multi Select'}
               options={_countries.map(it => {
                 const i: PickerItem = {
                   id: it.code,
@@ -138,80 +141,80 @@ export default function FormScreen() {
             />
 
             <RHFPhoneField
-              name={"phone"}
-              phoneCodeName={"phoneCode"}
-              label={t("labels.phone")}
-              placeholder={"Enter your phone"}
+              name={'phone'}
+              phoneCodeName={'phoneCode'}
+              label={t('labels.phone')}
+              placeholder={'Enter your phone'}
             />
 
             <RHFDatePicker
-              name={"date"}
-              label={t("labels.date")}
-              placeholder={t("labels.date")}
+              name={'date'}
+              label={t('labels.date')}
+              placeholder={t('labels.date')}
             />
 
             <RHFDateRangePicker
-              name={"dateRange"}
-              minDate={"2022-06-01"}
-              maxDate={"2022-08-05"}
+              name={'dateRange'}
+              minDate={'2023-06-01'}
               minDays={7}
               maxDays={30}
-              label={"Date Range Picker"}
-              placeholder={"Pick date range"}
+              label={'Date Range Picker'}
+              placeholder={'Pick date range'}
             />
             <RHFTimePicker
-              name={"time"}
-              label={t("labels.time")}
-              placeholder={t("labels.time")}
+              name={'time'}
+              label={t('labels.time')}
+              placeholder={t('labels.time')}
             />
             <RHFImagePicker
-              description={"Pastikan foto KTP terlihat jelas dan dapat dibaca"}
+              description={'Pastikan foto KTP terlihat jelas dan dapat dibaca'}
               buttonProps={{
                 icon: {
-                  icon: "camera",
+                  icon: 'camera',
                 },
               }}
               requiredLabel
-              name={"image"}
-              label={t("labels.image")} />
+              name={'image'}
+              label={t('labels.image')}
+            />
 
             <RHFMultiImagePicker
-              ratio={"16:9"}
-              description={"Pastikan foto KTP terlihat jelas dan dapat dibaca"}
+              ratio={'16:9'}
+              description={'Pastikan foto KTP terlihat jelas dan dapat dibaca'}
               buttonProps={{
                 icon: {
-                  icon: "camera",
+                  icon: 'camera',
                 },
               }}
               requiredLabel
-              name={"multiImage"}
-              label={"Multi Image"}
+              name={'multiImage'}
+              label={'Multi Image'}
             />
 
-            <RHFAvatarImagePicker
-              size={"3xl"}
-              name={"avatar"}
-            />
+            <RHFAvatarImagePicker size={'3xl'} name={'avatar'} />
 
             <RHFMapPicker
-              label={t("labels.map")}
+              label={t('labels.map')}
               requiredLabel
-              placeholder={t("labels.map")}
-              name={"map"} />
+              placeholder={t('labels.map')}
+              name={'map'}
+            />
 
             <RHFPriceField
-              prefixText={"Rp"}
-              name={"price"}
-              placeholder={t("labels.price")}
-              label={t("labels.price")} />
+              prefixText={'Rp'}
+              name={'price'}
+              placeholder={t('labels.price')}
+              label={t('labels.price')}
+            />
 
             <Button
               containerStyle={{
                 marginTop: 16,
               }}
               fullWidth
-              onPress={handleSubmit(onSubmit, onError)}
-            >Submit Form</Button>
+              onPress={handleSubmit(onSubmit, onError)}>
+              Submit Form
+            </Button>
           </Stack>
         </FormProvider>
       </ScrollView>
