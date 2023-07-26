@@ -14,9 +14,13 @@ core dependencies, and boilerplate to jumpstart development.
 
 ### Git Config
 
-- Clone this repository 
+- Clone this repository
 - Change the package name to your project
 - Change git origin to your project
+- For ios :
+  buka appDelegate.mm, terus ubah self.moduleName = @"ReactNativeStarterKit";
+  pake app namenya
+  ubah pake name di package.json
 
 ### Installations
 
@@ -39,7 +43,7 @@ core dependencies, and boilerplate to jumpstart development.
 - [react-navigation](https://reactnavigation.org/) navigation library.
 - [i18next](https://github.com/i18next/i18next) internationalization-framework.
 - [moment](https://github.com/moment/moment) date library for parsing, validating, manipulating, and formatting dates.
-- [react-hook-form](https://github.com/react-hook-form/react-hook-form)  Performant, flexible and extensible forms with
+- [react-hook-form](https://github.com/react-hook-form/react-hook-form) Performant, flexible and extensible forms with
   easy-to-use validation.
 - [yup](https://github.com/jquense/yup) schema builder for runtime value parsing and validation.
 - [react-native-svg](https://github.com/react-native-svg/react-native-svg) Please use svg for assets.
@@ -71,14 +75,13 @@ This template follows a very simple project structure:
   - free styles
 - `tmd`: This folder is contains template code for starter kit
 
-
 ## Setup environments
 
 ### Using scripts from console
 
 The template already has scripts to execute the project calling a specific environment defined into the package.json file. Keep in mind that if you are going to create new `envs` you have to define the script to build the project properly.
 
-To define which env you want to use, just keep the structure `yarn [platform]: [environment]` 
+To define which env you want to use, just keep the structure `yarn [platform]: [environment]`
 
 DEBUG: `yarn ios:debug` or `yarn android:debug`
 
@@ -89,7 +92,6 @@ PRODUCTION: `yarn ios` or `yarn android`
 Also, you can use npm following the same rule as before: `npm run ios:staging`
 
 Modify the environment variables files in root folder (`.env.debug`, `.env.staging` and `.env`)
-
 
 ## Components
 
@@ -170,7 +172,7 @@ To keep an application scalable and organized, the global static resources that 
   - MultiSelect
   - SelectModal
 - SignatureCanvas
-- Skeleton 
+- Skeleton
 - Tag
 - TextInput
 - Toast

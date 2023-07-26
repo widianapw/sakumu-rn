@@ -29,13 +29,6 @@
             {
               "client_id": "461007272945-chdb8rvcvc2p0vq0n68ekmdsgsnitvck.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "461007272945-72cn8makr1sfno08hhds9s21gjn3h9qb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "net.timedoor.reactnativestarterkit"
-              }
             }
           ]
         }
