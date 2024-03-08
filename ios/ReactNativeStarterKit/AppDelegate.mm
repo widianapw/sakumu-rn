@@ -8,7 +8,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.moduleName = @"ReactNativeStarterKit";
+  self.moduleName = @"SakuMu";
     [FIRApp configure];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
   // You can add your custom initial props in the dictionary below.

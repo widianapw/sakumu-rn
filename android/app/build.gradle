@@ -69,11 +69,11 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 android {
     ndkVersion rootProject.ext.ndkVersion
     compileSdk rootProject.ext.compileSdkVersion
-    namespace "net.timedoor.reactnativestarterkit"
+    namespace "com.sakumu.app"
 
 
     defaultConfig {
-        applicationId "net.timedoor.reactnativestarterkit"
+        applicationId "com.sakumu.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
