@@ -1,12 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.henninghall:numberpickerview:v1.1.5@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/046a401f3e0dd164c11b39f0dd3288e6/transformed/jetified-numberpickerview-v1.1.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/046a401f3e0dd164c11b39f0dd3288e6/transformed/jetified-numberpickerview-v1.1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/046a401f3e0dd164c11b39f0dd3288e6/transformed/jetified-numberpickerview-v1.1.5/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a931cbcee6e41655e6ecaa670ad804f6/transformed/jetified-numberpickerview-v1.1.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a931cbcee6e41655e6ecaa670ad804f6/transformed/jetified-numberpickerview-v1.1.5/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a931cbcee6e41655e6ecaa670ad804f6/transformed/jetified-numberpickerview-v1.1.5/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/281b68b1f70b8ea031b9d9121ebdd686/transformed/jetified-numberpickerview-v1.1.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/281b68b1f70b8ea031b9d9121ebdd686/transformed/jetified-numberpickerview-v1.1.5/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/281b68b1f70b8ea031b9d9121ebdd686/transformed/jetified-numberpickerview-v1.1.5/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.henninghall/numberpickerview/v1.1.5/ce7f54c3be454c0431b20b89c4013314b312b08b/numberpickerview-v1.1.5-javadoc.jar!/" />

@@ -1,16 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.autofill:autofill:1.1.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ac040a0ca01214fe2b6372db73818228/transformed/jetified-autofill-1.1.0/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f2955b1ec492cbb0742bfb6654e67e2b/transformed/jetified-autofill-1.1.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bbc759acba2c048b57518195849d8071/transformed/jetified-autofill-1.1.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ac040a0ca01214fe2b6372db73818228/transformed/jetified-autofill-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ac040a0ca01214fe2b6372db73818228/transformed/jetified-autofill-1.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ac040a0ca01214fe2b6372db73818228/transformed/jetified-autofill-1.1.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f2955b1ec492cbb0742bfb6654e67e2b/transformed/jetified-autofill-1.1.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f2955b1ec492cbb0742bfb6654e67e2b/transformed/jetified-autofill-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f2955b1ec492cbb0742bfb6654e67e2b/transformed/jetified-autofill-1.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bbc759acba2c048b57518195849d8071/transformed/jetified-autofill-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bbc759acba2c048b57518195849d8071/transformed/jetified-autofill-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bbc759acba2c048b57518195849d8071/transformed/jetified-autofill-1.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
