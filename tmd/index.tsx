@@ -10,6 +10,7 @@ export {default as ModalProvider} from './providers/ModalProvider';
 export {default as PermissionProvider} from './providers/PermissionProvider';
 export {default as TooltipStepperProvider} from './providers/TooltipStepperProvider';
 
+export {default as Typography} from './components/Typography/Typography';
 export {default as DefaultTheme} from './styles/theme/DefaultTheme';
 export {default as shadow} from './styles/shadow';
 export {default as overlay} from './styles/overlay';

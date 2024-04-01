@@ -1,6 +1,6 @@
-import { User } from "../../models/auth/Auth";
-import { Theme } from "../../../tmd/types/types";
-import { DefaultTheme } from "../../../tmd";
+import {User} from '@utils/models/auth/Auth';
+import {Theme} from '../../../tmd/types/types';
+import {DefaultTheme} from '../../../tmd';
 
 export type ThemeState = {
   theme?: Theme;
@@ -12,7 +12,7 @@ const initialState: ThemeState = {
 
 const themeReducer = (state: ThemeState = initialState, action: any) => {
   switch (action.type) {
-    case "CHANGE_THEME":
+    case 'CHANGE_THEME':
       return {
         ...state,
         theme: action.payload.theme,
@@ -21,6 +21,5 @@ const themeReducer = (state: ThemeState = initialState, action: any) => {
       return state;
   }
 };
-
 
 export default themeReducer;

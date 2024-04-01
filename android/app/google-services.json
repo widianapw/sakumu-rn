@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "461007272945",
-    "project_id": "rn-starter-kit-ef0bb",
-    "storage_bucket": "rn-starter-kit-ef0bb.appspot.com"
+    "project_number": "859293047961",
+    "project_id": "sakumu-bedac",
+    "storage_bucket": "sakumu-bedac.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:461007272945:android:0b8507fc59098954916250",
+        "mobilesdk_app_id": "1:859293047961:android:9128f1409c164f6aa9ec08",
         "android_client_info": {
-          "package_name": "net.timedoor.reactnativestarterkit"
+          "package_name": "com.sakumu.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "461007272945-chdb8rvcvc2p0vq0n68ekmdsgsnitvck.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDnwQHzp2s_1hdivUM2AfwdYdept_0ianE"
+          "current_key": "AIzaSyCIkJouTYbN4Juoc5DPOxXEpDGruMRcVqQ"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "461007272945-chdb8rvcvc2p0vq0n68ekmdsgsnitvck.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "461007272945-72cn8makr1sfno08hhds9s21gjn3h9qb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "net.timedoor.reactnativestarterkit"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

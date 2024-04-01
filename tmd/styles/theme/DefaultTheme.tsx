@@ -1,88 +1,88 @@
-import configureFonts from "../fonts";
-import type { Theme } from "../../types/types";
-import { defaultThemeColors } from "../defaultThemeColors";
+import configureFonts from '../fonts';
+import type {Theme} from '../../types/types';
+import {defaultThemeColors} from '../defaultThemeColors';
 
 const DefaultTheme: Theme = {
-  name: "light",
+  name: 'light',
   roundness: 8,
   colors: defaultThemeColors,
   dark: false,
   textInput: {
-    mode: "contained",
-    shape: "rect",
-    colorVariant: "primary",
+    mode: 'contained',
+    shape: 'rect',
+    colorVariant: 'primary',
   },
   button: {
-    variant: "primary",
-    shape: "rounded",
-    size: "md",
-    colorVariant: "primary",
+    variant: 'primary',
+    shape: 'rect',
+    size: 'md',
+    colorVariant: 'primary',
   },
   tag: {
-    colorVariant: "primary",
-    size: "md",
-    shape: "rounded",
-    variant: "default"
+    colorVariant: 'primary',
+    size: 'md',
+    shape: 'rounded',
+    variant: 'default',
   },
   alert: {
-    colorVariant: "info",
-    type: "basic",
+    colorVariant: 'info',
+    type: 'basic',
   },
   chip: {
-    variant: "filled",
-    shape: "rounded",
-    colorVariant: "primary",
+    variant: 'filled',
+    shape: 'rounded',
+    colorVariant: 'primary',
   },
   toast: {
-    colorVariant: "default",
-    shape: "rect",
+    colorVariant: 'default',
+    shape: 'rect',
   },
   skeleton: {
-    animation: "pulse",
+    animation: 'pulse',
     borderRadius: 8,
   },
   avatar: {
-    variant: "icon",
-    size: "2xl",
+    variant: 'icon',
+    size: '2xl',
   },
   badge: {
-    size: "md",
-    shape: "rounded",
-    colorVariant: "danger",
+    size: 'md',
+    shape: 'rounded',
+    colorVariant: 'danger',
   },
   toolbar: {
     elevation: 4,
-    size: "sm",
+    size: 'sm',
   },
   otpInput: {
-    colorVariant: "primary",
-    mode: "contained",
+    colorVariant: 'primary',
+    mode: 'contained',
   },
   checkbox: {
-    colorVariant: "primary",
+    colorVariant: 'primary',
   },
   radioButton: {
-    colorVariant: "primary",
+    colorVariant: 'primary',
   },
   switch: {
-    colorVariant: "primary",
+    colorVariant: 'primary',
   },
   imagePicker: {
-    colorVariant: "primary",
+    colorVariant: 'primary',
   },
   progressBar: {
-    colorVariant: "primary",
+    colorVariant: 'primary',
   },
   tab: {
-    colorVariant: "primary",
+    colorVariant: 'primary',
   },
   stepper: {
-    colorVariant: "primary",
+    colorVariant: 'primary',
   },
-  slider :{
-    thumbType: "filled",
-    thumbValuePosition: "bottom",
-    colorVariant: "primary",
+  slider: {
+    thumbType: 'filled',
+    thumbValuePosition: 'bottom',
+    colorVariant: 'primary',
   },
   fonts: configureFonts(),
   animation: {
